@@ -12,7 +12,7 @@ const IconButtonComponent = ({
   const { t } = useTranslation();
 
   return (
-    <button type={type} className={`icon-button ${className}`} {...props}>
+    <button type={type} title={t(translationKey)} className={`icon-button ${className}`} {...props}>
       <Icon className="icon-button__inside" />
     </button>
   );

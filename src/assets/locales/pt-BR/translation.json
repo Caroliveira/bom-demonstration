@@ -1,4 +1,6 @@
 {
+  "addNode": "Adicionar nó",
+  "back": "Voltar",
   "cancel": "Cancelar",
   "english": "Inglês",
   "import": "Importar projeto",
@@ -14,5 +16,6 @@
   "simulator": "Simulador",
   "start": "Começar novo",
   "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!",
+  "zoomIn": "Aumentar zoom",
   "zoomOut": "Reduzir zoom"
 }

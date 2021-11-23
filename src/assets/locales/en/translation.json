@@ -1,4 +1,6 @@
 {
+  "addNode": "Add node",
+  "back": "Go back",
   "cancel": "Cancel",
   "english": "English",
   "import": "Import project",
@@ -14,5 +16,6 @@
   "simulator": "Simulator",
   "start": "Start from scratch",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!",
+  "zoomIn": "Zoom in",
   "zoomOut": "Zoom out"
 }
