@@ -1,3 +1,5 @@
+import ButtonComponent from './ButtonComponent';
 import FooterComponent from './FooterComponent';
+import SwitchLanguageComponent from './SwitchLanguageComponent';
 
-export { FooterComponent };
+export { ButtonComponent, FooterComponent, SwitchLanguageComponent };

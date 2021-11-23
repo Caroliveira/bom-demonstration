@@ -6,11 +6,8 @@ const FooterComponent = (): JSX.Element => {
   return (
     <div className="footer">
       <span className="footer__text">
-        {t('madeBy')}
-        {' '}
-        Caroliveira
+        {t('madeBy')} Caroliveira
       </span>
-
     </div>
   );
 };

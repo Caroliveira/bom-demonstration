@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { FooterComponent } from '../components';
-import ButtonComponent from '../components/ButtonComponent';
+import { ButtonComponent, FooterComponent, SwitchLanguageComponent } from '../components';
 
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <div className="home">
+      <SwitchLanguageComponent className="home__language-switch" />
       <div className="home__container">
         <h1 className="home__title">{t('welcomeTitle')}</h1>
         <div className="home__buttons">

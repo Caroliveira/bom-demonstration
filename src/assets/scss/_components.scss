@@ -1,16 +1,7 @@
 @import 'variables';
 
-.footer {
-  border-top: 1px solid $NEUTRAL_COLOR;
-  padding: 16px 0;
-  width: 90%;
-  &__text {
-    color: $NEUTRAL_COLOR;
-  }
-}
-
 .button {
-  width: 200px;
+  width: 220px;
   padding: 8px 0;
   border-radius: 8px;
   text-transform: uppercase;
@@ -24,4 +15,18 @@
     border: 1px solid $NEUTRAL_COLOR;
     color: $NEUTRAL_COLOR;
   }
+}
+
+.footer {
+  border-top: 1px solid $NEUTRAL_COLOR;
+  padding: 16px 0;
+  width: 90%;
+  &__text {
+    color: $NEUTRAL_COLOR;
+    font-size: 20px;
+  }
+}
+
+.switch-language {
+  background-color: $NEUTRAL_COLOR;
 }

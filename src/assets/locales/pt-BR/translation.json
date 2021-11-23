@@ -1,6 +1,9 @@
 {
-  "madeBy": "Feito por",
+  "english": "Inglês",
   "import": "Importar projeto",
+  "madeBy": "Feito por",
+  "portuguese": "Português",
+  "selectLanguage": "Selecione o idioma desejado",
   "start": "Começar novo",
   "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!"
 }

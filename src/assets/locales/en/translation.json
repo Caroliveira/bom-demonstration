@@ -1,6 +1,9 @@
 {
-  "madeBy": "Made by",
+  "english": "English",
   "import": "Import project",
+  "madeBy": "Made by",
+  "portuguese": "Portuguese",
+  "selectLanguage": "Select the desired language",
   "start": "Start from scratch",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!"
 }
