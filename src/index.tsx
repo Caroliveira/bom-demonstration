@@ -5,15 +5,22 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './assets/scss/main.scss';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
-import { HomeScreen } from './screens';
+import { DiagramScreen, HomeScreen } from './screens';
+import { LayoutComponent } from './components';
+import { ContextProvider } from './context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={HomeScreen} />
-      </Switch>
-    </BrowserRouter>
+    <ContextProvider>
+      <BrowserRouter>
+        <LayoutComponent>
+          <Switch>
+            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/diagram" component={DiagramScreen} />
+          </Switch>
+        </LayoutComponent>
+      </BrowserRouter>
+    </ContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

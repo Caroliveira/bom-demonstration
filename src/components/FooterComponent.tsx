@@ -4,11 +4,11 @@ const FooterComponent = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className="footer">
+    <footer className="footer">
       <span className="footer__text">
         {t('madeBy')} Caroliveira
       </span>
-    </div>
+    </footer>
   );
 };
 

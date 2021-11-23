@@ -1,28 +1,16 @@
-@import 'variables';
-
 .home {
   height: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  background-color: $PRIMARY_COLOR;
+  align-items: center;
+  justify-content: center;
   font-size: calc(10px + 2vmin);
-  &__language-switch {
-    align-self: flex-end;
-    margin: 30px 50px 0;
-  }
-  &__container {
-    flex: 1;
-    max-width: 800px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
+  max-width: 800px;
   &__title {
-    color: $NEUTRAL_COLOR;
     margin: 0;
     padding: 20px 50px;
     text-align: center;
+    color: $NEUTRAL_COLOR;
   }
   &__buttons {
     display: flex;

@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFileAlt } from 'react-icons/fa';
 import { ButtonComponent } from '.';
+import { Context } from '../context';
 
-type ImportModalProps = {
-  show: boolean;
-  closeModal(): void;
-}
-
-const ImportModalComponent = ({ show, closeModal }: ImportModalProps): JSX.Element | null => {
+const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const [file, setFile] = useState<File>();
+  const { showImportModal, setShowImportModal } = useContext(Context);
 
   const handleClick = () => {
     if (file) {
@@ -20,7 +17,7 @@ const ImportModalComponent = ({ show, closeModal }: ImportModalProps): JSX.Eleme
         console.log(result);
       };
       reader.readAsText(file);
-      closeModal();
+      setShowImportModal(false);
     } else {
       const fileInput = document.getElementById('file-input');
       fileInput?.click();
@@ -32,7 +29,7 @@ const ImportModalComponent = ({ show, closeModal }: ImportModalProps): JSX.Eleme
     setFile(evt.target.files?.[0]);
   };
 
-  if (!show) return null;
+  if (!showImportModal) return null;
 
   return (
     <div className="modal__background">
@@ -43,7 +40,7 @@ const ImportModalComponent = ({ show, closeModal }: ImportModalProps): JSX.Eleme
         <input id="file-input" type="file" style={{ display: 'none' }} onChange={handleInputChange} />
         <p className="modal__file-name"><FaFileAlt className="modal__file-icon" />{file?.name || t('noFileSelected')}</p>
         <div className="modal__buttons">
-          <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={closeModal} />
+          <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={() => setShowImportModal(false)} />
           <ButtonComponent outlined translationKey={file ? 'save' : 'import'} onClick={handleClick} />
         </div>
       </div>
