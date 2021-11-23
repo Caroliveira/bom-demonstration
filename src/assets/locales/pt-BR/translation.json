@@ -11,5 +11,6 @@
   "save": "Salvar",
   "selectLanguage": "Selecione o idioma desejado",
   "start": "Começar novo",
-  "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!"
+  "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!",
+  "zoomOut": "Reduzir zoom"
 }

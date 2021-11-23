@@ -11,5 +11,6 @@
   "save": "Save",
   "selectLanguage": "Select the desired language",
   "start": "Start from scratch",
-  "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!"
+  "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!",
+  "zoomOut": "Zoom out"
 }

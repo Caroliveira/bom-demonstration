@@ -15,3 +15,16 @@
     color: $NEUTRAL_COLOR;
   }
 }
+
+.icon-button {
+  height: 45px;
+  width: 45px;
+  background-color: $PRIMARY_COLOR;
+  border-radius: 50%;
+  
+  &__inside {
+    height: 100%;
+    width: 100%;
+    color: $NEUTRAL_COLOR;
+  }
+}

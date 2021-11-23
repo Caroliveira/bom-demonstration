@@ -4,6 +4,7 @@
   margin: 20px;
   border-radius: 8px;
   background-color: $NEUTRAL_COLOR;
+  z-index: 99999;
   &__background {
     display: flex;
     align-items: center;
