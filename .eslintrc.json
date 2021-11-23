@@ -2,12 +2,14 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "commonjs": true
     },
     "extends": [
         "plugin:react/recommended",
         "airbnb",
-        "plugin:import/react"
+        "plugin:import/react",
+        "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,6 +25,8 @@
     ],
     "rules": {
         "no-undef": "off",
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
         "react/jsx-filename-extension": [
             1,
             {
@@ -37,17 +41,6 @@
                 "namedComponents": "arrow-function",
                 "unnamedComponents": "arrow-function"
             }
-        ],
-        "import/extensions": [
-          "error",
-          "never",
-          {
-            "json": "always",
-            "svg": "always",
-            "ttf": "always",
-            "scss": "always",
-            "png": "always"
-          }
-        ],
+        ]
     }
 }
