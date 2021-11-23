@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { ButtonComponent, FooterComponent, SwitchLanguageComponent } from '../components';
+import {
+  ButtonComponent, FooterComponent, ImportModalComponent, SwitchLanguageComponent,
+} from '../components';
 
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
@@ -14,6 +16,7 @@ const HomeScreen = (): JSX.Element => {
           <ButtonComponent translationKey="start" onClick={() => console.log('teste')} />
         </div>
       </div>
+      <ImportModalComponent />
       <FooterComponent />
     </div>
   );

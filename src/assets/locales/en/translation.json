@@ -1,8 +1,13 @@
 {
+  "cancel": "Cancel",
   "english": "English",
   "import": "Import project",
+  "importEspecification": "The file should be the links combinations between the game's items and should have the following structure",
+  "importTitle": "Import CSV or JSON file",
   "madeBy": "Made by",
+  "noFileSelected": "No file has been selected",
   "portuguese": "Portuguese",
+  "save": "Save",
   "selectLanguage": "Select the desired language",
   "start": "Start from scratch",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!"

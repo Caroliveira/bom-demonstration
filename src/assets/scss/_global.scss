@@ -6,3 +6,8 @@ body {
 #root {
   height: 100vh;
 }
+
+select {
+  background-color: $NEUTRAL_COLOR;
+  border-radius: 4px;
+}

@@ -1,0 +1,47 @@
+@import '../variables';
+
+.modal {
+  max-width: 800px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  background-color: $NEUTRAL_COLOR;
+  &__background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($PRIMARY_COLOR, 0.3);
+  }
+  &__title {
+    color: $PRIMARY_COLOR;
+    margin-top: 12px;
+  }
+  &__text {
+    font-size: 20px;
+    color: $PRIMARY_COLOR;
+    &--pre {
+      display: inline;
+    }
+  }
+  &__file-icon {
+    margin-right: 8px; 
+    color: $PRIMARY_COLOR;
+  }
+  &__file-name {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: $PRIMARY_COLOR;
+    background-color: rgba(#3c417a, 0.2);
+    border: 2px solid rgba($PRIMARY_COLOR, 0.5);
+  }
+  &__buttons {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

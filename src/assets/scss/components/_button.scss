@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../variables';
 
 .button {
   width: 220px;
@@ -15,18 +15,4 @@
     border: 1px solid $NEUTRAL_COLOR;
     color: $NEUTRAL_COLOR;
   }
-}
-
-.footer {
-  border-top: 1px solid $NEUTRAL_COLOR;
-  padding: 16px 0;
-  width: 90%;
-  &__text {
-    color: $NEUTRAL_COLOR;
-    font-size: 20px;
-  }
-}
-
-.switch-language {
-  background-color: $NEUTRAL_COLOR;
 }
