@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import './assets/scss/index.scss';
 import App from './screens/App';
 import reportWebVitals from './reportWebVitals';
@@ -7,6 +9,11 @@ import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={App} />
+      </Switch>
+    </BrowserRouter>
     <App />
   </React.StrictMode>,
   document.getElementById('root'),
