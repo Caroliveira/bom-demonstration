@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const SwitchLanguageComponent = ({ className, ...props }:
+const SwitchLanguageComponent = (props:
   React.SelectHTMLAttributes<HTMLSelectElement>): JSX.Element => {
   const { t, i18n } = useTranslation();
 
@@ -10,7 +10,7 @@ const SwitchLanguageComponent = ({ className, ...props }:
   };
 
   return (
-    <select aria-label={t('selectLanguage')} className={`switch-language ${className}`} onChange={handleChange} value={i18n.language} {...props}>
+    <select aria-label={t('selectLanguage')} onChange={handleChange} value={i18n.language} {...props}>
       <option value="en">{t('english')}</option>
       <option value="pt-BR">{t('portuguese')}</option>
     </select>

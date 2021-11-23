@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ButtonComponent, FooterComponent, ImportModalComponent, SwitchLanguageComponent,
@@ -5,6 +6,7 @@ import {
 
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
+  const [showImportModal, setShowImportModal] = useState(false);
 
   return (
     <div className="home">
@@ -12,11 +14,11 @@ const HomeScreen = (): JSX.Element => {
       <div className="home__container">
         <h1 className="home__title">{t('welcomeTitle')}</h1>
         <div className="home__buttons">
-          <ButtonComponent outlined translationKey="import" onClick={() => console.log('teste')} style={{ marginRight: 32 }} />
-          <ButtonComponent translationKey="start" onClick={() => console.log('teste')} />
+          <ButtonComponent outlined translationKey="import" onClick={() => setShowImportModal(true)} style={{ marginRight: 32 }} />
+          <ButtonComponent translationKey="start" onClick={() => setShowImportModal(true)} />
         </div>
       </div>
-      <ImportModalComponent />
+      <ImportModalComponent show={showImportModal} closeModal={() => setShowImportModal(false)} />
       <FooterComponent />
     </div>
   );

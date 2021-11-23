@@ -6,12 +6,12 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const ButtonComponent = ({
-  translationKey, outlined = false, type = 'button', ...props
+  translationKey, outlined = false, type = 'button', className, ...props
 }: ButtonProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <button className={`button button--${outlined ? 'outlined' : 'filled'}`} type={type} {...props}>
+    <button className={`button button--${outlined ? 'outlined' : 'filled'} ${className}`} type={type} {...props}>
       {t(translationKey)}
     </button>
   );
