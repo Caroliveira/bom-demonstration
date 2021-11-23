@@ -7,6 +7,9 @@
   &__title {
     color: $NEUTRAL_COLOR;
     font-size: 24px;
-    flex: 1;
+    text-decoration: none;
+    &:active, &:hover, &:focus {
+      text-decoration: underline;
+    }
   }
 }
