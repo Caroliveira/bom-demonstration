@@ -27,6 +27,10 @@
         "no-undef": "off",
         "import/extensions": "off",
         "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/button-has-type": "off",
+        "react/require-default-props": "off",
         "react/jsx-filename-extension": [
             1,
             {

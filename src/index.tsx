@@ -2,19 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import './assets/scss/index.scss';
-import App from './screens/App';
+import './assets/scss/main.scss';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
+import { HomeScreen } from './screens';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={HomeScreen} />
       </Switch>
     </BrowserRouter>
-    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );

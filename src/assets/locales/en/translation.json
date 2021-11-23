@@ -1,3 +1,6 @@
 {
+  "madeBy": "Made by",
+  "import": "Import project",
+  "start": "Start from scratch",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!"
 }

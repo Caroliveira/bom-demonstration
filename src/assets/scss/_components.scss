@@ -1,0 +1,27 @@
+@import 'variables';
+
+.footer {
+  border-top: 1px solid $NEUTRAL_COLOR;
+  padding: 16px 0;
+  width: 90%;
+  &__text {
+    color: $NEUTRAL_COLOR;
+  }
+}
+
+.button {
+  width: 200px;
+  padding: 8px 0;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  &--filled {
+    background-color: $NEUTRAL_COLOR;
+    color: $PRIMARY_COLOR;
+  }
+  &--outlined {
+    background-color: $PRIMARY_COLOR;
+    border: 1px solid $NEUTRAL_COLOR;
+    color: $NEUTRAL_COLOR;
+  }
+}

@@ -1,3 +1,6 @@
 {
+  "madeBy": "Feito por",
+  "import": "Importar projeto",
+  "start": "Começar novo",
   "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!"
 }
