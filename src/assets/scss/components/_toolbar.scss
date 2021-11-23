@@ -3,4 +3,13 @@
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  &--centered {
+    display: flex;
+    align-items: center;
+  }
+  &__button {
+    padding: 12px 0;
+    margin-right: 16px;
+  }
 }

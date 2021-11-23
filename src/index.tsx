@@ -4,12 +4,18 @@ import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 
-import './assets/scss/main.scss';
+import {
+  DiagramScreen,
+  HomeScreen,
+  NotFoundScreen,
+  SimulatorScreen,
+} from './screens';
+
 import reportWebVitals from './reportWebVitals';
-import './i18n';
-import { DiagramScreen, HomeScreen, NotFoundScreen } from './screens';
 import { LayoutComponent } from './components';
 import { ContextProvider } from './context';
+import './assets/scss/main.scss';
+import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +25,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={HomeScreen} />
             <Route exact path="/diagram" component={DiagramScreen} />
+            <Route exact path="/simulator" component={SimulatorScreen} />
             <Route exact path="/not-found" component={NotFoundScreen} />
             <Redirect from="*" to="/not-found" />
           </Switch>
