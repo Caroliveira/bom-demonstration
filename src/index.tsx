@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter, Switch, Route, Redirect,
+} from 'react-router-dom';
 
 import './assets/scss/main.scss';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
-import { DiagramScreen, HomeScreen } from './screens';
+import { DiagramScreen, HomeScreen, NotFoundScreen } from './screens';
 import { LayoutComponent } from './components';
 import { ContextProvider } from './context';
 
@@ -17,6 +19,8 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={HomeScreen} />
             <Route exact path="/diagram" component={DiagramScreen} />
+            <Route exact path="/not-found" component={NotFoundScreen} />
+            <Redirect from="*" to="/not-found" />
           </Switch>
         </LayoutComponent>
       </BrowserRouter>
