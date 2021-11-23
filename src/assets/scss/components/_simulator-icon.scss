@@ -1,0 +1,27 @@
+.simulator-item {
+  width: 120px;
+  padding: 8px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background-color: $NEUTRAL_COLOR;
+  &__button {
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    &--icon {
+      height: 25px;
+      width: 25px;
+      padding: 0;
+    }
+  }
+  &__options {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba($PRIMARY_COLOR, 0.3);
+  }
+}

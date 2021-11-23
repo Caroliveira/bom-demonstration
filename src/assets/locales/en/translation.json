@@ -1,4 +1,5 @@
 {
+  "add": "Add",
   "addNode": "Add node",
   "back": "Go back",
   "cancel": "Cancel",
@@ -6,6 +7,7 @@
   "import": "Import project",
   "importEspecification": "The file should be the links combinations between the game's items and should have the following structure",
   "importTitle": "Import CSV or JSON file",
+  "layer": "Layer",
   "madeBy": "Made by",
   "noFileSelected": "No file has been selected",
   "pageNotFound": "Page not found :(",
@@ -15,6 +17,8 @@
   "simulate": "Simulate game",
   "simulator": "Simulator",
   "start": "Start from scratch",
+  "subtract": "Subtract",
+  "timer": "Timer",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!",
   "zoomIn": "Zoom in",
   "zoomOut": "Zoom out"

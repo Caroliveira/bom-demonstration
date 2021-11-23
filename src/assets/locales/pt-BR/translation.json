@@ -1,4 +1,5 @@
 {
+  "add": "Adicionar",
   "addNode": "Adicionar nó",
   "back": "Voltar",
   "cancel": "Cancelar",
@@ -6,6 +7,7 @@
   "import": "Importar projeto",
   "importEspecification": "O arquivo deve ser um conjunto de ligações entre os itens do jogos e deverá ter o seguinte formato",
   "importTitle": "Importar arquivo CSV ou JSON",
+  "layer": "Camada",
   "madeBy": "Feito por",
   "noFileSelected": "Nenhum arquivo foi selecionado.",
   "pageNotFound": "Página não encontrada :(",
@@ -15,6 +17,8 @@
   "simulate": "Simular jogo",
   "simulator": "Simulador",
   "start": "Começar novo",
+  "subtract": "Subtrair",
+  "timer": "Temporizador",
   "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!",
   "zoomIn": "Aumentar zoom",
   "zoomOut": "Reduzir zoom"
