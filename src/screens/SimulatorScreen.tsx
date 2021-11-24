@@ -19,7 +19,9 @@ const SimulatorScreen = (): JSX.Element => {
       <div className="simulator__content">
         {availableLayers?.map((layer, index) => (
           <ul key={`layer${index + 1}`} className="simulator__list">
-            {layer?.map((node) => <SimulatorItemComponent node={node} key={node.id} />)}
+            {layer?.map((node) => (
+              node ? <SimulatorItemComponent node={node} key={node.id} /> : null
+            ))}
           </ul>
         ))}
       </div>
