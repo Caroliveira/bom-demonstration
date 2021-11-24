@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ReactFlowProvider } from 'react-flow-renderer';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
@@ -20,17 +21,19 @@ import './i18n';
 ReactDOM.render(
   <React.StrictMode>
     <ContextProvider>
-      <BrowserRouter>
-        <LayoutComponent>
-          <Switch>
-            <Route exact path="/" component={HomeScreen} />
-            <Route exact path="/diagram" component={DiagramScreen} />
-            <Route exact path="/simulator" component={SimulatorScreen} />
-            <Route exact path="/not-found" component={NotFoundScreen} />
-            <Redirect from="*" to="/not-found" />
-          </Switch>
-        </LayoutComponent>
-      </BrowserRouter>
+      <ReactFlowProvider>
+        <BrowserRouter>
+          <LayoutComponent>
+            <Switch>
+              <Route exact path="/" component={HomeScreen} />
+              <Route exact path="/diagram" component={DiagramScreen} />
+              <Route exact path="/simulator" component={SimulatorScreen} />
+              <Route exact path="/not-found" component={NotFoundScreen} />
+              <Redirect from="*" to="/not-found" />
+            </Switch>
+          </LayoutComponent>
+        </BrowserRouter>
+      </ReactFlowProvider>
     </ContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),

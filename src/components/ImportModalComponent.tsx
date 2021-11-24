@@ -3,18 +3,22 @@ import { useTranslation } from 'react-i18next';
 import { FaFileAlt } from 'react-icons/fa';
 import { ButtonComponent } from '.';
 import { Context } from '../context';
+import { fileHandler } from '../utils';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const [file, setFile] = useState<File>();
-  const { showImportModal, setShowImportModal } = useContext(Context);
+  const {
+    showImportModal, setShowImportModal, setModel,
+  } = useContext(Context);
 
   const handleClick = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
-        const result = loadEvent.target?.result;
-        console.log(result);
+        const result = loadEvent.target?.result as string;
+        const { nodes, links } = fileHandler(result, file.type) || {};
+        if (nodes && links) setModel(nodes, links);
       };
       reader.readAsText(file);
       setShowImportModal(false);
