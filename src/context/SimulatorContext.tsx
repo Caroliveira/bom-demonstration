@@ -29,29 +29,29 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
   const [availableLayers, setAvailableLayers] = useState<LayersType>([]);
 
   const defineDependencies = (layersArray: SimulatorNode[][]) => {
-    let sourceIndex = 0;
-    let sourceLayer = 0;
-    let targetIndex = 0;
-    let targetLayer = 0;
-
     links.forEach(({ source, target, label }) => {
       const amountNeeded = parseInt(label as string, 10);
-      layersArray.forEach((layer, layerIndex) => layer.forEach((node, nodeIndex) => {
-        if (node.id === source) {
-          sourceIndex = nodeIndex;
-          sourceLayer = layerIndex;
-        } else if (node.id === target) {
-          targetIndex = nodeIndex;
-          targetLayer = layerIndex;
-        }
-      }));
 
-      layersArray[sourceLayer][sourceIndex].pos.push({ index: targetIndex, amountNeeded });
-      layersArray[targetLayer][targetIndex].pre.push({ index: sourceIndex, amountNeeded });
+      let sourceIndex;
+      const sourceLayer = layersArray.findIndex((layer) => {
+        sourceIndex = layer.findIndex((node) => node.id === source);
+        return sourceIndex > -1;
+      });
+
+      let targetIndex;
+      const targetLayer = layersArray.findIndex((layer) => {
+        targetIndex = layer.findIndex((node) => node.id === target);
+        return targetIndex > -1;
+      });
+
+      if (sourceIndex && targetIndex) {
+        layersArray[sourceLayer][sourceIndex].pos.push({ index: targetIndex, amountNeeded });
+        layersArray[targetLayer][targetIndex].pre.push({ index: sourceIndex, amountNeeded });
+      }
     });
 
     setAllLayers(layersArray);
-    setAvailableLayers([layersArray[0]]);
+    setAvailableLayers([layersArray[0], layersArray[1]]);
   };
 
   const separateLayers = () => {
@@ -63,7 +63,7 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
       else layersArray[node.layer] = [simulatorNode];
     });
 
-    defineDependencies(layersArray);
+    if (layersArray.length) defineDependencies(layersArray);
   };
 
   useEffect(() => separateLayers(), []);
