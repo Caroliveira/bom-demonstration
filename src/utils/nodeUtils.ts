@@ -2,41 +2,38 @@ import { Edge, Node } from 'react-flow-renderer';
 
 type NodesWithLayersType = (Node & {layer: number})[];
 
-const calculateLayer = (
+const findNextNodes = (
   rootNodes: NodesWithLayersType,
   nodes: Node[],
   links: Edge[],
   count: number,
 ): NodesWithLayersType => {
-  // Select next nodes to send recursively
   const nextNodes: NodesWithLayersType = [];
   rootNodes.forEach((node) => {
     const auxLinks = links.filter(({ source }) => source === node.id);
     auxLinks.forEach(({ target }) => {
       const auxNode = nodes.find(({ id }) => id === target);
-      if (auxNode) {
-        const newNode = { ...auxNode, layer: count };
-        if (!nextNodes.find((el) => el.id === newNode.id)) nextNodes.push(newNode);
-      }
+      if (auxNode) nextNodes.push({ ...auxNode, layer: count });
     });
   });
 
-  // Check if is last interation
-  if (!nextNodes.length) return [];
-  const result = calculateLayer(nextNodes, nodes, links, count + 1);
+  if (!nextNodes.length) return rootNodes;
+  return [...rootNodes, ...findNextNodes(nextNodes, nodes, links, count + 1)];
+};
 
-  // Combine resulted array with root one removing duplicateds
-  const compiledArray = rootNodes.reduce((acc, el) => {
-    const index = result.findIndex((subEl) => subEl.id === el.id);
-    let nodeToAdd = el;
+const removeDuplicateds = (nodes: NodesWithLayersType) => {
+  return nodes.reduce((acc, el) => {
+    const index = acc.findIndex((subEl) => subEl.id === el.id);
+    const auxAcc = acc;
+    let addElement = true;
+
     if (index > -1) {
-      result.splice(index, 1);
-      nodeToAdd = result[index].layer > el.layer ? result[index] : el;
+      if (auxAcc[index].layer < el.layer) auxAcc.splice(index, 1);
+      else addElement = false;
     }
-    return [...acc, nodeToAdd];
-  }, [] as NodesWithLayersType);
 
-  return [...compiledArray, ...result];
+    return addElement ? [...auxAcc, el] : auxAcc;
+  }, [] as NodesWithLayersType);
 };
 
 export const nodesWithLayers = (nodes: Node[], links: Edge[]): NodesWithLayersType => {
@@ -46,5 +43,6 @@ export const nodesWithLayers = (nodes: Node[], links: Edge[]): NodesWithLayersTy
     if (!links.find(({ target }) => target === node.id)) rootNodes.push({ ...node, layer: 0 });
   });
 
-  return calculateLayer(rootNodes, nodes, links, 1);
+  const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, links, 1);
+  return removeDuplicateds(nodesWithDuplicateds);
 };
