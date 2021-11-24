@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ButtonComponent } from '../components';
-import { Context } from '../context';
+import { MainContext } from '../context';
 
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { setShowImportModal } = useContext(Context);
+  const { setShowImportModal } = useContext(MainContext);
 
   return (
     <div className="home">

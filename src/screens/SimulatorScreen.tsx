@@ -1,13 +1,14 @@
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiArrowLeft } from 'react-icons/fi';
-import { useHistory } from 'react-router-dom';
 import { IconButtonComponent, SimulatorItemComponent } from '../components';
-import { useSimulation } from '../hooks';
+import { SimulatorContext, SimulatorContextProvider } from '../context';
 
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const layers = useSimulation();
+  const { availableLayers, setAvailableLayers, allLayers } = useContext(SimulatorContext);
 
   return (
     <div className="simulator">
@@ -16,9 +17,9 @@ const SimulatorScreen = (): JSX.Element => {
         <h1 className="simulator__title">{t('simulator')}</h1>
       </div>
       <div className="simulator__content">
-        {layers.map((layer, index) => (
-          <ul title={`${t('layer')} ${index}`} className="simulator__list">
-            {layer?.map((node) => <SimulatorItemComponent node={node} />)}
+        {availableLayers?.map((layer, index) => (
+          <ul key={`layer${index + 1}`} className="simulator__list">
+            {layer?.map((node) => <SimulatorItemComponent node={node} key={node.id} />)}
           </ul>
         ))}
       </div>
@@ -26,4 +27,12 @@ const SimulatorScreen = (): JSX.Element => {
   );
 };
 
-export default SimulatorScreen;
+const ConnectedSimulatorScreen = (): JSX.Element => {
+  return (
+    <SimulatorContextProvider>
+      <SimulatorScreen />
+    </SimulatorContextProvider>
+  );
+};
+
+export default ConnectedSimulatorScreen;

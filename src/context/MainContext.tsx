@@ -1,10 +1,10 @@
 import React, { useState, ReactChild } from 'react';
 import { Edge, Node } from 'react-flow-renderer';
-import { nodesWithLayers } from './utils';
+import { nodesWithLayers } from '../utils';
 
 export type NodeWithLayerType = Node & {layer: number};
 
-type ContextType = {
+type MainContextType = {
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   nodes: NodeWithLayerType[];
@@ -14,11 +14,11 @@ type ContextType = {
   setModel: (nodes: Node[], links: Edge[]) => void;
 };
 
-type ContextProviderType = {children : ReactChild};
+type MainContextProviderType = {children : ReactChild};
 
-export const Context = React.createContext({} as ContextType);
+export const MainContext = React.createContext({} as MainContextType);
 
-export const ContextProvider = ({ children }: ContextProviderType): JSX.Element => {
+export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [showImportModal, setShowImportModal] = useState(false);
   const [nodes, setNodes] = useState<NodeWithLayerType[]>([]);
   const [links, setLinks] = useState<Edge[]>([]);
@@ -38,7 +38,7 @@ export const ContextProvider = ({ children }: ContextProviderType): JSX.Element 
   };
 
   return (
-    <Context.Provider value={{
+    <MainContext.Provider value={{
       showImportModal,
       setShowImportModal,
       nodes,
@@ -49,6 +49,6 @@ export const ContextProvider = ({ children }: ContextProviderType): JSX.Element 
     }}
     >
       {children}
-    </Context.Provider>
+    </MainContext.Provider>
   );
 };

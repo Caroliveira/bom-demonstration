@@ -14,13 +14,13 @@ import {
 
 import reportWebVitals from './reportWebVitals';
 import { LayoutComponent } from './components';
-import { ContextProvider } from './context';
+import { MainContextProvider } from './context';
 import './assets/scss/main.scss';
 import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
+    <MainContextProvider>
       <ReactFlowProvider>
         <BrowserRouter>
           <LayoutComponent>
@@ -34,7 +34,7 @@ ReactDOM.render(
           </LayoutComponent>
         </BrowserRouter>
       </ReactFlowProvider>
-    </ContextProvider>
+    </MainContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

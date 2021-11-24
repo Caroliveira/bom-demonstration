@@ -7,12 +7,12 @@ import {
 } from 'react-icons/fi';
 
 import { ButtonComponent, IconButtonComponent } from '.';
-import { Context } from '../context';
+import { MainContext } from '../context';
 
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const { zoomOut, zoomIn } = useZoomPanHelper();
-  const { setShowImportModal } = useContext(Context);
+  const { setShowImportModal } = useContext(MainContext);
   const history = useHistory();
 
   return (

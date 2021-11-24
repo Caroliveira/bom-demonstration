@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaFileAlt, FaTrash } from 'react-icons/fa';
 import { ButtonComponent } from '.';
-import { Context } from '../context';
+import { MainContext } from '../context';
 import { fileHandler } from '../utils';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
   const [file, setFile] = useState<File>();
-  const { showImportModal, setShowImportModal, setModel } = useContext(Context);
+  const { showImportModal, setShowImportModal, setModel } = useContext(MainContext);
 
   const closeModal = () => {
     setFile(undefined);

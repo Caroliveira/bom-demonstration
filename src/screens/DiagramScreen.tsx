@@ -1,12 +1,10 @@
-// import { useTranslation } from 'react-i18next';
 import { useContext } from 'react';
-import ReactFlow, { Elements } from 'react-flow-renderer';
+import ReactFlow from 'react-flow-renderer';
 import { DiagramToolbarComponent } from '../components';
-import { Context } from '../context';
+import { MainContext } from '../context';
 
 const DiagramScreen = (): JSX.Element => {
-// const { t } = useTranslation();
-  const { links, nodes } = useContext(Context);
+  const { links, nodes } = useContext(MainContext);
 
   return (
     <div className="diagram">
