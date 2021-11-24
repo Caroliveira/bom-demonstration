@@ -39,7 +39,7 @@ const ImportModalComponent = (): JSX.Element | null => {
     <div className="modal__background">
       <div className="modal" role="dialog">
         <h2 className="modal__title">{t('importTitle')}</h2>
-        <p className="modal__text">{t('importEspecification')}: <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre></p>
+        <p className="modal__text">{t('importEspecification')}:</p> <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
 
         <input id="file-input" type="file" style={{ display: 'none' }} onChange={handleInputChange} />
         <p className="modal__file-name"><FaFileAlt className="modal__file-icon" />{file?.name || t('noFileSelected')}</p>

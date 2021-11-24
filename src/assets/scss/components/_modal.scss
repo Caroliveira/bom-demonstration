@@ -21,12 +21,13 @@
   &__text {
     font-size: 20px;
     color: $PRIMARY_COLOR;
+    display: inline;
     &--pre {
       display: inline;
     }
   }
   &__file-icon {
-    margin-right: 8px; 
+    margin-right: 8px;
     color: $PRIMARY_COLOR;
   }
   &__file-name {
