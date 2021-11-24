@@ -1,16 +1,21 @@
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FaFileAlt } from 'react-icons/fa';
+import { FaFileAlt, FaTrash } from 'react-icons/fa';
 import { ButtonComponent } from '.';
 import { Context } from '../context';
 import { fileHandler } from '../utils';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [file, setFile] = useState<File>();
-  const {
-    showImportModal, setShowImportModal, setModel,
-  } = useContext(Context);
+  const { showImportModal, setShowImportModal, setModel } = useContext(Context);
+
+  const closeModal = () => {
+    setFile(undefined);
+    setShowImportModal(false);
+  };
 
   const handleClick = () => {
     if (file) {
@@ -21,7 +26,8 @@ const ImportModalComponent = (): JSX.Element | null => {
         if (nodes && links) setModel(nodes, links);
       };
       reader.readAsText(file);
-      setShowImportModal(false);
+      closeModal();
+      if (history.location.pathname !== '/diagram') history.push('/diagram');
     } else {
       const fileInput = document.getElementById('file-input');
       fileInput?.click();
@@ -42,9 +48,13 @@ const ImportModalComponent = (): JSX.Element | null => {
         <p className="modal__text">{t('importEspecification')}:</p> <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
 
         <input id="file-input" type="file" style={{ display: 'none' }} onChange={handleInputChange} />
-        <p className="modal__file-name"><FaFileAlt className="modal__file-icon" />{file?.name || t('noFileSelected')}</p>
+        <p className="modal__file-name">
+          <FaFileAlt className="modal__file-icon" />
+          {file?.name || t('noFileSelected')}
+        </p>
+
         <div className="modal__buttons">
-          <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={() => setShowImportModal(false)} />
+          <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={closeModal} />
           <ButtonComponent outlined translationKey={file ? 'save' : 'import'} onClick={handleClick} />
         </div>
       </div>
