@@ -2,11 +2,13 @@ import React, { useState, ReactChild } from 'react';
 import { Edge, Node } from 'react-flow-renderer';
 import { nodesWithLayers } from './utils';
 
+export type NodeWithLayerType = Node & {layer: number};
+
 type ContextType = {
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
-  nodes: Node[];
-  setNodes: (nodes: Node[]) => void;
+  nodes: NodeWithLayerType[];
+  setNodes: (nodes: NodeWithLayerType[]) => void;
   links: Edge[];
   setLinks: (links: Edge[]) => void;
   setModel: (nodes: Node[], links: Edge[]) => void;
@@ -18,12 +20,11 @@ export const Context = React.createContext({} as ContextType);
 
 export const ContextProvider = ({ children }: ContextProviderType): JSX.Element => {
   const [showImportModal, setShowImportModal] = useState(false);
-  const [nodes, setNodes] = useState<Node[]>([]);
+  const [nodes, setNodes] = useState<NodeWithLayerType[]>([]);
   const [links, setLinks] = useState<Edge[]>([]);
 
   const setModel = (unorderedNodes: Node[], unassignedLinks: Edge[]) => {
-    const nodesWithLayer:
-      (Node & {layer: number})[] = nodesWithLayers(unorderedNodes, unassignedLinks);
+    const nodesWithLayer: NodeWithLayerType[] = nodesWithLayers(unorderedNodes, unassignedLinks);
 
     const countArray: number[] = [];
     const nodesWithPosition = nodesWithLayer.map((node) => {

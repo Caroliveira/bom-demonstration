@@ -1,14 +1,13 @@
 import { Edge, Node } from 'react-flow-renderer';
-
-type NodesWithLayersType = (Node & {layer: number})[];
+import { NodeWithLayerType } from '../context';
 
 const findNextNodes = (
-  rootNodes: NodesWithLayersType,
+  rootNodes: NodeWithLayerType[],
   nodes: Node[],
   links: Edge[],
   count: number,
-): NodesWithLayersType => {
-  const nextNodes: NodesWithLayersType = [];
+): NodeWithLayerType[] => {
+  const nextNodes: NodeWithLayerType[] = [];
   rootNodes.forEach((node) => {
     const auxLinks = links.filter(({ source }) => source === node.id);
     auxLinks.forEach(({ target }) => {
@@ -21,7 +20,7 @@ const findNextNodes = (
   return [...rootNodes, ...findNextNodes(nextNodes, nodes, links, count + 1)];
 };
 
-const removeDuplicateds = (nodes: NodesWithLayersType) => {
+const removeDuplicateds = (nodes: NodeWithLayerType[]) => {
   return nodes.reduce((acc, el) => {
     const index = acc.findIndex((subEl) => subEl.id === el.id);
     const auxAcc = acc;
@@ -33,11 +32,11 @@ const removeDuplicateds = (nodes: NodesWithLayersType) => {
     }
 
     return addElement ? [...auxAcc, el] : auxAcc;
-  }, [] as NodesWithLayersType);
+  }, [] as NodeWithLayerType[]);
 };
 
-export const nodesWithLayers = (nodes: Node[], links: Edge[]): NodesWithLayersType => {
-  const rootNodes: NodesWithLayersType = [];
+export const nodesWithLayers = (nodes: Node[], links: Edge[]): NodeWithLayerType[] => {
+  const rootNodes: NodeWithLayerType[] = [];
 
   nodes.forEach((node) => {
     if (!links.find(({ target }) => target === node.id)) rootNodes.push({ ...node, layer: 0 });

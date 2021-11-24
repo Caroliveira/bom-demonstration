@@ -63,6 +63,19 @@ $NEUTRAL_TRANSPARENT: rgba($NEUTRAL_COLOR, 0.3);
     width: 90%;
     max-width: 1800px;
     display: flex;
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      height: 12px;
+      border-radius: 8px;
+    }     
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }     
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: darkgrey;
+    }
   }
   &__list {
     list-style-type: none;
