@@ -9,6 +9,7 @@
   "importTitle": "Import CSV or JSON file",
   "layer": "Layer",
   "madeBy": "Made by",
+  "noData": "There is no registered data",
   "noFileSelected": "No file has been selected",
   "pageNotFound": "Page not found :(",
   "portuguese": "Portuguese",

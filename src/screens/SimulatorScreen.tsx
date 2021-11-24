@@ -17,6 +17,7 @@ const SimulatorScreen = (): JSX.Element => {
         <h1 className="simulator__title">{t('simulator')}</h1>
       </div>
       <div className="simulator__content">
+        {!availableLayers[0] && <p className="simulator__empty">{t('noData')}</p>}
         {availableLayers?.map((layer, index) => (
           <ul key={`layer${index + 1}`} className="simulator__list">
             {layer?.map((node) => (

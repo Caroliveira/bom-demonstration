@@ -10,12 +10,24 @@ $NEUTRAL_TRANSPARENT: rgba($NEUTRAL_COLOR, 0.3);
   &__graph {
     height: 100%;
     max-width: 1800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90%;
     border: 1px solid $NEUTRAL_TRANSPARENT;
     background:
       repeating-linear-gradient(to right, transparent 0  calc(50px - 2px), $NEUTRAL_TRANSPARENT calc(50px - 2px) 50px),
       repeating-linear-gradient(to bottom, transparent 0 calc(50px - 2px), $NEUTRAL_TRANSPARENT calc(50px - 2px) 50px)
       rgba($NEUTRAL_COLOR, 0.1);
+  }
+  &__alert {
+    color: $NEUTRAL_COLOR;
+    text-transform: uppercase;
+    position: absolute;
+    padding: 30px 100px;
+    border-radius: 8px;
+    border: 2px solid darken($ALERT_COLOR, 25%);
+    background-color: darken($ALERT_COLOR, 15%);
   }
 }
 
@@ -64,6 +76,7 @@ $NEUTRAL_TRANSPARENT: rgba($NEUTRAL_COLOR, 0.3);
     max-width: 1800px;
     display: flex;
     overflow-x: scroll;
+    flex: 1;
     &::-webkit-scrollbar {
       height: 12px;
       border-radius: 8px;
@@ -79,5 +92,13 @@ $NEUTRAL_TRANSPARENT: rgba($NEUTRAL_COLOR, 0.3);
   }
   &__list {
     list-style-type: none;
+  }
+  &__empty {
+    background-color: $NEUTRAL_TRANSPARENT;
+    height: fit-content;
+    padding: 20px 20%;
+    margin: auto auto;
+    text-transform: uppercase;
+    border-radius: 8px;
   }
 }
