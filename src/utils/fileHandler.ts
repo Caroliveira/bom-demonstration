@@ -12,15 +12,15 @@ const nodeMounter = (name: string): Node => {
   };
 };
 
-const nodeExist = (nodes: Node[], node: string) => {
+const doesNodeExist = (nodes: Node[], node: string) => {
   return nodes.some(({ id }) => id === node);
 };
 
-const tableHandler = (table: string[][]): FileHandlerType => {
+const csvTableHandler = (table: string[][]): FileHandlerType => {
   const nodes: Node[] = [];
   const links: Edge[] = table.map((row) => {
-    if (!nodeExist(nodes, row[0])) nodes.push(nodeMounter(row[0]));
-    if (!nodeExist(nodes, row[1])) nodes.push(nodeMounter(row[1]));
+    if (!doesNodeExist(nodes, row[0])) nodes.push(nodeMounter(row[0]));
+    if (!doesNodeExist(nodes, row[1])) nodes.push(nodeMounter(row[1]));
     return {
       id: `${row[0]}-${row[1]}`,
       label: parseFloat(row[2]),
@@ -43,7 +43,7 @@ const csvHandler = (result: string) => {
     (row, index) => index && row.length >= columns.length && !row.some((col) => col === ''),
   );
 
-  const model = isHeaderValid && cleanTable[0] ? tableHandler(cleanTable) : undefined;
+  const model = isHeaderValid && cleanTable[0] ? csvTableHandler(cleanTable) : undefined;
   return model;
 };
 
@@ -51,8 +51,8 @@ const jsonHandler = (result: string): FileHandlerType => {
   const rawLinks = JSON.parse(result);
   const nodes: Node[] = [];
   const links = rawLinks.map(({ source, target, value }: JsonItemType) => {
-    if (!nodeExist(nodes, source)) nodes.push(nodeMounter(source));
-    if (!nodeExist(nodes, target)) nodes.push(nodeMounter(target));
+    if (!doesNodeExist(nodes, source)) nodes.push(nodeMounter(source));
+    if (!doesNodeExist(nodes, target)) nodes.push(nodeMounter(target));
     return {
       id: `${source}-${target}`,
       label: value,

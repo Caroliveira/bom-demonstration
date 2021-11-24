@@ -8,6 +8,7 @@ const calculateLayer = (
   links: Edge[],
   count: number,
 ): NodesWithLayersType => {
+  // Select next nodes to send recursively
   const nextNodes: NodesWithLayersType = [];
   rootNodes.forEach((node) => {
     const auxLinks = links.filter(({ source }) => source === node.id);
@@ -20,9 +21,11 @@ const calculateLayer = (
     });
   });
 
+  // Check if is last interation
   if (!nextNodes.length) return [];
   const result = calculateLayer(nextNodes, nodes, links, count + 1);
 
+  // Combine resulted array with root one removing duplicateds
   const compiledArray = rootNodes.reduce((acc, el) => {
     const index = result.findIndex((subEl) => subEl.id === el.id);
     let nodeToAdd = el;
