@@ -5,6 +5,7 @@ import HeaderComponent from './HeaderComponent';
 import IconButtonComponent from './IconButtonComponent';
 import ImportModalComponent from './ImportModalComponent';
 import LayoutComponent from './LayoutComponent';
+import NodeModalComponent from './NodeModalComponent';
 import SimulatorItemComponent from './SimulatorItemComponent';
 import SwitchLanguageComponent from './SwitchLanguageComponent';
 
@@ -16,6 +17,7 @@ export {
   IconButtonComponent,
   ImportModalComponent,
   LayoutComponent,
+  NodeModalComponent,
   SimulatorItemComponent,
   SwitchLanguageComponent,
 };

@@ -12,7 +12,10 @@ const SimulatorItemComponent = ({ node }:
   SimulatorItemProps): JSX.Element | null => {
   const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(false);
-  const { layers, setLayers } = useContext(SimulatorContext);
+  const { layers, setLayers, allowForcedOperations } = useContext(SimulatorContext);
+  const isDisabled = !node.available && !allowForcedOperations;
+
+  const handleClick = () => setShowInfo(!showInfo);
 
   const changeNodeAmount = (type: 'add' | 'subtract') => {
     if (!node) return;
@@ -25,8 +28,6 @@ const SimulatorItemComponent = ({ node }:
     setLayers(itemList);
   };
 
-  const handleClick = () => setShowInfo(!showInfo);
-
   if (!node) return null;
 
   return (
@@ -36,8 +37,8 @@ const SimulatorItemComponent = ({ node }:
       </div>
       {showInfo && (
       <div className="simulator-item__options">
-        <IconButtonComponent Icon={FiMinus} translationKey={t('subtract')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('subtract')} />
-        <IconButtonComponent Icon={FiPlus} translationKey={t('add')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('add')} />
+        <IconButtonComponent disabled={isDisabled} Icon={FiMinus} translationKey={t('subtract')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('subtract')} />
+        <IconButtonComponent disabled={isDisabled} Icon={FiPlus} translationKey={t('add')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('add')} />
         <IconButtonComponent Icon={FiClock} translationKey={t('timer')} className="simulator-item__button--icon" />
         <span>{node.timer}</span>
       </div>

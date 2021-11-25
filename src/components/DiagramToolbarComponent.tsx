@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useZoomPanHelper } from 'react-flow-renderer';
@@ -6,13 +6,13 @@ import {
   FiPlus, FiUpload, FiZoomIn, FiZoomOut,
 } from 'react-icons/fi';
 
-import { ButtonComponent, IconButtonComponent } from '.';
+import { ButtonComponent, IconButtonComponent, NodeModalComponent } from '.';
 import { MainContext } from '../context';
 
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const { zoomOut, zoomIn } = useZoomPanHelper();
-  const { setShowImportModal } = useContext(MainContext);
+  const { setShowImportModal, setShowNodeModal } = useContext(MainContext);
   const history = useHistory();
 
   return (
@@ -23,7 +23,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
       </div>
       <div className="toolbar--centered">
         <ButtonComponent outlined translationKey="simulate" className="toolbar__button" onClick={() => history.push('/simulator')} />
-        <IconButtonComponent Icon={FiPlus} translationKey={t('addNode')} className="mr-2" />
+        <IconButtonComponent Icon={FiPlus} translationKey={t('addNode')} className="mr-2" onClick={() => setShowNodeModal(true)} />
         <IconButtonComponent Icon={FiUpload} translationKey={t('import')} onClick={() => setShowImportModal(true)} />
       </div>
     </div>

@@ -10,6 +10,8 @@ export type CustomNodeType = {
 } & Node;
 
 type MainContextType = {
+  showNodeModal: boolean;
+  setShowNodeModal: (showNodeModal: boolean) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   nodes: CustomNodeType[];
@@ -25,6 +27,7 @@ export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [showImportModal, setShowImportModal] = useState(false);
+  const [showNodeModal, setShowNodeModal] = useState(false);
   const [nodes, setNodes] = useState<CustomNodeType[]>([]);
   const [links, setLinks] = useState<Edge[]>([]);
 
@@ -44,6 +47,8 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
 
   return (
     <MainContext.Provider value={{
+      showNodeModal,
+      setShowNodeModal,
       showImportModal,
       setShowImportModal,
       nodes,

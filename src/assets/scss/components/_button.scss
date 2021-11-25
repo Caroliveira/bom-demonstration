@@ -21,6 +21,11 @@
   width: 45px;
   background-color: $PRIMARY_COLOR;
   border-radius: 50%;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: default;
+  }
   
   &__inside {
     height: 100%;
