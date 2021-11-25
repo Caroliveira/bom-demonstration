@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  FiArrowLeft, FiRotateCcw, FiShield, FiShieldOff,
+  FiArrowLeft, FiShield, FiShieldOff,
 } from 'react-icons/fi';
 import { IconButtonComponent, SimulatorItemComponent } from '../components';
 import { SimulatorContext, SimulatorContextProvider } from '../context';
@@ -10,9 +10,7 @@ import { SimulatorContext, SimulatorContextProvider } from '../context';
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const {
-    layers, setLayers, allowForcedOperations, setAllowForcedOperations,
-  } = useContext(SimulatorContext);
+  const { layers, allowForcedOperations, setAllowForcedOperations } = useContext(SimulatorContext);
 
   return (
     <div className="simulator">
