@@ -1,6 +1,7 @@
 {
   "add": "Adicionar",
   "addNode": "Adicionar nó",
+  "allowForcedOperations": "Permitir operações forçadas: {{state}}",
   "back": "Voltar",
   "cancel": "Cancelar",
   "english": "Inglês",
@@ -11,6 +12,8 @@
   "madeBy": "Feito por",
   "noData": "Não há dados cadastrados",
   "noFileSelected": "Nenhum arquivo foi selecionado.",
+  "off": "Desligado",
+  "on": "Ligado",
   "pageNotFound": "Página não encontrada :(",
   "portuguese": "Português",
   "save": "Salvar",

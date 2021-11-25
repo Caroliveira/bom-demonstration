@@ -4,6 +4,9 @@
   margin-bottom: 20px;
   border-radius: 4px;
   background-color: $NEUTRAL_COLOR;
+  &--disabled {
+    opacity: 0.6;
+  }
   &__button {
     cursor: pointer;
     font-weight: bold;

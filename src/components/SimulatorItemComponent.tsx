@@ -30,7 +30,7 @@ const SimulatorItemComponent = ({ node }:
   if (!node) return null;
 
   return (
-    <li className="simulator-item">
+    <li className={`simulator-item ${!node.available && 'simulator-item--disabled'}`}>
       <div className="simulator-item__button" onClick={handleClick} onKeyPress={handleClick} role="button" tabIndex={0}>
         <span>{node.id}</span> <span>{node.amount}</span>
       </div>

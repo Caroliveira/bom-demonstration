@@ -8,6 +8,8 @@ export type LayersType = CustomNodeType[][];
 type SimulatorContextType = {
   layers: LayersType;
   setLayers: (layers: LayersType) => void;
+  allowForcedOperations: boolean;
+  setAllowForcedOperations: (allow: boolean) => void;
 };
 
 type SimulatorContextProviderType = {children : ReactChild};
@@ -18,6 +20,7 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
   JSX.Element => {
   const { nodes, links } = useContext(MainContext);
   const [layers, setLayers] = useState<LayersType>([]);
+  const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 
   const separateLayers = () => {
     const layersArray: CustomNodeType[][] = [];
@@ -33,7 +36,10 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
   useEffect(separateLayers, []);
 
   return (
-    <SimulatorContext.Provider value={{ layers, setLayers }}>
+    <SimulatorContext.Provider value={{
+      layers, setLayers, allowForcedOperations, setAllowForcedOperations,
+    }}
+    >
       {children}
     </SimulatorContext.Provider>
   );
