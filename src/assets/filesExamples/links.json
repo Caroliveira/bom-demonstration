@@ -1,0 +1,47 @@
+[
+  {
+    "source": "wood",
+    "target": "plank",
+    "value": 3
+  },
+  {
+    "source": "wood",
+    "target": "hammer",
+    "value": 1
+  },
+  {
+    "source": "wood",
+    "target": "fireplace",
+    "value": 2
+  },
+  {
+    "source": "stone",
+    "target": "hammer",
+    "value": 1
+  },
+  {
+    "source": "stone",
+    "target": "fireplace",
+    "value": 5
+  },
+  {
+    "source": "plank",
+    "target": "house",
+    "value": 2
+  },
+  {
+    "source": "hammer",
+    "target": "house",
+    "value": 1
+  },
+  {
+    "source": "fireplace",
+    "target": "comfy house",
+    "value": 1
+  },
+  {
+    "source": "house",
+    "target": "comfy house",
+    "value": 1
+  }
+]

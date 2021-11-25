@@ -8,7 +8,7 @@ import { SimulatorContext, SimulatorContextProvider } from '../context';
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { availableLayers, setAvailableLayers, allLayers } = useContext(SimulatorContext);
+  const { layers, setLayers } = useContext(SimulatorContext);
 
   return (
     <div className="simulator">
@@ -17,8 +17,8 @@ const SimulatorScreen = (): JSX.Element => {
         <h1 className="simulator__title">{t('simulator')}</h1>
       </div>
       <div className="simulator__content">
-        {!availableLayers[0] && <p className="simulator__empty">{t('noData')}</p>}
-        {availableLayers?.map((layer, index) => (
+        {!layers[0] && <p className="simulator__empty">{t('noData')}</p>}
+        {layers?.map((layer, index) => (
           <ul key={`layer${index + 1}`} className="simulator__list">
             {layer?.map((node) => (
               node ? <SimulatorItemComponent node={node} key={node.id} /> : null

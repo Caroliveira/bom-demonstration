@@ -2,27 +2,27 @@ import { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiClock, FiMinus, FiPlus } from 'react-icons/fi';
 import { IconButtonComponent } from '.';
-import { SimulatorContext, SimulatorNode } from '../context';
+import { CustomNodeType, SimulatorContext } from '../context';
 
 type SimulatorItemProps = {
-  node: SimulatorNode;
+  node: CustomNodeType;
 };
 
 const SimulatorItemComponent = ({ node }:
   SimulatorItemProps): JSX.Element | null => {
   const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(false);
-  const { allLayers, availableLayers, setAvailableLayers } = useContext(SimulatorContext);
+  const { layers, setLayers } = useContext(SimulatorContext);
 
   const changeNodeAmount = (type: 'add' | 'subtract') => {
     if (!node) return;
     const item = node;
-    const itemList = [...availableLayers];
+    const itemList = [...layers];
 
     if (type === 'add') item.amount += 1;
     else item.amount -= 1;
 
-    setAvailableLayers(itemList);
+    setLayers(itemList);
   };
 
   const handleClick = () => setShowInfo(!showInfo);

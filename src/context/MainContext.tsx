@@ -1,14 +1,19 @@
 import React, { useState, ReactChild } from 'react';
 import { Edge, Node } from 'react-flow-renderer';
-import { nodesWithLayers } from '../utils';
+import { nodeToCustomNode } from '../utils';
 
-export type NodeWithLayerType = Node & {layer: number};
+export type CustomNodeType = {
+  layer: number;
+  amount: number;
+  timer: number;
+  available: boolean;
+} & Node;
 
 type MainContextType = {
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
-  nodes: NodeWithLayerType[];
-  setNodes: (nodes: NodeWithLayerType[]) => void;
+  nodes: CustomNodeType[];
+  setNodes: (nodes: CustomNodeType[]) => void;
   links: Edge[];
   setLinks: (links: Edge[]) => void;
   setModel: (nodes: Node[], links: Edge[]) => void;
@@ -20,11 +25,11 @@ export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [showImportModal, setShowImportModal] = useState(false);
-  const [nodes, setNodes] = useState<NodeWithLayerType[]>([]);
+  const [nodes, setNodes] = useState<CustomNodeType[]>([]);
   const [links, setLinks] = useState<Edge[]>([]);
 
   const setModel = (unorderedNodes: Node[], unassignedLinks: Edge[]) => {
-    const nodesWithLayer: NodeWithLayerType[] = nodesWithLayers(unorderedNodes, unassignedLinks);
+    const nodesWithLayer: CustomNodeType[] = nodeToCustomNode(unorderedNodes, unassignedLinks);
 
     const countArray: number[] = [];
     const nodesWithPosition = nodesWithLayer.map((node) => {
