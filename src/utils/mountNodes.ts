@@ -4,15 +4,15 @@ import { CustomNodeType } from '../context';
 const findNextNodes = (
   currentNodes: CustomNodeType[],
   nodes: Node[],
-  links: Edge[],
+  edges: Edge[],
   count: number,
 ): CustomNodeType[] => {
   const nextNodes: CustomNodeType[] = [];
 
   currentNodes.forEach((node) => {
-    const targetLinks = links.filter(({ source }) => source === node.id);
+    const targetEdges = edges.filter(({ source }) => source === node.id);
 
-    targetLinks.forEach(({ target }) => {
+    targetEdges.forEach(({ target }) => {
       const targetNode = nodes.find(({ id }) => id === target);
       if (targetNode) {
         nextNodes.push({
@@ -23,7 +23,7 @@ const findNextNodes = (
   });
 
   if (!nextNodes.length) return currentNodes;
-  return [...currentNodes, ...findNextNodes(nextNodes, nodes, links, count + 1)];
+  return [...currentNodes, ...findNextNodes(nextNodes, nodes, edges, count + 1)];
 };
 
 const removeDuplicateds = (nodes: CustomNodeType[]) => {
@@ -40,17 +40,27 @@ const removeDuplicateds = (nodes: CustomNodeType[]) => {
   }, [] as CustomNodeType[]);
 };
 
-export const nodeToCustomNode = (nodes: Node[], links: Edge[]): CustomNodeType[] => {
+export const updateNodesPosition = (nodes: CustomNodeType[]) => {
+  const countArray: number[] = [];
+  return nodes.map((node) => {
+    const countLayer = countArray[node.layer] || 0;
+    countArray[node.layer] = countLayer + 1;
+    return { ...node, position: { x: countLayer * 200, y: node.layer * 200 } };
+  });
+};
+
+export const nodeToCustomNode = (nodes: Node[], edges: Edge[]): CustomNodeType[] => {
   const rootNodes: CustomNodeType[] = [];
 
   nodes.forEach((node) => {
-    if (!links.find(({ target }) => target === node.id)) {
+    if (!edges.find(({ target }) => target === node.id)) {
       rootNodes.push({
         ...node, layer: 0, amount: 0, timer: 0, available: true,
       });
     }
   });
 
-  const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, links, 1);
-  return removeDuplicateds(nodesWithDuplicateds);
+  const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, edges, 1);
+  const nodesWithLayer = removeDuplicateds(nodesWithDuplicateds);
+  return updateNodesPosition(nodesWithLayer);
 };

@@ -1,6 +1,6 @@
 import { ArrowHeadType, Edge, Node } from 'react-flow-renderer';
 
-type FileHandlerType = { nodes: Node[], links: Edge[]};
+type FileHandlerType = { nodes: Node[], edges: Edge[]};
 type JsonItemType = { source: string; target: string; value: string };
 
 const nodeMounter = (name: string): Node => {
@@ -18,7 +18,7 @@ const doesNodeExist = (nodes: Node[], node: string) => {
 
 const csvTableHandler = (table: string[][]): FileHandlerType => {
   const nodes: Node[] = [];
-  const links: Edge[] = table.map((row) => {
+  const edges: Edge[] = table.map((row) => {
     if (!doesNodeExist(nodes, row[0])) nodes.push(nodeMounter(row[0]));
     if (!doesNodeExist(nodes, row[1])) nodes.push(nodeMounter(row[1]));
     return {
@@ -30,7 +30,7 @@ const csvTableHandler = (table: string[][]): FileHandlerType => {
     };
   });
 
-  return { nodes, links };
+  return { nodes, edges };
 };
 
 const csvHandler = (result: string) => {
@@ -48,9 +48,9 @@ const csvHandler = (result: string) => {
 };
 
 const jsonHandler = (result: string): FileHandlerType => {
-  const rawLinks = JSON.parse(result);
+  const rawEdges = JSON.parse(result);
   const nodes: Node[] = [];
-  const links = rawLinks.map(({ source, target, value }: JsonItemType) => {
+  const edges = rawEdges.map(({ source, target, value }: JsonItemType) => {
     if (!doesNodeExist(nodes, source)) nodes.push(nodeMounter(source));
     if (!doesNodeExist(nodes, target)) nodes.push(nodeMounter(target));
     return {
@@ -61,7 +61,7 @@ const jsonHandler = (result: string): FileHandlerType => {
       arrowHeadType: ArrowHeadType.ArrowClosed,
     };
   });
-  return { nodes, links };
+  return { nodes, edges };
 };
 
 export const fileHandler = (result: string, fileType: string): FileHandlerType | undefined => {

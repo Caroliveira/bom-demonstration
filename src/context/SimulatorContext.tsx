@@ -1,7 +1,8 @@
 import React, {
   useState, useEffect, ReactChild, useContext,
 } from 'react';
-import { MainContext, CustomNodeType } from '.';
+import { useStoreState } from 'react-flow-renderer';
+import { CustomNodeType } from '.';
 
 export type LayersType = CustomNodeType[][];
 
@@ -18,7 +19,7 @@ export const SimulatorContext = React.createContext({} as SimulatorContextType);
 
 export const SimulatorContextProvider = ({ children }: SimulatorContextProviderType):
   JSX.Element => {
-  const { nodes, links } = useContext(MainContext);
+  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
   const [layers, setLayers] = useState<LayersType>([]);
   const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 

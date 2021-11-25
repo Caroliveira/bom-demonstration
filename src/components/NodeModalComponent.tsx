@@ -1,13 +1,20 @@
 import { useContext, useState } from 'react';
+import { useStoreState } from 'react-flow-renderer';
 import { useTranslation } from 'react-i18next';
 import { ButtonComponent, InputComponent } from '.';
-import { MainContext } from '../context';
+import { CustomNodeType, MainContext } from '../context';
+
+const defaultNodeProps = {
+  position: { x: 0, y: 0 }, available: true, amount: 0, timer: 0, layer: 0,
+};
 
 const NodeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const {
-    showNodeModal, setShowNodeModal, nodes, addNode, addLink, edgeSource, setEdgeSource,
+    showNodeModal, setShowNodeModal, edgeSource, setEdgeSource, elements, setElements,
   } = useContext(MainContext);
+  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
+
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [edgeAmount, setEdgeAmount] = useState('1');
@@ -25,34 +32,22 @@ const NodeModalComponent = (): JSX.Element | null => {
 
     if (nodeAlreadyExists || !name) setError('nameError');
     else {
-      let layer = 0;
-      let available = true;
-      const position = { x: 0, y: 0 };
+      let edge;
       const nodeSource = nodes.find(({ id }) => id === edgeSource);
+      const node = { id: name, data: { label: name }, ...defaultNodeProps };
 
       if (nodeSource && edgeSource) {
-        layer = nodeSource.layer + 1;
-        position.x = nodeSource.position.x;
-        position.y = nodeSource.position.y + 150;
-        available = nodeSource.amount >= parseInt(edgeAmount, 10);
-        addLink({
-          id: `${edgeSource}-${name}`,
-          source: edgeSource,
-          target: name,
-          label: edgeAmount,
-        });
+        node.layer = nodeSource.layer + 1;
+        node.position = { x: nodeSource.position.x, y: nodeSource.position.y + 150 };
+        node.available = nodeSource.amount >= parseInt(edgeAmount, 10);
+        edge = {
+          id: `${edgeSource}-${name}`, source: edgeSource, target: name, label: edgeAmount,
+        };
       }
 
-      addNode({
-        id: name,
-        data: { label: name },
-        layer,
-        position,
-        available,
-        amount: 0,
-        timer: 0,
-      });
-
+      console.log(elements);
+      const updatedElements = edge ? [...elements, node, edge] : [...elements, node];
+      setElements(updatedElements);
       close();
     }
   };

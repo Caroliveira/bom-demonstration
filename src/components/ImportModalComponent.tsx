@@ -1,16 +1,16 @@
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FaFileAlt, FaTrash } from 'react-icons/fa';
+import { FaFileAlt } from 'react-icons/fa';
 import { ButtonComponent } from '.';
 import { MainContext } from '../context';
-import { fileHandler } from '../utils';
+import { fileHandler, nodeToCustomNode } from '../utils';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
   const [file, setFile] = useState<File>();
-  const { showImportModal, setShowImportModal, setModel } = useContext(MainContext);
+  const { showImportModal, setShowImportModal, setElements } = useContext(MainContext);
 
   const closeModal = () => {
     setFile(undefined);
@@ -23,8 +23,8 @@ const ImportModalComponent = (): JSX.Element | null => {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         const result = loadEvent.target?.result as string;
-        const { nodes, links } = fileHandler(result, file.type) || {};
-        if (nodes && links) setModel(nodes, links);
+        const { nodes, edges } = fileHandler(result, file.type) || {};
+        if (nodes && edges) setElements([...nodeToCustomNode(nodes, edges), ...edges]);
       };
       reader.readAsText(file);
       closeModal();
