@@ -9,16 +9,23 @@ export type CustomNodeType = {
   available: boolean;
 } & Node;
 
+export type NodeModalProps = {
+  show: boolean;
+  edgeSource?: string
+ } | undefined;
+
 type MainContextType = {
-  showNodeModal: boolean;
-  setShowNodeModal: (showNodeModal: boolean) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   nodes: CustomNodeType[];
-  setNodes: (nodes: CustomNodeType[]) => void;
   links: Edge[];
-  setLinks: (links: Edge[]) => void;
   setModel: (nodes: Node[], links: Edge[]) => void;
+  showNodeModal: boolean;
+  setShowNodeModal: (show: boolean) => void;
+  addNode: (node: CustomNodeType) => void;
+  addLink: (link: Edge) => void;
+  edgeSource: string;
+  setEdgeSource: (nodeId: string) => void;
 };
 
 type MainContextProviderType = {children : ReactChild};
@@ -28,8 +35,12 @@ export const MainContext = React.createContext({} as MainContextType);
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
+  const [edgeSource, setEdgeSource] = useState('');
   const [nodes, setNodes] = useState<CustomNodeType[]>([]);
   const [links, setLinks] = useState<Edge[]>([]);
+
+  const addNode = (node: CustomNodeType) => setNodes([...nodes, node]);
+  const addLink = (link: Edge) => setLinks([...links, link]);
 
   const setModel = (unorderedNodes: Node[], unassignedLinks: Edge[]) => {
     const nodesWithLayer: CustomNodeType[] = nodeToCustomNode(unorderedNodes, unassignedLinks);
@@ -47,15 +58,17 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
 
   return (
     <MainContext.Provider value={{
-      showNodeModal,
-      setShowNodeModal,
       showImportModal,
       setShowImportModal,
       nodes,
-      setNodes,
       links,
-      setLinks,
       setModel,
+      showNodeModal,
+      setShowNodeModal,
+      addNode,
+      addLink,
+      edgeSource,
+      setEdgeSource,
     }}
     >
       {children}

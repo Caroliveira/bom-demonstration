@@ -17,7 +17,8 @@ const ImportModalComponent = (): JSX.Element | null => {
     setShowImportModal(false);
   };
 
-  const handleClick = () => {
+  const handleClick = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     if (file) {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
@@ -43,7 +44,7 @@ const ImportModalComponent = (): JSX.Element | null => {
 
   return (
     <div className="modal__background">
-      <div className="modal" role="dialog">
+      <form className="modal" role="dialog" onSubmit={handleClick}>
         <h2 className="modal__title">{t('importTitle')}</h2>
         <p className="modal__text">{t('importEspecification')}:</p> <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
 
@@ -55,9 +56,9 @@ const ImportModalComponent = (): JSX.Element | null => {
 
         <div className="modal__buttons">
           <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={closeModal} />
-          <ButtonComponent outlined translationKey={file ? 'save' : 'import'} onClick={handleClick} />
+          <ButtonComponent outlined translationKey={file ? 'save' : 'import'} type="submit" />
         </div>
-      </div>
+      </form>
     </div>
   );
 };

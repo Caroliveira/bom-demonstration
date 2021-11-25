@@ -4,6 +4,7 @@ import FooterComponent from './FooterComponent';
 import HeaderComponent from './HeaderComponent';
 import IconButtonComponent from './IconButtonComponent';
 import ImportModalComponent from './ImportModalComponent';
+import InputComponent from './InputComponent';
 import LayoutComponent from './LayoutComponent';
 import NodeModalComponent from './NodeModalComponent';
 import SimulatorItemComponent from './SimulatorItemComponent';
@@ -16,6 +17,7 @@ export {
   HeaderComponent,
   IconButtonComponent,
   ImportModalComponent,
+  InputComponent,
   LayoutComponent,
   NodeModalComponent,
   SimulatorItemComponent,

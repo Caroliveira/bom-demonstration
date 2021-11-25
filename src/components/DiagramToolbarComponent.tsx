@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useZoomPanHelper } from 'react-flow-renderer';
@@ -6,7 +6,7 @@ import {
   FiPlus, FiUpload, FiZoomIn, FiZoomOut,
 } from 'react-icons/fi';
 
-import { ButtonComponent, IconButtonComponent, NodeModalComponent } from '.';
+import { ButtonComponent, IconButtonComponent } from '.';
 import { MainContext } from '../context';
 
 const DiagramToolbarComponent = (): JSX.Element => {
