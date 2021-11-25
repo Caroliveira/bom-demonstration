@@ -6,6 +6,7 @@
   "back": "Voltar",
   "cancel": "Cancelar",
   "english": "Inglês",
+  "hideMap": "Esconder mini mapa",
   "import": "Importar projeto",
   "importEspecification": "O arquivo deve ser um conjunto de ligações entre os itens do jogos e deverá ter o seguinte formato",
   "importTitle": "Importar arquivo CSV ou JSON",
@@ -21,12 +22,11 @@
   "portuguese": "Português",
   "save": "Salvar",
   "selectLanguage": "Selecione o idioma desejado",
+  "showMap": "Mostrar mini mapa",
   "simulate": "Simular jogo",
   "simulator": "Simulador",
   "start": "Começar novo",
   "subtract": "Subtrair",
   "timer": "Temporizador",
-  "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!",
-  "zoomIn": "Aumentar zoom",
-  "zoomOut": "Reduzir zoom"
+  "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!"
 }

@@ -15,6 +15,8 @@ type MainContextType = {
   setShowImportModal: (showImportModal: boolean) => void;
   showNodeModal: boolean;
   setShowNodeModal: (show: boolean) => void;
+  showMiniMap: boolean;
+  setShowMiniMap: (show: boolean) =>void;
   edgeSource: string;
   setEdgeSource: (nodeId: string) => void;
   resetNodeModalStates: () => void;
@@ -29,6 +31,7 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
   const [elements, setElements] = useState<Elements>([]);
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
+  const [showMiniMap, setShowMiniMap] = useState(true);
 
   // Node modal states
   const [edgeSource, setEdgeSource] = useState('');
@@ -46,6 +49,8 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowImportModal,
       showNodeModal,
       setShowNodeModal,
+      showMiniMap,
+      setShowMiniMap,
       edgeSource,
       setEdgeSource,
       resetNodeModalStates,
