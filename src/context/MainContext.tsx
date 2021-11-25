@@ -1,5 +1,5 @@
 import React, { useState, ReactChild } from 'react';
-import { Elements, Node } from 'react-flow-renderer';
+import { Elements, Node, XYPosition } from 'react-flow-renderer';
 
 export type CustomNodeType = {
   layer: number;
@@ -7,11 +7,6 @@ export type CustomNodeType = {
   timer: number;
   available: boolean;
 } & Node;
-
-export type NodeModalProps = {
-  show: boolean;
-  edgeSource?: string
- } | undefined;
 
 type MainContextType = {
   elements: Elements;
@@ -22,6 +17,7 @@ type MainContextType = {
   setShowNodeModal: (show: boolean) => void;
   edgeSource: string;
   setEdgeSource: (nodeId: string) => void;
+  resetNodeModalStates: () => void;
 };
 
 type MainContextProviderType = {children : ReactChild};
@@ -29,10 +25,18 @@ type MainContextProviderType = {children : ReactChild};
 export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
+  // Global states
   const [elements, setElements] = useState<Elements>([]);
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
+
+  // Node modal states
   const [edgeSource, setEdgeSource] = useState('');
+
+  const resetNodeModalStates = () => {
+    setShowNodeModal(false);
+    setEdgeSource('');
+  };
 
   return (
     <MainContext.Provider value={{
@@ -44,6 +48,7 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowNodeModal,
       edgeSource,
       setEdgeSource,
+      resetNodeModalStates,
     }}
     >
       {children}

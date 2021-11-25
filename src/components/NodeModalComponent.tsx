@@ -11,7 +11,7 @@ const defaultNodeProps = {
 const NodeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const {
-    showNodeModal, setShowNodeModal, edgeSource, setEdgeSource, elements, setElements,
+    elements, setElements, showNodeModal, edgeSource, resetNodeModalStates,
   } = useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
 
@@ -22,8 +22,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   const close = () => {
     setName('');
     setError('');
-    setShowNodeModal(false);
-    setEdgeSource('');
+    resetNodeModalStates();
   };
 
   const handleSave = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -45,7 +44,6 @@ const NodeModalComponent = (): JSX.Element | null => {
         };
       }
 
-      console.log(elements);
       const updatedElements = edge ? [...elements, node, edge] : [...elements, node];
       setElements(updatedElements);
       close();
