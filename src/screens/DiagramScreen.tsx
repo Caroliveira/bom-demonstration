@@ -23,7 +23,7 @@ const DiagramScreen = (): JSX.Element => {
           onConnectStop={createNewNode}
         >
           <Controls />
-          {showMiniMap && <MiniMap nodeColor="black" draggable />}
+          {showMiniMap && <MiniMap nodeColor="black" maskColor="#000A" />}
         </ReactFlow>
       </div>
     </div>

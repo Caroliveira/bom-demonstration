@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ReactChild } from 'react';
-import { Elements, Node, useStoreState } from 'react-flow-renderer';
+import { Elements, Node } from 'react-flow-renderer';
 import { getLayoutedElements } from '../utils/dagre';
 
 export type CustomNodeType = {
@@ -9,10 +9,12 @@ export type CustomNodeType = {
   available: boolean;
 } & Node;
 
+type AdjustLayoutParams = {dir?: 'TB' | 'LR', els?: Elements} | undefined;
+
 type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
-  adjustLayout: (direction: 'TB' | 'LR') => void;
+  adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   showNodeModal: boolean;
@@ -29,11 +31,9 @@ type MainContextProviderType = {children : ReactChild};
 export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
-  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
-  const edges = useStoreState((store) => store.edges);
-
   // Global states
   const [elements, setElements] = useState<Elements>([]);
+  const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
@@ -46,9 +46,12 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
     setEdgeSource('');
   };
 
-  const adjustLayout = useCallback((direction: 'TB' | 'LR') => {
-    const layoutedElements = getLayoutedElements(elements, direction);
+  const adjustLayout = useCallback((params: AdjustLayoutParams) => {
+    const currentDirection = params?.dir || direction;
+    const currentElements = params?.els || elements;
+    const layoutedElements = getLayoutedElements(currentElements, currentDirection);
     setElements(layoutedElements);
+    setDirection(currentDirection);
   }, [elements]);
 
   return (

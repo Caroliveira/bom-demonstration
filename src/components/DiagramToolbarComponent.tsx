@@ -17,6 +17,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const {
+    elements,
     adjustLayout,
     setShowImportModal,
     setShowNodeModal,
@@ -27,7 +28,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
 
   const onDirectionChange = () => {
     const newDirection = direction === 'TB' ? 'LR' : 'TB';
-    adjustLayout(newDirection);
+    adjustLayout({ dir: newDirection });
     setDirection(newDirection);
   };
 
@@ -42,6 +43,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
           className="mr-2"
         />
         <IconButtonComponent
+          disabled={!elements.length}
           Icon={layout[direction].Icon}
           translationKey={t('layoutFormat', { layout: layout[direction].label })}
           onClick={onDirectionChange}

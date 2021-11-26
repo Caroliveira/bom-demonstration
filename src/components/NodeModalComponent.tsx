@@ -11,7 +11,7 @@ const defaultNodeProps = {
 const NodeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const {
-    elements, setElements, showNodeModal, edgeSource, resetNodeModalStates,
+    elements, setElements, adjustLayout, showNodeModal, edgeSource, resetNodeModalStates,
   } = useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
 
@@ -37,7 +37,6 @@ const NodeModalComponent = (): JSX.Element | null => {
 
       if (nodeSource && edgeSource) {
         node.layer = nodeSource.layer + 1;
-        node.position = { x: nodeSource.position.x, y: nodeSource.position.y + 150 };
         node.available = nodeSource.amount >= parseInt(edgeAmount, 10);
         edge = {
           id: `${edgeSource}-${name}`, source: edgeSource, target: name, label: edgeAmount,
@@ -45,7 +44,7 @@ const NodeModalComponent = (): JSX.Element | null => {
       }
 
       const updatedElements = edge ? [...elements, node, edge] : [...elements, node];
-      setElements(updatedElements);
+      adjustLayout({ els: updatedElements });
       close();
     }
   };
