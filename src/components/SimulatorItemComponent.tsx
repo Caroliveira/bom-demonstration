@@ -29,21 +29,45 @@ const SimulatorItemComponent = ({ node }:
     setLayers(itemList);
   };
 
+  const renderItemInfo = () => (
+    <div className="simulator-item__options">
+      <IconButtonComponent
+        disabled={isDisabled}
+        Icon={FiMinus}
+        translationKey={t('subtract')}
+        className="simulator-item__button--icon"
+        onClick={() => changeNodeAmount('subtract')}
+      />
+      <IconButtonComponent
+        disabled={isDisabled}
+        Icon={FiPlus}
+        translationKey={t('add')}
+        className="simulator-item__button--icon"
+        onClick={() => changeNodeAmount('add')}
+      />
+      <IconButtonComponent
+        Icon={FiClock}
+        translationKey={t('timer')}
+        className="simulator-item__button--icon"
+      />
+      <span>{node.timer}</span>
+    </div>
+  );
+
   if (!node) return null;
 
   return (
     <li className={`simulator-item ${!node.available && 'simulator-item--disabled'}`}>
-      <div className="simulator-item__button" onClick={handleClick} onKeyPress={handleClick} role="button" tabIndex={0}>
+      <div
+        className="simulator-item__button"
+        onClick={handleClick}
+        onKeyPress={handleClick}
+        role="button"
+        tabIndex={0}
+      >
         <span>{node.id}</span> <span>{node.amount}</span>
       </div>
-      {showInfo && (
-      <div className="simulator-item__options">
-        <IconButtonComponent disabled={isDisabled} Icon={FiMinus} translationKey={t('subtract')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('subtract')} />
-        <IconButtonComponent disabled={isDisabled} Icon={FiPlus} translationKey={t('add')} className="simulator-item__button--icon" onClick={() => changeNodeAmount('add')} />
-        <IconButtonComponent Icon={FiClock} translationKey={t('timer')} className="simulator-item__button--icon" />
-        <span>{node.timer}</span>
-      </div>
-      )}
+      {showInfo && renderItemInfo()}
     </li>
   );
 };

@@ -14,8 +14,16 @@ const HomeScreen = (): JSX.Element => {
     <div className="home">
       <h1 className="home__title">{t('welcomeTitle')}</h1>
       <div className="home__buttons">
-        <ButtonComponent outlined translationKey="import" onClick={() => setShowImportModal(true)} style={{ marginRight: 32 }} />
-        <ButtonComponent translationKey="start" onClick={() => history.push('/diagram')} />
+        <ButtonComponent
+          outlined
+          translationKey="import"
+          onClick={() => setShowImportModal(true)}
+          style={{ marginRight: 32 }}
+        />
+        <ButtonComponent
+          translationKey="start"
+          onClick={() => history.push('/diagram')}
+        />
       </div>
     </div>
   );

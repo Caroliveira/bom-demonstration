@@ -2,13 +2,19 @@ import { useTranslation } from 'react-i18next';
 import { IconBaseProps, IconType } from 'react-icons';
 
 type IconButtonProps = {
-  translationKey: string;
   Icon: IconType
+  translationKey: string;
   iconProps?: IconBaseProps;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const IconButtonComponent = ({
-  translationKey, Icon, type = 'button', className, disabled, iconProps, ...props
+  Icon,
+  translationKey,
+  type = 'button',
+  className,
+  disabled,
+  iconProps,
+  ...props
 }: IconButtonProps): JSX.Element => {
   const { t } = useTranslation();
 

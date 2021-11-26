@@ -10,7 +10,12 @@ const SwitchLanguageComponent = (props:
   };
 
   return (
-    <select aria-label={t('selectLanguage')} onChange={handleChange} value={i18n.language} {...props}>
+    <select
+      aria-label={t('selectLanguage')}
+      onChange={handleChange}
+      value={i18n.language}
+      {...props}
+    >
       <option value="en">{t('english')}</option>
       <option value="pt-BR">{t('portuguese')}</option>
     </select>

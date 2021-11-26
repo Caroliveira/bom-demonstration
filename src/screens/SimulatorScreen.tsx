@@ -15,7 +15,11 @@ const SimulatorScreen = (): JSX.Element => {
     <div className="simulator">
       <div className="simulator__header">
         <div className="simulator__header--left">
-          <IconButtonComponent Icon={FiArrowLeft} translationKey="back" onClick={() => history.push('/diagram')} />
+          <IconButtonComponent
+            Icon={FiArrowLeft}
+            translationKey="back"
+            onClick={() => history.push('/diagram')}
+          />
           <h1 className="simulator__title">{t('simulator')}</h1>
         </div>
         <IconButtonComponent

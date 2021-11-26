@@ -14,8 +14,14 @@ const InputComponent = ({
 
   return (
     <div className="input" style={divStyle}>
-      <label htmlFor={translationKey} className="input__label">{t(translationKey)}</label>
-      <input aria-labelledby={translationKey} className={`input__box ${className}`} {...props} />
+      <label htmlFor={translationKey} className="input__label">
+        {t(translationKey)}
+      </label>
+      <input
+        aria-labelledby={translationKey}
+        className={`input__box ${className}`}
+        {...props}
+      />
       {!!error && (
       <span className="input__error">
         <FiAlertTriangle style={{ marginRight: 8 }} />

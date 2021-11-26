@@ -39,12 +39,11 @@ const csvHandler = (result: string) => {
   const columns = ['source', 'target', 'value'];
 
   const isHeaderValid = !columns.some((el, i) => el !== table[0][i]);
-  const cleanTable = table.filter(
-    (row, index) => index && row.length >= columns.length && !row.some((col) => col === ''),
-  );
+  const cleanTable = table.filter((row, index) => {
+    return (index && row.length >= columns.length && !row.some((col) => col === ''));
+  });
 
-  const model = isHeaderValid && cleanTable[0] ? csvTableHandler(cleanTable) : undefined;
-  return model;
+  return isHeaderValid && cleanTable[0] ? csvTableHandler(cleanTable) : undefined;
 };
 
 const jsonHandler = (result: string): FileHandlerType => {

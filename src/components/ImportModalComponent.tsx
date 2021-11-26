@@ -47,17 +47,32 @@ const ImportModalComponent = (): JSX.Element | null => {
     <div className="modal__background">
       <form className="modal" role="dialog" onSubmit={handleClick}>
         <h2 className="modal__title">{t('importTitle')}</h2>
-        <p className="modal__text">{t('importEspecification')}:</p> <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
 
-        <input id="file-input" type="file" style={{ display: 'none' }} onChange={handleInputChange} />
+        <p className="modal__text">{t('importEspecification')}:</p>
+        <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
+
+        <input
+          type="file"
+          id="file-input"
+          style={{ display: 'none' }}
+          onChange={handleInputChange}
+        />
         <p className="modal__file-name">
           <FaFileAlt className="modal__file-icon" />
           {file?.name || t('noFileSelected')}
         </p>
 
         <div className="modal__buttons">
-          <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={closeModal} />
-          <ButtonComponent outlined translationKey={file ? 'save' : 'import'} type="submit" />
+          <ButtonComponent
+            translationKey="cancel"
+            className="modal__cancel-button"
+            onClick={closeModal}
+          />
+          <ButtonComponent
+            outlined
+            translationKey={file ? 'save' : 'import'}
+            type="submit"
+          />
         </div>
       </form>
     </div>
