@@ -15,6 +15,8 @@ type AdjustLayoutParams = {dir?: 'TB' | 'LR', els?: Elements} | undefined;
 type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
+  node?: CustomNodeType;
+  setNode: (node: CustomNodeType) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
@@ -22,6 +24,7 @@ type MainContextType = {
   setShowNodeModal: (show: boolean) => void;
   showMiniMap: boolean;
   setShowMiniMap: (show: boolean) =>void;
+  closeNodeModal: () => void;
 };
 
 type MainContextProviderType = {children : ReactChild};
@@ -30,10 +33,16 @@ export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
+  const [node, setNode] = useState<CustomNodeType>();
   const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
+
+  const closeNodeModal = () => {
+    setShowNodeModal(false);
+    setNode(undefined);
+  };
 
   const adjustLayout = useCallback((params: AdjustLayoutParams) => {
     const currentDirection = params?.dir || direction;
@@ -45,6 +54,8 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
 
   return (
     <MainContext.Provider value={{
+      node,
+      setNode,
       elements,
       setElements,
       adjustLayout,
@@ -54,6 +65,7 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowNodeModal,
       showMiniMap,
       setShowMiniMap,
+      closeNodeModal,
     }}
     >
       {children}

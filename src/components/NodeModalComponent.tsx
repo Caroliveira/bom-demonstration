@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStoreState } from 'react-flow-renderer';
 
@@ -12,12 +12,14 @@ const defaultNodeProps = {
 const NodeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const {
-    elements, adjustLayout, showNodeModal, setShowNodeModal,
+    elements, node, adjustLayout, showNodeModal, setShowNodeModal,
   } = useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
 
   const [name, setName] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => setName(node?.id || ''), [node]);
 
   const close = () => {
     setName('');
@@ -31,8 +33,8 @@ const NodeModalComponent = (): JSX.Element | null => {
 
     if (nodeAlreadyExists || !name) setError('nameError');
     else {
-      const node = { id: name, data: { label: name }, ...defaultNodeProps };
-      adjustLayout({ els: [...elements, node] });
+      const newNode = { id: name, data: { label: name }, ...defaultNodeProps };
+      adjustLayout({ els: [...elements, newNode] });
       close();
     }
   };
@@ -47,7 +49,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   return (
     <div className="modal__background">
       <form className="modal" role="dialog" onSubmit={handleSave}>
-        <h2 className="modal__title">{t('addItem')}</h2>
+        <h2 className="modal__title">{t(node ? 'editItem' : 'addItem')}</h2>
 
         <InputComponent
           autoFocus
