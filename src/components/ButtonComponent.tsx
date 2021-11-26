@@ -9,9 +9,14 @@ const ButtonComponent = ({
   translationKey, outlined = false, type = 'button', className, ...props
 }: ButtonProps): JSX.Element => {
   const { t } = useTranslation();
+  const buttonStyle = `button--${outlined ? 'outlined' : 'filled'}`;
 
   return (
-    <button className={`button button--${outlined ? 'outlined' : 'filled'} ${className}`} type={type} {...props}>
+    <button
+      type={type}
+      className={`button ${buttonStyle} ${className}`}
+      {...props}
+    >
       {t(translationKey)}
     </button>
   );

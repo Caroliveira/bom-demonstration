@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
-import { useStoreState } from 'react-flow-renderer';
 import { useTranslation } from 'react-i18next';
+import { useStoreState } from 'react-flow-renderer';
+
 import { ButtonComponent, InputComponent } from '.';
 import { CustomNodeType, MainContext } from '../context';
 
@@ -11,18 +12,17 @@ const defaultNodeProps = {
 const NodeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const {
-    elements, setElements, adjustLayout, showNodeModal, edgeSource, resetNodeModalStates,
+    elements, adjustLayout, showNodeModal, setShowNodeModal,
   } = useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
 
   const [name, setName] = useState('');
   const [error, setError] = useState('');
-  const [edgeAmount, setEdgeAmount] = useState('1');
 
   const close = () => {
     setName('');
     setError('');
-    resetNodeModalStates();
+    setShowNodeModal(false);
   };
 
   const handleSave = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -31,20 +31,8 @@ const NodeModalComponent = (): JSX.Element | null => {
 
     if (nodeAlreadyExists || !name) setError('nameError');
     else {
-      let edge;
-      const nodeSource = nodes.find(({ id }) => id === edgeSource);
       const node = { id: name, data: { label: name }, ...defaultNodeProps };
-
-      if (nodeSource && edgeSource) {
-        node.layer = nodeSource.layer + 1;
-        node.available = nodeSource.amount >= parseInt(edgeAmount, 10);
-        edge = {
-          id: `${edgeSource}-${name}`, source: edgeSource, target: name, label: edgeAmount,
-        };
-      }
-
-      const updatedElements = edge ? [...elements, node, edge] : [...elements, node];
-      adjustLayout({ els: updatedElements });
+      adjustLayout({ els: [...elements, node] });
       close();
     }
   };
@@ -68,17 +56,6 @@ const NodeModalComponent = (): JSX.Element | null => {
           value={name}
           onChange={handleNameChange}
         />
-
-        {edgeSource && (
-          <InputComponent
-            translationKey={t('amountOf', { node: edgeSource })}
-            type="number"
-            min={1}
-            value={edgeAmount}
-            onChange={(evt) => setEdgeAmount(evt.target.value)}
-            divStyle={{ marginTop: 16 }}
-          />
-        )}
 
         <div className="modal__buttons">
           <ButtonComponent translationKey="cancel" className="modal__cancel-button" onClick={close} />

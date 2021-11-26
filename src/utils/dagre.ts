@@ -20,6 +20,7 @@ export const getLayoutedElements = (elements: Elements, direction: 'TB' | 'LR' =
 
   return elements.map((element) => {
     const el = element;
+
     if (!isEdge(el)) {
       const nodeWithPosition = dagreGraph.node(el.id);
       el.targetPosition = isHorizontal ? Position.Left : Position.Top;

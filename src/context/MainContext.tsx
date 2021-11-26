@@ -1,6 +1,7 @@
 import React, { useState, useCallback, ReactChild } from 'react';
 import { Elements, Node } from 'react-flow-renderer';
-import { getLayoutedElements } from '../utils/dagre';
+
+import { getLayoutedElements } from '../utils';
 
 export type CustomNodeType = {
   layer: number;
@@ -21,9 +22,6 @@ type MainContextType = {
   setShowNodeModal: (show: boolean) => void;
   showMiniMap: boolean;
   setShowMiniMap: (show: boolean) =>void;
-  edgeSource: string;
-  setEdgeSource: (nodeId: string) => void;
-  resetNodeModalStates: () => void;
 };
 
 type MainContextProviderType = {children : ReactChild};
@@ -31,20 +29,11 @@ type MainContextProviderType = {children : ReactChild};
 export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
-  // Global states
   const [elements, setElements] = useState<Elements>([]);
   const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
-
-  // Node modal states
-  const [edgeSource, setEdgeSource] = useState('');
-
-  const resetNodeModalStates = () => {
-    setShowNodeModal(false);
-    setEdgeSource('');
-  };
 
   const adjustLayout = useCallback((params: AdjustLayoutParams) => {
     const currentDirection = params?.dir || direction;
@@ -65,9 +54,6 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowNodeModal,
       showMiniMap,
       setShowMiniMap,
-      edgeSource,
-      setEdgeSource,
-      resetNodeModalStates,
     }}
     >
       {children}

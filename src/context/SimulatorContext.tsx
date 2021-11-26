@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactChild } from 'react';
 import { useStoreState } from 'react-flow-renderer';
+
 import { CustomNodeType } from '.';
 
 export type LayersType = CustomNodeType[][];
@@ -36,7 +37,10 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
 
   return (
     <SimulatorContext.Provider value={{
-      layers, setLayers, allowForcedOperations, setAllowForcedOperations,
+      layers,
+      setLayers,
+      allowForcedOperations,
+      setAllowForcedOperations,
     }}
     >
       {children}

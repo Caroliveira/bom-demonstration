@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  FiArrowLeft, FiShield, FiShieldOff,
-} from 'react-icons/fi';
+import { FiArrowLeft, FiShield, FiShieldOff } from 'react-icons/fi';
+
 import { IconButtonComponent, SimulatorItemComponent } from '../components';
 import { SimulatorContext, SimulatorContextProvider } from '../context';
 

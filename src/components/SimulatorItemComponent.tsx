@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiClock, FiMinus, FiPlus } from 'react-icons/fi';
-import { IconButtonComponent } from '.';
+
 import { CustomNodeType, SimulatorContext } from '../context';
+import { IconButtonComponent } from '.';
 
 type SimulatorItemProps = {
   node: CustomNodeType;
@@ -19,12 +20,12 @@ const SimulatorItemComponent = ({ node }:
 
   const changeNodeAmount = (type: 'add' | 'subtract') => {
     if (!node) return;
+
     const item = node;
     const itemList = [...layers];
 
     if (type === 'add') item.amount += 1;
     else item.amount -= 1;
-
     setLayers(itemList);
   };
 

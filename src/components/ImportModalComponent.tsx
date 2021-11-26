@@ -2,9 +2,10 @@ import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaFileAlt } from 'react-icons/fa';
-import { ButtonComponent } from '.';
-import { MainContext } from '../context';
+
 import { fileHandler, mountElements } from '../utils';
+import { MainContext } from '../context';
+import { ButtonComponent } from '.';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();

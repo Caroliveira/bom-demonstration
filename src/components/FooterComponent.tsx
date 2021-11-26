@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+
 import { ReactComponent as Signature } from '../assets/images/signature.svg';
 
 const FooterComponent = (): JSX.Element => {

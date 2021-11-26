@@ -1,6 +1,6 @@
 import { Edge, Elements, Node } from 'react-flow-renderer';
-import { CustomNodeType } from '../context';
 import { getLayoutedElements } from './dagre';
+import { CustomNodeType } from '../context';
 
 const findNextNodes = (
   currentNodes: CustomNodeType[],
@@ -9,17 +9,13 @@ const findNextNodes = (
   count: number,
 ): CustomNodeType[] => {
   const nextNodes: CustomNodeType[] = [];
+  const nodeDefaults = { amount: 0, timer: 0, available: false };
 
   currentNodes.forEach((node) => {
     const targetEdges = edges.filter(({ source }) => source === node.id);
-
     targetEdges.forEach(({ target }) => {
       const targetNode = nodes.find(({ id }) => id === target);
-      if (targetNode) {
-        nextNodes.push({
-          ...targetNode, layer: count, amount: 0, timer: 0, available: false,
-        });
-      }
+      if (targetNode) nextNodes.push({ ...targetNode, ...nodeDefaults, layer: count });
     });
   });
 

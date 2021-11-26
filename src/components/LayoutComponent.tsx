@@ -1,13 +1,17 @@
 import { ReactChild } from 'react';
+
 import {
-  FooterComponent, HeaderComponent, ImportModalComponent, NodeModalComponent,
+  FooterComponent,
+  HeaderComponent,
+  ImportModalComponent,
+  NodeModalComponent,
 } from '.';
 
 type LayoutProps = {
   children: ReactChild;
 }
 
-const LayoutComponent = ({ children }:LayoutProps): JSX.Element => {
+const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <HeaderComponent />

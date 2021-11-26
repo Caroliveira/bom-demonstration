@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { FiPlus, FiUpload } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import { FaMap, FaRegMap } from 'react-icons/fa';
+import { FiPlus, FiUpload } from 'react-icons/fi';
 import { CgMoveDown, CgMoveRight } from 'react-icons/cg';
 
 import { ButtonComponent, IconButtonComponent } from '.';
