@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { IconType } from 'react-icons';
+import { IconBaseProps, IconType } from 'react-icons';
 
 type IconButtonProps = {
   translationKey: string;
   Icon: IconType
+  iconProps?: IconBaseProps;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const IconButtonComponent = ({
-  translationKey, Icon, type = 'button', className, disabled, ...props
+  translationKey, Icon, type = 'button', className, disabled, iconProps, ...props
 }: IconButtonProps): JSX.Element => {
   const { t } = useTranslation();
 
@@ -19,7 +20,7 @@ const IconButtonComponent = ({
       disabled={disabled}
       {...props}
     >
-      <Icon className="icon-button__inside" />
+      <Icon className="icon-button__inside" {...iconProps} />
     </button>
   );
 };

@@ -14,9 +14,21 @@
     width: 100%;
     background-color: rgba($PRIMARY_COLOR, 0.3);
   }
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
   &__title {
     color: $PRIMARY_COLOR;
     margin-top: 12px;
+  }
+  &__icon {
+    height: 28px;
+    width: 28px;
+    padding: 2px;
+    border-color: $ERROR_COLOR;
+    background-color: $NEUTRAL_COLOR;
   }
   &__text {
     font-size: 20px;

@@ -5,6 +5,11 @@
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+  &:focus {
+    border-width: 4px;
+    border-style: outset;
+    box-shadow: 1px black;
+  }
   &--filled {
     background-color: $NEUTRAL_COLOR;
     color: $PRIMARY_COLOR;
@@ -13,6 +18,9 @@
     background-color: $PRIMARY_COLOR;
     border: 1px solid $NEUTRAL_COLOR;
     color: $NEUTRAL_COLOR;
+  }
+  &--disabled {
+    cursor: default;
   }
 }
 
