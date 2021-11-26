@@ -11,6 +11,7 @@
   "importEspecification": "O arquivo deve ser um conjunto de ligações entre os itens do jogos e deverá ter o seguinte formato",
   "importTitle": "Importar arquivo CSV ou JSON",
   "layer": "Camada",
+  "layoutFormat": "Formato do layout: {{layout}}",
   "madeBy": "Feito por",
   "name": "Nome",
   "nameError": "Nome deve ser único",

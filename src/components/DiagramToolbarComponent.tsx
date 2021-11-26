@@ -1,27 +1,50 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { FiPlus, FiUpload } from 'react-icons/fi';
 import { FaMap, FaRegMap } from 'react-icons/fa';
+import { CgMoveDown, CgMoveRight } from 'react-icons/cg';
 
 import { ButtonComponent, IconButtonComponent } from '.';
 import { MainContext } from '../context';
 
+const layout = {
+  TB: { Icon: CgMoveDown, label: 'Vertical' },
+  LR: { Icon: CgMoveRight, label: 'Horizontal' },
+};
+
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
+  const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const {
-    setShowImportModal, setShowNodeModal, showMiniMap, setShowMiniMap,
+    adjustLayout,
+    setShowImportModal,
+    setShowNodeModal,
+    showMiniMap,
+    setShowMiniMap,
   } = useContext(MainContext);
   const history = useHistory();
+
+  const onDirectionChange = () => {
+    const newDirection = direction === 'TB' ? 'LR' : 'TB';
+    adjustLayout(newDirection);
+    setDirection(newDirection);
+  };
 
   return (
     <div className="toolbar">
       <div className="toolbar--centered">
         <IconButtonComponent
           Icon={showMiniMap ? FaMap : FaRegMap}
-          translationKey={t(showMiniMap ? 'hideMap' : 'showMap')}
+          translationKey={showMiniMap ? 'hideMap' : 'showMap'}
           onClick={() => setShowMiniMap(!showMiniMap)}
-          style={{ padding: 8 }}
+          style={{ padding: 10 }}
+          className="mr-2"
+        />
+        <IconButtonComponent
+          Icon={layout[direction].Icon}
+          translationKey={t('layoutFormat', { layout: layout[direction].label })}
+          onClick={onDirectionChange}
           className="mr-2"
         />
       </div>

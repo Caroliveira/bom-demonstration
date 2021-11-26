@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FaFileAlt } from 'react-icons/fa';
 import { ButtonComponent } from '.';
 import { MainContext } from '../context';
-import { fileHandler, nodeToCustomNode } from '../utils';
+import { fileHandler, mountElements } from '../utils';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ const ImportModalComponent = (): JSX.Element | null => {
       reader.onload = (loadEvent) => {
         const result = loadEvent.target?.result as string;
         const { nodes, edges } = fileHandler(result, file.type) || {};
-        if (nodes && edges) setElements([...nodeToCustomNode(nodes, edges), ...edges]);
+        if (nodes && edges) setElements(mountElements(nodes, edges));
       };
       reader.readAsText(file);
       closeModal();

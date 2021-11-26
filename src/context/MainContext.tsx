@@ -1,5 +1,6 @@
-import React, { useState, ReactChild } from 'react';
-import { Elements, Node, XYPosition } from 'react-flow-renderer';
+import React, { useState, useCallback, ReactChild } from 'react';
+import { Elements, Node, useStoreState } from 'react-flow-renderer';
+import { getLayoutedElements } from '../utils/dagre';
 
 export type CustomNodeType = {
   layer: number;
@@ -11,6 +12,7 @@ export type CustomNodeType = {
 type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
+  adjustLayout: (direction: 'TB' | 'LR') => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   showNodeModal: boolean;
@@ -27,6 +29,9 @@ type MainContextProviderType = {children : ReactChild};
 export const MainContext = React.createContext({} as MainContextType);
 
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
+  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
+  const edges = useStoreState((store) => store.edges);
+
   // Global states
   const [elements, setElements] = useState<Elements>([]);
   const [showImportModal, setShowImportModal] = useState(false);
@@ -41,10 +46,16 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
     setEdgeSource('');
   };
 
+  const adjustLayout = useCallback((direction: 'TB' | 'LR') => {
+    const layoutedElements = getLayoutedElements(elements, direction);
+    setElements(layoutedElements);
+  }, [elements]);
+
   return (
     <MainContext.Provider value={{
       elements,
       setElements,
+      adjustLayout,
       showImportModal,
       setShowImportModal,
       showNodeModal,

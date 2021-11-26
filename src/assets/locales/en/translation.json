@@ -11,6 +11,7 @@
   "importEspecification": "The file should be the links combinations between the game's items and should have the following structure",
   "importTitle": "Import CSV or JSON file",
   "layer": "Layer",
+  "layoutFormat": "Layout format: {{layout}}",
   "madeBy": "Made by",
   "name": "Name",
   "nameError": "Name must be unique",

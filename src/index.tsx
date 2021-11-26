@@ -20,8 +20,8 @@ import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainContextProvider>
-      <ReactFlowProvider>
+    <ReactFlowProvider>
+      <MainContextProvider>
         <BrowserRouter>
           <LayoutComponent>
             <Switch>
@@ -33,8 +33,8 @@ ReactDOM.render(
             </Switch>
           </LayoutComponent>
         </BrowserRouter>
-      </ReactFlowProvider>
-    </MainContextProvider>
+      </MainContextProvider>
+    </ReactFlowProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

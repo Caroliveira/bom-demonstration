@@ -1,5 +1,6 @@
-import { Edge, Node } from 'react-flow-renderer';
+import { Edge, Elements, Node } from 'react-flow-renderer';
 import { CustomNodeType } from '../context';
+import { getLayoutedElements } from './dagre';
 
 const findNextNodes = (
   currentNodes: CustomNodeType[],
@@ -40,16 +41,7 @@ const removeDuplicateds = (nodes: CustomNodeType[]) => {
   }, [] as CustomNodeType[]);
 };
 
-export const updateNodesPosition = (nodes: CustomNodeType[]) => {
-  const countArray: number[] = [];
-  return nodes.map((node) => {
-    const countLayer = countArray[node.layer] || 0;
-    countArray[node.layer] = countLayer + 1;
-    return { ...node, position: { x: countLayer * 200, y: node.layer * 200 } };
-  });
-};
-
-export const nodeToCustomNode = (nodes: Node[], edges: Edge[]): CustomNodeType[] => {
+export const mountElements = (nodes: Node[], edges: Edge[]): Elements => {
   const rootNodes: CustomNodeType[] = [];
 
   nodes.forEach((node) => {
@@ -62,5 +54,5 @@ export const nodeToCustomNode = (nodes: Node[], edges: Edge[]): CustomNodeType[]
 
   const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, edges, 1);
   const nodesWithLayer = removeDuplicateds(nodesWithDuplicateds);
-  return updateNodesPosition(nodesWithLayer);
+  return getLayoutedElements([...nodesWithLayer, ...edges]);
 };

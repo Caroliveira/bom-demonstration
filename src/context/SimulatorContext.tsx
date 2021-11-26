@@ -1,6 +1,4 @@
-import React, {
-  useState, useEffect, ReactChild, useContext,
-} from 'react';
+import React, { useState, useEffect, ReactChild } from 'react';
 import { useStoreState } from 'react-flow-renderer';
 import { CustomNodeType } from '.';
 
