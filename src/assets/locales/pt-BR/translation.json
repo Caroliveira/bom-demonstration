@@ -2,8 +2,12 @@
   "add": "Adicionar",
   "addItem": "Adicionar item",
   "allowForcedOperations": "Permitir operações forçadas: {{state}}",
+  "amountNeeded": "Quantidade necessária",
   "back": "Voltar",
   "cancel": "Cancelar",
+  "deleteConnection": "Deletar conexão",
+  "deleteItem": "Deletar item",
+  "editConnection": "Editar conexão",
   "editItem": "Editar item",
   "english": "Inglês",
   "hideMap": "Esconder mini mapa",
@@ -26,8 +30,10 @@
   "showMap": "Mostrar mini mapa",
   "simulate": "Simular jogo",
   "simulator": "Simulador",
+  "source": "Origem",
   "start": "Começar novo",
   "subtract": "Subtrair",
+  "target": "Destino",
   "timer": "Temporizador",
   "welcomeTitle": "Bem vindo à aplicação de demonstração do algoritmo BOM!"
 }

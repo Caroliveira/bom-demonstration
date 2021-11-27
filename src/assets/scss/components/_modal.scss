@@ -33,8 +33,8 @@
   &__text {
     font-size: 20px;
     color: $PRIMARY_COLOR;
-    display: inline;
-    &--pre {
+    margin-top: 0;
+    &--inline {
       display: inline;
     }
   }

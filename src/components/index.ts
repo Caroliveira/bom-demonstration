@@ -1,5 +1,6 @@
 import ButtonComponent from './ButtonComponent';
 import DiagramToolbarComponent from './DiagramToolbarComponent';
+import EdgeModalComponent from './EdgeModalComponent';
 import FooterComponent from './FooterComponent';
 import HeaderComponent from './HeaderComponent';
 import IconButtonComponent from './IconButtonComponent';
@@ -13,6 +14,7 @@ import SwitchLanguageComponent from './SwitchLanguageComponent';
 export {
   ButtonComponent,
   DiagramToolbarComponent,
+  EdgeModalComponent,
   FooterComponent,
   HeaderComponent,
   IconButtonComponent,

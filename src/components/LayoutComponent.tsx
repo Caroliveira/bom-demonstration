@@ -1,6 +1,5 @@
-import { ReactChild } from 'react';
-
 import {
+  EdgeModalComponent,
   FooterComponent,
   HeaderComponent,
   ImportModalComponent,
@@ -8,7 +7,7 @@ import {
 } from '.';
 
 type LayoutProps = {
-  children: ReactChild;
+  children: React.ReactChild;
 }
 
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
@@ -18,6 +17,7 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
       <div style={{ flex: 1 }}>{children}</div>
       <ImportModalComponent />
       <NodeModalComponent />
+      <EdgeModalComponent />
       <FooterComponent />
     </>
   );

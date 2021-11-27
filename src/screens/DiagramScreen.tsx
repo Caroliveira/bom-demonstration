@@ -16,7 +16,13 @@ import { CustomNodeType, MainContext } from '../context';
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const {
-    elements, setElements, setNode, showMiniMap, setShowNodeModal,
+    elements,
+    setElements,
+    setNode,
+    setEdge,
+    showMiniMap,
+    setShowNodeModal,
+    setShowEdgeModal,
   } = useContext(MainContext);
 
   const onConnect = (params: Edge | Connection) => {
@@ -32,6 +38,11 @@ const DiagramScreen = (): JSX.Element => {
     setShowNodeModal(true);
   };
 
+  const onEdgeDoubleClick = (evt: MouseEvent, edge: Edge) => {
+    setEdge(edge);
+    setShowEdgeModal(true);
+  };
+
   return (
     <div className="diagram">
       <DiagramToolbarComponent />
@@ -42,6 +53,7 @@ const DiagramScreen = (): JSX.Element => {
           onConnect={onConnect}
           onEdgeUpdate={onEdgeUpdate}
           onNodeDoubleClick={onNodeDoubleClick}
+          onEdgeDoubleClick={onEdgeDoubleClick}
         >
           <Controls />
           {showMiniMap && <MiniMap nodeColor="black" maskColor="#000A" />}

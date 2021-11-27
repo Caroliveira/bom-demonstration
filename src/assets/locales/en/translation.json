@@ -2,8 +2,12 @@
   "add": "Add",
   "addItem": "Add item",
   "allowForcedOperations": "Allow forced operations: {{state}}",
+  "amountNeeded": "Amount needed",
   "back": "Go back",
   "cancel": "Cancel",
+  "deleteConnection": "Delete connection",
+  "deleteItem": "Delete item",
+  "editConnection": "Edit connection",
   "editItem": "Edit item",
   "english": "English",
   "hideMap": "Hide mini map",
@@ -27,8 +31,10 @@
   "showMap": "Show mini map",
   "simulate": "Simulate game",
   "simulator": "Simulator",
+  "source": "Source",
   "start": "Start from scratch",
   "subtract": "Subtract",
+  "target": "Target",
   "timer": "Timer",
   "welcomeTitle": "Welcome to the BOM algorithm demonstration aplication!"
 }

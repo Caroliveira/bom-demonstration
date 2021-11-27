@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ReactChild } from 'react';
-import { Elements, Node } from 'react-flow-renderer';
+import { Edge, Elements, Node } from 'react-flow-renderer';
 
 import { getLayoutedElements } from '../utils';
 
@@ -17,14 +17,19 @@ type MainContextType = {
   setElements: (elements: Elements) => void;
   node?: CustomNodeType;
   setNode: (node: CustomNodeType) => void;
+  edge?: Edge;
+  setEdge: (edge: Edge) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   showNodeModal: boolean;
   setShowNodeModal: (show: boolean) => void;
+  showEdgeModal: boolean;
+  setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
   setShowMiniMap: (show: boolean) =>void;
   closeNodeModal: () => void;
+  closeEdgeModal: () => void;
 };
 
 type MainContextProviderType = {children : ReactChild};
@@ -34,14 +39,21 @@ export const MainContext = React.createContext({} as MainContextType);
 export const MainContextProvider = ({ children }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
   const [node, setNode] = useState<CustomNodeType>();
+  const [edge, setEdge] = useState<Edge>();
   const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
   const [showImportModal, setShowImportModal] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
+  const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
 
   const closeNodeModal = () => {
     setShowNodeModal(false);
     setNode(undefined);
+  };
+
+  const closeEdgeModal = () => {
+    setShowEdgeModal(false);
+    setEdge(undefined);
   };
 
   const adjustLayout = useCallback((params: AdjustLayoutParams) => {
@@ -56,6 +68,8 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
     <MainContext.Provider value={{
       node,
       setNode,
+      edge,
+      setEdge,
       elements,
       setElements,
       adjustLayout,
@@ -63,9 +77,12 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowImportModal,
       showNodeModal,
       setShowNodeModal,
+      showEdgeModal,
+      setShowEdgeModal,
       showMiniMap,
       setShowMiniMap,
       closeNodeModal,
+      closeEdgeModal,
     }}
     >
       {children}

@@ -48,8 +48,8 @@ const ImportModalComponent = (): JSX.Element | null => {
       secondaryButton={{ translationKey: 'cancel', onClick: closeModal }}
       submitButton={{ translationKey: file ? 'save' : 'import' }}
     >
-      <p className="modal__text">{t('importEspecification')}:</p>
-      <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
+      <p className="modal__text modal__text--inline">{t('importEspecification')}:</p>
+      <pre className="modal__text--inline">{'{ "source", "target", "value" }'}</pre>
 
       <input
         type="file"
