@@ -5,7 +5,7 @@ import { FaFileAlt } from 'react-icons/fa';
 
 import { fileHandler, mountElements } from '../utils';
 import { MainContext } from '../context';
-import { ButtonComponent } from '.';
+import ModalComponent from './ModalComponent';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -18,8 +18,7 @@ const ImportModalComponent = (): JSX.Element | null => {
     setShowImportModal(false);
   };
 
-  const handleClick = (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const handleClick = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
@@ -41,41 +40,28 @@ const ImportModalComponent = (): JSX.Element | null => {
     setFile(evt.target.files?.[0]);
   };
 
-  if (!showImportModal) return null;
-
   return (
-    <div className="modal__background">
-      <form className="modal" role="dialog" onSubmit={handleClick}>
-        <h2 className="modal__title">{t('importTitle')}</h2>
+    <ModalComponent
+      show={showImportModal}
+      title="importTitle"
+      onSubmit={handleClick}
+      secondaryButton={{ translationKey: 'cancel', onClick: closeModal }}
+      submitButton={{ translationKey: file ? 'save' : 'import' }}
+    >
+      <p className="modal__text">{t('importEspecification')}:</p>
+      <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
 
-        <p className="modal__text">{t('importEspecification')}:</p>
-        <pre className="modal__text--pre">{'{ "source", "target", "value" }'}</pre>
-
-        <input
-          type="file"
-          id="file-input"
-          style={{ display: 'none' }}
-          onChange={handleInputChange}
-        />
-        <p className="modal__file-name">
-          <FaFileAlt className="modal__file-icon" />
-          {file?.name || t('noFileSelected')}
-        </p>
-
-        <div className="modal__buttons">
-          <ButtonComponent
-            translationKey="cancel"
-            className="modal__cancel-button"
-            onClick={closeModal}
-          />
-          <ButtonComponent
-            outlined
-            translationKey={file ? 'save' : 'import'}
-            type="submit"
-          />
-        </div>
-      </form>
-    </div>
+      <input
+        type="file"
+        id="file-input"
+        style={{ display: 'none' }}
+        onChange={handleInputChange}
+      />
+      <p className="modal__file-name">
+        <FaFileAlt className="modal__file-icon" />
+        {file?.name || t('noFileSelected')}
+      </p>
+    </ModalComponent>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-type ButtonProps = {
+export type ButtonProps = {
   translationKey: string;
   outlined?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

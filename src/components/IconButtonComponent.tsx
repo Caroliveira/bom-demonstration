@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { IconBaseProps, IconType } from 'react-icons';
+import { ButtonProps } from './ButtonComponent';
 
 type IconButtonProps = {
   Icon: IconType
-  translationKey: string;
   iconProps?: IconBaseProps;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & ButtonProps;
 
 const IconButtonComponent = ({
   Icon,
