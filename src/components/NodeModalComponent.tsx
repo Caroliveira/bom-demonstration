@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { useStoreState, removeElements } from 'react-flow-renderer';
+import { useHistory } from 'react-router-dom';
 
 import { CustomNodeType, MainContext } from '../context';
 import { InputComponent, ModalComponent } from '.';
@@ -9,6 +10,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   const {
     elements, node, setNode, adjustLayout, showNodeModal, setShowNodeModal,
   } = useContext(MainContext);
+  const history = useHistory();
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
   const edges = useStoreState((store) => store.edges);
 
@@ -30,6 +32,7 @@ const NodeModalComponent = (): JSX.Element | null => {
     });
     const elementsToDelete = [node, ...edgesToDelete];
     adjustLayout({ els: removeElements(elementsToDelete, elements) });
+    history.push('/diagram');
     close();
   };
 
