@@ -1,26 +1,39 @@
-import { Edge, Elements, Node } from 'react-flow-renderer';
+import { Edge, Elements } from 'react-flow-renderer';
+import { v4 as uuid } from 'uuid';
+
 import { getLayoutedElements } from './dagre';
 import { CustomNodeType } from '../context';
 
+export const nodeMounter = (name: string): CustomNodeType => {
+  return {
+    id: uuid(),
+    type: 'default',
+    data: { label: name },
+    position: { x: 0, y: 0 },
+    available: false,
+    amount: 0,
+    timer: 0,
+    layer: 0,
+  };
+};
+
 const findNextNodes = (
   currentNodes: CustomNodeType[],
-  nodes: Node[],
+  nodes: CustomNodeType[],
   edges: Edge[],
-  count: number,
+  layer: number,
 ): CustomNodeType[] => {
   const nextNodes: CustomNodeType[] = [];
-  const nodeDefaults = { amount: 0, timer: 0, available: false };
-
   currentNodes.forEach((node) => {
     const targetEdges = edges.filter(({ source }) => source === node.id);
     targetEdges.forEach(({ target }) => {
       const targetNode = nodes.find(({ id }) => id === target);
-      if (targetNode) nextNodes.push({ ...targetNode, ...nodeDefaults, layer: count });
+      if (targetNode) nextNodes.push({ ...targetNode, layer });
     });
   });
 
   if (!nextNodes.length) return currentNodes;
-  return [...currentNodes, ...findNextNodes(nextNodes, nodes, edges, count + 1)];
+  return [...currentNodes, ...findNextNodes(nextNodes, nodes, edges, layer + 1)];
 };
 
 const removeDuplicateds = (nodes: CustomNodeType[]) => {
@@ -37,15 +50,10 @@ const removeDuplicateds = (nodes: CustomNodeType[]) => {
   }, [] as CustomNodeType[]);
 };
 
-export const mountElements = (nodes: Node[], edges: Edge[]): Elements => {
+export const mountElements = (nodes: CustomNodeType[], edges: Edge[]): Elements => {
   const rootNodes: CustomNodeType[] = [];
-
   nodes.forEach((node) => {
-    if (!edges.find(({ target }) => target === node.id)) {
-      rootNodes.push({
-        ...node, layer: 0, amount: 0, timer: 0, available: true,
-      });
-    }
+    if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);
   });
 
   const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, edges, 1);

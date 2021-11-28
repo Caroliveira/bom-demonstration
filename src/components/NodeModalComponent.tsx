@@ -3,11 +3,8 @@ import { useStoreState, removeElements } from 'react-flow-renderer';
 
 import { InputComponent } from '.';
 import { CustomNodeType, MainContext } from '../context';
+import { nodeMounter } from '../utils';
 import ModalComponent from './ModalComponent';
-
-const defaultNodeProps = {
-  position: { x: 0, y: 0 }, available: true, amount: 0, timer: 0, layer: 0,
-};
 
 const NodeModalComponent = (): JSX.Element | null => {
   const {
@@ -19,7 +16,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => setName(node?.id || ''), [node]);
+  useEffect(() => setName(node?.data.label || ''), [node]);
 
   const close = () => {
     setName('');
@@ -37,12 +34,19 @@ const NodeModalComponent = (): JSX.Element | null => {
     close();
   };
 
-  const handleSave = (evt: React.FormEvent<HTMLFormElement>) => {
-    const nodeAlreadyExists = name === node?.id ? false : nodes.some(({ id }) => id === name);
-    if (nodeAlreadyExists) setError('nameError');
+  const handleUpdate = () => {
+    return elements.map((element) => {
+      const el = element;
+      if (el.id === node?.id) el.data = { ...el.data, label: name };
+      return el;
+    });
+  };
+
+  const handleSave = () => {
+    const duplicatedName = name === node?.id ? false : nodes.some(({ id }) => id === name);
+    if (duplicatedName) setError('nameError');
     else {
-      const newNode = { id: name, data: { label: name }, ...defaultNodeProps };
-      adjustLayout({ els: [...elements, newNode] });
+      adjustLayout({ els: node ? handleUpdate() : [...elements, nodeMounter(name)] });
       close();
     }
   };

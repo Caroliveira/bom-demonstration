@@ -1,31 +1,26 @@
-import { ArrowHeadType, Edge, Node } from 'react-flow-renderer';
+import { ArrowHeadType, Edge } from 'react-flow-renderer';
+import { v4 as uuid } from 'uuid';
 
-type FileHandlerType = { nodes: Node[], edges: Edge[]};
+import { nodeMounter } from '.';
+import { CustomNodeType } from '../context';
+
+type FileHandlerType = { nodes: CustomNodeType[], edges: Edge[]};
 type JsonItemType = { source: string; target: string; value: string };
 
-const nodeMounter = (name: string): Node => {
-  return {
-    id: name,
-    type: 'default',
-    data: { label: name },
-    position: { x: 0, y: 0 },
-  };
-};
-
-const doesNodeExist = (nodes: Node[], node: string) => {
-  return nodes.some(({ id }) => id === node);
-};
-
 const csvTableHandler = (table: string[][]): FileHandlerType => {
-  const nodes: Node[] = [];
+  const nodes: CustomNodeType[] = [];
   const edges: Edge[] = table.map((row) => {
-    if (!doesNodeExist(nodes, row[0])) nodes.push(nodeMounter(row[0]));
-    if (!doesNodeExist(nodes, row[1])) nodes.push(nodeMounter(row[1]));
+    const sourceExist = nodes.find(({ data }) => data.label === row[0]);
+    const targetExist = nodes.find(({ data }) => data.label === row[1]);
+    const source = sourceExist || nodeMounter(row[0]);
+    const target = targetExist || nodeMounter(row[1]);
+    if (!sourceExist) nodes.push(source);
+    if (!targetExist) nodes.push(target);
     return {
-      id: `${row[0]}-${row[1]}`,
+      id: uuid(),
       label: parseFloat(row[2]),
-      source: row[0],
-      target: row[1],
+      source: source.id,
+      target: target.id,
       arrowHeadType: ArrowHeadType.ArrowClosed,
     };
   });
@@ -48,18 +43,23 @@ const csvHandler = (result: string) => {
 
 const jsonHandler = (result: string): FileHandlerType => {
   const rawEdges = JSON.parse(result);
-  const nodes: Node[] = [];
+  const nodes: CustomNodeType[] = [];
   const edges = rawEdges.map(({ source, target, value }: JsonItemType) => {
-    if (!doesNodeExist(nodes, source)) nodes.push(nodeMounter(source));
-    if (!doesNodeExist(nodes, target)) nodes.push(nodeMounter(target));
+    const sourceExist = nodes.find(({ data }) => data.label === source);
+    const targetExist = nodes.find(({ data }) => data.label === target);
+    const sourceNode = sourceExist || nodeMounter(source);
+    const targetNode = targetExist || nodeMounter(target);
+    if (!sourceExist) nodes.push(sourceNode);
+    if (!targetExist) nodes.push(targetNode);
     return {
-      id: `${source}-${target}`,
+      id: uuid(),
       label: value,
-      source,
-      target,
+      source: sourceNode.id,
+      target: targetNode.id,
       arrowHeadType: ArrowHeadType.ArrowClosed,
     };
   });
+
   return { nodes, edges };
 };
 

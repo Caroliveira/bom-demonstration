@@ -11,9 +11,12 @@ const EdgeModalComponent = (): JSX.Element | null => {
   const {
     elements, edge, adjustLayout, showEdgeModal, closeEdgeModal,
   } = useContext(MainContext);
+  const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
+  const [source, setSource] = useState('');
+  const [target, setTarget] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
 
@@ -21,6 +24,8 @@ const EdgeModalComponent = (): JSX.Element | null => {
     if (edge) {
       const fullEdge = edges.find(({ id }) => id === edge?.id);
       if (fullEdge) {
+        setSource(nodes.find(({ id }) => id === fullEdge.source)?.data.label);
+        setTarget(nodes.find(({ id }) => id === fullEdge.target)?.data.label);
         setAmount(fullEdge.label as string);
         setCurrentEdge(fullEdge);
       }
@@ -30,8 +35,10 @@ const EdgeModalComponent = (): JSX.Element | null => {
   if (!currentEdge) return null;
 
   const close = () => {
-    setAmount('');
     setError('');
+    setAmount('');
+    setSource('');
+    setTarget('');
     closeEdgeModal();
   };
 
@@ -60,7 +67,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
       onSubmit={handleSave}
     >
       <p className="modal__text">
-        ({t('source')}: {currentEdge.source}) {'->'} ({t('target')}: {currentEdge.target})
+        ({t('source')}: {source}) {'->'} ({t('target')}: {target})
       </p>
       <InputComponent
         autoFocus
