@@ -65,7 +65,7 @@ const SimulatorItemComponent = ({ node }:
         role="button"
         tabIndex={0}
       >
-        <span>{node.id}</span> <span>{node.amount}</span>
+        <span>{node.data.label}</span> <span>{node.amount}</span>
       </div>
       {showInfo && renderItemInfo()}
     </li>
