@@ -1,33 +1,23 @@
 import { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiArrowLeft, FiShield, FiShieldOff } from 'react-icons/fi';
+import { FiShield, FiShieldOff } from 'react-icons/fi';
 
-import { IconButtonComponent, SimulatorItemComponent } from '../components';
+import { IconButtonComponent, ScreensHeaderComponent, SimulatorItemComponent } from '../components';
 import { SimulatorContext, SimulatorContextProvider } from '../context';
 
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
-  const history = useHistory();
   const { layers, allowForcedOperations, setAllowForcedOperations } = useContext(SimulatorContext);
 
   return (
     <div className="simulator">
-      <div className="simulator__header">
-        <div className="simulator__header--left">
-          <IconButtonComponent
-            Icon={FiArrowLeft}
-            translationKey="back"
-            onClick={() => history.push('/diagram')}
-          />
-          <h1 className="simulator__title">{t('simulator')}</h1>
-        </div>
+      <ScreensHeaderComponent title="simulator">
         <IconButtonComponent
           Icon={allowForcedOperations ? FiShieldOff : FiShield}
           translationKey={t('allowForcedOperations', { state: allowForcedOperations ? t('on') : t('off') })}
           onClick={() => setAllowForcedOperations(!allowForcedOperations)}
         />
-      </div>
+      </ScreensHeaderComponent>
       <div className="simulator__content">
         {!layers[0] && <p className="simulator__empty">{t('noData')}</p>}
         {layers?.map((layer, index) => (

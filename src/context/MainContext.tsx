@@ -16,7 +16,7 @@ type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
   node?: CustomNodeType;
-  setNode: (node: CustomNodeType) => void;
+  setNode: (node?: CustomNodeType) => void;
   edge?: Edge;
   setEdge: (edge: Edge) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
@@ -28,7 +28,6 @@ type MainContextType = {
   setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
   setShowMiniMap: (show: boolean) =>void;
-  closeNodeModal: () => void;
   closeEdgeModal: () => void;
 };
 
@@ -45,11 +44,6 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
   const [showNodeModal, setShowNodeModal] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
-
-  const closeNodeModal = () => {
-    setShowNodeModal(false);
-    setNode(undefined);
-  };
 
   const closeEdgeModal = () => {
     setShowEdgeModal(false);
@@ -81,7 +75,6 @@ export const MainContextProvider = ({ children }: MainContextProviderType): JSX.
       setShowEdgeModal,
       showMiniMap,
       setShowMiniMap,
-      closeNodeModal,
       closeEdgeModal,
     }}
     >

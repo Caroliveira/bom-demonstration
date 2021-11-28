@@ -1,5 +1,6 @@
 import { useContext, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import ReactFlow, {
   addEdge,
   Connection,
@@ -11,17 +12,16 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 
 import { DiagramToolbarComponent } from '../components';
-import { CustomNodeType, MainContext } from '../context';
+import { MainContext } from '../context';
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
+  const history = useHistory();
   const {
     elements,
     setElements,
-    setNode,
     setEdge,
     showMiniMap,
-    setShowNodeModal,
     setShowEdgeModal,
   } = useContext(MainContext);
 
@@ -34,8 +34,7 @@ const DiagramScreen = (): JSX.Element => {
   };
 
   const onNodeDoubleClick = (evt: MouseEvent, node: Node) => {
-    setNode(node as CustomNodeType);
-    setShowNodeModal(true);
+    history.push(`/node/${node.id}`);
   };
 
   const onEdgeDoubleClick = (evt: MouseEvent, edge: Edge) => {

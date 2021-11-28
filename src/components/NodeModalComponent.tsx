@@ -1,14 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
 import { useStoreState, removeElements } from 'react-flow-renderer';
 
-import { InputComponent } from '.';
 import { CustomNodeType, MainContext } from '../context';
+import { InputComponent, ModalComponent } from '.';
 import { nodeMounter } from '../utils';
-import ModalComponent from './ModalComponent';
 
 const NodeModalComponent = (): JSX.Element | null => {
   const {
-    elements, node, adjustLayout, showNodeModal, closeNodeModal,
+    elements, node, setNode, adjustLayout, showNodeModal, setShowNodeModal,
   } = useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
   const edges = useStoreState((store) => store.edges);
@@ -16,12 +15,12 @@ const NodeModalComponent = (): JSX.Element | null => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => setName(node?.data.label || ''), [node]);
+  useEffect(() => setName(node?.data.label || ''), [node, showNodeModal]);
 
   const close = () => {
     setName('');
     setError('');
-    closeNodeModal();
+    setShowNodeModal(false);
   };
 
   const handleDelete = () => {
@@ -37,7 +36,10 @@ const NodeModalComponent = (): JSX.Element | null => {
   const handleUpdate = () => {
     return elements.map((element) => {
       const el = element;
-      if (el.id === node?.id) el.data = { ...el.data, label: name };
+      if (el.id === node?.id) {
+        el.data = { ...el.data, label: name };
+        setNode(el as CustomNodeType);
+      }
       return el;
     });
   };

@@ -8,6 +8,7 @@ import {
 import {
   DiagramScreen,
   HomeScreen,
+  NodeScreen,
   NotFoundScreen,
   SimulatorScreen,
 } from './screens';
@@ -27,6 +28,7 @@ ReactDOM.render(
             <Switch>
               <Route exact path="/" component={HomeScreen} />
               <Route exact path="/diagram" component={DiagramScreen} />
+              <Route exact path="/node/:id" component={NodeScreen} />
               <Route exact path="/simulator" component={SimulatorScreen} />
               <Route exact path="/not-found" component={NotFoundScreen} />
               <Redirect from="*" to="/not-found" />

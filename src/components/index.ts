@@ -7,7 +7,9 @@ import IconButtonComponent from './IconButtonComponent';
 import ImportModalComponent from './ImportModalComponent';
 import InputComponent from './InputComponent';
 import LayoutComponent from './LayoutComponent';
+import ModalComponent from './ModalComponent';
 import NodeModalComponent from './NodeModalComponent';
+import ScreensHeaderComponent from './ScreensHeaderComponent';
 import SimulatorItemComponent from './SimulatorItemComponent';
 import SwitchLanguageComponent from './SwitchLanguageComponent';
 
@@ -21,7 +23,9 @@ export {
   ImportModalComponent,
   InputComponent,
   LayoutComponent,
+  ModalComponent,
   NodeModalComponent,
+  ScreensHeaderComponent,
   SimulatorItemComponent,
   SwitchLanguageComponent,
 };

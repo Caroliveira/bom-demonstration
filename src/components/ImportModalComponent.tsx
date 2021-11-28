@@ -5,7 +5,7 @@ import { FaFileAlt } from 'react-icons/fa';
 
 import { fileHandler, mountElements } from '../utils';
 import { MainContext } from '../context';
-import ModalComponent from './ModalComponent';
+import { ModalComponent } from '.';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();

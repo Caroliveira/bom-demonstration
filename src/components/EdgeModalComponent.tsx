@@ -2,9 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import { removeElements, Edge, useStoreState } from 'react-flow-renderer';
 import { useTranslation } from 'react-i18next';
 
-import { InputComponent } from '.';
+import { InputComponent, ModalComponent } from '.';
 import { MainContext } from '../context';
-import ModalComponent from './ModalComponent';
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
