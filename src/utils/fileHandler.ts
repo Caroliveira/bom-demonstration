@@ -7,24 +7,33 @@ import { CustomNodeType } from '../context';
 type FileHandlerType = { nodes: CustomNodeType[], edges: Edge[]};
 type JsonItemType = { source: string; target: string; value: string };
 
-const csvTableHandler = (table: string[][]): FileHandlerType => {
-  const nodes: CustomNodeType[] = [];
-  const edges: Edge[] = table.map((row) => {
-    const sourceExist = nodes.find(({ data }) => data.label === row[0]);
-    const targetExist = nodes.find(({ data }) => data.label === row[1]);
-    const source = sourceExist || nodeMounter(row[0]);
-    const target = targetExist || nodeMounter(row[1]);
-    if (!sourceExist) nodes.push(source);
-    if (!targetExist) nodes.push(target);
-    return {
-      id: uuid(),
-      label: parseFloat(row[2]),
-      source: source.id,
-      target: target.id,
-      arrowHeadType: ArrowHeadType.ArrowClosed,
-    };
-  });
+const nodesCreator = (sourceLabels: string[], targetLabels: string[]) => {
+  const uniqueLabels = [...new Set([...sourceLabels, ...targetLabels])];
+  return uniqueLabels.map((label) => nodeMounter(label));
+};
 
+const edgesCreator = (
+  nodes: CustomNodeType[],
+  sourceLabel: string,
+  targetLabel: string,
+  edgeValue: string,
+) => {
+  const source = nodes.find(({ data }) => data.label === sourceLabel);
+  const target = nodes.find(({ data }) => data.label === targetLabel);
+  return {
+    id: uuid(),
+    label: parseFloat(edgeValue),
+    source: source?.id || '',
+    target: target?.id || '',
+    arrowHeadType: ArrowHeadType.ArrowClosed,
+  };
+};
+
+const csvTableHandler = (table: string[][]): FileHandlerType => {
+  const sourceLabels = table.map((row) => row[0]);
+  const targetLabels = table.map((row) => row[1]);
+  const nodes = nodesCreator(sourceLabels, targetLabels);
+  const edges = table.map((row) => edgesCreator(nodes, row[0], row[1], row[2]));
   return { nodes, edges };
 };
 
@@ -43,23 +52,12 @@ const csvHandler = (result: string) => {
 
 const jsonHandler = (result: string): FileHandlerType => {
   const rawEdges = JSON.parse(result);
-  const nodes: CustomNodeType[] = [];
+  const sourceLabels = rawEdges.map(({ source }: JsonItemType) => source);
+  const targetLabels = rawEdges.map(({ target }: JsonItemType) => target);
+  const nodes = nodesCreator(sourceLabels, targetLabels);
   const edges = rawEdges.map(({ source, target, value }: JsonItemType) => {
-    const sourceExist = nodes.find(({ data }) => data.label === source);
-    const targetExist = nodes.find(({ data }) => data.label === target);
-    const sourceNode = sourceExist || nodeMounter(source);
-    const targetNode = targetExist || nodeMounter(target);
-    if (!sourceExist) nodes.push(sourceNode);
-    if (!targetExist) nodes.push(targetNode);
-    return {
-      id: uuid(),
-      label: value,
-      source: sourceNode.id,
-      target: targetNode.id,
-      arrowHeadType: ArrowHeadType.ArrowClosed,
-    };
+    return edgesCreator(nodes, source, target, value);
   });
-
   return { nodes, edges };
 };
 
