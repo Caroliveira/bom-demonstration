@@ -1,9 +1,9 @@
 .footer {
-  border-top: 1px solid $NEUTRAL_COLOR;
-  padding: 5px 0;
   width: 90%;
   display: flex;
   align-items: flex-start;
+  border-top: 1px solid $NEUTRAL_COLOR;
+  padding: 5px 0;
   &__text {
     color: $NEUTRAL_COLOR;
     font-size: 20px;

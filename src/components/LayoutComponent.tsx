@@ -14,7 +14,9 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <HeaderComponent />
-      <div style={{ flex: 1 }}>{children}</div>
+      <div className="layout">
+        <main className="layout__main">{children}</main>
+      </div>
       <ImportModalComponent />
       <NodeModalComponent />
       <EdgeModalComponent />

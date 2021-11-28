@@ -72,7 +72,7 @@ const NodeScreen = ({ match }: RouteComponentProps<RouteParams>): JSX.Element =>
   };
 
   return (
-    <div className="node">
+    <>
       <ScreensHeaderComponent title="Item playground">
         <IconButtonComponent
           Icon={FiEdit}
@@ -88,7 +88,7 @@ const NodeScreen = ({ match }: RouteComponentProps<RouteParams>): JSX.Element =>
         <GiBottomRight3DArrow className="node__arrow" />
         {renderDependencies(targets, 'target')}
       </div>
-    </div>
+    </>
   );
 };
 

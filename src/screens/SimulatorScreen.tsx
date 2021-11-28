@@ -10,7 +10,7 @@ const SimulatorScreen = (): JSX.Element => {
   const { layers, allowForcedOperations, setAllowForcedOperations } = useContext(SimulatorContext);
 
   return (
-    <div className="simulator">
+    <>
       <ScreensHeaderComponent title="simulator">
         <IconButtonComponent
           Icon={allowForcedOperations ? FiShieldOff : FiShield}
@@ -28,7 +28,7 @@ const SimulatorScreen = (): JSX.Element => {
           </ul>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

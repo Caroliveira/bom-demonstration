@@ -1,0 +1,15 @@
+.layout {
+  flex: 1;
+  height: 90%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  &__main { 
+    width: 90%;
+    max-width: 1600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

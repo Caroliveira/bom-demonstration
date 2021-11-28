@@ -43,7 +43,7 @@ const DiagramScreen = (): JSX.Element => {
   };
 
   return (
-    <div className="diagram">
+    <>
       <DiagramToolbarComponent />
       <div className="diagram__graph">
         {!elements.length && <span className="diagram__alert">{t('noData')}</span>}
@@ -58,7 +58,7 @@ const DiagramScreen = (): JSX.Element => {
           {showMiniMap && <MiniMap nodeColor="black" maskColor="#000A" />}
         </ReactFlow>
       </div>
-    </div>
+    </>
   );
 };
 
