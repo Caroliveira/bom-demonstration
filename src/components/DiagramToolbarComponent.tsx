@@ -59,13 +59,13 @@ const DiagramToolbarComponent = (): JSX.Element => {
         />
         <IconButtonComponent
           Icon={FiPlus}
-          translationKey={t('addNode')}
+          translationKey="addNode"
           onClick={() => setShowNodeModal(true)}
           className="mr-2"
         />
         <IconButtonComponent
           Icon={FiUpload}
-          translationKey={t('import')}
+          translationKey="import"
           onClick={() => setShowImportModal(true)}
         />
       </div>

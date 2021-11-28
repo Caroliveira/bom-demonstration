@@ -21,6 +21,7 @@
   "nameError": "Nome deve ser único",
   "noData": "Não há dados cadastrados",
   "noFileSelected": "Nenhum arquivo foi selecionado.",
+  "noItems": "Não há items {{type}}",
   "off": "Desligado",
   "on": "Ligado",
   "pageNotFound": "Página não encontrada :(",

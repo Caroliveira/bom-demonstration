@@ -21,6 +21,7 @@
   "nameError": "Name must be unique",
   "noData": "There is no registered data",
   "noFileSelected": "No file has been selected",
+  "noItems": "There are no {{type}} items",
   "off": "Off",
   "on": "On",
   "pageNotFound": "Page not found :(",
