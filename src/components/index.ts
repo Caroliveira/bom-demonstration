@@ -10,6 +10,7 @@ import LayoutComponent from './LayoutComponent';
 import ModalComponent from './ModalComponent';
 import NodeModalComponent from './NodeModalComponent';
 import ScreensHeaderComponent from './ScreensHeaderComponent';
+import SelectInputComponent from './SelectInputComponent';
 import SimulatorItemComponent from './SimulatorItemComponent';
 import SwitchLanguageComponent from './SwitchLanguageComponent';
 
@@ -26,6 +27,7 @@ export {
   ModalComponent,
   NodeModalComponent,
   ScreensHeaderComponent,
+  SelectInputComponent,
   SimulatorItemComponent,
   SwitchLanguageComponent,
 };

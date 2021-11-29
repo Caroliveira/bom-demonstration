@@ -9,8 +9,8 @@ type ModalProps = {
   title: string;
   deleteButton?: ButtonProps;
   secondaryButton?: ButtonProps;
-  submitButton: ButtonProps;
-  onSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
+  submitButton?: ButtonProps;
+  onSubmit?: (evt: React.FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
 }
 
@@ -21,7 +21,7 @@ const ModalComponent = ({
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    onSubmit(evt);
+    onSubmit?.(evt);
   };
 
   if (!show) return null;
@@ -46,7 +46,7 @@ const ModalComponent = ({
 
         <div className="modal__buttons">
           {secondaryButton && <ButtonComponent className="modal__cancel-button" {...secondaryButton} />}
-          <ButtonComponent {...submitButton} outlined type="submit" />
+          {submitButton && <ButtonComponent {...submitButton} outlined type="submit" />}
         </div>
       </form>
     </div>

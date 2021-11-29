@@ -5,20 +5,45 @@ import { FaFileAlt } from 'react-icons/fa';
 
 import { fileHandler, mountElements } from '../utils';
 import { MainContext } from '../context';
-import { ModalComponent } from '.';
+import { InputComponent, ModalComponent, SelectInputComponent } from '.';
+import { getEdges } from '../api';
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [file, setFile] = useState<File>();
   const { showImportModal, setShowImportModal, setElements } = useContext(MainContext);
 
+  const [id, setId] = useState('');
+  const [type, setType] = useState('');
+  const [error, setError] = useState('');
+  const [file, setFile] = useState<File>();
+
   const closeModal = () => {
+    setId('');
+    setType('');
+    setError('');
     setFile(undefined);
     setShowImportModal(false);
   };
 
-  const handleClick = () => {
+  const handleIdClick = async () => {
+    try {
+      const result = await getEdges(id);
+      const { nodes, edges } = fileHandler(result.edges, 'application/json', true) || {};
+      if (nodes && edges) setElements(mountElements(nodes, edges));
+      closeModal();
+      if (history.location.pathname !== '/diagram') history.push('/diagram');
+    } catch (err: any) {
+      setError(`error${err?.response?.status}`);
+    }
+  };
+
+  const handleIdChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setId(evt.target.value);
+    setError('');
+  };
+
+  const handleFileClick = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
@@ -35,18 +60,57 @@ const ImportModalComponent = (): JSX.Element | null => {
     }
   };
 
-  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     evt.preventDefault();
     setFile(evt.target.files?.[0]);
   };
 
+  if (!type) {
+    return (
+      <ModalComponent
+        show={showImportModal}
+        title="importTypeTitle"
+      >
+        <SelectInputComponent
+          hideLabel
+          value={type}
+          translationKey={t('importTypeTitle')}
+          onChange={(evt) => setType(evt.target.value)}
+        >
+          <option value="" disabled>{t('choose')}</option>
+          <option value="file">{t('file')}</option>
+          <option value="id">{t('id')}</option>
+        </SelectInputComponent>
+      </ModalComponent>
+    );
+  }
+
+  if (type === 'id') {
+    return (
+      <ModalComponent
+        show={showImportModal}
+        title="importIdTitle"
+        onSubmit={handleIdClick}
+        secondaryButton={{ translationKey: 'cancel', onClick: closeModal }}
+        submitButton={{ translationKey: 'loadProject' }}
+      >
+        <InputComponent
+          translationKey={t('id')}
+          error={error}
+          value={id}
+          onChange={handleIdChange}
+        />
+      </ModalComponent>
+    );
+  }
+
   return (
     <ModalComponent
       show={showImportModal}
-      title="importTitle"
-      onSubmit={handleClick}
+      title="importFileTitle"
+      onSubmit={handleFileClick}
       secondaryButton={{ translationKey: 'cancel', onClick: closeModal }}
-      submitButton={{ translationKey: file ? 'save' : 'import' }}
+      submitButton={{ translationKey: file ? 'save' : 'loadProject' }}
     >
       <p className="modal__text modal__text--inline">{t('importEspecification')}:</p>
       <pre className="modal__text--inline">{'{ "source", "target", "value" }'}</pre>
@@ -55,7 +119,7 @@ const ImportModalComponent = (): JSX.Element | null => {
         type="file"
         id="file-input"
         style={{ display: 'none' }}
-        onChange={handleInputChange}
+        onChange={handleFileChange}
       />
       <p className="modal__file-name">
         <FaFileAlt className="modal__file-icon" />

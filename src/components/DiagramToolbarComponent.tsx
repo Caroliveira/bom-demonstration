@@ -65,7 +65,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
         />
         <IconButtonComponent
           Icon={FiUpload}
-          translationKey="import"
+          translationKey="loadProject"
           onClick={() => setShowImportModal(true)}
         />
       </div>

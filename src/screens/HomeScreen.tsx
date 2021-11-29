@@ -16,7 +16,7 @@ const HomeScreen = (): JSX.Element => {
       <div className="home__buttons">
         <ButtonComponent
           outlined
-          translationKey="import"
+          translationKey="loadProject"
           onClick={() => setShowImportModal(true)}
           style={{ marginRight: 32 }}
         />
