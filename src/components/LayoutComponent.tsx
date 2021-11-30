@@ -1,14 +1,15 @@
+import React from "react";
 import {
   EdgeModalComponent,
   FooterComponent,
   HeaderComponent,
   ImportModalComponent,
   NodeModalComponent,
-} from '.';
+} from ".";
 
 type LayoutProps = {
   children: React.ReactChild;
-}
+};
 
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   return (

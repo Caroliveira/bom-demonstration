@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import { FiAlertTriangle } from 'react-icons/fi';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { FiAlertTriangle } from "react-icons/fi";
 
 type SelectInputProps = {
   error?: string;
@@ -10,14 +11,22 @@ type SelectInputProps = {
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 const SelectInputComponent = ({
-  error, hideLabel, children, translationKey, divStyle, className, ...props
+  error,
+  hideLabel,
+  children,
+  translationKey,
+  divStyle,
+  className,
+  ...props
 }: SelectInputProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <div className="input" style={divStyle}>
       {!hideLabel && (
-        <label htmlFor={translationKey} className="input__label">{t(translationKey)}</label>
+        <label htmlFor={translationKey} className="input__label">
+          {t(translationKey)}
+        </label>
       )}
       <select
         aria-labelledby={translationKey}

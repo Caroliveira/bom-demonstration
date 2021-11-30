@@ -1,21 +1,21 @@
-import { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { FaMap, FaRegMap } from 'react-icons/fa';
-import { FiPlus, FiUpload } from 'react-icons/fi';
-import { CgMoveDown, CgMoveRight } from 'react-icons/cg';
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { FaMap, FaRegMap } from "react-icons/fa";
+import { FiPlus, FiUpload } from "react-icons/fi";
+import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
-import { ButtonComponent, IconButtonComponent } from '.';
-import { MainContext } from '../context';
+import { ButtonComponent, IconButtonComponent } from ".";
+import { MainContext } from "../context";
 
 const layout = {
-  TB: { Icon: CgMoveDown, label: 'Vertical' },
-  LR: { Icon: CgMoveRight, label: 'Horizontal' },
+  TB: { Icon: CgMoveDown, label: "Vertical" },
+  LR: { Icon: CgMoveRight, label: "Horizontal" },
 };
 
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
-  const [direction, setDirection] = useState<'TB' | 'LR'>('TB');
+  const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const {
     elements,
     adjustLayout,
@@ -27,7 +27,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
   const history = useHistory();
 
   const onDirectionChange = () => {
-    const newDirection = direction === 'TB' ? 'LR' : 'TB';
+    const newDirection = direction === "TB" ? "LR" : "TB";
     adjustLayout({ dir: newDirection });
     setDirection(newDirection);
   };
@@ -37,7 +37,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
       <div className="toolbar--centered">
         <IconButtonComponent
           Icon={showMiniMap ? FaMap : FaRegMap}
-          translationKey={showMiniMap ? 'hideMap' : 'showMap'}
+          translationKey={showMiniMap ? "hideMap" : "showMap"}
           onClick={() => setShowMiniMap(!showMiniMap)}
           style={{ padding: 10 }}
           className="mr-2"
@@ -45,7 +45,9 @@ const DiagramToolbarComponent = (): JSX.Element => {
         <IconButtonComponent
           disabled={!elements.length}
           Icon={layout[direction].Icon}
-          translationKey={t('layoutFormat', { layout: layout[direction].label })}
+          translationKey={t("layoutFormat", {
+            layout: layout[direction].label,
+          })}
           onClick={onDirectionChange}
           className="mr-2"
         />
@@ -55,7 +57,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
           outlined
           translationKey="simulate"
           className="toolbar__button"
-          onClick={() => history.push('/simulator')}
+          onClick={() => history.push("/simulator")}
         />
         <IconButtonComponent
           Icon={FiPlus}

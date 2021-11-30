@@ -1,6 +1,6 @@
-import { useContext, MouseEvent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import ReactFlow, {
   addEdge,
   Connection,
@@ -9,21 +9,16 @@ import ReactFlow, {
   MiniMap,
   Node,
   updateEdge,
-} from 'react-flow-renderer';
+} from "react-flow-renderer";
 
-import { DiagramToolbarComponent } from '../components';
-import { MainContext } from '../context';
+import { DiagramToolbarComponent } from "../components";
+import { MainContext } from "../context";
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const {
-    elements,
-    setElements,
-    setEdge,
-    showMiniMap,
-    setShowEdgeModal,
-  } = useContext(MainContext);
+  const { elements, setElements, setEdge, showMiniMap, setShowEdgeModal } =
+    useContext(MainContext);
 
   const onConnect = (params: Edge | Connection) => {
     setElements(addEdge({ ...params, label: 1 }, elements));
@@ -46,7 +41,9 @@ const DiagramScreen = (): JSX.Element => {
     <>
       <DiagramToolbarComponent />
       <div className="diagram__graph">
-        {!elements.length && <span className="diagram__alert">{t('noData')}</span>}
+        {!elements.length && (
+          <span className="diagram__alert">{t("noData")}</span>
+        )}
         <ReactFlow
           elements={elements}
           onConnect={onConnect}

@@ -1,12 +1,15 @@
-import { useHistory } from 'react-router-dom';
-import { SwitchLanguageComponent } from '.';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { SwitchLanguageComponent } from ".";
 
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
 
-  const handleClick = (evt:React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleClick = (
+    evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     evt.preventDefault();
-    history.push('/diagram');
+    history.push("/diagram");
   };
 
   return (

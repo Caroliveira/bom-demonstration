@@ -1,30 +1,32 @@
-import { useState, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { FiClock, FiMinus, FiPlus } from 'react-icons/fi';
+import React, { useState, useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
-import { CustomNodeType, SimulatorContext } from '../context';
-import { IconButtonComponent } from '.';
+import { CustomNodeType, SimulatorContext } from "../context";
+import { IconButtonComponent } from ".";
 
 type SimulatorItemProps = {
   node: CustomNodeType;
 };
 
-const SimulatorItemComponent = ({ node }:
-  SimulatorItemProps): JSX.Element | null => {
+const SimulatorItemComponent = ({
+  node,
+}: SimulatorItemProps): JSX.Element | null => {
   const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(false);
-  const { layers, setLayers, allowForcedOperations } = useContext(SimulatorContext);
+  const { layers, setLayers, allowForcedOperations } =
+    useContext(SimulatorContext);
   const isDisabled = !node.available && !allowForcedOperations;
 
   const handleClick = () => setShowInfo(!showInfo);
 
-  const changeNodeAmount = (type: 'add' | 'subtract') => {
+  const changeNodeAmount = (type: "add" | "subtract") => {
     if (!node) return;
 
     const item = node;
     const itemList = [...layers];
 
-    if (type === 'add') item.amount += 1;
+    if (type === "add") item.amount += 1;
     else item.amount -= 1;
     setLayers(itemList);
   };
@@ -34,20 +36,20 @@ const SimulatorItemComponent = ({ node }:
       <IconButtonComponent
         disabled={isDisabled}
         Icon={FiMinus}
-        translationKey={t('subtract')}
+        translationKey={t("subtract")}
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount('subtract')}
+        onClick={() => changeNodeAmount("subtract")}
       />
       <IconButtonComponent
         disabled={isDisabled}
         Icon={FiPlus}
-        translationKey={t('add')}
+        translationKey={t("add")}
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount('add')}
+        onClick={() => changeNodeAmount("add")}
       />
       <IconButtonComponent
         Icon={FiClock}
-        translationKey={t('timer')}
+        translationKey={t("timer")}
         className="simulator-item__button--icon"
       />
       <span>{node.timer}</span>
@@ -57,7 +59,11 @@ const SimulatorItemComponent = ({ node }:
   if (!node) return null;
 
   return (
-    <li className={`simulator-item ${!node.available && 'simulator-item--disabled'}`}>
+    <li
+      className={`simulator-item ${
+        !node.available && "simulator-item--disabled"
+      }`}
+    >
       <div
         className="simulator-item__button"
         onClick={handleClick}

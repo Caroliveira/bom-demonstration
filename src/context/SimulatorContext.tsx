@@ -1,7 +1,7 @@
-import React, { useState, useEffect, ReactChild } from 'react';
-import { useStoreState } from 'react-flow-renderer';
+import React, { useState, useEffect, ReactChild } from "react";
+import { useStoreState } from "react-flow-renderer";
 
-import { CustomNodeType } from '.';
+import { CustomNodeType } from ".";
 
 export type LayersType = CustomNodeType[][];
 
@@ -12,12 +12,13 @@ type SimulatorContextType = {
   setAllowForcedOperations: (allow: boolean) => void;
 };
 
-type SimulatorContextProviderType = {children : ReactChild};
+type SimulatorContextProviderType = { children: ReactChild };
 
 export const SimulatorContext = React.createContext({} as SimulatorContextType);
 
-export const SimulatorContextProvider = ({ children }: SimulatorContextProviderType):
-  JSX.Element => {
+export const SimulatorContextProvider = ({
+  children,
+}: SimulatorContextProviderType): JSX.Element => {
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
   const [layers, setLayers] = useState<LayersType>([]);
   const [allowForcedOperations, setAllowForcedOperations] = useState(false);
@@ -36,12 +37,13 @@ export const SimulatorContextProvider = ({ children }: SimulatorContextProviderT
   useEffect(separateLayers, []);
 
   return (
-    <SimulatorContext.Provider value={{
-      layers,
-      setLayers,
-      allowForcedOperations,
-      setAllowForcedOperations,
-    }}
+    <SimulatorContext.Provider
+      value={{
+        layers,
+        setLayers,
+        allowForcedOperations,
+        setAllowForcedOperations,
+      }}
     >
       {children}
     </SimulatorContext.Provider>

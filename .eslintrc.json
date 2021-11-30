@@ -6,10 +6,11 @@
         "commonjs": true
     },
     "extends": [
-        "plugin:react/recommended",
         "airbnb",
         "plugin:import/react",
-        "plugin:react/jsx-runtime"
+        "plugin:react/jsx-runtime",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,7 +22,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "no-undef": "off",
@@ -32,9 +34,11 @@
         "arrow-body-style": "off",
         "react/jsx-props-no-spreading": "off",
         "react/button-has-type": "off",
+        "react/prop-types": "off",
         "react/require-default-props": "off",
         "react/jsx-one-expression-per-line": "off",
         "react/jsx-no-constructed-context-values": "off",
+        "prettier/prettier": "error",
         "react/jsx-filename-extension": [
             1,
             {

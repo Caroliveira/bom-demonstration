@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { IconBaseProps, IconType } from 'react-icons';
-import { ButtonProps } from './ButtonComponent';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { IconBaseProps, IconType } from "react-icons";
+import { ButtonProps } from "./ButtonComponent";
 
 type IconButtonProps = {
-  Icon: IconType
+  Icon: IconType;
   iconProps?: IconBaseProps;
 } & ButtonProps;
 
 const IconButtonComponent = ({
   Icon,
   translationKey,
-  type = 'button',
+  type = "button",
   className,
   disabled,
   iconProps,
@@ -22,7 +23,9 @@ const IconButtonComponent = ({
     <button
       type={type}
       title={t(translationKey)}
-      className={`icon-button ${disabled && 'icon-button--disabled'} ${className}`}
+      className={`icon-button ${
+        disabled && "icon-button--disabled"
+      } ${className}`}
       disabled={disabled}
       {...props}
     >

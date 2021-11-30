@@ -1,10 +1,10 @@
-import { ArrowHeadType, Edge } from 'react-flow-renderer';
-import { v4 as uuid } from 'uuid';
+import { ArrowHeadType, Edge } from "react-flow-renderer";
+import { v4 as uuid } from "uuid";
 
-import { nodeMounter } from '.';
-import { CustomNodeType } from '../context';
+import { nodeMounter } from ".";
+import { CustomNodeType } from "../context";
 
-type FileHandlerType = { nodes: CustomNodeType[], edges: Edge[]};
+type FileHandlerType = { nodes: CustomNodeType[]; edges: Edge[] };
 type JsonItemType = { source: string; target: string; value: string };
 
 const nodesCreator = (sourceLabels: string[], targetLabels: string[]) => {
@@ -16,15 +16,15 @@ const edgesCreator = (
   nodes: CustomNodeType[],
   sourceLabel: string,
   targetLabel: string,
-  edgeValue: string,
+  edgeValue: string
 ) => {
   const source = nodes.find(({ data }) => data.label === sourceLabel);
   const target = nodes.find(({ data }) => data.label === targetLabel);
   return {
     id: uuid(),
     label: parseFloat(edgeValue),
-    source: source?.id || '',
-    target: target?.id || '',
+    source: source?.id || "",
+    target: target?.id || "",
     arrowHeadType: ArrowHeadType.ArrowClosed,
   };
 };
@@ -38,16 +38,20 @@ const csvTableHandler = (table: string[][]): FileHandlerType => {
 };
 
 const csvHandler = (result: string) => {
-  const rows = result.split('\n');
-  const table = rows.map((el) => el.split(','));
-  const columns = ['source', 'target', 'value'];
+  const rows = result.split("\n");
+  const table = rows.map((el) => el.split(","));
+  const columns = ["source", "target", "value"];
 
   const isHeaderValid = !columns.some((el, i) => el !== table[0][i]);
   const cleanTable = table.filter((row, index) => {
-    return (index && row.length >= columns.length && !row.some((col) => col === ''));
+    return (
+      index && row.length >= columns.length && !row.some((col) => col === "")
+    );
   });
 
-  return isHeaderValid && cleanTable[0] ? csvTableHandler(cleanTable) : undefined;
+  return isHeaderValid && cleanTable[0]
+    ? csvTableHandler(cleanTable)
+    : undefined;
 };
 
 const jsonHandler = (result: string, skipParse?: boolean): FileHandlerType => {
@@ -61,9 +65,12 @@ const jsonHandler = (result: string, skipParse?: boolean): FileHandlerType => {
   return { nodes, edges };
 };
 
-export const fileHandler = (result: string, fileType: string, skipParse?: boolean)
-: FileHandlerType | undefined => {
-  if (fileType === 'text/csv') return csvHandler(result);
-  if (fileType === 'application/json') return jsonHandler(result, skipParse);
+export const fileHandler = (
+  result: string,
+  fileType: string,
+  skipParse?: boolean
+): FileHandlerType | undefined => {
+  if (fileType === "text/csv") return csvHandler(result);
+  if (fileType === "application/json") return jsonHandler(result, skipParse);
   return undefined;
 };

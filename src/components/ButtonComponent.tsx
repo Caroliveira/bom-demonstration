@@ -1,4 +1,5 @@
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 export type ButtonProps = {
   translationKey: string;
@@ -6,11 +7,16 @@ export type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const ButtonComponent = ({
-  translationKey, outlined = false, type = 'button', className, disabled, ...props
+  translationKey,
+  outlined = false,
+  type = "button",
+  className,
+  disabled,
+  ...props
 }: ButtonProps): JSX.Element => {
   const { t } = useTranslation();
-  const buttonType = outlined ? 'outlined' : 'filled';
-  const buttonStyle = `button--${disabled ? 'disabled' : buttonType}`;
+  const buttonType = outlined ? "outlined" : "filled";
+  const buttonStyle = `button--${disabled ? "disabled" : buttonType}`;
 
   return (
     <button

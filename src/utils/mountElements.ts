@@ -1,13 +1,13 @@
-import { Edge, Elements } from 'react-flow-renderer';
-import { v4 as uuid } from 'uuid';
+import { Edge, Elements } from "react-flow-renderer";
+import { v4 as uuid } from "uuid";
 
-import { getLayoutedElements } from './dagre';
-import { CustomNodeType } from '../context';
+import { getLayoutedElements } from "./dagre";
+import { CustomNodeType } from "../context";
 
 export const nodeMounter = (name: string): CustomNodeType => {
   return {
     id: uuid(),
-    type: 'default',
+    type: "default",
     data: { label: name },
     position: { x: 0, y: 0 },
     available: false,
@@ -21,7 +21,7 @@ const findNextNodes = (
   currentNodes: CustomNodeType[],
   nodes: CustomNodeType[],
   edges: Edge[],
-  layer: number,
+  layer: number
 ): CustomNodeType[] => {
   const nextNodes: CustomNodeType[] = [];
   currentNodes.forEach((node) => {
@@ -33,7 +33,10 @@ const findNextNodes = (
   });
 
   if (!nextNodes.length) return currentNodes;
-  return [...currentNodes, ...findNextNodes(nextNodes, nodes, edges, layer + 1)];
+  return [
+    ...currentNodes,
+    ...findNextNodes(nextNodes, nodes, edges, layer + 1),
+  ];
 };
 
 const removeDuplicateds = (nodes: CustomNodeType[]) => {
@@ -50,7 +53,10 @@ const removeDuplicateds = (nodes: CustomNodeType[]) => {
   }, [] as CustomNodeType[]);
 };
 
-export const mountElements = (nodes: CustomNodeType[], edges: Edge[]): Elements => {
+export const mountElements = (
+  nodes: CustomNodeType[],
+  edges: Edge[]
+): Elements => {
   const rootNodes: CustomNodeType[] = [];
   nodes.forEach((node) => {
     if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);

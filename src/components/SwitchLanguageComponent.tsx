@@ -1,7 +1,9 @@
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const SwitchLanguageComponent = (props:
-  React.SelectHTMLAttributes<HTMLSelectElement>): JSX.Element => {
+const SwitchLanguageComponent = (
+  props: React.SelectHTMLAttributes<HTMLSelectElement>
+): JSX.Element => {
   const { t, i18n } = useTranslation();
 
   const handleChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
@@ -11,13 +13,13 @@ const SwitchLanguageComponent = (props:
 
   return (
     <select
-      aria-label={t('selectLanguage')}
+      aria-label={t("selectLanguage")}
       onChange={handleChange}
       value={i18n.language}
       {...props}
     >
-      <option value="en">{t('english')}</option>
-      <option value="pt-BR">{t('portuguese')}</option>
+      <option value="en">{t("english")}</option>
+      <option value="pt-BR">{t("portuguese")}</option>
     </select>
   );
 };

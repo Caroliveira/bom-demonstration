@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import { FiAlertTriangle } from 'react-icons/fi';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { FiAlertTriangle } from "react-icons/fi";
 
 type InputProps = {
   error?: string;
@@ -8,7 +9,11 @@ type InputProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputComponent = ({
-  error, translationKey, divStyle, className, ...props
+  error,
+  translationKey,
+  divStyle,
+  className,
+  ...props
 }: InputProps): JSX.Element => {
   const { t } = useTranslation();
 
@@ -23,10 +28,10 @@ const InputComponent = ({
         {...props}
       />
       {!!error && (
-      <span className="input__error">
-        <FiAlertTriangle style={{ marginRight: 8 }} />
-        {t(error)}
-      </span>
+        <span className="input__error">
+          <FiAlertTriangle style={{ marginRight: 8 }} />
+          {t(error)}
+        </span>
       )}
     </div>
   );

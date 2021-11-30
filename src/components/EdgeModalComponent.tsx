@@ -1,23 +1,22 @@
-import { useContext, useState, useEffect } from 'react';
-import { removeElements, Edge, useStoreState } from 'react-flow-renderer';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useState, useEffect } from "react";
+import { removeElements, Edge, useStoreState } from "react-flow-renderer";
+import { useTranslation } from "react-i18next";
 
-import { InputComponent, ModalComponent } from '.';
-import { MainContext } from '../context';
+import { InputComponent, ModalComponent } from ".";
+import { MainContext } from "../context";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const {
-    elements, edge, adjustLayout, showEdgeModal, closeEdgeModal,
-  } = useContext(MainContext);
+  const { elements, edge, adjustLayout, showEdgeModal, closeEdgeModal } =
+    useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
-  const [source, setSource] = useState('');
-  const [target, setTarget] = useState('');
-  const [amount, setAmount] = useState('');
-  const [error, setError] = useState('');
+  const [source, setSource] = useState("");
+  const [target, setTarget] = useState("");
+  const [amount, setAmount] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (edge) {
@@ -34,10 +33,10 @@ const EdgeModalComponent = (): JSX.Element | null => {
   if (!currentEdge) return null;
 
   const close = () => {
-    setError('');
-    setAmount('');
-    setSource('');
-    setTarget('');
+    setError("");
+    setAmount("");
+    setSource("");
+    setTarget("");
     closeEdgeModal();
   };
 
@@ -60,13 +59,16 @@ const EdgeModalComponent = (): JSX.Element | null => {
     <ModalComponent
       show={showEdgeModal}
       title="editConnection"
-      deleteButton={{ translationKey: 'deleteConnection', onClick: handleDelete }}
-      secondaryButton={{ translationKey: 'cancel', onClick: close }}
-      submitButton={{ disabled: !amount, translationKey: 'save' }}
+      deleteButton={{
+        translationKey: "deleteConnection",
+        onClick: handleDelete,
+      }}
+      secondaryButton={{ translationKey: "cancel", onClick: close }}
+      submitButton={{ disabled: !amount, translationKey: "save" }}
       onSubmit={handleSave}
     >
       <p className="modal__text">
-        ({t('source')}: {source}) {'->'} ({t('target')}: {target})
+        ({t("source")}: {source}) {"->"} ({t("target")}: {target})
       </p>
       <InputComponent
         autoFocus

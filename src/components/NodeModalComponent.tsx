@@ -1,27 +1,32 @@
-import { useContext, useState, useEffect } from 'react';
-import { useStoreState, removeElements } from 'react-flow-renderer';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from "react";
+import { useStoreState, removeElements } from "react-flow-renderer";
+import { useHistory } from "react-router-dom";
 
-import { CustomNodeType, MainContext } from '../context';
-import { InputComponent, ModalComponent } from '.';
-import { nodeMounter } from '../utils';
+import { CustomNodeType, MainContext } from "../context";
+import { InputComponent, ModalComponent } from ".";
+import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const {
-    elements, node, setNode, adjustLayout, showNodeModal, setShowNodeModal,
+    elements,
+    node,
+    setNode,
+    adjustLayout,
+    showNodeModal,
+    setShowNodeModal,
   } = useContext(MainContext);
   const history = useHistory();
   const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
   const edges = useStoreState((store) => store.edges);
 
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => setName(node?.data.label || ''), [node, showNodeModal]);
+  useEffect(() => setName(node?.data.label || ""), [node, showNodeModal]);
 
   const close = () => {
-    setName('');
-    setError('');
+    setName("");
+    setError("");
     setShowNodeModal(false);
   };
 
@@ -32,7 +37,7 @@ const NodeModalComponent = (): JSX.Element | null => {
     });
     const elementsToDelete = [node, ...edgesToDelete];
     adjustLayout({ els: removeElements(elementsToDelete, elements) });
-    history.push('/diagram');
+    history.push("/diagram");
     close();
   };
 
@@ -48,26 +53,31 @@ const NodeModalComponent = (): JSX.Element | null => {
   };
 
   const handleSave = () => {
-    const duplicatedName = name === node?.id ? false : nodes.some(({ id }) => id === name);
-    if (duplicatedName) setError('nameError');
+    const duplicatedName =
+      name === node?.id ? false : nodes.some(({ id }) => id === name);
+    if (duplicatedName) setError("nameError");
     else {
-      adjustLayout({ els: node ? handleUpdate() : [...elements, nodeMounter(name)] });
+      adjustLayout({
+        els: node ? handleUpdate() : [...elements, nodeMounter(name)],
+      });
       close();
     }
   };
 
   const handleNameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setError('');
+    setError("");
     setName(evt.target.value);
   };
 
   return (
     <ModalComponent
       show={showNodeModal}
-      title={node ? 'editItem' : 'addItem'}
-      deleteButton={node && { translationKey: 'deleteItem', onClick: handleDelete }}
-      secondaryButton={{ translationKey: 'cancel', onClick: close }}
-      submitButton={{ disabled: !name, translationKey: 'save' }}
+      title={node ? "editItem" : "addItem"}
+      deleteButton={
+        node && { translationKey: "deleteItem", onClick: handleDelete }
+      }
+      secondaryButton={{ translationKey: "cancel", onClick: close }}
+      submitButton={{ disabled: !name, translationKey: "save" }}
       onSubmit={handleSave}
     >
       <InputComponent
