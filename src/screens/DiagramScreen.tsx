@@ -36,7 +36,6 @@ const DiagramScreen = (): JSX.Element => {
     setEdge(edge);
     setShowEdgeModal(true);
   };
-  console.log(elements);
 
   return (
     <>
