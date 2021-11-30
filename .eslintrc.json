@@ -7,7 +7,6 @@
     },
     "extends": [
         "airbnb",
-        "plugin:import/react",
         "plugin:react/jsx-runtime",
         "plugin:react/recommended",
         "plugin:prettier/recommended"

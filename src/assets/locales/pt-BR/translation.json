@@ -27,6 +27,7 @@
   "madeBy": "Feito por",
   "name": "Nome",
   "nameError": "Nome deve ser único",
+  "negativeValueError": "Quantidade deve ser positiva",
   "noData": "Não há dados cadastrados",
   "noFileSelected": "Nenhum arquivo foi selecionado.",
   "noItems": "Não há items {{type}}",

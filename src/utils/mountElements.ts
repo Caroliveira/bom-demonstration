@@ -54,6 +54,17 @@ const removeDuplicateds = (nodes: CustomNodeType[]) => {
   }, [] as CustomNodeType[]);
 };
 
+export const updateLayers = (
+  current: CustomNodeType[],
+  nodes: CustomNodeType[],
+  edges: Edge[],
+  nextLayer: number
+) => {
+  const nodesWithDuplicateds = findNextNodes(current, nodes, edges, nextLayer);
+  const nodesWithLayer = removeDuplicateds(nodesWithDuplicateds);
+  return getLayoutedElements([...nodesWithLayer, ...edges]);
+};
+
 export const mountElements = (
   nodes: CustomNodeType[],
   edges: Edge[]
@@ -63,7 +74,5 @@ export const mountElements = (
     if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);
   });
 
-  const nodesWithDuplicateds = findNextNodes(rootNodes, nodes, edges, 1);
-  const nodesWithLayer = removeDuplicateds(nodesWithDuplicateds);
-  return getLayoutedElements([...nodesWithLayer, ...edges]);
+  return updateLayers(rootNodes, nodes, edges, 1);
 };

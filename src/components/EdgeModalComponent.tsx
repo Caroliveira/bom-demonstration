@@ -4,12 +4,14 @@ import { useTranslation } from "react-i18next";
 
 import { InputComponent, ModalComponent } from ".";
 import { MainContext } from "../context";
+import useEdgeManipulation from "../hooks/useEdgeManipulation";
 import { nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { elements, edge, adjustLayout, showEdgeModal, closeEdgeModal } =
     useContext(MainContext);
+  const { handleLabelChange } = useEdgeManipulation();
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
@@ -21,13 +23,11 @@ const EdgeModalComponent = (): JSX.Element | null => {
 
   useEffect(() => {
     if (edge) {
-      const fullEdge = edges.find(({ id }) => id === edge?.id);
-      if (fullEdge) {
-        setSource(nodeById(nodes, fullEdge.source)?.data.label);
-        setTarget(nodeById(nodes, fullEdge.target)?.data.label);
-        setAmount(fullEdge.label as string);
-        setCurrentEdge(fullEdge);
-      }
+      const fullEdge = edges.find(({ id }) => id === edge?.id) || edge;
+      setSource(nodeById(nodes, fullEdge.source)?.data.label);
+      setTarget(nodeById(nodes, fullEdge.target)?.data.label);
+      setAmount((fullEdge.label as string) || "");
+      setCurrentEdge(fullEdge);
     }
   }, [edge]);
 
@@ -47,13 +47,13 @@ const EdgeModalComponent = (): JSX.Element | null => {
   };
 
   const handleSave = () => {
-    const updatedElements = elements.map((element) => {
-      const el = element as Edge;
-      if (el.id === currentEdge.id) el.label = amount;
-      return el;
-    });
-    adjustLayout({ els: updatedElements });
+    handleLabelChange(currentEdge, amount);
     close();
+  };
+
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(evt.target.value);
+    setError(parseInt(evt.target.value, 10) <= 0 ? "negativeValueError" : "");
   };
 
   return (
@@ -65,7 +65,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
         onClick: handleDelete,
       }}
       secondaryButton={{ translationKey: "cancel", onClick: close }}
-      submitButton={{ disabled: !amount, translationKey: "save" }}
+      submitButton={{ disabled: !amount || !!error, translationKey: "save" }}
       onSubmit={handleSave}
     >
       <p className="modal__text">
@@ -73,10 +73,12 @@ const EdgeModalComponent = (): JSX.Element | null => {
       </p>
       <InputComponent
         autoFocus
-        translationKey="amountNeeded"
+        min={1}
+        type="number"
         error={error}
         value={amount}
-        onChange={(evt) => setAmount(evt.target.value)}
+        onChange={handleChange}
+        translationKey="amountNeeded"
       />
     </ModalComponent>
   );
