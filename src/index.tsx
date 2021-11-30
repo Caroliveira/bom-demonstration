@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ReactFlowProvider } from 'react-flow-renderer';
-import {
-  BrowserRouter, Switch, Route, Redirect,
-} from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ReactFlowProvider } from "react-flow-renderer";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import {
   DiagramScreen,
@@ -11,13 +9,13 @@ import {
   NodeScreen,
   NotFoundScreen,
   SimulatorScreen,
-} from './screens';
+} from "./screens";
 
-import reportWebVitals from './reportWebVitals';
-import { LayoutComponent } from './components';
-import { MainContextProvider } from './context';
-import './assets/scss/main.scss';
-import './i18n';
+import reportWebVitals from "./reportWebVitals";
+import { LayoutComponent } from "./components";
+import { MainContextProvider } from "./context";
+import "./assets/scss/main.scss";
+import "./i18n";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -38,7 +36,7 @@ ReactDOM.render(
       </MainContextProvider>
     </ReactFlowProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
