@@ -9,6 +9,7 @@ import ImportModalComponent from "./ImportModalComponent";
 import InputComponent from "./InputComponent";
 import LayoutComponent from "./LayoutComponent";
 import ModalComponent from "./ModalComponent";
+import NodeDependenciesComponent from "./NodeDependeciesComponent";
 import NodeModalComponent from "./NodeModalComponent";
 import ScreensHeaderComponent from "./ScreensHeaderComponent";
 import SelectInputComponent from "./SelectInputComponent";
@@ -27,6 +28,7 @@ export {
   InputComponent,
   LayoutComponent,
   ModalComponent,
+  NodeDependenciesComponent,
   NodeModalComponent,
   ScreensHeaderComponent,
   SelectInputComponent,
