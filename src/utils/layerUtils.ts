@@ -1,6 +1,6 @@
-import { Edge } from "react-flow-renderer";
+import { Edge, Node } from "react-flow-renderer";
 import { CustomNodeType } from "../context";
-import { nodeById } from ".";
+import { nodeById, removeDuplicatedNodes } from ".";
 
 const nextNodesUpdateLayers = (
   currentNodes: CustomNodeType[],
@@ -24,31 +24,21 @@ const nextNodesUpdateLayers = (
   ];
 };
 
-const removeDuplicateds = (nodes: CustomNodeType[]) => {
-  return nodes.reduce((acc, el) => {
-    const index = acc.findIndex((subEl) => subEl.data.label === el.data.label);
-    let addElement = true;
-
-    if (index > -1) {
-      if (acc[index].layer < el.layer) acc.splice(index, 1);
-      else addElement = false;
-    }
-
-    return addElement ? [...acc, el] : acc;
-  }, [] as CustomNodeType[]);
-};
-
 export const updateLayers = (
   current: CustomNodeType[],
-  nodes: CustomNodeType[],
+  nodes: (CustomNodeType | Node)[],
   edges: Edge[],
   nextLayer: number
 ) => {
   const nodesWithDuplicateds = nextNodesUpdateLayers(
     current,
-    nodes,
+    nodes as CustomNodeType[],
     edges,
     nextLayer
   );
-  return removeDuplicateds(nodesWithDuplicateds);
+  return removeDuplicatedNodes(
+    nodesWithDuplicateds,
+    (subEl, el) => subEl.layer < el.layer,
+    "data"
+  );
 };

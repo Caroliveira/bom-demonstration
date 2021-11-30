@@ -3,7 +3,7 @@ import { removeElements, Edge, useStoreState } from "react-flow-renderer";
 import { useTranslation } from "react-i18next";
 
 import { InputComponent, ModalComponent } from ".";
-import { MainContext } from "../context";
+import { CustomNodeType, MainContext } from "../context";
 import useEdgeManipulation from "../hooks/useEdgeManipulation";
 import { nodeById } from "../utils";
 
@@ -11,38 +11,38 @@ const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { elements, edge, adjustLayout, showEdgeModal, closeEdgeModal } =
     useContext(MainContext);
-  const { handleLabelChange } = useEdgeManipulation();
+  const { handleLabelChange, handleEdgeDelete } = useEdgeManipulation();
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
-  const [source, setSource] = useState("");
-  const [target, setTarget] = useState("");
+  const [source, setSource] = useState<CustomNodeType>();
+  const [target, setTarget] = useState<CustomNodeType>();
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (edge) {
       const fullEdge = edges.find(({ id }) => id === edge?.id) || edge;
-      setSource(nodeById(nodes, fullEdge.source)?.data.label);
-      setTarget(nodeById(nodes, fullEdge.target)?.data.label);
+      setSource(nodeById(nodes, fullEdge.source));
+      setTarget(nodeById(nodes, fullEdge.target));
       setAmount((fullEdge.label as string) || "");
       setCurrentEdge(fullEdge);
     }
   }, [edge]);
 
-  if (!currentEdge) return null;
+  if (!currentEdge || !source || !target) return null;
 
   const close = () => {
     setError("");
     setAmount("");
-    setSource("");
-    setTarget("");
+    setSource(undefined);
+    setTarget(undefined);
     closeEdgeModal();
   };
 
   const handleDelete = () => {
-    adjustLayout({ els: removeElements([currentEdge], elements) });
+    handleEdgeDelete(currentEdge, source, target);
     close();
   };
 
@@ -60,16 +60,17 @@ const EdgeModalComponent = (): JSX.Element | null => {
     <ModalComponent
       show={showEdgeModal}
       title="editConnection"
+      onSubmit={handleSave}
+      submitButton={{ disabled: !amount || !!error, translationKey: "save" }}
+      secondaryButton={{ translationKey: "cancel", onClick: close }}
       deleteButton={{
         translationKey: "deleteConnection",
         onClick: handleDelete,
       }}
-      secondaryButton={{ translationKey: "cancel", onClick: close }}
-      submitButton={{ disabled: !amount || !!error, translationKey: "save" }}
-      onSubmit={handleSave}
     >
       <p className="modal__text">
-        ({t("source")}: {source}) {"->"} ({t("target")}: {target})
+        ({t("source")}: {source.data.label}){" -> "}({t("target")}:{" "}
+        {target.data.label})
       </p>
       <InputComponent
         autoFocus
