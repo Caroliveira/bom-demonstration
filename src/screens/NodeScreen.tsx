@@ -11,6 +11,7 @@ import {
   ScreensHeaderComponent,
 } from "../components";
 import { CustomNodeType, MainContext } from "../context";
+import { nodeById } from "../utils";
 
 type RouteParams = { id: string };
 
@@ -29,7 +30,7 @@ const NodeScreen = ({
   const getNodesById = (nodesId: string[]) => {
     const nodesById: CustomNodeType[] = [];
     nodesId.forEach((id) => {
-      const nodeExist = nodes.find((n) => n.id === id);
+      const nodeExist = nodeById(nodes, id);
       if (nodeExist) nodesById.push(nodeExist as CustomNodeType);
     });
     return nodesById;
@@ -37,7 +38,7 @@ const NodeScreen = ({
 
   useEffect(() => {
     const { id } = match.params;
-    const nodeExists = nodes.find((n) => n.id === id);
+    const nodeExists = nodeById(nodes, id);
     if (nodeExists) setNode(nodeExists as CustomNodeType);
     else history.push("/not-found");
   }, [match.params.id]);

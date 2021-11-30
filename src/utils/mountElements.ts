@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 
 import { getLayoutedElements } from "./dagre";
 import { CustomNodeType } from "../context";
+import { nodeById } from ".";
 
 export const nodeMounter = (name: string): CustomNodeType => {
   return {
@@ -27,7 +28,7 @@ const findNextNodes = (
   currentNodes.forEach((node) => {
     const targetEdges = edges.filter(({ source }) => source === node.id);
     targetEdges.forEach(({ target }) => {
-      const targetNode = nodes.find(({ id }) => id === target);
+      const targetNode = nodeById(nodes, target);
       if (targetNode) nextNodes.push({ ...targetNode, layer });
     });
   });

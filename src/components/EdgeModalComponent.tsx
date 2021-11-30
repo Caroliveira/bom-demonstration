@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { InputComponent, ModalComponent } from ".";
 import { MainContext } from "../context";
+import { nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -22,8 +23,8 @@ const EdgeModalComponent = (): JSX.Element | null => {
     if (edge) {
       const fullEdge = edges.find(({ id }) => id === edge?.id);
       if (fullEdge) {
-        setSource(nodes.find(({ id }) => id === fullEdge.source)?.data.label);
-        setTarget(nodes.find(({ id }) => id === fullEdge.target)?.data.label);
+        setSource(nodeById(nodes, fullEdge.source)?.data.label);
+        setTarget(nodeById(nodes, fullEdge.target)?.data.label);
         setAmount(fullEdge.label as string);
         setCurrentEdge(fullEdge);
       }

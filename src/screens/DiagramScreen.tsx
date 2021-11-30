@@ -25,6 +25,7 @@ const DiagramScreen = (): JSX.Element => {
   };
 
   const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
+    console.log(oldEdge, newConnection);
     setElements(updateEdge(oldEdge, newConnection, elements));
   };
 
