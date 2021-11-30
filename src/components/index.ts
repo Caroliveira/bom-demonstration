@@ -1,3 +1,4 @@
+import AccordionComponent from "./AccordionComponent";
 import ButtonComponent from "./ButtonComponent";
 import DiagramToolbarComponent from "./DiagramToolbarComponent";
 import EdgeModalComponent from "./EdgeModalComponent";
@@ -15,6 +16,7 @@ import SimulatorItemComponent from "./SimulatorItemComponent";
 import SwitchLanguageComponent from "./SwitchLanguageComponent";
 
 export {
+  AccordionComponent,
   ButtonComponent,
   DiagramToolbarComponent,
   EdgeModalComponent,

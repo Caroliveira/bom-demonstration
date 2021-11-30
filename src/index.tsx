@@ -13,7 +13,7 @@ import {
 
 import reportWebVitals from "./reportWebVitals";
 import { LayoutComponent } from "./components";
-import { MainContextProvider } from "./context";
+import { MainContextProvider, NodeContextProvider } from "./context";
 import "./assets/scss/main.scss";
 import "./i18n";
 
@@ -21,18 +21,20 @@ ReactDOM.render(
   <React.StrictMode>
     <ReactFlowProvider>
       <MainContextProvider>
-        <BrowserRouter>
-          <LayoutComponent>
-            <Switch>
-              <Route exact path="/" component={HomeScreen} />
-              <Route exact path="/diagram" component={DiagramScreen} />
-              <Route exact path="/node/:id" component={NodeScreen} />
-              <Route exact path="/simulator" component={SimulatorScreen} />
-              <Route exact path="/not-found" component={NotFoundScreen} />
-              <Redirect from="*" to="/not-found" />
-            </Switch>
-          </LayoutComponent>
-        </BrowserRouter>
+        <NodeContextProvider>
+          <BrowserRouter>
+            <LayoutComponent>
+              <Switch>
+                <Route exact path="/" component={HomeScreen} />
+                <Route exact path="/diagram" component={DiagramScreen} />
+                <Route exact path="/node/:id" component={NodeScreen} />
+                <Route exact path="/simulator" component={SimulatorScreen} />
+                <Route exact path="/not-found" component={NotFoundScreen} />
+                <Redirect from="*" to="/not-found" />
+              </Switch>
+            </LayoutComponent>
+          </BrowserRouter>
+        </NodeContextProvider>
       </MainContextProvider>
     </ReactFlowProvider>
   </React.StrictMode>,

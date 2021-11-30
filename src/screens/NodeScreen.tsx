@@ -3,15 +3,15 @@ import { useHistory, RouteComponentProps } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FiEdit } from "react-icons/fi";
 import { GiBottomRight3DArrow } from "react-icons/gi";
-
 import { Node, useStoreState } from "react-flow-renderer";
+
 import {
   ButtonComponent,
   IconButtonComponent,
   ScreensHeaderComponent,
 } from "../components";
-import { MainContext } from "../context";
 import { nodeById } from "../utils";
+import { NodeContext, NodeContextProvider } from "../context";
 
 type RouteParams = { id: string };
 
@@ -20,41 +20,18 @@ const NodeScreen = ({
 }: RouteComponentProps<RouteParams>): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { setShowNodeModal, node, setNode } = useContext(MainContext);
+  const { setShowNodeModal, node, setNode, sources, targets } =
+    useContext(NodeContext);
   const nodes = useStoreState((store) => store.nodes);
-  const edges = useStoreState((store) => store.edges);
-
-  const [sources, setSources] = useState<Node[]>([]);
-  const [targets, setTargets] = useState<Node[]>([]);
-
-  const getNodesById = (nodesId: string[]) => {
-    const nodesById: Node[] = [];
-    nodesId.forEach((id) => {
-      const nodeExist = nodeById(nodes, id);
-      if (nodeExist) nodesById.push(nodeExist);
-    });
-    return nodesById;
-  };
 
   useEffect(() => {
     const { id } = match.params;
-    const nodeExists = nodeById(nodes, id);
-    if (nodeExists) setNode(nodeExists);
-    else history.push("/not-found");
-  }, [match.params.id]);
-
-  useEffect(() => {
-    if (node) {
-      const sourcesId: string[] = [];
-      const targetsId: string[] = [];
-      edges.forEach(({ source, target }) => {
-        if (source === node.id) targetsId.push(target);
-        if (target === node.id) sourcesId.push(source);
-      });
-      setSources(getNodesById(sourcesId));
-      setTargets(getNodesById(targetsId));
+    if (!node || node.id !== id) {
+      const nodeExists = nodeById(nodes, id);
+      if (nodeExists) setNode(nodeExists);
+      else history.push("/not-found");
     }
-  }, [node]);
+  }, [match.params.id, node]);
 
   useEffect(() => {
     return () => setNode(undefined);

@@ -2,19 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import { useStoreState, removeElements, isNode } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
 
-import { MainContext } from "../context";
+import { MainContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
 import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
-  const {
-    elements,
-    node,
-    setNode,
-    adjustLayout,
-    showNodeModal,
-    setShowNodeModal,
-  } = useContext(MainContext);
+  const { elements, setElements } = useContext(MainContext);
+  const { node, setNode, showNodeModal, setShowNodeModal } =
+    useContext(NodeContext);
   const history = useHistory();
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
@@ -36,7 +31,7 @@ const NodeModalComponent = (): JSX.Element | null => {
       return edge.source === node.id || edge.target === node.id;
     });
     const elementsToDelete = [node, ...edgesToDelete];
-    adjustLayout({ els: removeElements(elementsToDelete, elements) });
+    setElements(removeElements(elementsToDelete, elements));
     history.push("/diagram");
     close();
   };
@@ -57,9 +52,7 @@ const NodeModalComponent = (): JSX.Element | null => {
       name === node?.id ? false : nodes.some(({ id }) => id === name);
     if (duplicatedName) setError("nameError");
     else {
-      adjustLayout({
-        els: node ? handleUpdate() : [...elements, nodeMounter(name)],
-      });
+      setElements(node ? handleUpdate() : [...elements, nodeMounter(name)]);
       close();
     }
   };

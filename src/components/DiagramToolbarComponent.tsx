@@ -6,7 +6,7 @@ import { FiPlus, FiUpload } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from ".";
-import { MainContext } from "../context";
+import { MainContext, NodeContext } from "../context";
 
 const layout = {
   TB: { Icon: CgMoveDown, label: "Vertical" },
@@ -16,11 +16,11 @@ const layout = {
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
+  const { setShowNodeModal } = useContext(NodeContext);
   const {
     elements,
     adjustLayout,
     setShowImportModal,
-    setShowNodeModal,
     showMiniMap,
     setShowMiniMap,
   } = useContext(MainContext);

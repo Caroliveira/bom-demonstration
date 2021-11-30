@@ -8,15 +8,11 @@ type AdjustLayoutParams = { dir?: "TB" | "LR"; els?: Elements } | undefined;
 type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
-  node?: Node;
-  setNode: (node?: Node) => void;
   edge?: Edge;
   setEdge: (edge: Edge) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
-  showNodeModal: boolean;
-  setShowNodeModal: (show: boolean) => void;
   showEdgeModal: boolean;
   setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
@@ -32,11 +28,9 @@ export const MainContextProvider = ({
   children,
 }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
-  const [node, setNode] = useState<Node>();
   const [edge, setEdge] = useState<Edge>();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
-  const [showNodeModal, setShowNodeModal] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
 
@@ -62,8 +56,6 @@ export const MainContextProvider = ({
   return (
     <MainContext.Provider
       value={{
-        node,
-        setNode,
         edge,
         setEdge,
         elements,
@@ -71,8 +63,6 @@ export const MainContextProvider = ({
         adjustLayout,
         showImportModal,
         setShowImportModal,
-        showNodeModal,
-        setShowNodeModal,
         showEdgeModal,
         setShowEdgeModal,
         showMiniMap,
