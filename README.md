@@ -1,11 +1,13 @@
 # Bill of materials demonstration
 
 This project is a tool to help game developers define, test and balance their tech trees.
+
 **It can be accessed through https://bom-demonstration.herokuapp.com/.**
 
 ## Project configuration
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) with the typescript template.
+
 It's using Eslint and (soon) Jest to maintaining the project integrity and padronization.
 
 ## Available Scripts
