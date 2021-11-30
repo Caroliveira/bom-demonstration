@@ -52,12 +52,21 @@ const NodeScreen = ({
       <div className="node__dependencies">
         <NodeDependenciesComponent dependencies={sources} type="source" />
         <GiBottomRight3DArrow className="node__arrow" />
-        <p className="node__label">{node?.data.label}</p>
+        <h2 className="node__label">{node?.data.label}</h2>
         <GiBottomRight3DArrow className="node__arrow" />
         <NodeDependenciesComponent dependencies={targets} type="target" />
       </div>
 
-      <AccordionComponent translationKey="node" />
+      {/* TO DO: think of better name */}
+      <AccordionComponent translationKey="convertionPlayground">
+        <p>teste</p>
+      </AccordionComponent>
+      <AccordionComponent translationKey="layersCalculation">
+        <p>teste</p>
+      </AccordionComponent>
+      <AccordionComponent translationKey="compareNodes">
+        <p>teste</p>
+      </AccordionComponent>
     </>
   );
 };

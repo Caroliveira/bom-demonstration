@@ -1,0 +1,16 @@
+.accordion {
+  width: 100%;
+  box-shadow: 0 2px 2px 2px grey;
+  border-radius: 4px;
+  margin-top: 24px;
+  cursor: pointer;
+  &__label {
+    text-align: center;
+    color: $NEUTRAL_COLOR;
+  }
+  &__content {
+    margin: 20px 24px;
+    border-top: 1px solid $NEUTRAL_TRANSPARENT;
+    color: $NEUTRAL_COLOR;
+  }
+}
