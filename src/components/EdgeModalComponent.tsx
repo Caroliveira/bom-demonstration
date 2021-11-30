@@ -1,53 +1,60 @@
 import React, { useContext, useState, useEffect } from "react";
-import { removeElements, Edge, useStoreState } from "react-flow-renderer";
+import {
+  Edge,
+  useStoreState,
+  Node,
+  isEdge,
+  removeElements,
+} from "react-flow-renderer";
 import { useTranslation } from "react-i18next";
 
 import { InputComponent, ModalComponent } from ".";
-import { CustomNodeType, MainContext } from "../context";
-import useEdgeManipulation from "../hooks/useEdgeManipulation";
+import { MainContext } from "../context";
 import { nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { elements, edge, adjustLayout, showEdgeModal, closeEdgeModal } =
+  const { edge, elements, setElements, showEdgeModal, closeEdgeModal } =
     useContext(MainContext);
-  const { handleLabelChange, handleEdgeDelete } = useEdgeManipulation();
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
-  const [source, setSource] = useState<CustomNodeType>();
-  const [target, setTarget] = useState<CustomNodeType>();
+  const [source, setSource] = useState("");
+  const [target, setTarget] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (edge) {
       const fullEdge = edges.find(({ id }) => id === edge?.id) || edge;
-      setSource(nodeById(nodes, fullEdge.source));
-      setTarget(nodeById(nodes, fullEdge.target));
+      setSource(nodeById(nodes, fullEdge.source)?.data.label);
+      setTarget(nodeById(nodes, fullEdge.target)?.data.label);
       setAmount((fullEdge.label as string) || "");
       setCurrentEdge(fullEdge);
     }
   }, [edge]);
 
-  if (!currentEdge || !source || !target) return null;
-
   const close = () => {
     setError("");
     setAmount("");
-    setSource(undefined);
-    setTarget(undefined);
+    setSource("");
+    setTarget("");
     closeEdgeModal();
   };
 
+  if (!currentEdge) return null;
+
   const handleDelete = () => {
-    handleEdgeDelete(currentEdge, source, target);
+    setElements(removeElements([currentEdge], elements));
     close();
   };
 
   const handleSave = () => {
-    handleLabelChange(currentEdge, amount);
+    const updatedElements = elements.map((el) =>
+      isEdge(el) && el.id === currentEdge.id ? { ...el, label: amount } : el
+    );
+    setElements(updatedElements);
     close();
   };
 
@@ -69,8 +76,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
       }}
     >
       <p className="modal__text">
-        ({t("source")}: {source.data.label}){" -> "}({t("target")}:{" "}
-        {target.data.label})
+        ({t("source")}: {source}) {"->"} ({t("target")}: {target})
       </p>
       <InputComponent
         autoFocus

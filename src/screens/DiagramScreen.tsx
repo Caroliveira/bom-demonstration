@@ -13,14 +13,16 @@ import ReactFlow, {
 
 import { DiagramToolbarComponent } from "../components";
 import { MainContext } from "../context";
-import useEdgeManipulation from "../hooks/useEdgeManipulation";
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { handleEdgeCreation } = useEdgeManipulation();
   const { elements, setElements, setEdge, showMiniMap, setShowEdgeModal } =
     useContext(MainContext);
+
+  const onConnect = (params: Edge | Connection) => {
+    setElements(addEdge({ ...params, label: 1 }, elements));
+  };
 
   const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
     setElements(updateEdge(oldEdge, newConnection, elements));
@@ -44,7 +46,7 @@ const DiagramScreen = (): JSX.Element => {
         )}
         <ReactFlow
           elements={elements}
-          onConnect={handleEdgeCreation}
+          onConnect={onConnect}
           onEdgeUpdate={onEdgeUpdate}
           onNodeDoubleClick={onNodeDoubleClick}
           onEdgeDoubleClick={onEdgeDoubleClick}

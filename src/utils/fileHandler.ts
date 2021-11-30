@@ -1,10 +1,8 @@
-import { ArrowHeadType, Edge } from "react-flow-renderer";
+import { ArrowHeadType, Edge, Node } from "react-flow-renderer";
 import { v4 as uuid } from "uuid";
-
 import { nodeMounter } from ".";
-import { CustomNodeType } from "../context";
 
-type FileHandlerType = { nodes: CustomNodeType[]; edges: Edge[] };
+type FileHandlerType = { nodes: Node[]; edges: Edge[] };
 type JsonItemType = { source: string; target: string; value: string };
 
 const nodesCreator = (sourceLabels: string[], targetLabels: string[]) => {
@@ -13,7 +11,7 @@ const nodesCreator = (sourceLabels: string[], targetLabels: string[]) => {
 };
 
 const edgesCreator = (
-  nodes: CustomNodeType[],
+  nodes: Node[],
   sourceLabel: string,
   targetLabel: string,
   edgeValue: string

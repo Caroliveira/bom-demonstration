@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useStoreState, removeElements } from "react-flow-renderer";
+import { useStoreState, removeElements, isNode } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
 
-import { CustomNodeType, MainContext } from "../context";
+import { MainContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
 import { nodeMounter } from "../utils";
 
@@ -16,7 +16,7 @@ const NodeModalComponent = (): JSX.Element | null => {
     setShowNodeModal,
   } = useContext(MainContext);
   const history = useHistory();
-  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
+  const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
   const [name, setName] = useState("");
@@ -44,9 +44,9 @@ const NodeModalComponent = (): JSX.Element | null => {
   const handleUpdate = () => {
     return elements.map((element) => {
       const el = element;
-      if (el.id === node?.id) {
+      if (isNode(el) && el.id === node?.id) {
         el.data = { ...el.data, label: name };
-        setNode(el as CustomNodeType);
+        setNode(el);
       }
       return el;
     });

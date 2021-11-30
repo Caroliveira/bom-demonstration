@@ -3,20 +3,13 @@ import { Edge, Elements, Node } from "react-flow-renderer";
 
 import { getLayoutedElements } from "../utils";
 
-export type CustomNodeType = {
-  layer: number;
-  amount: number;
-  timer: number;
-  available: boolean;
-} & Node;
-
 type AdjustLayoutParams = { dir?: "TB" | "LR"; els?: Elements } | undefined;
 
 type MainContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
-  node?: CustomNodeType;
-  setNode: (node?: CustomNodeType) => void;
+  node?: Node;
+  setNode: (node?: Node) => void;
   edge?: Edge;
   setEdge: (edge: Edge) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
@@ -39,7 +32,7 @@ export const MainContextProvider = ({
   children,
 }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
-  const [node, setNode] = useState<CustomNodeType>();
+  const [node, setNode] = useState<Node>();
   const [edge, setEdge] = useState<Edge>();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaFileAlt } from "react-icons/fa";
 
-import { fileHandler, mountElements } from "../utils";
+import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
 import { getEdges } from "../api";
@@ -11,7 +11,7 @@ import { getEdges } from "../api";
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { showImportModal, setShowImportModal, setElements } =
+  const { showImportModal, setShowImportModal, adjustLayout } =
     useContext(MainContext);
 
   const [id, setId] = useState("");
@@ -30,9 +30,8 @@ const ImportModalComponent = (): JSX.Element | null => {
   const handleIdClick = async () => {
     try {
       const result = await getEdges(id);
-      const { nodes, edges } =
-        fileHandler(result.edges, "application/json", true) || {};
-      if (nodes && edges) setElements(mountElements(nodes, edges));
+      const model = fileHandler(result.edges, "application/json", true);
+      if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
       closeModal();
       if (history.location.pathname !== "/diagram") history.push("/diagram");
     } catch (err: any) {
@@ -50,8 +49,8 @@ const ImportModalComponent = (): JSX.Element | null => {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         const result = loadEvent.target?.result as string;
-        const { nodes, edges } = fileHandler(result, file.type) || {};
-        if (nodes && edges) setElements(mountElements(nodes, edges));
+        const model = fileHandler(result, file.type);
+        if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
       };
       reader.readAsText(file);
       closeModal();

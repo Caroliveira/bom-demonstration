@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { FiEdit } from "react-icons/fi";
 import { GiBottomRight3DArrow } from "react-icons/gi";
 
-import { useStoreState } from "react-flow-renderer";
+import { Node, useStoreState } from "react-flow-renderer";
 import {
   ButtonComponent,
   IconButtonComponent,
   ScreensHeaderComponent,
 } from "../components";
-import { CustomNodeType, MainContext } from "../context";
+import { MainContext } from "../context";
 import { nodeById } from "../utils";
 
 type RouteParams = { id: string };
@@ -24,14 +24,14 @@ const NodeScreen = ({
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
-  const [sources, setSources] = useState<CustomNodeType[]>([]);
-  const [targets, setTargets] = useState<CustomNodeType[]>([]);
+  const [sources, setSources] = useState<Node[]>([]);
+  const [targets, setTargets] = useState<Node[]>([]);
 
   const getNodesById = (nodesId: string[]) => {
-    const nodesById: CustomNodeType[] = [];
+    const nodesById: Node[] = [];
     nodesId.forEach((id) => {
       const nodeExist = nodeById(nodes, id);
-      if (nodeExist) nodesById.push(nodeExist as CustomNodeType);
+      if (nodeExist) nodesById.push(nodeExist);
     });
     return nodesById;
   };
@@ -39,7 +39,7 @@ const NodeScreen = ({
   useEffect(() => {
     const { id } = match.params;
     const nodeExists = nodeById(nodes, id);
-    if (nodeExists) setNode(nodeExists as CustomNodeType);
+    if (nodeExists) setNode(nodeExists);
     else history.push("/not-found");
   }, [match.params.id]);
 
@@ -61,7 +61,7 @@ const NodeScreen = ({
   }, []);
 
   const renderDependencies = (
-    dependencies: CustomNodeType[],
+    dependencies: Node[],
     type: "source" | "target"
   ) => {
     return !dependencies.length ? (

@@ -1,9 +1,14 @@
 import React, { useState, useEffect, ReactChild } from "react";
-import { useStoreState } from "react-flow-renderer";
+import { useStoreState, Node } from "react-flow-renderer";
 
-import { CustomNodeType } from ".";
+export type SimulatorNodeType = {
+  layer: number;
+  amount: number;
+  timer: number;
+  available: boolean;
+} & Node;
 
-export type LayersType = CustomNodeType[][];
+export type LayersType = SimulatorNodeType[][];
 
 type SimulatorContextType = {
   layers: LayersType;
@@ -19,12 +24,12 @@ export const SimulatorContext = React.createContext({} as SimulatorContextType);
 export const SimulatorContextProvider = ({
   children,
 }: SimulatorContextProviderType): JSX.Element => {
-  const nodes = useStoreState((store) => store.nodes) as CustomNodeType[];
+  const nodes = useStoreState((store) => store.nodes) as SimulatorNodeType[];
   const [layers, setLayers] = useState<LayersType>([]);
   const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 
   const separateLayers = () => {
-    const layersArray: CustomNodeType[][] = [];
+    const layersArray: SimulatorNodeType[][] = [];
 
     nodes.forEach((node) => {
       if (layersArray[node.layer]) layersArray[node.layer].push(node);

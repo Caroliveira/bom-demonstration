@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
-import { CustomNodeType, SimulatorContext } from "../context";
+import { SimulatorContext, SimulatorNodeType } from "../context";
 import { IconButtonComponent } from ".";
 
 type SimulatorItemProps = {
-  node: CustomNodeType;
+  node: SimulatorNodeType;
 };
 
 const SimulatorItemComponent = ({
