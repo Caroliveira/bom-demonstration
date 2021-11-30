@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import {
+  addEdge,
+  Connection,
   Edge,
   isEdge,
   removeElements,
@@ -14,7 +16,10 @@ const useEdgeManipulation = () => {
   const nodes = useStoreState((store) => store.nodes);
   const edges = useStoreState((store) => store.edges);
 
-  const nodeLayerOnSourceChange = (sourceId: string, targetId: string) => {
+  const changeNodeLayerOnSourceRemoval = (
+    sourceId: string,
+    targetId: string
+  ) => {
     let layer = 0;
     let hasSource = false;
     edges.forEach((e) => {
@@ -32,16 +37,33 @@ const useEdgeManipulation = () => {
     source: CustomNodeType,
     target: CustomNodeType
   ) => {
-    const targetLayer = nodeLayerOnSourceChange(source.id, target.id);
-    const targetNode = { ...target, layer: targetLayer };
-    const nextLayer = targetLayer + 1;
-    const targetNodes = updateLayers([targetNode], nodes, edges, nextLayer);
+    const layer = changeNodeLayerOnSourceRemoval(source.id, target.id);
+    const targetNode = { ...target, layer };
+    const targetNodes = updateLayers([targetNode], nodes, edges, layer + 1);
     const updatedNodes = removeDuplicatedNodes(
       [...nodes, ...targetNodes],
       (subEl, el) => subEl.layer >= el.layer,
       "id"
     );
     setElements(removeElements([edge], [...updatedNodes, ...edges]));
+  };
+
+  const handleEdgeCreation = (params: Edge | Connection) => {
+    const source = nodeById(nodes, params.source) as CustomNodeType;
+    const target = nodeById(nodes, params.target) as CustomNodeType;
+    let updatedElements = elements;
+    if (source.layer + 1 > target.layer) {
+      const layer = source.layer + 1;
+      const targetNode = { ...target, layer };
+      const targetNodes = updateLayers([targetNode], nodes, edges, layer + 1);
+      const updatedNodes = removeDuplicatedNodes(
+        [...nodes, ...targetNodes],
+        (subEl, el) => subEl.layer < el.layer,
+        "id"
+      );
+      updatedElements = [...updatedNodes, ...edges];
+    }
+    setElements(addEdge({ ...params, label: 1 }, updatedElements));
   };
 
   const handleLabelChange = (edge: Edge, label: string) => {
@@ -51,7 +73,7 @@ const useEdgeManipulation = () => {
     setElements(updatedElements);
   };
 
-  return { handleLabelChange, handleEdgeDelete };
+  return { handleLabelChange, handleEdgeDelete, handleEdgeCreation };
 };
 
 export default useEdgeManipulation;
