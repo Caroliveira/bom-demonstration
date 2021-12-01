@@ -55,6 +55,14 @@
     margin-top: 24px;
     display: flex;
     justify-content: flex-end;
+    &--row {
+      margin-top: 0;
+      flex-direction: column;
+      & > * {
+        width: 360px;
+        margin-top: 8px;
+      }
+    }
   }
   &__cancel-button {
     margin-right: 20px;

@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaFileAlt } from "react-icons/fa";
 
+import { AWSError } from "aws-sdk";
+import { GetItemOutput } from "aws-sdk/clients/dynamodb";
 import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
@@ -27,15 +29,21 @@ const ImportModalComponent = (): JSX.Element | null => {
     setShowImportModal(false);
   };
 
+  const handleResult = (err: AWSError, data: GetItemOutput) => {
+    const { edges } = data.Item || {};
+    if (edges) {
+      const model = fileHandler(JSON.stringify(edges), "application/json");
+      if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
+    } else if (err) setError(`error${err?.statusCode}`);
+  };
+
   const handleIdClick = async () => {
     try {
-      const result = await getEdges(id);
-      const model = fileHandler(result.edges, "application/json", true);
-      if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
+      await getEdges(id, handleResult);
       closeModal();
       if (history.location.pathname !== "/diagram") history.push("/diagram");
     } catch (err: any) {
-      setError(`error${err?.response?.status}`);
+      setError(`error${err?.statusCode}`);
     }
   };
 

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { IconBaseProps, IconType } from "react-icons";
 import { ButtonProps, ButtonParcial } from "./ButtonComponent";
 
-type IconButtonProps = {
+export type IconButtonProps = {
   Icon: IconType;
   iconProps?: IconBaseProps;
 } & ButtonProps &

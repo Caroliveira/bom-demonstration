@@ -52,8 +52,8 @@ const csvHandler = (result: string) => {
     : undefined;
 };
 
-const jsonHandler = (result: string, skipParse?: boolean): FileHandlerType => {
-  const rawEdges = skipParse ? result : JSON.parse(result);
+const jsonHandler = (result: string): FileHandlerType => {
+  const rawEdges = JSON.parse(result);
   const sourceLabels = rawEdges.map(({ source }: JsonItemType) => source);
   const targetLabels = rawEdges.map(({ target }: JsonItemType) => target);
   const nodes = nodesCreator(sourceLabels, targetLabels);
@@ -69,6 +69,6 @@ export const fileHandler = (
   skipParse?: boolean
 ): FileHandlerType | undefined => {
   if (fileType === "text/csv") return csvHandler(result);
-  if (fileType === "application/json") return jsonHandler(result, skipParse);
+  if (fileType === "application/json") return jsonHandler(result);
   return undefined;
 };

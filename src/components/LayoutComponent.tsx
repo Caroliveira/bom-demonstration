@@ -1,6 +1,7 @@
 import React from "react";
 import {
   EdgeModalComponent,
+  ExportModalComponent,
   FooterComponent,
   HeaderComponent,
   ImportModalComponent,
@@ -19,6 +20,7 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
         <main className="layout__main">{children}</main>
       </div>
       <ImportModalComponent />
+      <ExportModalComponent />
       <NodeModalComponent />
       <EdgeModalComponent />
       <FooterComponent />

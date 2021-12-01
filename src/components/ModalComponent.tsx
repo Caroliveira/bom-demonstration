@@ -1,14 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { CgTrash } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from ".";
 import { ButtonProps } from "./ButtonComponent";
+import { IconButtonProps } from "./IconButtonComponent";
 
 type ModalProps = {
   show: boolean;
   title: string;
-  deleteButton?: ButtonProps;
+  deleteButton?: IconButtonProps;
   secondaryButton?: ButtonProps;
   submitButton?: ButtonProps;
   onSubmit?: (evt: React.FormEvent<HTMLFormElement>) => void;
@@ -40,7 +40,6 @@ const ModalComponent = ({
           <h2 className="modal__title">{t(title)}</h2>
           {deleteButton && (
             <IconButtonComponent
-              Icon={CgTrash}
               className="modal__icon"
               iconProps={{ color: "#821d1d" }}
               {...deleteButton}

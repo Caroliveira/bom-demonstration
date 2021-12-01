@@ -7,6 +7,7 @@ import {
   removeElements,
 } from "react-flow-renderer";
 import { useTranslation } from "react-i18next";
+import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from ".";
 import { MainContext } from "../context";
@@ -71,6 +72,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
       submitButton={{ disabled: !amount || !!error, translationKey: "save" }}
       secondaryButton={{ translationKey: "cancel", onClick: close }}
       deleteButton={{
+        Icon: CgTrash,
         translationKey: "deleteConnection",
         onClick: handleDelete,
       }}

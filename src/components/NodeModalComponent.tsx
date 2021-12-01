@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useStoreState, removeElements, isNode } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
 
+import { CgTrash } from "react-icons/cg";
 import { MainContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
 import { nodeMounter } from "../utils";
@@ -67,7 +68,11 @@ const NodeModalComponent = (): JSX.Element | null => {
       show={showNodeModal}
       title={node ? "editItem" : "addItem"}
       deleteButton={
-        node && { translationKey: "deleteItem", onClick: handleDelete }
+        node && {
+          Icon: CgTrash,
+          translationKey: "deleteItem",
+          onClick: handleDelete,
+        }
       }
       secondaryButton={{ translationKey: "cancel", onClick: close }}
       submitButton={{ disabled: !name, translationKey: "save" }}

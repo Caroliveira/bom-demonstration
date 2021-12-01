@@ -2,6 +2,7 @@ import AccordionComponent from "./AccordionComponent";
 import ButtonComponent from "./ButtonComponent";
 import DiagramToolbarComponent from "./DiagramToolbarComponent";
 import EdgeModalComponent from "./EdgeModalComponent";
+import ExportModalComponent from "./ExportModalComponent";
 import FooterComponent from "./FooterComponent";
 import HeaderComponent from "./HeaderComponent";
 import IconButtonComponent from "./IconButtonComponent";
@@ -22,6 +23,7 @@ export {
   ButtonComponent,
   DiagramToolbarComponent,
   EdgeModalComponent,
+  ExportModalComponent,
   FooterComponent,
   HeaderComponent,
   IconButtonComponent,
