@@ -3,14 +3,31 @@
   box-shadow: 0 2px 2px 2px grey;
   border-radius: 4px;
   margin-top: 24px;
-  cursor: pointer;
   &__label {
+    cursor: pointer;
     text-align: center;
     color: $NEUTRAL_COLOR;
+    margin: 0;
+    padding: 24px 0;
   }
   &__content {
-    margin: 20px 24px;
+    padding-top: 24px;
+    margin: 0 24px 24px;
     border-top: 1px solid $NEUTRAL_TRANSPARENT;
     color: $NEUTRAL_COLOR;
+  }
+}
+
+.layers {
+  display: flex;
+    align-items: center;
+  &__result {
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+    font-size: 24px;
+    & > * {
+      margin: 4px 0;
+    } 
   }
 }

@@ -1,13 +1,23 @@
 .node {
   &__label {
+    min-width: 160px;
     padding: 16px;
     border-radius: 20px;
     background-color: $NEUTRAL_COLOR;
     box-shadow: 0 2px 0 2px grey;
 
+    color: $PRIMARY_COLOR;
+    text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 20px;
+  }
+  &__layer {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba($PRIMARY_COLOR, 0.9);
   }
   &__arrow {
     width: 24px;

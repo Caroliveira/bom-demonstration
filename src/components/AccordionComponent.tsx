@@ -8,7 +8,6 @@ export type AccordionProps = {
 const AccordionComponent = ({
   translationKey,
   children,
-  id,
   ...props
 }: AccordionProps): JSX.Element => {
   const { t } = useTranslation();
@@ -17,16 +16,15 @@ const AccordionComponent = ({
   const handleClick = () => setShow(!show);
 
   return (
-    <div
-      className="accordion"
-      onClick={handleClick}
-      onKeyPress={handleClick}
-      role="button"
-      tabIndex={0}
-      id={id}
-      {...props}
-    >
-      <h3 className="accordion__label">{t(translationKey)}</h3>
+    <div className="accordion" {...props}>
+      <div
+        onClick={handleClick}
+        onKeyPress={handleClick}
+        role="button"
+        tabIndex={0}
+      >
+        <h3 className="accordion__label">{t(translationKey)}</h3>
+      </div>
       {/* TO DO: Add animation */}
       {show && <div className="accordion__content">{children}</div>}
     </div>

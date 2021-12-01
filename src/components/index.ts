@@ -7,6 +7,7 @@ import HeaderComponent from "./HeaderComponent";
 import IconButtonComponent from "./IconButtonComponent";
 import ImportModalComponent from "./ImportModalComponent";
 import InputComponent from "./InputComponent";
+import LayersCalculationComponent from "./LayersCalculationComponent";
 import LayoutComponent from "./LayoutComponent";
 import ModalComponent from "./ModalComponent";
 import NodeDependenciesComponent from "./NodeDependeciesComponent";
@@ -26,6 +27,7 @@ export {
   IconButtonComponent,
   ImportModalComponent,
   InputComponent,
+  LayersCalculationComponent,
   LayoutComponent,
   ModalComponent,
   NodeDependenciesComponent,
