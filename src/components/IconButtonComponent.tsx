@@ -1,15 +1,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IconBaseProps, IconType } from "react-icons";
-import { ButtonProps } from "./ButtonComponent";
+import { ButtonProps, ButtonParcial } from "./ButtonComponent";
 
 type IconButtonProps = {
   Icon: IconType;
   iconProps?: IconBaseProps;
-} & ButtonProps;
+} & ButtonProps &
+  ButtonParcial;
 
 const IconButtonComponent = ({
   Icon,
+  label,
   translationKey,
   type = "button",
   className,
@@ -22,7 +24,7 @@ const IconButtonComponent = ({
   return (
     <button
       type={type}
-      title={t(translationKey)}
+      title={translationKey ? t(translationKey) : label}
       className={`icon-button ${
         disabled && "icon-button--disabled"
       } ${className}`}

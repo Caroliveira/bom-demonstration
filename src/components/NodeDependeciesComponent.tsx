@@ -31,7 +31,7 @@ const NodeDependenciesComponent = ({
         <li className="node__dependencies-item" key={dep.id}>
           <ButtonComponent
             outlined
-            translationKey={dep.data.label}
+            label={dep.data.label}
             onClick={() => history.push(`/node/${dep.id}`)}
           />
         </li>

@@ -1,12 +1,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+export type ButtonParcial =
+  | { label?: string; translationKey?: never }
+  | { label?: never; translationKey: string };
+
 export type ButtonProps = {
-  translationKey: string;
   outlined?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & React.ButtonHTMLAttributes<HTMLButtonElement> &
+  ButtonParcial;
 
 const ButtonComponent = ({
+  label,
   translationKey,
   outlined = false,
   type = "button",
@@ -25,7 +30,7 @@ const ButtonComponent = ({
       className={`button ${buttonStyle} ${className}`}
       {...props}
     >
-      {t(translationKey)}
+      {translationKey ? t(translationKey) : label}
     </button>
   );
 };

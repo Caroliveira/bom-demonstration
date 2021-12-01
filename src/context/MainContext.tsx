@@ -13,6 +13,8 @@ type MainContextType = {
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
+  showExportModal: boolean;
+  setShowExportModal: (showExportModal: boolean) => void;
   showEdgeModal: boolean;
   setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
@@ -31,6 +33,7 @@ export const MainContextProvider = ({
   const [edge, setEdge] = useState<Edge>();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
 
@@ -63,6 +66,8 @@ export const MainContextProvider = ({
         adjustLayout,
         showImportModal,
         setShowImportModal,
+        showExportModal,
+        setShowExportModal,
         showEdgeModal,
         setShowEdgeModal,
         showMiniMap,

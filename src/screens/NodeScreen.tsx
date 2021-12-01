@@ -44,7 +44,7 @@ const NodeScreen = ({
       <ScreensHeaderComponent title="Item playground">
         <IconButtonComponent
           Icon={FiEdit}
-          translationKey={t("editItem")}
+          translationKey="editItem"
           onClick={() => setShowNodeModal(true)}
           style={{ padding: 8 }}
         />

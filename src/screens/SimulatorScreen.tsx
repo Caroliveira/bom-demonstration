@@ -19,7 +19,7 @@ const SimulatorScreen = (): JSX.Element => {
       <ScreensHeaderComponent title="simulator">
         <IconButtonComponent
           Icon={allowForcedOperations ? FiShieldOff : FiShield}
-          translationKey={t("allowForcedOperations", {
+          label={t("allowForcedOperations", {
             state: allowForcedOperations ? t("on") : t("off"),
           })}
           onClick={() => setAllowForcedOperations(!allowForcedOperations)}

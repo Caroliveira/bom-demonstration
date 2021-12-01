@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaMap, FaRegMap } from "react-icons/fa";
-import { FiPlus, FiUpload } from "react-icons/fi";
+import { FiPlus, FiSave, FiUpload } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from ".";
@@ -21,6 +21,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
     elements,
     adjustLayout,
     setShowImportModal,
+    setShowExportModal,
     showMiniMap,
     setShowMiniMap,
   } = useContext(MainContext);
@@ -45,9 +46,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
         <IconButtonComponent
           disabled={!elements.length}
           Icon={layout[direction].Icon}
-          translationKey={t("layoutFormat", {
-            layout: layout[direction].label,
-          })}
+          label={t("layoutFormat", { layout: layout[direction].label })}
           onClick={onDirectionChange}
           className="mr-2"
         />
@@ -69,6 +68,12 @@ const DiagramToolbarComponent = (): JSX.Element => {
           Icon={FiUpload}
           translationKey="loadProject"
           onClick={() => setShowImportModal(true)}
+          className="mr-2"
+        />
+        <IconButtonComponent
+          Icon={FiSave}
+          translationKey="save"
+          onClick={() => setShowExportModal(true)}
         />
       </div>
     </div>

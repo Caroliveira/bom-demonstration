@@ -36,20 +36,20 @@ const SimulatorItemComponent = ({
       <IconButtonComponent
         disabled={isDisabled}
         Icon={FiMinus}
-        translationKey={t("subtract")}
+        translationKey="subtract"
         className="simulator-item__button--icon"
         onClick={() => changeNodeAmount("subtract")}
       />
       <IconButtonComponent
         disabled={isDisabled}
         Icon={FiPlus}
-        translationKey={t("add")}
+        translationKey="add"
         className="simulator-item__button--icon"
         onClick={() => changeNodeAmount("add")}
       />
       <IconButtonComponent
         Icon={FiClock}
-        translationKey={t("timer")}
+        translationKey="timer"
         className="simulator-item__button--icon"
       />
       <span>{node.timer}</span>
