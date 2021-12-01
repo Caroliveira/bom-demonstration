@@ -12,7 +12,7 @@
   "editItem": "Edit item",
   "english": "English",
   "errorundefined": "Server is off, try again later",
-  "error404": "Wrong ID, verify if is written correctly",
+  "error404": "ID not found, verify if is written correctly",
   "error500": "Server is not working properly, try again later",
   "export": "Export {{file}}",
   "exportTitle": "Save your project",

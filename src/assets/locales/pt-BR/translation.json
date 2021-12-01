@@ -12,7 +12,7 @@
   "editItem": "Editar item",
   "english": "Inglês",
   "errorundefined": "Servidor fora do ar, tente novamente mais tarde",
-  "error404": "Id incorreto, verifique se está escrito corretamente",
+  "error404": "Id não encontrado, verifique se está escrito corretamente",
   "error500": "O servidor não está funcionando corretamente, tente novamente mais tarde",
   "export": "Exportar {{file}}",
   "exportTitle": "Salve seu projeto",

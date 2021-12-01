@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaFileAlt } from "react-icons/fa";
 
-import { AWSError } from "aws-sdk";
-import { GetItemOutput } from "aws-sdk/clients/dynamodb";
 import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
@@ -29,21 +27,15 @@ const ImportModalComponent = (): JSX.Element | null => {
     setShowImportModal(false);
   };
 
-  const handleResult = (err: AWSError, data: GetItemOutput) => {
-    const { edges } = data.Item || {};
-    if (edges) {
-      const model = fileHandler(JSON.stringify(edges), "application/json");
-      if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
-    } else if (err) setError(`error${err?.statusCode}`);
-  };
-
   const handleIdClick = async () => {
     try {
-      const result = await getEdges(id);
-      console.log(result);
-
-      closeModal();
-      if (history.location.pathname !== "/diagram") history.push("/diagram");
+      const { edges } = await getEdges(id);
+      if (edges) {
+        const model = fileHandler(JSON.stringify(edges), "application/json");
+        if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
+        if (history.location.pathname !== "/diagram") history.push("/diagram");
+        closeModal();
+      } else setError(`error404`);
     } catch (err: any) {
       setError(`error${err?.statusCode}`);
     }
