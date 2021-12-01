@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   Edge,
   useStoreState,
-  Node,
   isEdge,
   removeElements,
 } from "react-flow-renderer";

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ReactChild } from "react";
-import { Edge, Elements, Node } from "react-flow-renderer";
+import { Edge, Elements } from "react-flow-renderer";
 
 import { getLayoutedElements } from "../utils";
 

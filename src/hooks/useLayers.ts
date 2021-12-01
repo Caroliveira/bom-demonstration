@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useStoreState, Node } from "react-flow-renderer";
 import { NodeContext } from "../context";
 import { nodeById } from "../utils";
