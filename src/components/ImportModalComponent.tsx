@@ -8,7 +8,7 @@ import { GetItemOutput } from "aws-sdk/clients/dynamodb";
 import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
-import { getEdges } from "../api";
+import { getEdges } from "../services";
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -39,7 +39,9 @@ const ImportModalComponent = (): JSX.Element | null => {
 
   const handleIdClick = async () => {
     try {
-      await getEdges(id, handleResult);
+      const result = await getEdges(id);
+      console.log(result);
+
       closeModal();
       if (history.location.pathname !== "/diagram") history.push("/diagram");
     } catch (err: any) {

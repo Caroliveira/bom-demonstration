@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 import { nodeById } from "../utils";
 import { MainContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
-import { createEdges, updateEdges } from "../api";
+import { createEdges, updateEdges } from "../services";
 
 export type EdgesToSaveType = {
   source: string;
