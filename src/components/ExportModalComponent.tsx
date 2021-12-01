@@ -23,7 +23,9 @@ const ExportModalComponent = (): JSX.Element | null => {
   const { showExportModal, setShowExportModal } = useContext(MainContext);
 
   const [error, setError] = useState("");
-  const [id, setId] = useState(() => localStorage.getItem("id") || "");
+  const [id, setId] = useState(
+    () => localStorage.getItem("bom_demonstration_id") || ""
+  );
 
   const edgesToSave = useMemo(() => {
     return edges.map((edge) => {
@@ -40,7 +42,7 @@ const ExportModalComponent = (): JSX.Element | null => {
         const generated = uuid();
         await createEdges(generated, edgesToSave);
         setId(generated);
-        localStorage.setItem("id", generated);
+        localStorage.setItem("bom_demonstration_id", generated);
       }
     } catch (err: any) {
       setError(`error${err?.response?.error}`);

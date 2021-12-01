@@ -7,10 +7,12 @@ import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
 import { getEdges } from "../services";
+import { useServices } from "../hooks";
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
+  const { getProject } = useServices();
   const { showImportModal, setShowImportModal, adjustLayout } =
     useContext(MainContext);
 
@@ -28,17 +30,9 @@ const ImportModalComponent = (): JSX.Element | null => {
   };
 
   const handleIdClick = async () => {
-    try {
-      const { edges } = await getEdges(id);
-      if (edges) {
-        const model = fileHandler(JSON.stringify(edges), "application/json");
-        if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
-        if (history.location.pathname !== "/diagram") history.push("/diagram");
-        closeModal();
-      } else setError(`error404`);
-    } catch (err: any) {
-      setError(`error${err?.statusCode}`);
-    }
+    const status = await getProject(id);
+    if (status === 200) closeModal();
+    else setError(`error${status}`);
   };
 
   const handleIdChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
