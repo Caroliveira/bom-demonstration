@@ -12,6 +12,8 @@ export type ProjectType = {
   conversionEdges?: Edge[];
 };
 
+axios.defaults.headers.common = { Accept: "application/json" };
+
 export const useServices = () => {
   const history = useHistory();
   const { adjustLayout } = useContext(MainContext);
@@ -31,7 +33,7 @@ export const useServices = () => {
     }
   };
 
-  const createProject = async (project: ProjectType) => {
+  const createProject = async (project: Partial<ProjectType>) => {
     try {
       const res = await axios.post(`${base}/projects`, project);
       return res.data;
@@ -45,7 +47,7 @@ export const useServices = () => {
       const res = await axios.put(`${base}/projects/${id}`, project);
       return res.data;
     } catch (error: any) {
-      return error.response.status;
+      return error;
     }
   };
 

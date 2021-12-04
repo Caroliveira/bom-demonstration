@@ -1,6 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { Edge, Elements } from "react-flow-renderer";
-import { useHistory } from "react-router-dom";
 
 import { getLayoutedElements } from "../utils";
 
@@ -11,6 +10,8 @@ type MainContextType = {
   setElements: (elements: Elements) => void;
   edge?: Edge;
   setEdge: (edge: Edge) => void;
+  conversionEdges: Edge[];
+  setConversionEdges: (edges: Edge[]) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
@@ -33,6 +34,7 @@ export const MainContextProvider = ({
   children,
 }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
+  const [conversionEdges, setConversionEdges] = useState<Edge[]>([]);
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
@@ -67,6 +69,8 @@ export const MainContextProvider = ({
         setEdge,
         elements,
         setElements,
+        conversionEdges,
+        setConversionEdges,
         adjustLayout,
         showImportModal,
         setShowImportModal,

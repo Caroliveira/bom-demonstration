@@ -1,9 +1,8 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "react-flow-renderer";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
-import { v4 as uuid } from "uuid";
 
 import { CustomNode, MainContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
@@ -11,28 +10,21 @@ import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const edges = useStoreState((store) => store.edges);
+  const { updateProject } = useServices();
+  const { showExportModal, setShowExportModal, conversionEdges } =
+    useContext(MainContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
-  const { showExportModal, setShowExportModal } = useContext(MainContext);
-  const { createProject, updateProject } = useServices();
+  const edges = useStoreState((store) => store.edges);
+  const id = localStorage.getItem("bom_demonstration_id") || "";
 
-  const [error, setError] = useState("");
-  const id = useMemo(() => {
-    return localStorage.getItem("bom_demonstration_id") || "";
-  }, [localStorage]);
-
-  const generateID = async () => {
-    try {
-      if (id) await updateProject({ id, nodes, edges });
-      else {
-        const generated = uuid();
-        await createProject({ id: generated, nodes, edges });
-        localStorage.setItem("bom_demonstration_id", generated);
-      }
-    } catch (err: any) {
-      setError(`error${err?.response?.error}`);
-    }
+  const update = async () => {
+    const res = await updateProject({ id, nodes, edges, conversionEdges });
+    console.log(res);
   };
+
+  useEffect(() => {
+    if (showExportModal) update();
+  }, [showExportModal]);
 
   const generateFile = (data: string, type: "csv" | "json") => {
     const fileName = `bom-data.${type}`;
@@ -76,7 +68,6 @@ const ExportModalComponent = (): JSX.Element | null => {
       )}
       <iframe title="export" id="iframe" style={{ display: "none" }} />
       <div className="modal__buttons modal__buttons--row">
-        <ButtonComponent translationKey="generateId" onClick={generateID} />
         {/* <ButtonComponent
           label={t("export", { file: "CSV" })}
           onClick={exportCSVFile}

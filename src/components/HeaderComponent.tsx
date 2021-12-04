@@ -5,9 +5,11 @@ import { v4 as uuid } from "uuid";
 
 import { IconButtonComponent, SwitchLanguageComponent } from ".";
 import { MainContext } from "../context";
+import { useServices } from "../hooks";
 
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
+  const { createProject } = useServices();
   const {
     showFullHeader,
     setShowFullHeader,
@@ -15,10 +17,12 @@ const HeaderComponent = (): JSX.Element => {
     setShowExportModal,
   } = useContext(MainContext);
 
-  const handleClick = (evt: React.MouseEvent) => {
+  const handleClick = async (evt: React.MouseEvent) => {
     evt.preventDefault();
     if (history.location.pathname === "/") {
-      localStorage.setItem("bom_demonstration_id", uuid());
+      const id = uuid();
+      localStorage.setItem("bom_demonstration_id", id);
+      await createProject({ id });
     }
     history.push("/diagram");
     setShowFullHeader(true);
