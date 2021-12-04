@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ReactChild } from "react";
+import React, { useState, useCallback } from "react";
 import { Edge, Elements } from "react-flow-renderer";
 
 import { getLayoutedElements } from "../utils";
@@ -22,7 +22,7 @@ type MainContextType = {
   closeEdgeModal: () => void;
 };
 
-type MainContextProviderType = { children: ReactChild };
+type MainContextProviderType = { children: React.ReactChild };
 
 export const MainContext = React.createContext({} as MainContextType);
 
@@ -30,12 +30,12 @@ export const MainContextProvider = ({
   children,
 }: MainContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
-  const [edge, setEdge] = useState<Edge>();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
+  const [edge, setEdge] = useState<Edge>();
 
   const closeEdgeModal = () => {
     setShowEdgeModal(false);

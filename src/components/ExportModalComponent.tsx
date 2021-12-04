@@ -5,42 +5,28 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 import { v4 as uuid } from "uuid";
 
-import { MainContext, NodeContext } from "../context";
+import { CustomNode, MainContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
-import { createEdges, updateEdges } from "../services";
-
-export type EdgesToSaveType = {
-  source: string;
-  target: string;
-  value: string;
-}[];
+import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { nodeById } = useContext(NodeContext);
   const edges = useStoreState((store) => store.edges);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const { showExportModal, setShowExportModal } = useContext(MainContext);
+  const { createProject, updateProject } = useServices();
 
   const [error, setError] = useState("");
-  const [id, setId] = useState(
-    () => localStorage.getItem("bom_demonstration_id") || ""
-  );
-
-  const edgesToSave = useMemo(() => {
-    return edges.map((edge) => {
-      const source = nodeById(edge.source)?.data.label;
-      const target = nodeById(edge.target)?.data.label;
-      return { source, target, value: edge.label as string };
-    });
-  }, [edges]);
+  const id = useMemo(() => {
+    return localStorage.getItem("bom_demonstration_id") || "";
+  }, [localStorage]);
 
   const generateID = async () => {
     try {
-      if (id) await updateEdges(id, edgesToSave);
+      if (id) await updateProject({ id, nodes, edges });
       else {
         const generated = uuid();
-        await createEdges(generated, edgesToSave);
-        setId(generated);
+        await createProject({ id: generated, nodes, edges });
         localStorage.setItem("bom_demonstration_id", generated);
       }
     } catch (err: any) {
@@ -61,15 +47,15 @@ const ExportModalComponent = (): JSX.Element | null => {
     linkElement.click();
   };
 
-  const exportCSVFile = () => {
-    const data = edgesToSave
-      .map((edge) => `${edge.source},${edge.target},${edge.value}\n`)
-      .join("");
-    generateFile(data, "csv");
-  };
+  // const exportCSVFile = () => {
+  //   const data = edgesToSave
+  //     .map((edge) => `${edge.source},${edge.target},${edge.value}\n`)
+  //     .join("");
+  //   generateFile(data, "csv");
+  // };
 
   const exportJSONFile = () => {
-    const data = JSON.stringify(edgesToSave);
+    const data = JSON.stringify({ id, nodes, edges });
     generateFile(data, "json");
   };
 
@@ -91,10 +77,10 @@ const ExportModalComponent = (): JSX.Element | null => {
       <iframe title="export" id="iframe" style={{ display: "none" }} />
       <div className="modal__buttons modal__buttons--row">
         <ButtonComponent translationKey="generateId" onClick={generateID} />
-        <ButtonComponent
+        {/* <ButtonComponent
           label={t("export", { file: "CSV" })}
           onClick={exportCSVFile}
-        />
+        /> */}
         <ButtonComponent
           label={t("export", { file: "JSON" })}
           onClick={exportJSONFile}

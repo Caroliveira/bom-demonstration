@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import { FaFileAlt } from "react-icons/fa";
 
 import { fileHandler } from "../utils";
+import { useServices } from "../hooks";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
-import { useServices } from "../hooks";
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -30,8 +30,10 @@ const ImportModalComponent = (): JSX.Element | null => {
 
   const handleIdClick = async () => {
     const status = await getProject(id);
-    if (status === 200) closeModal();
-    else setError(`error${status}`);
+    if (status === 200) {
+      closeModal();
+      localStorage.setItem("bom_demonstration_id", id);
+    } else setError(`error${status}`);
   };
 
   const handleIdChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,8 +46,7 @@ const ImportModalComponent = (): JSX.Element | null => {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         const result = loadEvent.target?.result as string;
-        const model = fileHandler(result, file.type);
-        if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
+        adjustLayout({ els: fileHandler(result, file.type) || [] });
       };
       reader.readAsText(file);
       closeModal();

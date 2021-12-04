@@ -1,29 +1,53 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { Edge } from "react-flow-renderer";
+import axios from "axios";
 
-import { fileHandler } from "../utils";
-import { MainContext } from "../context";
-import { getEdges } from "../services";
+import { CustomNode, MainContext } from "../context";
+
+export type ProjectType = {
+  id: string;
+  nodes: CustomNode[];
+  edges: Edge[];
+  conversionEdges?: Edge[];
+};
 
 export const useServices = () => {
   const history = useHistory();
   const { adjustLayout } = useContext(MainContext);
+  const base = "https://bom-demonstration-api.herokuapp.com";
 
   const getProject = async (id: string) => {
     try {
-      const { edges } = await getEdges(id);
-      if (edges) {
-        localStorage.setItem("bom_demonstration_id", id);
-        const model = fileHandler(JSON.stringify(edges), "application/json");
-        if (model) adjustLayout({ els: [...model.nodes, ...model.edges] });
+      const { data } = await axios.get(`${base}/projects/${id}`);
+      if (data) {
+        adjustLayout({ els: [...data.nodes, ...data.edges] });
         if (history.location.pathname !== "/diagram") history.push("/diagram");
         return 200;
       }
       return 404;
     } catch (err: any) {
-      return err?.statusCode || 500;
+      return err?.response?.status || 500;
     }
   };
 
-  return { getProject };
+  const createProject = async (project: ProjectType) => {
+    try {
+      const res = await axios.post(`${base}/projects`, project);
+      return res.data;
+    } catch (error: any) {
+      return error.response.status;
+    }
+  };
+
+  const updateProject = async ({ id, ...project }: ProjectType) => {
+    try {
+      const res = await axios.put(`${base}/projects/${id}`, project);
+      return res.data;
+    } catch (error: any) {
+      return error.response.status;
+    }
+  };
+
+  return { getProject, createProject, updateProject };
 };
