@@ -1,26 +1,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const SwitchLanguageComponent = (
-  props: React.SelectHTMLAttributes<HTMLSelectElement>
-): JSX.Element => {
+const SwitchLanguageComponent = (): JSX.Element => {
   const { t, i18n } = useTranslation();
+  const newLanguage = i18n.language === "en" ? "pt" : "en";
 
-  const handleChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
-    i18n.changeLanguage(evt.target.value);
+    i18n.changeLanguage(newLanguage);
   };
 
   return (
-    <select
-      aria-label={t("selectLanguage")}
-      onChange={handleChange}
-      value={i18n.language}
-      {...props}
+    <button
+      type="button"
+      title={t(i18n.language)}
+      className="icon-button icon-button__text"
+      onClick={handleClick}
     >
-      <option value="en">{t("english")}</option>
-      <option value="pt-BR">{t("portuguese")}</option>
-    </select>
+      {i18n.language}
+    </button>
   );
 };
 

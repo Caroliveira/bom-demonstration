@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { v4 as uuid } from "uuid";
 
 import { ButtonComponent } from "../components";
 import { MainContext } from "../context";
@@ -9,6 +10,13 @@ const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
   const { setShowImportModal } = useContext(MainContext);
+
+  const handleStartClick = () => {
+    if (history.location.pathname === "/") {
+      localStorage.setItem("bom_demonstration_id", uuid());
+    }
+    history.push("/diagram");
+  };
 
   return (
     <div className="home">
@@ -20,10 +28,7 @@ const HomeScreen = (): JSX.Element => {
           onClick={() => setShowImportModal(true)}
           style={{ marginRight: 32 }}
         />
-        <ButtonComponent
-          translationKey="start"
-          onClick={() => history.push("/diagram")}
-        />
+        <ButtonComponent translationKey="start" onClick={handleStartClick} />
       </div>
     </div>
   );

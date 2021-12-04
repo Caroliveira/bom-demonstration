@@ -40,4 +40,11 @@
     width: 100%;
     color: $NEUTRAL_COLOR;
   }
+
+  &__text {
+    color: $NEUTRAL_COLOR;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 20px;
+  }
 }
