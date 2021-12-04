@@ -64,17 +64,6 @@ const DiagramToolbarComponent = (): JSX.Element => {
           onClick={() => setShowNodeModal(true)}
           className="mr-2"
         />
-        <IconButtonComponent
-          Icon={FiUpload}
-          translationKey="loadProject"
-          onClick={() => setShowImportModal(true)}
-          className="mr-2"
-        />
-        <IconButtonComponent
-          Icon={FiSave}
-          translationKey="save"
-          onClick={() => setShowExportModal(true)}
-        />
       </div>
     </div>
   );

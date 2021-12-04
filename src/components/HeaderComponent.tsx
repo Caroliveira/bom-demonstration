@@ -2,16 +2,18 @@ import React, { useContext } from "react";
 import { FiSave, FiUpload } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import {
-  ButtonComponent,
-  IconButtonComponent,
-  SwitchLanguageComponent,
-} from ".";
+
+import { IconButtonComponent, SwitchLanguageComponent } from ".";
 import { MainContext } from "../context";
 
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
-  const { setShowImportModal, setShowExportModal } = useContext(MainContext);
+  const {
+    showFullHeader,
+    setShowFullHeader,
+    setShowImportModal,
+    setShowExportModal,
+  } = useContext(MainContext);
 
   const handleClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -19,6 +21,7 @@ const HeaderComponent = (): JSX.Element => {
       localStorage.setItem("bom_demonstration_id", uuid());
     }
     history.push("/diagram");
+    setShowFullHeader(true);
   };
 
   const renderFullHeader = () => (
@@ -45,7 +48,7 @@ const HeaderComponent = (): JSX.Element => {
           BOM - Bill Of Materials
         </a>
       </div>
-      {localStorage.getItem("bom_demonstration_id") && renderFullHeader()}
+      {showFullHeader && renderFullHeader()}
       <SwitchLanguageComponent />
     </header>
   );

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
@@ -9,13 +9,14 @@ import { MainContext } from "../context";
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { setShowImportModal } = useContext(MainContext);
+  const { setShowImportModal, setShowFullHeader } = useContext(MainContext);
 
   const handleStartClick = () => {
     if (history.location.pathname === "/") {
       localStorage.setItem("bom_demonstration_id", uuid());
     }
     history.push("/diagram");
+    setShowFullHeader(true);
   };
 
   return (

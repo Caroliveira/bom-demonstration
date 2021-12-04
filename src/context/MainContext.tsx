@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Edge, Elements } from "react-flow-renderer";
+import { useHistory } from "react-router-dom";
 
 import { getLayoutedElements } from "../utils";
 
@@ -19,6 +20,8 @@ type MainContextType = {
   setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
   setShowMiniMap: (show: boolean) => void;
+  showFullHeader: boolean;
+  setShowFullHeader: (show: boolean) => void;
   closeEdgeModal: () => void;
 };
 
@@ -33,6 +36,7 @@ export const MainContextProvider = ({
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
+  const [showFullHeader, setShowFullHeader] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
   const [edge, setEdge] = useState<Edge>();
@@ -73,6 +77,8 @@ export const MainContextProvider = ({
         showMiniMap,
         setShowMiniMap,
         closeEdgeModal,
+        showFullHeader,
+        setShowFullHeader,
       }}
     >
       {children}
