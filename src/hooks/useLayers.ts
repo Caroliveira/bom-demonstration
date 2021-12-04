@@ -1,43 +1,31 @@
-import React, { useState, useContext } from "react";
-import { useStoreState, Node } from "react-flow-renderer";
-import { NodeContext } from "../context";
-import { nodeById } from "../utils";
-
-export type CalculatedNode = { layer: number; amount: number } & Node;
+import React, { useContext } from "react";
+import { useStoreState } from "react-flow-renderer";
+import { CustomNode, MainContext, NodeContext } from "../context";
 
 export const useLayers = () => {
-  const { setLayer } = useContext(NodeContext);
-  const nodes = useStoreState((store) => store.nodes);
+  const { setElements } = useContext(MainContext);
+  const { nodeById } = useContext(NodeContext);
   const edges = useStoreState((store) => store.edges);
-  const [calculatedNodes, setCalculatedNodes] = useState<CalculatedNode[]>([]);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
 
   const calculateLayers = (
-    currentNodes: CalculatedNode[]
-  ): CalculatedNode[] => {
-    const nextNodes: CalculatedNode[] = [];
-    currentNodes.forEach((n) => {
-      const sourceEdges = edges.filter(({ target }) => target === n.id);
-      sourceEdges.forEach(({ source, label }) => {
-        const sourceNode = nodeById(nodes, source);
-        const amount = parseInt(label as string, 10);
-        if (sourceNode) {
-          const sourceCalculatedNode = { ...sourceNode, layer: 0, amount };
-          nextNodes.push(sourceCalculatedNode);
-        }
+    currentNodes: CustomNode[],
+    layer: number
+  ): CustomNode[] => {
+    const nextNodes: CustomNode[] = [];
+    currentNodes.forEach((node) => {
+      const targetEdges = edges.filter(({ source }) => source === node.id);
+      targetEdges.forEach(({ target }) => {
+        const targetNode = nodeById(target);
+        if (targetNode) nextNodes.push({ ...targetNode, layer });
       });
     });
 
     if (!nextNodes.length) return currentNodes;
-    const calculatedNextNodes = calculateLayers(nextNodes);
-    const currentLayer = calculatedNextNodes[0].layer + 1;
-    const calculateCurrentNodes = currentNodes.map((n) => {
-      return { ...n, layer: currentLayer };
-    });
-
-    return [...calculateCurrentNodes, ...calculatedNextNodes];
+    return [...currentNodes, ...calculateLayers(nextNodes, layer + 1)];
   };
 
-  const removeDuplicatedNodes = (duplicateds: CalculatedNode[]) => {
+  const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
     return duplicateds.reduce((acc, el) => {
       const index = acc.findIndex((subEl) => subEl.id === el.id);
       const { amount } = acc[index] || { amount: 0 };
@@ -52,19 +40,23 @@ export const useLayers = () => {
       }
 
       return addElement ? [...acc, { ...el, amount: amount + el.amount }] : acc;
-    }, [] as CalculatedNode[]);
+    }, [] as CustomNode[]);
   };
 
-  const calculateNodes = (node: Node) => {
-    const duplicateds = calculateLayers([{ ...node, layer: 0, amount: 0 }]);
+  const calculateNodesLayers = () => {
+    const rootNodes: CustomNode[] = [];
+    nodes.forEach((node) => {
+      if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);
+    });
+
+    const duplicateds = calculateLayers(rootNodes, 1);
     const calculateds = removeDuplicatedNodes(duplicateds);
-    setCalculatedNodes(calculateds);
-    return calculateds.find((n) => n.id === node.id)?.layer || 0;
+    setElements([...calculateds, ...edges]);
   };
 
-  const getCalculatedLayer = (layer: number) => {
-    return calculatedNodes.filter((n) => n.layer === layer);
+  const getNodesByLayer = (layer: number) => {
+    return nodes.filter((node) => node.layer === layer);
   };
 
-  return { getCalculatedLayer, calculateNodes };
+  return { getNodesByLayer, calculateNodesLayers };
 };

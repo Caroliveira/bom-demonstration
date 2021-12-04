@@ -5,8 +5,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 import { v4 as uuid } from "uuid";
 
-import { nodeById } from "../utils";
-import { MainContext } from "../context";
+import { MainContext, NodeContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
 import { createEdges, updateEdges } from "../services";
 
@@ -18,7 +17,7 @@ export type EdgesToSaveType = {
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const nodes = useStoreState((store) => store.nodes);
+  const { nodeById } = useContext(NodeContext);
   const edges = useStoreState((store) => store.edges);
   const { showExportModal, setShowExportModal } = useContext(MainContext);
 
@@ -29,8 +28,8 @@ const ExportModalComponent = (): JSX.Element | null => {
 
   const edgesToSave = useMemo(() => {
     return edges.map((edge) => {
-      const source = nodeById(nodes, edge.source)?.data.label;
-      const target = nodeById(nodes, edge.target)?.data.label;
+      const source = nodeById(edge.source)?.data.label;
+      const target = nodeById(edge.target)?.data.label;
       return { source, target, value: edge.label as string };
     });
   }, [edges]);

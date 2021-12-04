@@ -5,18 +5,18 @@ import { NodeContext } from "../context";
 
 const LayersCalculationComponent = (): JSX.Element => {
   const { t } = useTranslation();
-  const { layer, getCalculatedLayer } = useContext(NodeContext);
+  const { layer } = useContext(NodeContext);
   const [currentLayer, setCurrentLayer] = useState("");
 
-  const renderCalculation = () => {
-    const calculatedNodes = getCalculatedLayer(parseInt(currentLayer, 10));
-    if (!calculatedNodes.length) return <p>{t("noLayerSelected")}</p>;
-    return calculatedNodes.map((node) => (
-      <p key={node.id}>
-        {node.data.label}: {node.amount}
-      </p>
-    ));
-  };
+  // const renderCalculation = () => {
+  //   const calculatedNodes = getCalculatedLayer(parseInt(currentLayer, 10));
+  //   if (!calculatedNodes.length) return <p>{t("noLayerSelected")}</p>;
+  //   return calculatedNodes.map((node) => (
+  //     <p key={node.id}>
+  //       {node.data.label}: {node.amount}
+  //     </p>
+  //   ));
+  // };
 
   return (
     <div className="layers">
@@ -36,7 +36,7 @@ const LayersCalculationComponent = (): JSX.Element => {
           ))}
       </SelectInputComponent>
       <div style={{ flex: 1 }} />
-      <div className="layers__result">{renderCalculation()}</div>
+      {/* <div className="layers__result">{renderCalculation()}</div> */}
     </div>
   );
 };

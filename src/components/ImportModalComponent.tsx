@@ -6,7 +6,6 @@ import { FaFileAlt } from "react-icons/fa";
 import { fileHandler } from "../utils";
 import { MainContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
-import { getEdges } from "../services";
 import { useServices } from "../hooks";
 
 const ImportModalComponent = (): JSX.Element | null => {

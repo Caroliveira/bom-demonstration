@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Node } from "react-flow-renderer";
 
 import { ButtonComponent } from "../components";
+import { CustomNode } from "../context";
 
 type NodeDependenciesProps = {
-  dependencies: Node[];
+  dependencies: CustomNode[];
   type: "source" | "target";
 };
 

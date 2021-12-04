@@ -1,18 +1,22 @@
 import React, { useState, useEffect, ReactChild } from "react";
 import { Node, useStoreState } from "react-flow-renderer";
-import { CalculatedNode, useLayers } from "../hooks";
-import { nodeById } from "../utils";
+
+export type CustomNode = {
+  amount: number;
+  layer: number;
+  timer: number;
+} & Node;
 
 type NodeContextType = {
-  node?: Node;
-  setNode: (node?: Node) => void;
+  node?: CustomNode;
+  setNode: (node?: CustomNode) => void;
   layer: number;
   setLayer: (layer: number) => void;
-  sources: Node[];
-  targets: Node[];
+  sources: CustomNode[];
+  targets: CustomNode[];
   showNodeModal: boolean;
   setShowNodeModal: (show: boolean) => void;
-  getCalculatedLayer: (layer: number) => CalculatedNode[];
+  nodeById: (id?: string | null) => CustomNode | undefined;
 };
 
 type NodeContextProviderType = { children: ReactChild };
@@ -22,19 +26,23 @@ export const NodeContext = React.createContext({} as NodeContextType);
 export const NodeContextProvider = ({
   children,
 }: NodeContextProviderType): JSX.Element => {
-  const { calculateNodes, getCalculatedLayer } = useLayers();
-  const [node, setNode] = useState<Node>();
+  const [node, setNode] = useState<CustomNode>();
   const [layer, setLayer] = useState(0);
-  const [sources, setSources] = useState<Node[]>([]);
-  const [targets, setTargets] = useState<Node[]>([]);
+  const [sources, setSources] = useState<CustomNode[]>([]);
+  const [targets, setTargets] = useState<CustomNode[]>([]);
   const [showNodeModal, setShowNodeModal] = useState(false);
-  const nodes = useStoreState((store) => store.nodes);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
 
+  const nodeById = (id?: string | null) => {
+    if (!id) return undefined;
+    return nodes.find((n) => n.id === id);
+  };
+
   const getNodesById = (nodesId: string[]) => {
-    const nodesById: Node[] = [];
+    const nodesById: CustomNode[] = [];
     nodesId.forEach((id) => {
-      const nodeExist = nodeById(nodes, id);
+      const nodeExist = nodeById(id);
       if (nodeExist) nodesById.push(nodeExist);
     });
     return nodesById;
@@ -50,7 +58,6 @@ export const NodeContextProvider = ({
       });
       setSources(getNodesById(sourcesId));
       setTargets(getNodesById(targetsId));
-      setLayer(calculateNodes(node));
     }
   }, [node]);
 
@@ -65,7 +72,7 @@ export const NodeContextProvider = ({
         targets,
         showNodeModal,
         setShowNodeModal,
-        getCalculatedLayer,
+        nodeById,
       }}
     >
       {children}

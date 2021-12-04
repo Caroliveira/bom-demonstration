@@ -12,7 +12,6 @@ import {
   NodeDependenciesComponent,
   ScreensHeaderComponent,
 } from "../components";
-import { nodeById } from "../utils";
 import { NodeContext } from "../context";
 
 type RouteParams = { id: string };
@@ -22,14 +21,14 @@ const NodeScreen = ({
 }: RouteComponentProps<RouteParams>): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { setShowNodeModal, node, setNode, layer, sources, targets } =
+  const { setShowNodeModal, node, setNode, layer, sources, targets, nodeById } =
     useContext(NodeContext);
   const nodes = useStoreState((store) => store.nodes);
 
   useEffect(() => {
     const { id } = match.params;
     if (!node || node.id !== id) {
-      const nodeExists = nodeById(nodes, id);
+      const nodeExists = nodeById(id);
       if (nodeExists) setNode(nodeExists);
       else history.push("/not-found");
     }

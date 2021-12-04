@@ -1,18 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useStoreState, removeElements, isNode } from "react-flow-renderer";
+import { useStoreState, removeElements, isEdge } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
-
 import { CgTrash } from "react-icons/cg";
-import { MainContext, NodeContext } from "../context";
+import { v4 as uuid } from "uuid";
+
+import { CustomNode, MainContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
-import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const { elements, setElements } = useContext(MainContext);
   const { node, setNode, showNodeModal, setShowNodeModal } =
     useContext(NodeContext);
   const history = useHistory();
-  const nodes = useStoreState((store) => store.nodes);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
 
   const [name, setName] = useState("");
@@ -40,12 +40,24 @@ const NodeModalComponent = (): JSX.Element | null => {
   const handleUpdate = () => {
     return elements.map((element) => {
       const el = element;
-      if (isNode(el) && el.id === node?.id) {
+      if (!isEdge(el) && el.id === node?.id) {
         el.data = { ...el.data, label: name };
-        setNode(el);
+        setNode(el as CustomNode);
       }
       return el;
     });
+  };
+
+  const nodeMounter = (label: string): CustomNode => {
+    return {
+      id: uuid(),
+      type: "default",
+      data: { label },
+      position: { x: 0, y: 0 },
+      amount: 0,
+      layer: 0,
+      timer: 0,
+    };
   };
 
   const handleSave = () => {
