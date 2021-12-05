@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaMap, FaRegMap } from "react-icons/fa";
-import { FiPlus, FiSave, FiUpload } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from ".";
-import { MainContext, NodeContext } from "../context";
+import { MainContext } from "../context";
 
 const layout = {
   TB: { Icon: CgMoveDown, label: "Vertical" },
@@ -16,14 +16,12 @@ const layout = {
 const DiagramToolbarComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
-  const { setShowNodeModal } = useContext(NodeContext);
   const {
     elements,
-    adjustLayout,
-    setShowImportModal,
-    setShowExportModal,
     showMiniMap,
+    adjustLayout,
     setShowMiniMap,
+    setShowNodeModal,
   } = useContext(MainContext);
   const history = useHistory();
 

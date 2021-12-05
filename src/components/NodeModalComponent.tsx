@@ -9,10 +9,11 @@ import { InputComponent, ModalComponent } from ".";
 import { calculateNodesLayers } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
-  const { elements, setElements } = useContext(MainContext);
-  const { node, setNode, showNodeModal, setShowNodeModal } =
-    useContext(NodeContext);
   const history = useHistory();
+  const { node, setNode } = useContext(NodeContext);
+  const { elements, setElements, showNodeModal, setShowNodeModal } =
+    useContext(MainContext);
+
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
 

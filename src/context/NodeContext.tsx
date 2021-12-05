@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactChild } from "react";
 import { Node, useStoreState } from "react-flow-renderer";
+import { nodeArrayById } from "../utils";
 
 export type CustomNode = {
   amount: number;
@@ -14,9 +15,6 @@ type NodeContextType = {
   setLayer: (layer: number) => void;
   sources: CustomNode[];
   targets: CustomNode[];
-  showNodeModal: boolean;
-  setShowNodeModal: (show: boolean) => void;
-  nodeById: (id?: string | null) => CustomNode | undefined;
 };
 
 type NodeContextProviderType = { children: ReactChild };
@@ -30,23 +28,8 @@ export const NodeContextProvider = ({
   const [layer, setLayer] = useState(0);
   const [sources, setSources] = useState<CustomNode[]>([]);
   const [targets, setTargets] = useState<CustomNode[]>([]);
-  const [showNodeModal, setShowNodeModal] = useState(false);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
-
-  const nodeById = (id?: string | null) => {
-    if (!id) return undefined;
-    return nodes.find((n) => n.id === id);
-  };
-
-  const getNodesById = (nodesId: string[]) => {
-    const nodesById: CustomNode[] = [];
-    nodesId.forEach((id) => {
-      const nodeExist = nodeById(id);
-      if (nodeExist) nodesById.push(nodeExist);
-    });
-    return nodesById;
-  };
 
   useEffect(() => {
     if (node) {
@@ -56,8 +39,8 @@ export const NodeContextProvider = ({
         if (source === node.id) targetsId.push(target);
         if (target === node.id) sourcesId.push(source);
       });
-      setSources(getNodesById(sourcesId));
-      setTargets(getNodesById(targetsId));
+      setSources(nodeArrayById(nodes, sourcesId));
+      setTargets(nodeArrayById(nodes, targetsId));
     }
   }, [node]);
 
@@ -70,9 +53,6 @@ export const NodeContextProvider = ({
         setLayer,
         sources,
         targets,
-        showNodeModal,
-        setShowNodeModal,
-        nodeById,
       }}
     >
       {children}

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory, RouteComponentProps } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 import { FiEdit } from "react-icons/fi";
 import { GiBottomRight3DArrow } from "react-icons/gi";
-import { useStoreState } from "react-flow-renderer";
 
+import { useStoreState } from "react-flow-renderer";
 import {
   AccordionComponent,
   IconButtonComponent,
@@ -12,7 +13,13 @@ import {
   NodeDependenciesComponent,
   ScreensHeaderComponent,
 } from "../components";
-import { NodeContext } from "../context";
+import {
+  CustomNode,
+  MainContext,
+  NodeContext,
+  NodeContextProvider,
+} from "../context";
+import { nodeById } from "../utils";
 
 type RouteParams = { id: string };
 
@@ -21,14 +28,14 @@ const NodeScreen = ({
 }: RouteComponentProps<RouteParams>): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { setShowNodeModal, node, setNode, layer, sources, targets, nodeById } =
-    useContext(NodeContext);
-  const nodes = useStoreState((store) => store.nodes);
+  const { setShowNodeModal } = useContext(MainContext);
+  const { node, setNode, sources, targets } = useContext(NodeContext);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
 
   useEffect(() => {
     const { id } = match.params;
     if (!node || node.id !== id) {
-      const nodeExists = nodeById(id);
+      const nodeExists = nodeById(nodes, id);
       if (nodeExists) setNode(nodeExists);
       else history.push("/not-found");
     }
@@ -55,7 +62,7 @@ const NodeScreen = ({
         <h2 className="node__label">
           {node?.data.label}
           <span className="node__layer">
-            {t("layer")} {layer + 1}
+            {t("layer")} {node && node.layer + 1}
           </span>
         </h2>
         <GiBottomRight3DArrow className="node__arrow" />
@@ -63,7 +70,7 @@ const NodeScreen = ({
       </div>
 
       {/* TO DO: think of better name */}
-      {layer !== 0 && (
+      {node && node.layer !== 0 && (
         <AccordionComponent translationKey="layersCalculation">
           <LayersCalculationComponent />
         </AccordionComponent>
@@ -78,4 +85,10 @@ const NodeScreen = ({
   );
 };
 
-export default NodeScreen;
+const ConnectedNodeScreen = (props: RouteComponentProps<RouteParams>) => (
+  <NodeContextProvider>
+    <NodeScreen {...props} />
+  </NodeContextProvider>
+);
+
+export default ConnectedNodeScreen;

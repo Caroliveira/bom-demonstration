@@ -17,6 +17,8 @@ type MainContextType = {
   setShowImportModal: (showImportModal: boolean) => void;
   showExportModal: boolean;
   setShowExportModal: (showExportModal: boolean) => void;
+  showNodeModal: boolean;
+  setShowNodeModal: (show: boolean) => void;
   showEdgeModal: boolean;
   setShowEdgeModal: (show: boolean) => void;
   showMiniMap: boolean;
@@ -39,6 +41,7 @@ export const MainContextProvider = ({
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showFullHeader, setShowFullHeader] = useState(false);
+  const [showNodeModal, setShowNodeModal] = useState(false);
   const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
   const [edge, setEdge] = useState<Edge>();
@@ -76,6 +79,8 @@ export const MainContextProvider = ({
         setShowImportModal,
         showExportModal,
         setShowExportModal,
+        showNodeModal,
+        setShowNodeModal,
         showEdgeModal,
         setShowEdgeModal,
         showMiniMap,

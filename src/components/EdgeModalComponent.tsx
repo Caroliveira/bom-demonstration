@@ -9,14 +9,14 @@ import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from ".";
-import { MainContext, NodeContext } from "../context";
-import { calculateNodesLayers } from "../utils";
+import { CustomNode, MainContext } from "../context";
+import { calculateNodesLayers, nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { edge, elements, setElements, showEdgeModal, closeEdgeModal } =
     useContext(MainContext);
-  const { nodeById } = useContext(NodeContext);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
@@ -28,8 +28,8 @@ const EdgeModalComponent = (): JSX.Element | null => {
   useEffect(() => {
     if (edge) {
       const fullEdge = edges.find(({ id }) => id === edge?.id) || edge;
-      setSource(nodeById(fullEdge.source)?.data.label);
-      setTarget(nodeById(fullEdge.target)?.data.label);
+      setSource(nodeById(nodes, fullEdge.source)?.data.label);
+      setTarget(nodeById(nodes, fullEdge.target)?.data.label);
       setAmount((fullEdge.label as string) || "");
       setCurrentEdge(fullEdge);
     }

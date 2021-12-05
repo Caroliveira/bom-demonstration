@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { ButtonComponent, IconButtonComponent } from ".";
+import { colors } from "../utils";
 import { ButtonProps } from "./ButtonComponent";
 import { IconButtonProps } from "./IconButtonComponent";
 
@@ -41,7 +42,7 @@ const ModalComponent = ({
           {deleteButton && (
             <IconButtonComponent
               className="modal__icon"
-              iconProps={{ color: "#821d1d" }}
+              iconProps={{ color: colors.error }}
               {...deleteButton}
             />
           )}
