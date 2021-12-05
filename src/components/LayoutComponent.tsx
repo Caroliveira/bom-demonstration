@@ -18,8 +18,8 @@ type LayoutProps = {
 
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   const history = useHistory();
-  const { getProject } = useServices();
-  const { elements } = useContext(ProjectContext);
+  const { elements, setLoadingGet } = useContext(ProjectContext);
+  const { getProject } = useServices(setLoadingGet);
 
   useEffect(() => {
     const verifyId = async () => {

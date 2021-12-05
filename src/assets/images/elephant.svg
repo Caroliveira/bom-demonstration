@@ -1,6 +1,6 @@
-<svg viewBox="0 0 210 210">
-  <polyline class="ear" stroke-width="6" fill="none" points="100,10 80,2 50,2 2,30 2,70 30,100 60,110 70,130 80,140 100,130" />
-  <polyline class="tusk" stroke-width="6" fill="none" points="100,8 100,130 200,130" />
-  <line class="eye" x1="120" y1="80" x2="130" y2="80" stroke-width="6" />
-  <path class="trunk" stroke-width="6" fill="none" d="M 100 10 q 40 10 60 80 q 10 50 -10 90 q -15 25 -40 20 q -15 -5 -15 -20 q 5 -15 20 -10" />
+<svg viewBox="0 0 210 210" stroke-width="6"  fill="none">
+  <polyline class="ear" points="100,10 80,2 50,2 2,30 2,70 30,100 60,110 70,130 80,140 100,130" />
+  <polyline class="tusk" points="100,8 100,130 200,130" />
+  <line class="eye" x1="120" y1="80" x2="130" y2="80" />
+  <path class="trunk"  d="M 100 10 q 40 10 60 80 q 10 50 -10 90 q -15 25 -40 20 q -15 -5 -15 -20 q 5 -15 20 -10" />
 </svg>

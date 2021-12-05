@@ -13,12 +13,14 @@
       rgba($NEUTRAL_COLOR, 0.1);
   }
   &__alert {
+    position: absolute;
     color: $NEUTRAL_COLOR;
     text-transform: uppercase;
-    position: absolute;
-    padding: 30px 100px;
-    border-radius: 8px;
-    border: 2px solid darken($ALERT_COLOR, 25%);
-    background-color: darken($ALERT_COLOR, 15%);
+    &--backgroud {
+      padding: 30px 100px;
+      border-radius: 8px;
+      border: 2px solid darken($ALERT_COLOR, 25%);
+      background-color: darken($ALERT_COLOR, 15%);
+    }
   }
 }

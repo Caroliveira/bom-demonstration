@@ -11,10 +11,10 @@ import { InputComponent, ModalComponent, SelectInputComponent } from ".";
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { getProject } = useServices();
-  const { showImportModal, setShowImportModal, adjustLayout } =
+  const { showImportModal, setShowImportModal, adjustLayout, setLoadingGet } =
     useContext(ProjectContext);
 
+  const { getProject } = useServices(setLoadingGet);
   const [id, setId] = useState("");
   const [type, setType] = useState("");
   const [error, setError] = useState("");

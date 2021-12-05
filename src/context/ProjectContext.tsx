@@ -19,6 +19,10 @@ type ProjectContextType = {
   setShowNodeModal: (show: boolean) => void;
   showFullHeader: boolean;
   setShowFullHeader: (show: boolean) => void;
+  loadingGet: boolean;
+  setLoadingGet: (show: boolean) => void;
+  loadingSet: boolean;
+  setLoadingSet: (show: boolean) => void;
 };
 
 type ProjectContextProviderType = { children: React.ReactChild };
@@ -35,6 +39,8 @@ export const ProjectContextProvider = ({
   const [showExportModal, setShowExportModal] = useState(false);
   const [showFullHeader, setShowFullHeader] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
+  const [loadingGet, setLoadingGet] = useState(false);
+  const [loadingSet, setLoadingSet] = useState(false);
 
   const adjustLayout = useCallback(
     (params: AdjustLayoutParams) => {
@@ -66,6 +72,10 @@ export const ProjectContextProvider = ({
         setShowNodeModal,
         showFullHeader,
         setShowFullHeader,
+        loadingGet,
+        setLoadingGet,
+        loadingSet,
+        setLoadingSet,
       }}
     >
       {children}

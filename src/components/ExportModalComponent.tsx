@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "react-flow-renderer";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -10,15 +10,22 @@ import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { updateProject } = useServices();
-  const { showExportModal, setShowExportModal, conversionEdges } =
-    useContext(ProjectContext);
+  const [showModal, setShowModal] = useState(false);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
   const id = localStorage.getItem("bom_demonstration_id") || "";
 
+  const {
+    showExportModal,
+    setShowExportModal,
+    conversionEdges,
+    setLoadingSet,
+  } = useContext(ProjectContext);
+  const { updateProject } = useServices(setLoadingSet);
+
   const update = async () => {
     await updateProject({ id, nodes, edges, conversionEdges });
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -50,19 +57,20 @@ const ExportModalComponent = (): JSX.Element | null => {
     generateFile(data, "json");
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    setShowExportModal(false);
+  };
+
   return (
     <ModalComponent
-      show={showExportModal}
+      show={showModal}
       title="exportTitle"
-      deleteButton={{
-        Icon: AiOutlineCloseCircle,
-        onClick: () => setShowExportModal(false),
-      }}
+      deleteButton={{ Icon: AiOutlineCloseCircle, onClick: closeModal }}
     >
       {id && (
         <p className="modal__file-name">
-          <FaKey className="modal__file-icon" />
-          {id}
+          <FaKey className="modal__file-icon" /> {id}
         </p>
       )}
       <iframe title="export" id="iframe" style={{ display: "none" }} />

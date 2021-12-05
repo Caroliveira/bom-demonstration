@@ -10,8 +10,8 @@ import { useServices } from "../hooks";
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { createProject, getProject } = useServices();
-  const { setShowImportModal } = useContext(ProjectContext);
+  const { setShowImportModal, setLoadingGet } = useContext(ProjectContext);
+  const { createProject, getProject } = useServices(setLoadingGet);
 
   useEffect(() => {
     const loadProject = async (identifier: string) => {

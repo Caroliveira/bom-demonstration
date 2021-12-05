@@ -14,50 +14,60 @@ export type ProjectType = {
 
 axios.defaults.headers.common = { Accept: "application/json" };
 
-export const useServices = () => {
+export const useServices = (customSetLoading?: (loading: boolean) => void) => {
   const history = useHistory();
   const { adjustLayout } = useContext(ProjectContext);
   const base = "https://bom-demonstration-api.herokuapp.com";
   const [loading, setLoading] = useState(false);
 
+  const startLoading = () => {
+    if (customSetLoading) customSetLoading(true);
+    else setLoading(true);
+  };
+
+  const stopLoading = () => {
+    if (customSetLoading) customSetLoading(false);
+    else setLoading(false);
+  };
+
   const getProject = async (id: string) => {
-    setLoading(true);
+    startLoading();
     try {
       const { data } = await axios.get(`${base}/projects/${id}`);
       if (data) {
         adjustLayout({ els: [...data.nodes, ...data.edges] });
         if (history.location.pathname !== "/diagram") history.push("/diagram");
-        setLoading(false);
+        stopLoading();
         return 200;
       }
-      setLoading(false);
+      stopLoading();
       return 404;
     } catch (err: any) {
-      setLoading(false);
+      stopLoading();
       return err?.response?.status || 500;
     }
   };
 
   const createProject = async (project: Partial<ProjectType>) => {
-    setLoading(true);
+    startLoading();
     try {
       const res = await axios.post(`${base}/projects`, project);
-      setLoading(false);
+      stopLoading();
       return res.data;
     } catch (error: any) {
-      setLoading(false);
+      stopLoading();
       return error.response.status;
     }
   };
 
   const updateProject = async ({ id, ...project }: ProjectType) => {
-    setLoading(true);
+    startLoading();
     try {
       const res = await axios.put(`${base}/projects/${id}`, project);
-      setLoading(false);
+      stopLoading();
       return res.data;
     } catch (error: any) {
-      setLoading(false);
+      stopLoading();
       return error;
     }
   };

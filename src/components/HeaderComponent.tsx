@@ -10,7 +10,7 @@ import { useServices } from "../hooks";
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
   const { createProject } = useServices();
-  const { showFullHeader, setShowImportModal, setShowExportModal } =
+  const { showFullHeader, setShowImportModal, setShowExportModal, loadingSet } =
     useContext(ProjectContext);
 
   const handleClick = async (evt: React.MouseEvent) => {
@@ -35,6 +35,7 @@ const HeaderComponent = (): JSX.Element => {
         Icon={FiSave}
         translationKey="save"
         onClick={() => setShowExportModal(true)}
+        loading={loadingSet}
         className="mr-2"
       />
     </>

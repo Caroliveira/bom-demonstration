@@ -23,7 +23,7 @@ import { DiagramToolbarComponent, EdgeModalComponent } from "../components";
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { elements, setElements, setShowFullHeader } =
+  const { elements, setElements, setShowFullHeader, loadingGet } =
     useContext(ProjectContext);
   const { setEdge, showMiniMap, setShowEdgeModal } = useContext(DiagramContext);
 
@@ -52,17 +52,18 @@ const DiagramScreen = (): JSX.Element => {
     <>
       <DiagramToolbarComponent />
       <div className="diagram__graph">
-        {!elements && (
+        {loadingGet && (
           <Elephant
-            width={80}
-            height={80}
+            width={120}
+            height={120}
             stroke={colors.alert}
-            style={{ marginTop: 100 }}
-            className="loading"
+            className="diagram__alert"
           />
         )}
-        {!elements.length && (
-          <span className="diagram__alert">{t("noData")}</span>
+        {!loadingGet && !elements.length && (
+          <span className="diagram__alert diagram__alert--background">
+            {t("noData")}
+          </span>
         )}
         <ReactFlow
           elements={elements}
