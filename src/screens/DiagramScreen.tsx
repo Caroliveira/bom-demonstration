@@ -13,6 +13,7 @@ import ReactFlow, {
 
 import { DiagramToolbarComponent } from "../components";
 import { MainContext } from "../context";
+import { calculateNodesLayers } from "../utils";
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
@@ -29,11 +30,13 @@ const DiagramScreen = (): JSX.Element => {
   useEffect(() => setShowFullHeader(true), []);
 
   const onConnect = (params: Edge | Connection) => {
-    setElements(addEdge({ ...params, label: 1 }, elements));
+    const auxElements = addEdge({ ...params, label: 1 }, elements);
+    setElements(calculateNodesLayers(auxElements));
   };
 
   const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
-    setElements(updateEdge(oldEdge, newConnection, elements));
+    const auxElements = updateEdge(oldEdge, newConnection, elements);
+    setElements(calculateNodesLayers(auxElements));
   };
 
   const onNodeDoubleClick = (evt: React.MouseEvent, node: Node) => {

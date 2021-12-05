@@ -1,5 +1,14 @@
-import { Edge } from "react-flow-renderer";
+import { Edge, Elements, isEdge } from "react-flow-renderer";
 import { CustomNode } from "../context";
+
+const defineEdgesAndNodes = (elements: Elements) => {
+  const nodes: CustomNode[] = [];
+  const edges: Edge[] = [];
+  elements.forEach((el) =>
+    isEdge(el) ? edges.push(el) : nodes.push(el as CustomNode)
+  );
+  return { nodes, edges };
+};
 
 const calculateLayers = (
   currentNodes: CustomNode[],
@@ -37,7 +46,9 @@ const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
   }, [] as CustomNode[]);
 };
 
-export const calculateNodesLayers = (nodes: CustomNode[], edges: Edge[]) => {
+export const calculateNodesLayers = (elements: Elements) => {
+  const { nodes, edges } = defineEdgesAndNodes(elements);
+
   const rootNodes: CustomNode[] = [];
   nodes.forEach((node) => {
     if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);

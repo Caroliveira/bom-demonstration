@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 
 import { CustomNode, MainContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
+import { calculateNodesLayers } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const { elements, setElements } = useContext(MainContext);
@@ -32,7 +33,9 @@ const NodeModalComponent = (): JSX.Element | null => {
       return edge.source === node.id || edge.target === node.id;
     });
     const elementsToDelete = [node, ...edgesToDelete];
-    setElements(removeElements(elementsToDelete, elements));
+
+    const auxElements = removeElements(elementsToDelete, elements);
+    setElements(calculateNodesLayers(auxElements));
     history.push("/diagram");
     close();
   };
