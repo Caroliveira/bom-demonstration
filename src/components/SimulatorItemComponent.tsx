@@ -1,34 +1,29 @@
-import React, { useState, useContext } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useMemo } from "react";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
-import { SimulatorContext, SimulatorNodeType } from "../context";
 import { IconButtonComponent } from ".";
+import { CustomNode } from "../context";
+import { useSimulation } from "../hooks";
 
 type SimulatorItemProps = {
-  node: SimulatorNodeType;
+  node: CustomNode;
 };
 
 const SimulatorItemComponent = ({
   node,
 }: SimulatorItemProps): JSX.Element | null => {
-  const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(false);
-  const { layers, setLayers, allowForcedOperations } =
-    useContext(SimulatorContext);
-  const isDisabled = !node.available && !allowForcedOperations;
+  const { allowForcedOperations, isAvailable } = useSimulation();
+  const available = useMemo(() => isAvailable(node), [node]);
+  const isDisabled = !available && !allowForcedOperations;
 
   const handleClick = () => setShowInfo(!showInfo);
 
   const changeNodeAmount = (type: "add" | "subtract") => {
     if (!node) return;
-
     const item = node;
-    const itemList = [...layers];
-
     if (type === "add") item.amount += 1;
     else item.amount -= 1;
-    setLayers(itemList);
   };
 
   const renderItemInfo = () => (
@@ -60,9 +55,7 @@ const SimulatorItemComponent = ({
 
   return (
     <li
-      className={`simulator-item ${
-        !node.available && "simulator-item--disabled"
-      }`}
+      className={`simulator-item ${!available && "simulator-item--disabled"}`}
     >
       <div
         className="simulator-item__button"

@@ -293,7 +293,7 @@
         "y": 258
       },
       "amount": 0,
-      "layer": 2,
+      "layer": 3,
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
