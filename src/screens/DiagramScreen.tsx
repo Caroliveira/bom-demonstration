@@ -1,4 +1,4 @@
-import React, { useContext, MouseEvent } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import ReactFlow, {
@@ -17,8 +17,16 @@ import { MainContext } from "../context";
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { elements, setElements, setEdge, showMiniMap, setShowEdgeModal } =
-    useContext(MainContext);
+  const {
+    elements,
+    setElements,
+    setEdge,
+    showMiniMap,
+    setShowEdgeModal,
+    setShowFullHeader,
+  } = useContext(MainContext);
+
+  useEffect(() => setShowFullHeader(true), []);
 
   const onConnect = (params: Edge | Connection) => {
     setElements(addEdge({ ...params, label: 1 }, elements));
@@ -28,11 +36,11 @@ const DiagramScreen = (): JSX.Element => {
     setElements(updateEdge(oldEdge, newConnection, elements));
   };
 
-  const onNodeDoubleClick = (evt: MouseEvent, node: Node) => {
+  const onNodeDoubleClick = (evt: React.MouseEvent, node: Node) => {
     history.push(`/node/${node.id}`);
   };
 
-  const onEdgeDoubleClick = (evt: MouseEvent, edge: Edge) => {
+  const onEdgeDoubleClick = (evt: React.MouseEvent, edge: Edge) => {
     setEdge(edge);
     setShowEdgeModal(true);
   };

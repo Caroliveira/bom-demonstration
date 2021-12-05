@@ -10,12 +10,8 @@ import { useServices } from "../hooks";
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
   const { createProject } = useServices();
-  const {
-    showFullHeader,
-    setShowFullHeader,
-    setShowImportModal,
-    setShowExportModal,
-  } = useContext(MainContext);
+  const { showFullHeader, setShowImportModal, setShowExportModal } =
+    useContext(MainContext);
 
   const handleClick = async (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -25,7 +21,6 @@ const HeaderComponent = (): JSX.Element => {
       await createProject({ id });
     }
     history.push("/diagram");
-    setShowFullHeader(true);
   };
 
   const renderFullHeader = () => (

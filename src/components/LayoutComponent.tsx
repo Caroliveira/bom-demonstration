@@ -20,14 +20,13 @@ type LayoutProps = {
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   const history = useHistory();
   const { getProject } = useServices();
-  const { elements, setShowFullHeader } = useContext(MainContext);
+  const { elements } = useContext(MainContext);
 
   useEffect(() => {
     const verifyId = async () => {
       const id = localStorage.getItem("bom_demonstration_id");
       if (!id) localStorage.setItem("bom_demonstration_id", uuid());
       else if (!elements.length) await getProject(id);
-      setShowFullHeader(true);
     };
 
     if (history.location.pathname !== "/") verifyId();

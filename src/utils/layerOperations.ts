@@ -1,4 +1,3 @@
-import React from "react";
 import { Edge } from "react-flow-renderer";
 import { CustomNode } from "../context";
 
@@ -27,18 +26,14 @@ const calculateLayers = (
 const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
   return duplicateds.reduce((acc, el) => {
     const index = acc.findIndex((subEl) => subEl.id === el.id);
-    const { amount } = acc[index] || { amount: 0 };
     let addElement = true;
 
     if (index > -1) {
-      if (acc[index].layer > el.layer) acc.splice(index, 1);
-      else {
-        addElement = false;
-        acc[index].amount += el.amount;
-      }
+      if (acc[index].layer < el.layer) acc.splice(index, 1);
+      else addElement = false;
     }
 
-    return addElement ? [...acc, { ...el, amount: amount + el.amount }] : acc;
+    return addElement ? [...acc, el] : acc;
   }, [] as CustomNode[]);
 };
 

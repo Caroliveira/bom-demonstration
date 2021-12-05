@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
@@ -10,8 +10,16 @@ import { useServices } from "../hooks";
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { createProject } = useServices();
-  const { setShowImportModal, setShowFullHeader } = useContext(MainContext);
+  const { createProject, getProject } = useServices();
+  const { setShowImportModal } = useContext(MainContext);
+
+  useEffect(() => {
+    const loadProject = async (identifier: string) => {
+      await getProject(identifier);
+    };
+    const id = localStorage.getItem("bom_demonstration_id");
+    if (id) loadProject(id);
+  }, []);
 
   const handleStartClick = async () => {
     if (history.location.pathname === "/") {
@@ -19,7 +27,6 @@ const HomeScreen = (): JSX.Element => {
       localStorage.setItem("bom_demonstration_id", id);
       await createProject({ id });
     }
-    setShowFullHeader(true);
     history.push("/diagram");
   };
 

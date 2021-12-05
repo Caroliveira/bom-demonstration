@@ -18,8 +18,7 @@ const ExportModalComponent = (): JSX.Element | null => {
   const id = localStorage.getItem("bom_demonstration_id") || "";
 
   const update = async () => {
-    const res = await updateProject({ id, nodes, edges, conversionEdges });
-    console.log(res);
+    await updateProject({ id, nodes, edges, conversionEdges });
   };
 
   useEffect(() => {
