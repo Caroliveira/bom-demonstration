@@ -15,7 +15,7 @@ import {
 } from "../components";
 import {
   CustomNode,
-  MainContext,
+  ProjectContext,
   NodeContext,
   NodeContextProvider,
 } from "../context";
@@ -28,7 +28,7 @@ const NodeScreen = ({
 }: RouteComponentProps<RouteParams>): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { setShowNodeModal } = useContext(MainContext);
+  const { setShowNodeModal } = useContext(ProjectContext);
   const { node, setNode, sources, targets } = useContext(NodeContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
 

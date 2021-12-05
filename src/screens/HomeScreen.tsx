@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 
 import { ButtonComponent } from "../components";
-import { MainContext } from "../context";
+import { ProjectContext } from "../context";
 import { useServices } from "../hooks";
 
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
   const { createProject, getProject } = useServices();
-  const { setShowImportModal } = useContext(MainContext);
+  const { setShowImportModal } = useContext(ProjectContext);
 
   useEffect(() => {
     const loadProject = async (identifier: string) => {

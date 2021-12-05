@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
 }
 
 #root {
@@ -19,4 +19,36 @@ select {
 
 .mr-2 {
   margin-right: 8px;
+}
+
+.loading {
+  stroke-dasharray: 1000;
+
+  .eye {
+    animation: dash 3s linear infinite alternate;
+    animation-delay: 2s;
+  }
+
+  .trunk {
+    animation: dash 3s linear infinite alternate;
+    animation-delay: 1s;
+  }
+
+  .ear {
+    animation: dash 2s linear infinite alternate;
+  }
+
+  .tusk {
+    animation: dash 3s linear infinite alternate;
+    animation-delay: 2s;
+  }
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 2500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }

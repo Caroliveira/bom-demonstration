@@ -4,14 +4,14 @@ import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
 import { IconButtonComponent, SwitchLanguageComponent } from ".";
-import { MainContext } from "../context";
+import { ProjectContext } from "../context";
 import { useServices } from "../hooks";
 
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
   const { createProject } = useServices();
   const { showFullHeader, setShowImportModal, setShowExportModal } =
-    useContext(MainContext);
+    useContext(ProjectContext);
 
   const handleClick = async (evt: React.MouseEvent) => {
     evt.preventDefault();

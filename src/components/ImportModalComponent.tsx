@@ -5,7 +5,7 @@ import { FaFileAlt } from "react-icons/fa";
 
 import { fileHandler } from "../utils";
 import { useServices } from "../hooks";
-import { MainContext } from "../context";
+import { ProjectContext } from "../context";
 import { InputComponent, ModalComponent, SelectInputComponent } from ".";
 
 const ImportModalComponent = (): JSX.Element | null => {
@@ -13,7 +13,7 @@ const ImportModalComponent = (): JSX.Element | null => {
   const history = useHistory();
   const { getProject } = useServices();
   const { showImportModal, setShowImportModal, adjustLayout } =
-    useContext(MainContext);
+    useContext(ProjectContext);
 
   const [id, setId] = useState("");
   const [type, setType] = useState("");

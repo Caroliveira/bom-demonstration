@@ -11,21 +11,21 @@ import ReactFlow, {
   updateEdge,
 } from "react-flow-renderer";
 
-import { DiagramToolbarComponent } from "../components";
-import { MainContext } from "../context";
-import { calculateNodesLayers } from "../utils";
+import {
+  DiagramContext,
+  DiagramContextProvider,
+  ProjectContext,
+} from "../context";
+import { calculateNodesLayers, colors } from "../utils";
+import { ReactComponent as Elephant } from "../assets/images/elephant.svg";
+import { DiagramToolbarComponent, EdgeModalComponent } from "../components";
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const {
-    elements,
-    setElements,
-    setEdge,
-    showMiniMap,
-    setShowEdgeModal,
-    setShowFullHeader,
-  } = useContext(MainContext);
+  const { elements, setElements, setShowFullHeader } =
+    useContext(ProjectContext);
+  const { setEdge, showMiniMap, setShowEdgeModal } = useContext(DiagramContext);
 
   useEffect(() => setShowFullHeader(true), []);
 
@@ -52,6 +52,15 @@ const DiagramScreen = (): JSX.Element => {
     <>
       <DiagramToolbarComponent />
       <div className="diagram__graph">
+        {!elements && (
+          <Elephant
+            width={80}
+            height={80}
+            stroke={colors.alert}
+            style={{ marginTop: 100 }}
+            className="loading"
+          />
+        )}
         {!elements.length && (
           <span className="diagram__alert">{t("noData")}</span>
         )}
@@ -66,8 +75,15 @@ const DiagramScreen = (): JSX.Element => {
           {showMiniMap && <MiniMap nodeColor="black" maskColor="#000A" />}
         </ReactFlow>
       </div>
+      <EdgeModalComponent />
     </>
   );
 };
 
-export default DiagramScreen;
+const ConnectedDiagramScreen = () => (
+  <DiagramContextProvider>
+    <DiagramScreen />
+  </DiagramContextProvider>
+);
+
+export default ConnectedDiagramScreen;

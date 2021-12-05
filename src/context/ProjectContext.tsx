@@ -5,11 +5,9 @@ import { getLayoutedElements } from "../utils";
 
 type AdjustLayoutParams = { dir?: "TB" | "LR"; els?: Elements } | undefined;
 
-type MainContextType = {
+type ProjectContextType = {
   elements: Elements;
   setElements: (elements: Elements) => void;
-  edge?: Edge;
-  setEdge: (edge: Edge) => void;
   conversionEdges: Edge[];
   setConversionEdges: (edges: Edge[]) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
@@ -19,22 +17,17 @@ type MainContextType = {
   setShowExportModal: (showExportModal: boolean) => void;
   showNodeModal: boolean;
   setShowNodeModal: (show: boolean) => void;
-  showEdgeModal: boolean;
-  setShowEdgeModal: (show: boolean) => void;
-  showMiniMap: boolean;
-  setShowMiniMap: (show: boolean) => void;
   showFullHeader: boolean;
   setShowFullHeader: (show: boolean) => void;
-  closeEdgeModal: () => void;
 };
 
-type MainContextProviderType = { children: React.ReactChild };
+type ProjectContextProviderType = { children: React.ReactChild };
 
-export const MainContext = React.createContext({} as MainContextType);
+export const ProjectContext = React.createContext({} as ProjectContextType);
 
-export const MainContextProvider = ({
+export const ProjectContextProvider = ({
   children,
-}: MainContextProviderType): JSX.Element => {
+}: ProjectContextProviderType): JSX.Element => {
   const [elements, setElements] = useState<Elements>([]);
   const [conversionEdges, setConversionEdges] = useState<Edge[]>([]);
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
@@ -42,14 +35,6 @@ export const MainContextProvider = ({
   const [showExportModal, setShowExportModal] = useState(false);
   const [showFullHeader, setShowFullHeader] = useState(false);
   const [showNodeModal, setShowNodeModal] = useState(false);
-  const [showEdgeModal, setShowEdgeModal] = useState(false);
-  const [showMiniMap, setShowMiniMap] = useState(true);
-  const [edge, setEdge] = useState<Edge>();
-
-  const closeEdgeModal = () => {
-    setShowEdgeModal(false);
-    setEdge(undefined);
-  };
 
   const adjustLayout = useCallback(
     (params: AdjustLayoutParams) => {
@@ -66,10 +51,8 @@ export const MainContextProvider = ({
   );
 
   return (
-    <MainContext.Provider
+    <ProjectContext.Provider
       value={{
-        edge,
-        setEdge,
         elements,
         setElements,
         conversionEdges,
@@ -81,16 +64,11 @@ export const MainContextProvider = ({
         setShowExportModal,
         showNodeModal,
         setShowNodeModal,
-        showEdgeModal,
-        setShowEdgeModal,
-        showMiniMap,
-        setShowMiniMap,
-        closeEdgeModal,
         showFullHeader,
         setShowFullHeader,
       }}
     >
       {children}
-    </MainContext.Provider>
+    </ProjectContext.Provider>
   );
 };

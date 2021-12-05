@@ -4,7 +4,7 @@ import { useStoreState } from "react-flow-renderer";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 
-import { CustomNode, MainContext } from "../context";
+import { CustomNode, ProjectContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
 import { useServices } from "../hooks";
 
@@ -12,7 +12,7 @@ const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { updateProject } = useServices();
   const { showExportModal, setShowExportModal, conversionEdges } =
-    useContext(MainContext);
+    useContext(ProjectContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
   const id = localStorage.getItem("bom_demonstration_id") || "";

@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
 import {
-  EdgeModalComponent,
   ExportModalComponent,
   FooterComponent,
   HeaderComponent,
@@ -11,7 +10,7 @@ import {
   NodeModalComponent,
 } from ".";
 import { useServices } from "../hooks";
-import { MainContext } from "../context";
+import { ProjectContext } from "../context";
 
 type LayoutProps = {
   children: React.ReactChild;
@@ -20,7 +19,7 @@ type LayoutProps = {
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   const history = useHistory();
   const { getProject } = useServices();
-  const { elements } = useContext(MainContext);
+  const { elements } = useContext(ProjectContext);
 
   useEffect(() => {
     const verifyId = async () => {
@@ -41,7 +40,6 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
       <ImportModalComponent />
       <ExportModalComponent />
       <NodeModalComponent />
-      <EdgeModalComponent />
       <FooterComponent />
     </>
   );

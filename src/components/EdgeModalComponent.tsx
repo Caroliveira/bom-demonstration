@@ -9,13 +9,13 @@ import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from ".";
-import { CustomNode, MainContext } from "../context";
+import { CustomNode, DiagramContext, ProjectContext } from "../context";
 import { calculateNodesLayers, nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { edge, elements, setElements, showEdgeModal, closeEdgeModal } =
-    useContext(MainContext);
+  const { elements, setElements } = useContext(ProjectContext);
+  const { edge, showEdgeModal, closeEdgeModal } = useContext(DiagramContext);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);
 

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { CgTrash } from "react-icons/cg";
 import { v4 as uuid } from "uuid";
 
-import { CustomNode, MainContext, NodeContext } from "../context";
+import { CustomNode, ProjectContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
 import { calculateNodesLayers } from "../utils";
 
@@ -12,7 +12,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
   const { node, setNode } = useContext(NodeContext);
   const { elements, setElements, showNodeModal, setShowNodeModal } =
-    useContext(MainContext);
+    useContext(ProjectContext);
 
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
   const edges = useStoreState((store) => store.edges);

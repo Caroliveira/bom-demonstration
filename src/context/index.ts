@@ -1,2 +1,3 @@
-export * from "./MainContext";
+export * from "./DiagramContext";
+export * from "./ProjectContext";
 export * from "./NodeContext";
