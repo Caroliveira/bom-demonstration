@@ -1,26 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { v4 as uuid } from "uuid";
 
 import { ButtonComponent } from "../components";
 import { ProjectContext } from "../context";
-import { useServices } from "../hooks";
 
 const HomeScreen = (): JSX.Element => {
-  const { t } = useTranslation();
   const history = useHistory();
+  const { t } = useTranslation();
   const { setShowImportModal } = useContext(ProjectContext);
-  const { createProject } = useServices();
-
-  const handleStartClick = async () => {
-    if (history.location.pathname === "/") {
-      const id = uuid();
-      localStorage.setItem("bom_demonstration_id", id);
-      await createProject({ id });
-    }
-    history.push("/diagram");
-  };
 
   return (
     <div className="home">
@@ -32,7 +20,10 @@ const HomeScreen = (): JSX.Element => {
           onClick={() => setShowImportModal(true)}
           style={{ marginRight: 32 }}
         />
-        <ButtonComponent translationKey="start" onClick={handleStartClick} />
+        <ButtonComponent
+          translationKey="start"
+          onClick={() => history.push("/diagram")}
+        />
       </div>
     </div>
   );

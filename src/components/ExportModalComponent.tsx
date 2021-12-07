@@ -21,10 +21,12 @@ const ExportModalComponent = (): JSX.Element | null => {
     conversionEdges,
     setLoadingSet,
   } = useContext(ProjectContext);
-  const { updateProject } = useServices(setLoadingSet);
+  const { updateProject, createProject } = useServices(setLoadingSet);
 
   const update = async () => {
-    await updateProject({ id, nodes, edges, conversionEdges });
+    const project = { id, nodes, edges, conversionEdges };
+    if (!id) await createProject(project);
+    else await updateProject(project);
     setShowModal(true);
   };
 

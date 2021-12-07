@@ -1,6 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { v4 as uuid } from "uuid";
 
 import {
   ExportModalComponent,
@@ -17,18 +15,16 @@ type LayoutProps = {
 };
 
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
-  const history = useHistory();
   const { elements, setLoadingGet } = useContext(ProjectContext);
   const { getProject } = useServices(setLoadingGet);
 
   useEffect(() => {
     const loadProject = async () => {
       const id = localStorage.getItem("bom_demonstration_id");
-      if (!id) localStorage.setItem("bom_demonstration_id", uuid());
-      else if (!elements.length) await getProject(id);
+      if (id) await getProject(id);
     };
 
-    if (history.location.pathname !== "/") loadProject();
+    if (!elements.length) loadProject();
   }, []);
 
   return (
