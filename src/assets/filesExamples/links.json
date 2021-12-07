@@ -15,38 +15,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 30.000933340708553,
-          "y": 0
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 82,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 82,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "2",
@@ -62,38 +31,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 454.0002380644237,
-          "y": 0
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 82,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 82,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "3",
@@ -109,38 +47,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 0.000781805765921759,
-          "y": 86
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 81.99999618530273,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 81.99999618530273,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "4",
@@ -156,38 +63,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 222.00035717996192,
-          "y": 86
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 82.00001525878906,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 82.00001525878906,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "5",
@@ -203,38 +79,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 444.00002857858874,
-          "y": 86
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 81.99996948242188,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 81.99996948242188,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "6",
@@ -250,38 +95,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 111.00015460532704,
-          "y": 172
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 82,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 82,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     },
     {
       "id": "7",
@@ -297,38 +111,7 @@
       "timer": 0,
       "targetPosition": "top",
       "sourcePosition": "bottom",
-      "type": "default",
-      "__rf": {
-        "position": {
-          "x": 222.00074567206116,
-          "y": 258
-        },
-        "width": 172,
-        "height": 36,
-        "handleBounds": {
-          "source": [
-            {
-              "id": null,
-              "position": "bottom",
-              "x": 81.99998474121094,
-              "y": 31,
-              "width": 8,
-              "height": 8
-            }
-          ],
-          "target": [
-            {
-              "id": null,
-              "position": "top",
-              "x": 81.99998474121094,
-              "y": -3,
-              "width": 8,
-              "height": 8
-            }
-          ]
-        },
-        "isDragging": false
-      }
+      "type": "default"
     }
   ],
   "edges": [

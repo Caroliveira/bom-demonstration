@@ -1,33 +1,42 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
+import { useStoreState } from "react-flow-renderer";
 import { useTranslation } from "react-i18next";
 import { SelectInputComponent } from ".";
-import { NodeContext } from "../context";
+import { CustomNode, NodeContext } from "../context";
+import { useAmountByLayer } from "../hooks";
+// import { calculateAmountByLayer } from "../utils";
 
-const LayersCalculationComponent = (): JSX.Element => {
+const LayersCalculationComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { layer } = useContext(NodeContext);
+  const { node } = useContext(NodeContext);
+  const { calculateNodesLayers } = useAmountByLayer();
   const [currentLayer, setCurrentLayer] = useState("");
+  const edges = useStoreState((store) => store.edges);
+  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
 
-  // const renderCalculation = () => {
-  //   const calculatedNodes = getCalculatedLayer(parseInt(currentLayer, 10));
-  //   if (!calculatedNodes.length) return <p>{t("noLayerSelected")}</p>;
-  //   return calculatedNodes.map((node) => (
-  //     <p key={node.id}>
-  //       {node.data.label}: {node.amount}
-  //     </p>
-  //   ));
-  // };
+  if (!node) return null;
+
+  const renderCalculation = useMemo(() => {
+    const layerToCalculate = parseInt(currentLayer, 10);
+    if (Number.isNaN(layerToCalculate)) return <p>{t("noLayerSelected")}</p>;
+    const calculatedNodes = calculateNodesLayers(layerToCalculate);
+    return calculatedNodes.map((n) => (
+      <p key={n.id}>
+        {n.data.label}: {n.amount}
+      </p>
+    ));
+  }, [node, currentLayer]);
 
   return (
     <div className="layers">
       <SelectInputComponent
         translationKey="layer"
-        value={layer}
+        value={node.layer}
         onChange={(evt) => setCurrentLayer(evt.target.value)}
         style={{ width: 220 }}
       >
         <option value="">{t("choose")}</option>
-        {Array(layer)
+        {Array(node.layer)
           .fill(0)
           .map((_, index) => (
             <option value={index} key={`${index + 1}`}>
@@ -36,7 +45,7 @@ const LayersCalculationComponent = (): JSX.Element => {
           ))}
       </SelectInputComponent>
       <div style={{ flex: 1 }} />
-      {/* <div className="layers__result">{renderCalculation()}</div> */}
+      <div className="layers__result">{renderCalculation}</div>
     </div>
   );
 };

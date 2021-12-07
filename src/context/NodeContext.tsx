@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactChild } from "react";
-import { Node, useStoreState } from "react-flow-renderer";
+import { Edge, Node, useStoreState } from "react-flow-renderer";
 import { nodeArrayById } from "../utils";
 
 export type CustomNode = {
@@ -11,8 +11,6 @@ export type CustomNode = {
 type NodeContextType = {
   node?: CustomNode;
   setNode: (node?: CustomNode) => void;
-  layer: number;
-  setLayer: (layer: number) => void;
   sources: CustomNode[];
   targets: CustomNode[];
 };
@@ -25,7 +23,6 @@ export const NodeContextProvider = ({
   children,
 }: NodeContextProviderType): JSX.Element => {
   const [node, setNode] = useState<CustomNode>();
-  const [layer, setLayer] = useState(0);
   const [sources, setSources] = useState<CustomNode[]>([]);
   const [targets, setTargets] = useState<CustomNode[]>([]);
   const nodes = useStoreState((store) => store.nodes) as CustomNode[];
@@ -49,8 +46,6 @@ export const NodeContextProvider = ({
       value={{
         node,
         setNode,
-        layer,
-        setLayer,
         sources,
         targets,
       }}
