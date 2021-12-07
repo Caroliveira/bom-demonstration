@@ -25,21 +25,21 @@ select {
   stroke-dasharray: 1000;
 
   .eye {
-    animation: dash 3s linear infinite alternate;
+    animation: dash 2s linear infinite alternate;
     animation-delay: 2s;
   }
 
   .trunk {
-    animation: dash 3s linear infinite alternate;
+    animation: dash 2s linear infinite alternate;
     animation-delay: 1s;
   }
 
   .ear {
-    animation: dash 2s linear infinite alternate;
+    animation: dash 1.5s linear infinite alternate;
   }
 
   .tusk {
-    animation: dash 3s linear infinite alternate;
+    animation: dash 2s linear infinite alternate;
     animation-delay: 2s;
   }
 }

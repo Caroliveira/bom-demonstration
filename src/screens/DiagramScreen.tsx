@@ -57,7 +57,7 @@ const DiagramScreen = (): JSX.Element => {
             width={120}
             height={120}
             stroke={colors.alert}
-            className="diagram__alert"
+            className="diagram__alert loading"
           />
         )}
         {!loadingGet && !elements.length && (
