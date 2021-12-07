@@ -10,13 +10,14 @@ const defineEdgesAndNodes = (elements: Elements) => {
   return { nodes, edges };
 };
 
-const calculateLayers = (
+const setNextLayers = (
   currentNodes: CustomNode[],
   nodes: CustomNode[],
   edges: Edge[],
   layer: number
 ): CustomNode[] => {
   const nextNodes: CustomNode[] = [];
+
   currentNodes.forEach((node) => {
     const targetEdges = edges.filter(({ source }) => source === node.id);
     targetEdges.forEach(({ target }) => {
@@ -28,7 +29,7 @@ const calculateLayers = (
   if (!nextNodes.length) return currentNodes;
   return [
     ...currentNodes,
-    ...calculateLayers(nextNodes, nodes, edges, layer + 1),
+    ...setNextLayers(nextNodes, nodes, edges, layer + 1),
   ];
 };
 
@@ -46,7 +47,7 @@ const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
   }, [] as CustomNode[]);
 };
 
-export const calculateNodesLayers = (elements: Elements) => {
+export const calculateLayers = (elements: Elements) => {
   const { nodes, edges } = defineEdgesAndNodes(elements);
 
   const rootNodes: CustomNode[] = [];
@@ -54,11 +55,7 @@ export const calculateNodesLayers = (elements: Elements) => {
     if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);
   });
 
-  const duplicateds = calculateLayers(rootNodes, nodes, edges, 1);
+  const duplicateds = setNextLayers(rootNodes, nodes, edges, 1);
   const calculateds = removeDuplicatedNodes(duplicateds);
   return [...calculateds, ...edges];
-};
-
-export const getNodesByLayer = (nodes: CustomNode[], layer: number) => {
-  return nodes.filter((node) => node.layer === layer);
 };

@@ -2,11 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { useStoreState, removeElements, isEdge } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
 import { CgTrash } from "react-icons/cg";
-import { v4 as uuid } from "uuid";
 
 import { CustomNode, ProjectContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
-import { calculateNodesLayers } from "../utils";
+import { calculateLayers, nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
@@ -34,9 +33,8 @@ const NodeModalComponent = (): JSX.Element | null => {
       return edge.source === node.id || edge.target === node.id;
     });
     const elementsToDelete = [node, ...edgesToDelete];
-
     const auxElements = removeElements(elementsToDelete, elements);
-    setElements(calculateNodesLayers(auxElements));
+    setElements(calculateLayers(auxElements));
     history.push("/diagram");
     close();
   };
@@ -50,18 +48,6 @@ const NodeModalComponent = (): JSX.Element | null => {
       }
       return el;
     });
-  };
-
-  const nodeMounter = (label: string): CustomNode => {
-    return {
-      id: uuid(),
-      type: "default",
-      data: { label },
-      position: { x: 0, y: 0 },
-      amount: 0,
-      layer: 0,
-      timer: 0,
-    };
   };
 
   const handleSave = () => {

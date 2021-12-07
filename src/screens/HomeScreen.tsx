@@ -10,16 +10,8 @@ import { useServices } from "../hooks";
 const HomeScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { setShowImportModal, setLoadingGet } = useContext(ProjectContext);
-  const { createProject, getProject } = useServices(setLoadingGet);
-
-  useEffect(() => {
-    const loadProject = async (identifier: string) => {
-      await getProject(identifier);
-    };
-    const id = localStorage.getItem("bom_demonstration_id");
-    if (id) loadProject(id);
-  }, []);
+  const { setShowImportModal } = useContext(ProjectContext);
+  const { createProject } = useServices();
 
   const handleStartClick = async () => {
     if (history.location.pathname === "/") {

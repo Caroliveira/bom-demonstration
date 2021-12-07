@@ -22,13 +22,13 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   const { getProject } = useServices(setLoadingGet);
 
   useEffect(() => {
-    const verifyId = async () => {
+    const loadProject = async () => {
       const id = localStorage.getItem("bom_demonstration_id");
       if (!id) localStorage.setItem("bom_demonstration_id", uuid());
       else if (!elements.length) await getProject(id);
     };
 
-    if (history.location.pathname !== "/") verifyId();
+    if (history.location.pathname !== "/") loadProject();
   }, []);
 
   return (
