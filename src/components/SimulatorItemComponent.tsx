@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useContext } from "react";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
 import { IconButtonComponent } from ".";
-import { CustomNode } from "../context";
-import { useSimulation } from "../hooks";
+import { CustomNode, SimulationContext } from "../context";
 
 type SimulatorItemProps = {
   node: CustomNode;
@@ -13,34 +12,29 @@ const SimulatorItemComponent = ({
   node,
 }: SimulatorItemProps): JSX.Element | null => {
   const [showInfo, setShowInfo] = useState(false);
-  const { allowForcedOperations, isAvailable } = useSimulation();
-  const available = useMemo(() => isAvailable(node), [node]);
-  const isDisabled = !available && !allowForcedOperations;
+  const { allowForcedOperations, changeNodeAmount, isAvailable } =
+    useContext(SimulationContext);
+
+  const available = isAvailable(node);
+  const isSubtractDisabled = !allowForcedOperations && node.amount <= 0;
 
   const handleClick = () => setShowInfo(!showInfo);
-
-  const changeNodeAmount = (type: "add" | "subtract") => {
-    if (!node) return;
-    const item = node;
-    if (type === "add") item.amount += 1;
-    else item.amount -= 1;
-  };
 
   const renderItemInfo = () => (
     <div className="simulator-item__options">
       <IconButtonComponent
-        disabled={isDisabled}
+        disabled={isSubtractDisabled}
         Icon={FiMinus}
         translationKey="subtract"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount("subtract")}
+        onClick={() => changeNodeAmount(node, "subtract")}
       />
       <IconButtonComponent
-        disabled={isDisabled}
+        disabled={allowForcedOperations ? false : !available}
         Icon={FiPlus}
         translationKey="add"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount("add")}
+        onClick={() => changeNodeAmount(node, "add")}
       />
       <IconButtonComponent
         Icon={FiClock}
@@ -50,8 +44,6 @@ const SimulatorItemComponent = ({
       <span>{node.timer}</span>
     </div>
   );
-
-  if (!node) return null;
 
   return (
     <li
