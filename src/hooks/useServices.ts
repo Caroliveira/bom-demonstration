@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 import { Edge } from "react-flow-renderer";
 import axios from "axios";
 
-import { CustomNode, ProjectContext } from "../context";
+import { ConversionEdge, Edges, Nodes, ProjectContext } from "../context";
 
 export type ProjectType = {
   id: string;
-  nodes: CustomNode[];
-  edges: Edge[];
-  conversionEdges?: Edge[];
+  nodes: Nodes;
+  edges: Edges;
+  conversionEdges?: ConversionEdge[];
 };
 
 axios.defaults.headers.common = { Accept: "application/json" };

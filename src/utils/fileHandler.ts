@@ -1,4 +1,4 @@
-import { Elements } from "react-flow-renderer";
+import { Project } from "../context";
 
 // TO DO: adapt csvHandler to new store format
 // const csvHandler = (result: string) => {
@@ -18,16 +18,16 @@ import { Elements } from "react-flow-renderer";
 //     : undefined;
 // };
 
-const jsonHandler = (result: string): Elements => {
-  const { id, nodes, edges } = JSON.parse(result);
+const jsonHandler = (result: string): Project => {
+  const { id, nodes, edges, conversionEdges } = JSON.parse(result);
   localStorage.setItem("bom_demonstration_id", id);
-  return [...nodes, ...edges];
+  return { nodes, edges, conversionEdges };
 };
 
 export const fileHandler = (
   result: string,
   fileType = "application/json"
-): Elements | undefined => {
+): Project | undefined => {
   // if (fileType === "text/csv") return csvHandler(result);
   if (fileType === "application/json") return jsonHandler(result);
   return undefined;

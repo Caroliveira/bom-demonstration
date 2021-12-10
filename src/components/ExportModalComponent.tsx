@@ -1,18 +1,16 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useStoreState } from "react-flow-renderer";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 
-import { CustomNode, ProjectContext } from "../context";
+import { ProjectContext } from "../context";
 import { ButtonComponent, ModalComponent } from ".";
 import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
-  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
-  const edges = useStoreState((store) => store.edges);
+  const { nodes, edges } = useContext(ProjectContext);
   const id = localStorage.getItem("bom_demonstration_id") || "";
 
   const {

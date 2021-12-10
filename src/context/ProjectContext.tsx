@@ -1,15 +1,46 @@
-import React, { useState, useCallback } from "react";
-import { Edge, Elements } from "react-flow-renderer";
+import React, { useState, useCallback, useEffect } from "react";
+import { Elements } from "react-flow-renderer";
 
 import { getLayoutedElements } from "../utils";
 
 type AdjustLayoutParams = { dir?: "TB" | "LR"; els?: Elements } | undefined;
 
+export type Node = {
+  label: string;
+  amount: number;
+  layer: number;
+  timer: number;
+};
+
+export type Nodes = { [id: string]: Node };
+
+export type Edge = {
+  label: string;
+  source: string;
+  target: string;
+};
+
+export type Edges = { [id: string]: Edge };
+
+export type ConversionEdge = {
+  label: string;
+  source: string[];
+  target: string[];
+};
+
+export type Project = {
+  nodes: Nodes;
+  edges: Edges;
+  conversionEdges: ConversionEdge[];
+};
+
 type ProjectContextType = {
+  nodes: Nodes;
+  edges: Edges;
   elements: Elements;
   setElements: (elements: Elements) => void;
-  conversionEdges: Edge[];
-  setConversionEdges: (edges: Edge[]) => void;
+  conversionEdges: ConversionEdge[];
+  setConversionEdges: (conversionEdges: ConversionEdge[]) => void;
   adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
@@ -23,6 +54,7 @@ type ProjectContextType = {
   setLoadingGet: (show: boolean) => void;
   loadingSet: boolean;
   setLoadingSet: (show: boolean) => void;
+  setProject: (project?: Project) => void;
 };
 
 type ProjectContextProviderType = { children: React.ReactChild };
@@ -32,8 +64,10 @@ export const ProjectContext = React.createContext({} as ProjectContextType);
 export const ProjectContextProvider = ({
   children,
 }: ProjectContextProviderType): JSX.Element => {
+  const [nodes, setNodes] = useState<Nodes>({});
+  const [edges, setEdges] = useState<Edges>({});
   const [elements, setElements] = useState<Elements>([]);
-  const [conversionEdges, setConversionEdges] = useState<Edge[]>([]);
+  const [conversionEdges, setConversionEdges] = useState<ConversionEdge[]>([]);
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
@@ -56,9 +90,24 @@ export const ProjectContextProvider = ({
     [elements]
   );
 
+  const setProject = (project?: Project) => {
+    if (project) {
+      const { nodes: n, edges: e } = project;
+      const elsEdges = Object.entries(e).map(([id, el]) => ({ ...el, id }));
+      const elsNodes = Object.entries(n).map(([id, { label, ...rest }]) => {
+        return { ...rest, id, data: { label } };
+      });
+      setNodes(n);
+      setEdges(e);
+      adjustLayout({ els: [...elsNodes, ...elsEdges] as Elements });
+    }
+  };
+
   return (
     <ProjectContext.Provider
       value={{
+        nodes,
+        edges,
         elements,
         setElements,
         conversionEdges,
@@ -76,6 +125,7 @@ export const ProjectContextProvider = ({
         setLoadingGet,
         loadingSet,
         setLoadingSet,
+        setProject,
       }}
     >
       {children}

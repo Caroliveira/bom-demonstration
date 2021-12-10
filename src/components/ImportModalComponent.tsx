@@ -11,7 +11,7 @@ import { InputComponent, ModalComponent, SelectInputComponent } from ".";
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { showImportModal, setShowImportModal, adjustLayout, setLoadingGet } =
+  const { showImportModal, setShowImportModal, setProject, setLoadingGet } =
     useContext(ProjectContext);
 
   const { getProject } = useServices(setLoadingGet);
@@ -46,7 +46,8 @@ const ImportModalComponent = (): JSX.Element | null => {
       const reader = new FileReader();
       reader.onload = (loadEvent) => {
         const result = loadEvent.target?.result as string;
-        adjustLayout({ els: fileHandler(result, file.type) || [] });
+        const project = fileHandler(result, file.type);
+        setProject(project);
       };
       reader.readAsText(file);
       closeModal();
@@ -108,12 +109,12 @@ const ImportModalComponent = (): JSX.Element | null => {
       secondaryButton={{ translationKey: "cancel", onClick: closeModal }}
       submitButton={{ translationKey: file ? "save" : "loadProject" }}
     >
-      <p className="modal__text modal__text--inline">
+      {/* <p className="modal__text modal__text--inline">
         {t("importEspecification")}:
       </p>
       <pre className="modal__text--inline">
         {'{ "source", "target", "value" }'}
-      </pre>
+      </pre> */}
 
       <input
         type="file"
