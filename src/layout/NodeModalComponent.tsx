@@ -4,7 +4,7 @@ import { CgTrash } from "react-icons/cg";
 import { v4 as uuid } from "uuid";
 
 import { ProjectContext, NodeContext } from "../context";
-import { InputComponent, ModalComponent } from ".";
+import { InputComponent, ModalComponent } from "../components";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();

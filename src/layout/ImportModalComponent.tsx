@@ -6,7 +6,11 @@ import { FaFileAlt } from "react-icons/fa";
 import { fileHandler } from "../utils";
 import { useServices } from "../hooks";
 import { ProjectContext } from "../context";
-import { InputComponent, ModalComponent, SelectInputComponent } from ".";
+import {
+  InputComponent,
+  ModalComponent,
+  SelectInputComponent,
+} from "../components";
 
 const ImportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();

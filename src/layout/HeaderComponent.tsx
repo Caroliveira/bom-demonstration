@@ -3,7 +3,8 @@ import { FiSave, FiUpload } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-import { IconButtonComponent, SwitchLanguageComponent } from ".";
+import SwitchLanguageComponent from "./SwitchLanguageComponent";
+import { IconButtonComponent } from "../components";
 import { ProjectContext } from "../context";
 import { useServices } from "../hooks";
 

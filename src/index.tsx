@@ -11,9 +11,9 @@ import {
   SimulatorScreen,
 } from "./screens";
 
-import reportWebVitals from "./reportWebVitals";
-import { LayoutComponent } from "./components";
 import { ProjectContextProvider } from "./context";
+import reportWebVitals from "./reportWebVitals";
+import Layout from "./layout";
 import "./assets/scss/main.scss";
 import "./i18n";
 
@@ -22,7 +22,7 @@ ReactDOM.render(
     <ReactFlowProvider>
       <ProjectContextProvider>
         <BrowserRouter>
-          <LayoutComponent>
+          <Layout>
             <Switch>
               <Route exact path="/" component={HomeScreen} />
               <Route exact path="/diagram" component={DiagramScreen} />
@@ -31,7 +31,7 @@ ReactDOM.render(
               <Route exact path="/not-found" component={NotFoundScreen} />
               <Redirect from="*" to="/not-found" />
             </Switch>
-          </LayoutComponent>
+          </Layout>
         </BrowserRouter>
       </ProjectContextProvider>
     </ReactFlowProvider>

@@ -4,7 +4,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaKey } from "react-icons/fa";
 
 import { ProjectContext } from "../context";
-import { ButtonComponent, ModalComponent } from ".";
+import { ButtonComponent, ModalComponent } from "../components";
 import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {

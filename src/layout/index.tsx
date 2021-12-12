@@ -1,20 +1,18 @@
 import React, { useEffect, useContext } from "react";
 
-import {
-  ExportModalComponent,
-  FooterComponent,
-  HeaderComponent,
-  ImportModalComponent,
-  NodeModalComponent,
-} from ".";
 import { useServices } from "../hooks";
 import { ProjectContext } from "../context";
+import HeaderComponent from "./HeaderComponent";
+import ImportModalComponent from "./ImportModalComponent";
+import ExportModalComponent from "./ExportModalComponent";
+import NodeModalComponent from "./NodeModalComponent";
+import FooterComponent from "./FooterComponent";
 
 type LayoutProps = {
   children: React.ReactChild;
 };
 
-const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
+const Layout = ({ children }: LayoutProps): JSX.Element => {
   const { nodes, setLoadingGet } = useContext(ProjectContext);
   const { getProject } = useServices(setLoadingGet);
 
@@ -41,4 +39,4 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
   );
 };
 
-export default LayoutComponent;
+export default Layout;
