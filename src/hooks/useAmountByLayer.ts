@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { NodeContext, ProjectContext } from "../context";
+import { ProjectContext } from "../context";
 
 type CalculatedNode = {
   id: string;
@@ -9,8 +9,7 @@ type CalculatedNode = {
 };
 
 export const useAmountByLayer = () => {
-  const { nodeId } = useContext(NodeContext);
-  const { nodes, edges } = useContext(ProjectContext);
+  const { nodeId, nodes, edges } = useContext(ProjectContext);
 
   const edgesArr = useMemo(() => {
     return Object.entries(edges).map(([edgeId, edge]) => {

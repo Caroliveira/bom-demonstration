@@ -3,14 +3,20 @@ import { useHistory } from "react-router-dom";
 import { CgTrash } from "react-icons/cg";
 import { v4 as uuid } from "uuid";
 
-import { ProjectContext, NodeContext } from "../context";
+import { ProjectContext } from "../context";
 import { InputComponent, ModalComponent } from "../components";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
-  const { nodeId, setNodeId } = useContext(NodeContext);
-  const { nodes, setNodes, edges, setEdges, showNodeModal, setShowNodeModal } =
-    useContext(ProjectContext);
+  const {
+    nodeId,
+    nodes,
+    setNodes,
+    edges,
+    setEdges,
+    showNodeModal,
+    setShowNodeModal,
+  } = useContext(ProjectContext);
 
   const [name, setName] = useState("");
   const [error, setError] = useState("");

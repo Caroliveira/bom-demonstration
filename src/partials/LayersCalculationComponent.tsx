@@ -1,13 +1,12 @@
 import React, { useState, useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { SelectInputComponent } from "../components";
-import { NodeContext, ProjectContext } from "../context";
+import { ProjectContext } from "../context";
 import { useAmountByLayer } from "../hooks";
 
 const LayersCalculationComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { nodeId } = useContext(NodeContext);
-  const { nodes } = useContext(ProjectContext);
+  const { nodeId, nodes } = useContext(ProjectContext);
   const { calculateNodesLayers } = useAmountByLayer();
   const [currentLayer, setCurrentLayer] = useState("");
 
@@ -28,7 +27,7 @@ const LayersCalculationComponent = (): JSX.Element | null => {
     <div className="layers">
       <SelectInputComponent
         translationKey="layer"
-        value={nodes[nodeId].layer}
+        value={currentLayer}
         onChange={(evt) => setCurrentLayer(evt.target.value)}
         style={{ width: 220 }}
       >

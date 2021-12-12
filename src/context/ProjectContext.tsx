@@ -30,6 +30,8 @@ export type Project = {
 };
 
 type ProjectContextType = {
+  nodeId: string;
+  setNodeId: (nodeId: string) => void;
   nodes: Nodes;
   setNodes: (nodes: Nodes) => void;
   edges: Edges;
@@ -58,6 +60,7 @@ export const ProjectContext = React.createContext({} as ProjectContextType);
 export const ProjectContextProvider = ({
   children,
 }: ProjectContextProviderType): JSX.Element => {
+  const [nodeId, setNodeId] = useState("");
   const [nodes, setNodes] = useState<Nodes>({});
   const [edges, setEdges] = useState<Edges>({});
   const [conversionEdges, setConversionEdges] = useState<ConversionEdge[]>([]);
@@ -79,6 +82,8 @@ export const ProjectContextProvider = ({
   return (
     <ProjectContext.Provider
       value={{
+        nodeId,
+        setNodeId,
         nodes,
         setNodes,
         edges,

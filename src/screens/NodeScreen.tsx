@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, RouteComponentProps } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -14,24 +14,37 @@ import {
   LayersCalculationComponent,
   NodeDependenciesComponent,
 } from "../partials";
-import { ProjectContext, NodeContext, NodeContextProvider } from "../context";
+import { ProjectContext } from "../context";
 
 type RouteParams = { id: string };
 
 const NodeScreen = ({
   match,
-}: RouteComponentProps<RouteParams>): JSX.Element => {
+}: RouteComponentProps<RouteParams>): JSX.Element | null => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { nodes, setShowNodeModal } = useContext(ProjectContext);
-  const { nodeId, setNodeId, sources, targets } = useContext(NodeContext);
+  const [sources, setSources] = useState<string[]>([]);
+  const [targets, setTargets] = useState<string[]>([]);
+  const { nodeId, setNodeId, nodes, edges, setShowNodeModal } =
+    useContext(ProjectContext);
 
   useEffect(() => {
     const { id } = match.params;
     if (nodeId !== id) {
       const nodeExists = nodes[id];
-      if (nodeExists) setNodeId(id);
-      else history.push("/not-found");
+      if (!nodeExists) history.push("/not-found");
+      else {
+        const sourcesId: string[] = [];
+        const targetsId: string[] = [];
+        Object.keys(edges).forEach((edgeId) => {
+          const [source, target] = edgeId.split("-");
+          if (source === id) targetsId.push(target);
+          if (target === id) sourcesId.push(source);
+        });
+        setNodeId(id);
+        setSources(sourcesId);
+        setTargets(targetsId);
+      }
     }
   }, [match.params.id, nodeId]);
 
@@ -39,6 +52,7 @@ const NodeScreen = ({
     return () => setNodeId("");
   }, []);
 
+  if (!nodeId) return null;
   return (
     <>
       <ScreensHeaderComponent title="Item playground">
@@ -56,7 +70,7 @@ const NodeScreen = ({
         <h2 className="node__label">
           {nodes[nodeId].label}
           <span className="node__layer">
-            {t("layer")} {nodeId && nodes[nodeId].layer + 1}
+            {t("layer")} {nodes[nodeId].layer + 1}
           </span>
         </h2>
         <GiBottomRight3DArrow className="node__arrow" />
@@ -64,7 +78,7 @@ const NodeScreen = ({
       </div>
 
       {/* TO DO: think of better name */}
-      {nodeId && nodes[nodeId].layer !== 0 && (
+      {nodes[nodeId].layer !== 0 && (
         <AccordionComponent translationKey="layersCalculation">
           <LayersCalculationComponent />
         </AccordionComponent>
@@ -79,10 +93,4 @@ const NodeScreen = ({
   );
 };
 
-const ConnectedNodeScreen = (props: RouteComponentProps<RouteParams>) => (
-  <NodeContextProvider>
-    <NodeScreen {...props} />
-  </NodeContextProvider>
-);
-
-export default ConnectedNodeScreen;
+export default NodeScreen;
