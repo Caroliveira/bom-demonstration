@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Elements } from "react-flow-renderer";
-import { ProjectContext } from "../context/ProjectContext";
+import { ProjectContext } from "../context";
 import { getLayoutedElements } from "../utils";
 
 type DirectionType = "TB" | "LR";
