@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
-import { IconButtonComponent } from ".";
+import { IconButtonComponent } from "../components";
 import { Node, SimulationContext } from "../context";
 
 type SimulatorItemProps = {

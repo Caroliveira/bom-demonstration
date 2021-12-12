@@ -8,10 +8,12 @@ import { GiBottomRight3DArrow } from "react-icons/gi";
 import {
   AccordionComponent,
   IconButtonComponent,
-  LayersCalculationComponent,
-  NodeDependenciesComponent,
   ScreensHeaderComponent,
 } from "../components";
+import {
+  LayersCalculationComponent,
+  NodeDependenciesComponent,
+} from "../partials";
 import { ProjectContext, NodeContext, NodeContextProvider } from "../context";
 
 type RouteParams = { id: string };

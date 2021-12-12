@@ -1,6 +1,6 @@
 import React, { useState, useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { SelectInputComponent } from ".";
+import { SelectInputComponent } from "../components";
 import { NodeContext, ProjectContext } from "../context";
 import { useAmountByLayer } from "../hooks";
 

@@ -5,7 +5,7 @@ import { FaMap, FaRegMap } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
-import { ButtonComponent, IconButtonComponent } from ".";
+import { ButtonComponent, IconButtonComponent } from "../components";
 import { ProjectContext } from "../context";
 import { useDiagram } from "../hooks";
 

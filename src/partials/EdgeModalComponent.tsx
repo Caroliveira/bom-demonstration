@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
-import { InputComponent, ModalComponent } from ".";
+import { InputComponent, ModalComponent } from "../components";
 import { Edge, ProjectContext } from "../context";
 import { useDiagram } from "../hooks";
 

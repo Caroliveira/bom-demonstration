@@ -3,17 +3,14 @@ import { useTranslation } from "react-i18next";
 import { FiShield, FiShieldOff } from "react-icons/fi";
 
 import {
-  IconButtonComponent,
-  ScreensHeaderComponent,
-  SimulatorItemComponent,
-} from "../components";
-import {
   Nodes,
   ProjectContext,
   SimulationContext,
   SimulationContextProvider,
 } from "../context";
 import { calculateLayers } from "../utils";
+import { SimulatorItemComponent } from "../partials";
+import { IconButtonComponent, ScreensHeaderComponent } from "../components";
 
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();

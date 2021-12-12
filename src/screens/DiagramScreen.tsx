@@ -14,7 +14,7 @@ import ReactFlow, {
 import { ProjectContext } from "../context";
 import { colors } from "../utils";
 import { ReactComponent as Elephant } from "../assets/images/elephant.svg";
-import { DiagramToolbarComponent, EdgeModalComponent } from "../components";
+import { DiagramToolbarComponent, EdgeModalComponent } from "../partials";
 import { useDiagram } from "../hooks";
 
 const DiagramScreen = (): JSX.Element => {
