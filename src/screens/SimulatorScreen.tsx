@@ -41,7 +41,9 @@ const SimulatorScreen = (): JSX.Element => {
   };
 
   const renderContent = () => {
-    if (!nodes) return <p className="simulator__empty">{t("noData")}</p>;
+    if (!Object.keys(nodes).length) {
+      return <p className="simulator__empty">{t("noData")}</p>;
+    }
     const maxLayer = Object.values(nodes).reduce((acc, vl) => {
       return acc > vl.layer ? acc : vl.layer;
     }, 0);

@@ -28,7 +28,7 @@ const SimulatorItemComponent = ({
       if (target === nodeId && amount < intLabel) isAvailable = false;
     });
     return isAvailable;
-  }, [nodeId]);
+  }, [nodes]);
 
   const handleClick = () => setShowInfo(!showInfo);
 

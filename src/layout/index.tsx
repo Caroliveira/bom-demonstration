@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
       if (id) await getProject(id);
     };
 
-    if (!nodes) loadProject();
+    if (!Object.keys(nodes).length) loadProject();
   }, []);
 
   return (
