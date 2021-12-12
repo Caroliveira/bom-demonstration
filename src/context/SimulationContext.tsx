@@ -18,8 +18,7 @@ export const SimulationContext = React.createContext(
 export const SimulationContextProvider = ({
   children,
 }: SimulationContextProviderType): JSX.Element => {
-  const { nodes, setNodes, edges, elements, setElements } =
-    useContext(ProjectContext);
+  const { nodes, setNodes, edges } = useContext(ProjectContext);
   const [maxLayer, setMaxLayer] = useState<number>();
   const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 

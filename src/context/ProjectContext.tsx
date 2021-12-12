@@ -1,9 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Elements } from "react-flow-renderer";
-
-import { getLayoutedElements } from "../utils";
-
-type AdjustLayoutParams = { dir?: "TB" | "LR"; els?: Elements } | undefined;
+import React, { useState } from "react";
 
 export type Node = {
   label: string;
@@ -39,11 +34,8 @@ type ProjectContextType = {
   setNodes: (nodes: Nodes) => void;
   edges: Edges;
   setEdges: (edges: Edges) => void;
-  elements: Elements;
-  setElements: (elements: Elements) => void;
   conversionEdges: ConversionEdge[];
   setConversionEdges: (conversionEdges: ConversionEdge[]) => void;
-  adjustLayout: (params: AdjustLayoutParams) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   showExportModal: boolean;
@@ -68,9 +60,7 @@ export const ProjectContextProvider = ({
 }: ProjectContextProviderType): JSX.Element => {
   const [nodes, setNodes] = useState<Nodes>({});
   const [edges, setEdges] = useState<Edges>({});
-  const [elements, setElements] = useState<Elements>([]);
   const [conversionEdges, setConversionEdges] = useState<ConversionEdge[]>([]);
-  const [direction, setDirection] = useState<"TB" | "LR">("TB");
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showFullHeader, setShowFullHeader] = useState(false);
@@ -78,30 +68,11 @@ export const ProjectContextProvider = ({
   const [loadingGet, setLoadingGet] = useState(false);
   const [loadingSet, setLoadingSet] = useState(false);
 
-  const adjustLayout = useCallback(
-    (params: AdjustLayoutParams) => {
-      const currentDirection = params?.dir || direction;
-      const currentElements = params?.els || elements;
-      const layoutedElements = getLayoutedElements(
-        currentElements,
-        currentDirection
-      );
-      setElements(layoutedElements);
-      setDirection(currentDirection);
-    },
-    [elements]
-  );
-
   const setProject = (project?: Project) => {
     if (project) {
       const { nodes: n, edges: e } = project;
-      const elsEdges = Object.entries(e).map(([id, el]) => ({ ...el, id }));
-      const elsNodes = Object.entries(n).map(([id, { label, ...rest }]) => {
-        return { ...rest, id, data: { label } };
-      });
       setNodes(n);
       setEdges(e);
-      adjustLayout({ els: [...elsNodes, ...elsEdges] as Elements });
     }
   };
 
@@ -112,11 +83,8 @@ export const ProjectContextProvider = ({
         setNodes,
         edges,
         setEdges,
-        elements,
-        setElements,
         conversionEdges,
         setConversionEdges,
-        adjustLayout,
         showImportModal,
         setShowImportModal,
         showExportModal,

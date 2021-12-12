@@ -1,51 +1,44 @@
-import React, { useState, useEffect, ReactChild } from "react";
-import { Edge, Node, useStoreState } from "react-flow-renderer";
-import { nodeArrayById } from "../utils";
-
-export type CustomNode = {
-  amount: number;
-  layer: number;
-  timer: number;
-} & Node;
+import React, { useState, useEffect, useContext } from "react";
+import { ProjectContext } from ".";
 
 type NodeContextType = {
-  node?: CustomNode;
-  setNode: (node?: CustomNode) => void;
-  sources: CustomNode[];
-  targets: CustomNode[];
+  nodeId: string;
+  setNodeId: (node: string) => void;
+  sources: string[];
+  targets: string[];
 };
 
-type NodeContextProviderType = { children: ReactChild };
+type NodeContextProviderProps = { children: React.ReactChild };
 
 export const NodeContext = React.createContext({} as NodeContextType);
 
 export const NodeContextProvider = ({
   children,
-}: NodeContextProviderType): JSX.Element => {
-  const [node, setNode] = useState<CustomNode>();
-  const [sources, setSources] = useState<CustomNode[]>([]);
-  const [targets, setTargets] = useState<CustomNode[]>([]);
-  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
-  const edges = useStoreState((store) => store.edges);
+}: NodeContextProviderProps): JSX.Element => {
+  const [nodeId, setNodeId] = useState("");
+  const [sources, setSources] = useState<string[]>([]);
+  const [targets, setTargets] = useState<string[]>([]);
+  const { edges } = useContext(ProjectContext);
 
   useEffect(() => {
-    if (node) {
+    if (nodeId) {
       const sourcesId: string[] = [];
       const targetsId: string[] = [];
-      edges.forEach(({ source, target }) => {
-        if (source === node.id) targetsId.push(target);
-        if (target === node.id) sourcesId.push(source);
+      Object.keys(edges).forEach((edgeId) => {
+        const [source, target] = edgeId.split("-");
+        if (source === nodeId) targetsId.push(target);
+        if (target === nodeId) sourcesId.push(source);
       });
-      setSources(nodeArrayById(nodes, sourcesId));
-      setTargets(nodeArrayById(nodes, targetsId));
+      setSources(sourcesId);
+      setTargets(targetsId);
     }
-  }, [node]);
+  }, [nodeId]);
 
   return (
     <NodeContext.Provider
       value={{
-        node,
-        setNode,
+        nodeId,
+        setNodeId,
         sources,
         targets,
       }}

@@ -6,7 +6,8 @@ import { FiPlus } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from ".";
-import { DiagramContext, ProjectContext } from "../context";
+import { ProjectContext } from "../context";
+import { useDiagram } from "../hooks";
 
 const layout = {
   TB: { Icon: CgMoveDown, label: "Vertical" },
@@ -17,14 +18,12 @@ const DiagramToolbarComponent = (): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
   const [direction, setDirection] = useState<"TB" | "LR">("TB");
-  const { showMiniMap, setShowMiniMap } = useContext(DiagramContext);
-  const { elements, adjustLayout, setShowNodeModal } =
-    useContext(ProjectContext);
+  const { elements, adjustLayout, showMiniMap, setShowMiniMap } = useDiagram();
+  const { setShowNodeModal } = useContext(ProjectContext);
 
   const onDirectionChange = () => {
     const newDirection = direction === "TB" ? "LR" : "TB";
-    adjustLayout({ dir: newDirection });
-    setDirection(newDirection);
+    adjustLayout(newDirection);
   };
 
   return (

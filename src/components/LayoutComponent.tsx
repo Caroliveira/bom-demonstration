@@ -15,7 +15,7 @@ type LayoutProps = {
 };
 
 const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
-  const { elements, setLoadingGet } = useContext(ProjectContext);
+  const { nodes, setLoadingGet } = useContext(ProjectContext);
   const { getProject } = useServices(setLoadingGet);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const LayoutComponent = ({ children }: LayoutProps): JSX.Element => {
       if (id) await getProject(id);
     };
 
-    if (!elements.length) loadProject();
+    if (!nodes) loadProject();
   }, []);
 
   return (

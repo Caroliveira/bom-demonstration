@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { FiEdit } from "react-icons/fi";
 import { GiBottomRight3DArrow } from "react-icons/gi";
 
-import { useStoreState } from "react-flow-renderer";
 import {
   AccordionComponent,
   IconButtonComponent,
@@ -13,13 +12,7 @@ import {
   NodeDependenciesComponent,
   ScreensHeaderComponent,
 } from "../components";
-import {
-  CustomNode,
-  ProjectContext,
-  NodeContext,
-  NodeContextProvider,
-} from "../context";
-import { nodeById } from "../utils";
+import { ProjectContext, NodeContext, NodeContextProvider } from "../context";
 
 type RouteParams = { id: string };
 
@@ -28,21 +21,20 @@ const NodeScreen = ({
 }: RouteComponentProps<RouteParams>): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { setShowNodeModal } = useContext(ProjectContext);
-  const { node, setNode, sources, targets } = useContext(NodeContext);
-  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
+  const { nodes, setShowNodeModal } = useContext(ProjectContext);
+  const { nodeId, setNodeId, sources, targets } = useContext(NodeContext);
 
   useEffect(() => {
     const { id } = match.params;
-    if (!node || node.id !== id) {
-      const nodeExists = nodeById(nodes, id);
-      if (nodeExists) setNode(nodeExists);
+    if (nodeId !== id) {
+      const nodeExists = nodes[id];
+      if (nodeExists) setNodeId(id);
       else history.push("/not-found");
     }
-  }, [match.params.id, node]);
+  }, [match.params.id, nodeId]);
 
   useEffect(() => {
-    return () => setNode(undefined);
+    return () => setNodeId("");
   }, []);
 
   return (
@@ -60,9 +52,9 @@ const NodeScreen = ({
         <NodeDependenciesComponent dependencies={sources} type="source" />
         <GiBottomRight3DArrow className="node__arrow" />
         <h2 className="node__label">
-          {node?.data.label}
+          {nodes[nodeId].label}
           <span className="node__layer">
-            {t("layer")} {node && node.layer + 1}
+            {t("layer")} {nodeId && nodes[nodeId].layer + 1}
           </span>
         </h2>
         <GiBottomRight3DArrow className="node__arrow" />
@@ -70,7 +62,7 @@ const NodeScreen = ({
       </div>
 
       {/* TO DO: think of better name */}
-      {node && node.layer !== 0 && (
+      {nodeId && nodes[nodeId].layer !== 0 && (
         <AccordionComponent translationKey="layersCalculation">
           <LayersCalculationComponent />
         </AccordionComponent>

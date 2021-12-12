@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { ButtonComponent } from "../components";
-import { CustomNode } from "../context";
+import { ProjectContext } from "../context";
 
 type NodeDependenciesProps = {
-  dependencies: CustomNode[];
+  dependencies: string[];
   type: "source" | "target";
 };
 
@@ -16,6 +16,7 @@ const NodeDependenciesComponent = ({
 }: NodeDependenciesProps): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
+  const { nodes } = useContext(ProjectContext);
 
   if (!dependencies.length) {
     return (
@@ -27,12 +28,12 @@ const NodeDependenciesComponent = ({
 
   return (
     <ul className="node__dependencies-list">
-      {dependencies.map((dep) => (
-        <li className="node__dependencies-item" key={dep.id}>
+      {dependencies.map((id) => (
+        <li className="node__dependencies-item" key={id}>
           <ButtonComponent
             outlined
-            label={dep.data.label}
-            onClick={() => history.push(`/node/${dep.id}`)}
+            label={nodes[id].label}
+            onClick={() => history.push(`/node/${id}`)}
           />
         </li>
       ))}

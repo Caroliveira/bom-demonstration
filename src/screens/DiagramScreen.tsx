@@ -11,21 +11,18 @@ import ReactFlow, {
   updateEdge,
 } from "react-flow-renderer";
 
-import {
-  DiagramContext,
-  DiagramContextProvider,
-  ProjectContext,
-} from "../context";
+import { ProjectContext } from "../context";
 import { colors } from "../utils";
 import { ReactComponent as Elephant } from "../assets/images/elephant.svg";
 import { DiagramToolbarComponent, EdgeModalComponent } from "../components";
+import { useDiagram } from "../hooks";
 
 const DiagramScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { elements, setElements, setShowFullHeader, loadingGet } =
-    useContext(ProjectContext);
-  const { setEdge, showMiniMap, setShowEdgeModal } = useContext(DiagramContext);
+  const { setShowFullHeader, loadingGet } = useContext(ProjectContext);
+  const { elements, setElements, setEdgeId, showMiniMap, setShowEdgeModal } =
+    useDiagram();
 
   useEffect(() => setShowFullHeader(true), []);
 
@@ -44,7 +41,7 @@ const DiagramScreen = (): JSX.Element => {
   };
 
   const onEdgeDoubleClick = (evt: React.MouseEvent, edge: Edge) => {
-    setEdge(edge);
+    setEdgeId(edge.id);
     setShowEdgeModal(true);
   };
 
@@ -81,10 +78,4 @@ const DiagramScreen = (): JSX.Element => {
   );
 };
 
-const ConnectedDiagramScreen = () => (
-  <DiagramContextProvider>
-    <DiagramScreen />
-  </DiagramContextProvider>
-);
-
-export default ConnectedDiagramScreen;
+export default DiagramScreen;

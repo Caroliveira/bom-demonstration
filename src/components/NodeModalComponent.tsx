@@ -1,25 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useStoreState, removeElements, isEdge } from "react-flow-renderer";
 import { useHistory } from "react-router-dom";
 import { CgTrash } from "react-icons/cg";
 
-import { CustomNode, ProjectContext, NodeContext } from "../context";
+import { ProjectContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
 import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
-  const { node, setNode } = useContext(NodeContext);
-  const { elements, setElements, showNodeModal, setShowNodeModal } =
+  const { nodeId, setNodeId } = useContext(NodeContext);
+  const { nodes, setNodes, edges, setEdges, showNodeModal, setShowNodeModal } =
     useContext(ProjectContext);
-
-  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
-  const edges = useStoreState((store) => store.edges);
 
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => setName(node?.data.label || ""), [node, showNodeModal]);
+  useEffect(() => setName(nodes[nodeId]?.label || ""), [nodeId, showNodeModal]);
 
   const close = () => {
     setName("");
@@ -28,34 +24,42 @@ const NodeModalComponent = (): JSX.Element | null => {
   };
 
   const handleDelete = () => {
-    if (!node) return;
-    const edgesToDelete = edges.filter((edge) => {
-      return edge.source === node.id || edge.target === node.id;
+    if (!nodeId) return;
+    const auxNodes = { ...nodes };
+    const auxEdges = { ...edges };
+    Object.keys(edges).forEach((edgeId) => {
+      const [source, target] = edgeId.split("-");
+      if (nodeId === source || nodeId === target) delete auxEdges[edgeId];
     });
-    const elementsToDelete = [node, ...edgesToDelete];
-    const auxElements = removeElements(elementsToDelete, elements);
-    setElements(auxElements);
+    delete auxNodes[nodeId];
+    setNodes(auxNodes);
+    setEdges(auxEdges);
     history.push("/diagram");
     close();
   };
 
+  const handleCreate = () => {
+    const auxNodes = { ...nodes };
+    const { id, ...newNode } = nodeMounter(name);
+    auxNodes[id] = newNode;
+    setNodes(auxNodes);
+  };
+
   const handleUpdate = () => {
-    return elements.map((element) => {
-      const el = element;
-      if (!isEdge(el) && el.id === node?.id) {
-        el.data = { ...el.data, label: name };
-        setNode(el as CustomNode);
-      }
-      return el;
-    });
+    const auxNodes = { ...nodes };
+    auxNodes[nodeId].label = name;
+    setNodes(auxNodes);
   };
 
   const handleSave = () => {
-    const duplicatedName =
-      name === node?.id ? false : nodes.some(({ id }) => id === name);
-    if (duplicatedName) setError("nameError");
+    const nameHasChanged = name !== nodes[nodeId].label;
+    const duplicatedName = Object.values(nodes).some(
+      ({ label }) => label === name
+    );
+    if (nameHasChanged && duplicatedName) setError("nameError");
     else {
-      setElements(node ? handleUpdate() : [...elements, nodeMounter(name)]);
+      if (nodeId) handleUpdate();
+      else handleCreate();
       close();
     }
   };
@@ -68,13 +72,15 @@ const NodeModalComponent = (): JSX.Element | null => {
   return (
     <ModalComponent
       show={showNodeModal}
-      title={node ? "editItem" : "addItem"}
+      title={nodeId ? "editItem" : "addItem"}
       deleteButton={
-        node && {
-          Icon: CgTrash,
-          translationKey: "deleteItem",
-          onClick: handleDelete,
-        }
+        nodeId
+          ? {
+              Icon: CgTrash,
+              translationKey: "deleteItem",
+              onClick: handleDelete,
+            }
+          : undefined
       }
       secondaryButton={{ translationKey: "cancel", onClick: close }}
       submitButton={{ disabled: !name, translationKey: "save" }}

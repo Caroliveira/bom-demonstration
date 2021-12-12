@@ -1,23 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-  Edge,
-  useStoreState,
-  isEdge,
-  removeElements,
-} from "react-flow-renderer";
 import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from ".";
-import { CustomNode, DiagramContext, ProjectContext } from "../context";
-import { nodeById } from "../utils";
+import { Edge, ProjectContext } from "../context";
+import { useDiagram } from "../hooks";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
-  const { elements, setElements } = useContext(ProjectContext);
-  const { edge, showEdgeModal, closeEdgeModal } = useContext(DiagramContext);
-  const nodes = useStoreState((store) => store.nodes) as CustomNode[];
-  const edges = useStoreState((store) => store.edges);
+  const { nodes, edges, setEdges } = useContext(ProjectContext);
+  const { edgeId, showEdgeModal, closeEdgeModal } = useDiagram();
 
   const [currentEdge, setCurrentEdge] = useState<Edge>();
   const [source, setSource] = useState("");
@@ -26,14 +18,14 @@ const EdgeModalComponent = (): JSX.Element | null => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (edge) {
-      const fullEdge = edges.find(({ id }) => id === edge?.id) || edge;
-      setSource(nodeById(nodes, fullEdge.source)?.data.label);
-      setTarget(nodeById(nodes, fullEdge.target)?.data.label);
-      setAmount((fullEdge.label as string) || "");
-      setCurrentEdge(fullEdge);
+    if (edgeId) {
+      const [sourceId, targetId] = edgeId.split("-");
+      setSource(nodes[sourceId].label);
+      setTarget(nodes[targetId].label);
+      setAmount(edges[edgeId].label);
+      setCurrentEdge(edges[edgeId]);
     }
-  }, [edge]);
+  }, [edgeId]);
 
   const close = () => {
     setError("");
@@ -46,16 +38,16 @@ const EdgeModalComponent = (): JSX.Element | null => {
   if (!currentEdge) return null;
 
   const handleDelete = () => {
-    const auxElements = removeElements([currentEdge], elements);
-    setElements(auxElements);
+    const auxEdges = { ...edges };
+    delete auxEdges[edgeId];
+    setEdges(auxEdges);
     close();
   };
 
   const handleSave = () => {
-    const updatedElements = elements.map((el) =>
-      isEdge(el) && el.id === currentEdge.id ? { ...el, label: amount } : el
-    );
-    setElements(updatedElements);
+    const auxEdges = { ...edges };
+    auxEdges[edgeId].label = amount;
+    setEdges(auxEdges);
     close();
   };
 

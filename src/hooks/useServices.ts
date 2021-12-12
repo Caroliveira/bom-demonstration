@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Edge } from "react-flow-renderer";
 import axios from "axios";
 
 import { ConversionEdge, Edges, Nodes, ProjectContext } from "../context";
@@ -16,7 +15,7 @@ axios.defaults.headers.common = { Accept: "application/json" };
 
 export const useServices = (customSetLoading?: (loading: boolean) => void) => {
   const history = useHistory();
-  const { adjustLayout } = useContext(ProjectContext);
+  const { setProject } = useContext(ProjectContext);
   const base = "https://bom-demonstration-api.herokuapp.com";
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +34,7 @@ export const useServices = (customSetLoading?: (loading: boolean) => void) => {
     try {
       const { data } = await axios.get(`${base}/projects/${id}`);
       if (data) {
-        adjustLayout({ els: [...data.nodes, ...data.edges] });
+        setProject(data);
         if (history.location.pathname !== "/diagram") history.push("/diagram");
         stopLoading();
         return 200;
