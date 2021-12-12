@@ -1,26 +1,43 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
 import { IconButtonComponent } from "../components";
-import { Node, SimulationContext } from "../context";
+import { Node, ProjectContext } from "../context";
 
 type SimulatorItemProps = {
   nodeId: string;
   node: Node;
+  allowForcedOperations: boolean;
 };
 
 const SimulatorItemComponent = ({
   nodeId,
   node,
+  allowForcedOperations,
 }: SimulatorItemProps): JSX.Element | null => {
   const [showInfo, setShowInfo] = useState(false);
-  const { allowForcedOperations, changeNodeAmount, isAvailable } =
-    useContext(SimulationContext);
-
-  const available = isAvailable(nodeId);
+  const { nodes, edges, setNodes } = useContext(ProjectContext);
   const isSubtractDisabled = !allowForcedOperations && node.amount <= 0;
 
+  const available = useMemo(() => {
+    let isAvailable = true;
+    Object.entries(edges).forEach(([edgeId, { label }]) => {
+      const [source, target] = edgeId.split("-");
+      const { amount } = nodes[source];
+      const intLabel = parseInt(label as string, 10);
+      if (target === nodeId && amount < intLabel) isAvailable = false;
+    });
+    return isAvailable;
+  }, [nodeId]);
+
   const handleClick = () => setShowInfo(!showInfo);
+
+  const handleNodeAmountChange = (type: "add" | "subtract") => {
+    const auxNodes = { ...nodes };
+    if (type === "add") auxNodes[nodeId].amount += 1;
+    else auxNodes[nodeId].amount -= 1;
+    setNodes(auxNodes);
+  };
 
   const renderItemInfo = () => (
     <div className="simulator-item__options">
@@ -29,14 +46,14 @@ const SimulatorItemComponent = ({
         Icon={FiMinus}
         translationKey="subtract"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount(nodeId, "subtract")}
+        onClick={() => handleNodeAmountChange("subtract")}
       />
       <IconButtonComponent
         disabled={allowForcedOperations ? false : !available}
         Icon={FiPlus}
         translationKey="add"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount(nodeId, "add")}
+        onClick={() => handleNodeAmountChange("add")}
       />
       <IconButtonComponent
         Icon={FiClock}

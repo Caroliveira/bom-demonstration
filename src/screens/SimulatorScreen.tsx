@@ -1,13 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiShield, FiShieldOff } from "react-icons/fi";
 
-import {
-  Nodes,
-  ProjectContext,
-  SimulationContext,
-  SimulationContextProvider,
-} from "../context";
+import { Nodes, ProjectContext } from "../context";
 import { calculateLayers } from "../utils";
 import { SimulatorItemComponent } from "../partials";
 import { IconButtonComponent, ScreensHeaderComponent } from "../components";
@@ -15,8 +10,7 @@ import { IconButtonComponent, ScreensHeaderComponent } from "../components";
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const { nodes, edges, setNodes } = useContext(ProjectContext);
-  const { maxLayer, allowForcedOperations, setAllowForcedOperations } =
-    useContext(SimulationContext);
+  const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 
   useEffect(() => setNodes(calculateLayers(nodes, edges)), []);
 
@@ -33,16 +27,24 @@ const SimulatorScreen = (): JSX.Element => {
     return (
       <ul key={`layer${index + 1}`} className="simulator__list">
         {Object.entries(layerNodes).map(([id, node]) => {
-          return <SimulatorItemComponent nodeId={id} node={node} key={id} />;
+          return (
+            <SimulatorItemComponent
+              key={id}
+              nodeId={id}
+              node={node}
+              allowForcedOperations={allowForcedOperations}
+            />
+          );
         })}
       </ul>
     );
   };
 
   const renderContent = () => {
-    if (maxLayer === undefined) {
-      return <p className="simulator__empty">{t("noData")}</p>;
-    }
+    if (!nodes) return <p className="simulator__empty">{t("noData")}</p>;
+    const maxLayer = Object.values(nodes).reduce((acc, vl) => {
+      return acc > vl.layer ? acc : vl.layer;
+    }, 0);
     const emptyArr = Array(maxLayer + 1).fill(0);
     return emptyArr.map((_, index) => renderList(index));
   };
@@ -63,10 +65,4 @@ const SimulatorScreen = (): JSX.Element => {
   );
 };
 
-const ConnectedSimulatorScreen = () => (
-  <SimulationContextProvider>
-    <SimulatorScreen />
-  </SimulationContextProvider>
-);
-
-export default ConnectedSimulatorScreen;
+export default SimulatorScreen;
