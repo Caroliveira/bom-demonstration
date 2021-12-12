@@ -16,7 +16,7 @@ import {
   DiagramContextProvider,
   ProjectContext,
 } from "../context";
-import { calculateLayers, colors } from "../utils";
+import { colors } from "../utils";
 import { ReactComponent as Elephant } from "../assets/images/elephant.svg";
 import { DiagramToolbarComponent, EdgeModalComponent } from "../components";
 
@@ -31,12 +31,12 @@ const DiagramScreen = (): JSX.Element => {
 
   const onConnect = (params: Edge | Connection) => {
     const auxElements = addEdge({ ...params, label: 1 }, elements);
-    setElements(calculateLayers(auxElements));
+    setElements(auxElements);
   };
 
   const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
     const auxElements = updateEdge(oldEdge, newConnection, elements);
-    setElements(calculateLayers(auxElements));
+    setElements(auxElements);
   };
 
   const onNodeDoubleClick = (evt: React.MouseEvent, node: Node) => {

@@ -10,7 +10,7 @@ import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from ".";
 import { CustomNode, DiagramContext, ProjectContext } from "../context";
-import { calculateLayers, nodeById } from "../utils";
+import { nodeById } from "../utils";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
 
   const handleDelete = () => {
     const auxElements = removeElements([currentEdge], elements);
-    setElements(calculateLayers(auxElements));
+    setElements(auxElements);
     close();
   };
 

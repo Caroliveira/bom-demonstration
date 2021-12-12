@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { CustomNode } from "../context";
+import { CustomNode, Nodes } from "../context";
 
 export const nodeById = (nodes: CustomNode[], id?: string | null) => {
   if (!id) return undefined;
@@ -15,8 +15,12 @@ export const nodeArrayById = (nodes: CustomNode[], nodesId: string[]) => {
   return nodesById;
 };
 
-export const getNodesByLayer = (nodes: CustomNode[], layer: number) => {
-  return nodes.filter((node) => node.layer === layer);
+export const getNodesByLayer = (nodes: Nodes, layer: number) => {
+  const nodesByLayer: Nodes = {};
+  Object.entries(nodes).forEach(([id, node]) => {
+    if (layer === node.layer) nodesByLayer[id] = node;
+  });
+  return nodesByLayer;
 };
 
 export const nodeMounter = (label: string): CustomNode => {

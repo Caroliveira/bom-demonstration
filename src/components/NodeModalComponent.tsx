@@ -5,7 +5,7 @@ import { CgTrash } from "react-icons/cg";
 
 import { CustomNode, ProjectContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
-import { calculateLayers, nodeMounter } from "../utils";
+import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
@@ -34,7 +34,7 @@ const NodeModalComponent = (): JSX.Element | null => {
     });
     const elementsToDelete = [node, ...edgesToDelete];
     const auxElements = removeElements(elementsToDelete, elements);
-    setElements(calculateLayers(auxElements));
+    setElements(auxElements);
     history.push("/diagram");
     close();
   };

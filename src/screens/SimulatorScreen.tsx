@@ -1,5 +1,4 @@
-import React, { useContext, useCallback } from "react";
-import { isEdge } from "react-flow-renderer";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FiShield, FiShieldOff } from "react-icons/fi";
 
@@ -9,26 +8,26 @@ import {
   SimulatorItemComponent,
 } from "../components";
 import {
-  CustomNode,
   ProjectContext,
   SimulationContext,
   SimulationContextProvider,
 } from "../context";
-import { getNodesByLayer } from "../utils";
+import { calculateLayers, getNodesByLayer } from "../utils";
 
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
-  const { elements } = useContext(ProjectContext);
+  const { nodes, edges, setNodes } = useContext(ProjectContext);
   const { maxLayer, allowForcedOperations, setAllowForcedOperations } =
     useContext(SimulationContext);
 
+  useEffect(() => setNodes(calculateLayers(nodes, edges)), []);
+
   const renderList = (index: number) => {
-    const nodes = elements.filter((el) => !isEdge(el)) as CustomNode[];
     const layerNodes = getNodesByLayer(nodes, index);
     return (
       <ul key={`layer${index + 1}`} className="simulator__list">
-        {layerNodes?.map((node) => {
-          return <SimulatorItemComponent node={node} key={node.id} />;
+        {Object.entries(layerNodes).map(([id, node]) => {
+          return <SimulatorItemComponent nodeId={id} node={node} key={id} />;
         })}
       </ul>
     );

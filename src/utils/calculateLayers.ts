@@ -1,22 +1,29 @@
-import { Edge, Elements, isEdge } from "react-flow-renderer";
-import { CustomNode } from "../context";
+import { Edge, Edges, Node, Nodes } from "../context";
 
-const defineEdgesAndNodes = (elements: Elements) => {
-  const nodes: CustomNode[] = [];
-  const edges: Edge[] = [];
-  elements.forEach((el) =>
-    isEdge(el) ? edges.push(el) : nodes.push(el as CustomNode)
-  );
-  return { nodes, edges };
+type NodesArr = ({ id: string } & Node)[];
+type EdgesArr = ({ id: string } & Edge)[];
+
+const defineEdgesAndNodesAsArray = (nodes: Nodes, edges: Edges) => {
+  const nodesArr = Object.entries(nodes).map(([id, node]) => ({ ...node, id }));
+  const edgesArr = Object.entries(edges).map(([id, edge]) => ({ ...edge, id }));
+  return { nodesArr, edgesArr };
+};
+
+const reverseNodesToObject = (nodesArr: NodesArr) => {
+  const nodes: Nodes = {};
+  nodesArr.forEach(({ id, ...node }) => {
+    nodes[id] = node;
+  });
+  return nodes;
 };
 
 const setNextLayers = (
-  currentNodes: CustomNode[],
-  nodes: CustomNode[],
-  edges: Edge[],
+  currentNodes: NodesArr,
+  nodes: NodesArr,
+  edges: EdgesArr,
   layer: number
-): CustomNode[] => {
-  const nextNodes: CustomNode[] = [];
+): NodesArr => {
+  const nextNodes: NodesArr = [];
 
   currentNodes.forEach((node) => {
     const targetEdges = edges.filter(({ source }) => source === node.id);
@@ -33,7 +40,7 @@ const setNextLayers = (
   ];
 };
 
-const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
+const removeDuplicatedNodes = (duplicateds: NodesArr) => {
   return duplicateds.reduce((acc, el) => {
     const index = acc.findIndex((subEl) => subEl.id === el.id);
     let addElement = true;
@@ -44,18 +51,19 @@ const removeDuplicatedNodes = (duplicateds: CustomNode[]) => {
     }
 
     return addElement ? [...acc, el] : acc;
-  }, [] as CustomNode[]);
+  }, [] as NodesArr);
 };
 
-export const calculateLayers = (elements: Elements) => {
-  const { nodes, edges } = defineEdgesAndNodes(elements);
+export const calculateLayers = (nodes: Nodes, edges: Edges) => {
+  const { nodesArr, edgesArr } = defineEdgesAndNodesAsArray(nodes, edges);
 
-  const rootNodes: CustomNode[] = [];
-  nodes.forEach((node) => {
-    if (!edges.find(({ target }) => target === node.id)) rootNodes.push(node);
+  const rootNodes: NodesArr = [];
+  nodesArr.forEach((node) => {
+    if (!edgesArr.find(({ target }) => target === node.id))
+      rootNodes.push(node);
   });
 
-  const duplicateds = setNextLayers(rootNodes, nodes, edges, 1);
+  const duplicateds = setNextLayers(rootNodes, nodesArr, edgesArr, 1);
   const calculateds = removeDuplicatedNodes(duplicateds);
-  return [...calculateds, ...edges];
+  return reverseNodesToObject(calculateds);
 };

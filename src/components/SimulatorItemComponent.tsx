@@ -2,20 +2,22 @@ import React, { useState, useContext } from "react";
 import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
 
 import { IconButtonComponent } from ".";
-import { CustomNode, SimulationContext } from "../context";
+import { Node, SimulationContext } from "../context";
 
 type SimulatorItemProps = {
-  node: CustomNode;
+  nodeId: string;
+  node: Node;
 };
 
 const SimulatorItemComponent = ({
+  nodeId,
   node,
 }: SimulatorItemProps): JSX.Element | null => {
   const [showInfo, setShowInfo] = useState(false);
   const { allowForcedOperations, changeNodeAmount, isAvailable } =
     useContext(SimulationContext);
 
-  const available = isAvailable(node);
+  const available = isAvailable(nodeId);
   const isSubtractDisabled = !allowForcedOperations && node.amount <= 0;
 
   const handleClick = () => setShowInfo(!showInfo);
@@ -27,14 +29,14 @@ const SimulatorItemComponent = ({
         Icon={FiMinus}
         translationKey="subtract"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount(node, "subtract")}
+        onClick={() => changeNodeAmount(nodeId, "subtract")}
       />
       <IconButtonComponent
         disabled={allowForcedOperations ? false : !available}
         Icon={FiPlus}
         translationKey="add"
         className="simulator-item__button--icon"
-        onClick={() => changeNodeAmount(node, "add")}
+        onClick={() => changeNodeAmount(nodeId, "add")}
       />
       <IconButtonComponent
         Icon={FiClock}
@@ -56,7 +58,7 @@ const SimulatorItemComponent = ({
         role="button"
         tabIndex={0}
       >
-        <span>{node.data.label}</span> <span>{node.amount}</span>
+        <span>{node.label}</span> <span>{node.amount}</span>
       </div>
       {showInfo && renderItemInfo()}
     </li>

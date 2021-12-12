@@ -36,7 +36,9 @@ export type Project = {
 
 type ProjectContextType = {
   nodes: Nodes;
+  setNodes: (nodes: Nodes) => void;
   edges: Edges;
+  setEdges: (edges: Edges) => void;
   elements: Elements;
   setElements: (elements: Elements) => void;
   conversionEdges: ConversionEdge[];
@@ -107,7 +109,9 @@ export const ProjectContextProvider = ({
     <ProjectContext.Provider
       value={{
         nodes,
+        setNodes,
         edges,
+        setEdges,
         elements,
         setElements,
         conversionEdges,
