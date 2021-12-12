@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { CgTrash } from "react-icons/cg";
+import { v4 as uuid } from "uuid";
 
 import { ProjectContext, NodeContext } from "../context";
 import { InputComponent, ModalComponent } from ".";
-import { nodeMounter } from "../utils";
 
 const NodeModalComponent = (): JSX.Element | null => {
   const history = useHistory();
@@ -40,8 +40,7 @@ const NodeModalComponent = (): JSX.Element | null => {
 
   const handleCreate = () => {
     const auxNodes = { ...nodes };
-    const { id, ...newNode } = nodeMounter(name);
-    auxNodes[id] = newNode;
+    auxNodes[uuid()] = { label: name, amount: 0, layer: 0, timer: 0 };
     setNodes(auxNodes);
   };
 

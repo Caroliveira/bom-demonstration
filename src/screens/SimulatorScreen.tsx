@@ -8,11 +8,12 @@ import {
   SimulatorItemComponent,
 } from "../components";
 import {
+  Nodes,
   ProjectContext,
   SimulationContext,
   SimulationContextProvider,
 } from "../context";
-import { calculateLayers, getNodesByLayer } from "../utils";
+import { calculateLayers } from "../utils";
 
 const SimulatorScreen = (): JSX.Element => {
   const { t } = useTranslation();
@@ -22,8 +23,16 @@ const SimulatorScreen = (): JSX.Element => {
 
   useEffect(() => setNodes(calculateLayers(nodes, edges)), []);
 
+  const getNodesByLayer = (layer: number) => {
+    const nodesByLayer: Nodes = {};
+    Object.entries(nodes).forEach(([id, node]) => {
+      if (layer === node.layer) nodesByLayer[id] = node;
+    });
+    return nodesByLayer;
+  };
+
   const renderList = (index: number) => {
-    const layerNodes = getNodesByLayer(nodes, index);
+    const layerNodes = getNodesByLayer(index);
     return (
       <ul key={`layer${index + 1}`} className="simulator__list">
         {Object.entries(layerNodes).map(([id, node]) => {
