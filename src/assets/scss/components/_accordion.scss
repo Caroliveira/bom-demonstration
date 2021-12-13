@@ -20,14 +20,14 @@
 
 .layers {
   display: flex;
-    align-items: center;
+  align-items: center;
   &__result {
     display: flex;
-      flex-direction: column;
-      justify-content: center;
+    flex-direction: column;
+    justify-content: center;
     font-size: 24px;
     & > * {
       margin: 4px 0;
-    } 
+    }
   }
 }

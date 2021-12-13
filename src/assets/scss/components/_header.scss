@@ -9,7 +9,9 @@
     color: $NEUTRAL_COLOR;
     font-size: 24px;
     text-decoration: none;
-    &:active, &:hover, &:focus {
+    &:active,
+    &:hover,
+    &:focus {
       text-decoration: underline;
     }
   }
