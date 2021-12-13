@@ -46,20 +46,20 @@ const NodeModalComponent = (): JSX.Element | null => {
 
   const handleCreate = () => {
     const auxNodes = { ...nodes };
-    auxNodes[uuid()] = { label: name, amount: 0, layer: 0, timer: 0 };
+    auxNodes[uuid()] = { label: name.trim(), amount: 0, layer: 0, timer: 0 };
     setNodes(auxNodes);
   };
 
   const handleUpdate = () => {
     const auxNodes = { ...nodes };
-    auxNodes[nodeId].label = name;
+    auxNodes[nodeId].label = name.trim();
     setNodes(auxNodes);
   };
 
   const handleSave = () => {
-    const nameHasChanged = name !== nodes[nodeId].label;
+    const nameHasChanged = name.trim() !== nodes[nodeId]?.label;
     const duplicatedName = Object.values(nodes).some(
-      ({ label }) => label === name
+      ({ label }) => label === name.trim()
     );
     if (nameHasChanged && duplicatedName) setError("nameError");
     else {

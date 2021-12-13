@@ -4,7 +4,7 @@ import { FiShield, FiShieldOff } from "react-icons/fi";
 
 import { Nodes, ProjectContext } from "../context";
 import { calculateLayers } from "../utils";
-import { SimulatorItemComponent } from "../partials";
+import { ConversionListComponent, SimulatorItemComponent } from "../partials";
 import { IconButtonComponent, ScreensHeaderComponent } from "../components";
 
 const SimulatorScreen = (): JSX.Element => {
@@ -62,7 +62,10 @@ const SimulatorScreen = (): JSX.Element => {
           onClick={() => setAllowForcedOperations(!allowForcedOperations)}
         />
       </ScreensHeaderComponent>
-      <div className="simulator__content">{renderContent()}</div>
+      <div className="simulator__content">
+        <div className="simulator__items">{renderContent()}</div>
+        <ConversionListComponent />
+      </div>
     </>
   );
 };

@@ -26,16 +26,14 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   }, []);
 
   return (
-    <>
+    <div className="layout">
       <HeaderComponent />
-      <div className="layout">
-        <main className="layout__main">{children}</main>
-      </div>
+      <main className="layout__main">{children}</main>
       <ImportModalComponent />
       <ExportModalComponent />
       <NodeModalComponent />
       <FooterComponent />
-    </>
+    </div>
   );
 };
 

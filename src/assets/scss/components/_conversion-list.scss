@@ -1,0 +1,49 @@
+.cl {
+    position: absolute;
+    bottom: 50px;
+    right: 5vw;
+    align-self: flex-end;
+    height: fit-content;
+    background-color: $PRIMARY_COLOR;
+    border: 4px solid $NEUTRAL_COLOR;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    &__header {
+        margin: 0;
+        padding: 8px;
+        background-color: $NEUTRAL_COLOR;
+        text-align: center;
+        font-weight: bold;
+        color: $PRIMARY_COLOR;
+    }
+    &__content {
+        min-height: 10vh;
+        max-height: 60vh;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $NEUTRAL_TRANSPARENT;
+        }
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        background-color: $NEUTRAL_COLOR;
+        border-radius: 4px;
+        padding: 8px;
+        margin: 8px;
+        &-text {
+            display: block;
+            padding: 2px;
+        }
+        &-icon {
+            margin: 0px 16px;
+        }
+    }
+}
