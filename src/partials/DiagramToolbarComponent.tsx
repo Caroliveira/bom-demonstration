@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaMap, FaRegMap } from "react-icons/fa";
@@ -6,8 +6,7 @@ import { FiPlus } from "react-icons/fi";
 import { CgMoveDown, CgMoveRight } from "react-icons/cg";
 
 import { ButtonComponent, IconButtonComponent } from "../components";
-import { ProjectContext } from "../context";
-import { useDiagram } from "../hooks";
+import { DiagramContext, ProjectContext } from "../context";
 
 const layout = {
   TB: { Icon: CgMoveDown, label: "Vertical" },
@@ -17,8 +16,8 @@ const layout = {
 const DiagramToolbarComponent = (): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const [direction, setDirection] = useState<"TB" | "LR">("TB");
-  const { elements, adjustLayout, showMiniMap, setShowMiniMap } = useDiagram();
+  const { elements, direction, showMiniMap, setShowMiniMap, adjustLayout } =
+    useContext(DiagramContext);
   const { setShowNodeModal } = useContext(ProjectContext);
 
   const onDirectionChange = () => {

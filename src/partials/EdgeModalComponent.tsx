@@ -3,13 +3,12 @@ import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from "../components";
-import { ProjectContext } from "../context";
-import { useDiagram } from "../hooks";
+import { DiagramContext, ProjectContext } from "../context";
 
 const EdgeModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { nodes, edges, setEdges } = useContext(ProjectContext);
-  const { edgeId, showEdgeModal, closeEdgeModal } = useDiagram();
+  const { edgeId, setEdgeId } = useContext(DiagramContext);
 
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
@@ -30,10 +29,8 @@ const EdgeModalComponent = (): JSX.Element | null => {
     setAmount("");
     setSource("");
     setTarget("");
-    closeEdgeModal();
+    setEdgeId("");
   };
-
-  if (!amount) return null;
 
   const handleDelete = () => {
     const auxEdges = { ...edges };
@@ -56,7 +53,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
 
   return (
     <ModalComponent
-      show={showEdgeModal}
+      show={!!edgeId}
       title="editConnection"
       onSubmit={handleSave}
       submitButton={{ disabled: !amount || !!error, translationKey: "save" }}

@@ -5,11 +5,27 @@ import { getLayoutedElements } from "../utils";
 
 type DirectionType = "TB" | "LR";
 
-export const useDiagram = () => {
+type DiagramContextType = {
+  elements: Elements;
+  setElements: (elements: Elements) => void;
+  edgeId: string;
+  setEdgeId: (edgeId: string) => void;
+  direction: DirectionType;
+  showMiniMap: boolean;
+  setShowMiniMap: (showMiniMap: boolean) => void;
+  adjustLayout: (dir: DirectionType, els?: Elements) => void;
+};
+
+type DiagramContextProviderType = { children: React.ReactNode };
+
+export const DiagramContext = React.createContext({} as DiagramContextType);
+
+export const DiagramContextProvider = ({
+  children,
+}: DiagramContextProviderType): JSX.Element => {
   const { nodes, edges } = useContext(ProjectContext);
   const [elements, setElements] = useState<Elements>([]);
   const [direction, setDirection] = useState<DirectionType>("TB");
-  const [showEdgeModal, setShowEdgeModal] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(true);
   const [edgeId, setEdgeId] = useState("");
 
@@ -34,21 +50,20 @@ export const useDiagram = () => {
     adjustLayout(direction, [...elsNodes, ...elsEdges] as Elements);
   }, [nodes, edges]);
 
-  const closeEdgeModal = () => {
-    setShowEdgeModal(false);
-    setEdgeId("");
-  };
-
-  return {
-    elements,
-    setElements,
-    edgeId,
-    setEdgeId,
-    showEdgeModal,
-    setShowEdgeModal,
-    showMiniMap,
-    setShowMiniMap,
-    adjustLayout,
-    closeEdgeModal,
-  };
+  return (
+    <DiagramContext.Provider
+      value={{
+        elements,
+        setElements,
+        edgeId,
+        setEdgeId,
+        direction,
+        showMiniMap,
+        setShowMiniMap,
+        adjustLayout,
+      }}
+    >
+      {children}
+    </DiagramContext.Provider>
+  );
 };
