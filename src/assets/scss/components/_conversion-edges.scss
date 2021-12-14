@@ -1,0 +1,19 @@
+.ce {
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $NEUTRAL_COLOR;
+        border-radius: 4px;
+        padding: 8px;
+        margin: 8px;
+        &__text {
+            display: block;
+            padding: 2px;
+            color: black;
+        }
+        &__icon {
+            margin: 0px 16px;
+        }
+    }
+}

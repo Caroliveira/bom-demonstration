@@ -31,19 +31,4 @@
             background-color: $NEUTRAL_TRANSPARENT;
         }
     }
-    &__item {
-        display: flex;
-        align-items: center;
-        background-color: $NEUTRAL_COLOR;
-        border-radius: 4px;
-        padding: 8px;
-        margin: 8px;
-        &-text {
-            display: block;
-            padding: 2px;
-        }
-        &-icon {
-            margin: 0px 16px;
-        }
-    }
 }
