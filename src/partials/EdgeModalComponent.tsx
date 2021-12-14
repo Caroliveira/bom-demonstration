@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
 
 import { InputComponent, ModalComponent } from "../components";
-import { Edge, ProjectContext } from "../context";
+import { ProjectContext } from "../context";
 import { useDiagram } from "../hooks";
 
 const EdgeModalComponent = (): JSX.Element | null => {
@@ -11,7 +11,6 @@ const EdgeModalComponent = (): JSX.Element | null => {
   const { nodes, edges, setEdges } = useContext(ProjectContext);
   const { edgeId, showEdgeModal, closeEdgeModal } = useDiagram();
 
-  const [currentEdge, setCurrentEdge] = useState<Edge>();
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
   const [amount, setAmount] = useState("");
@@ -22,8 +21,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
       const [sourceId, targetId] = edgeId.split("-");
       setSource(nodes[sourceId].label);
       setTarget(nodes[targetId].label);
-      setAmount(edges[edgeId].label);
-      setCurrentEdge(edges[edgeId]);
+      setAmount(edges[edgeId].toString());
     }
   }, [edgeId]);
 
@@ -35,7 +33,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
     closeEdgeModal();
   };
 
-  if (!currentEdge) return null;
+  if (!amount) return null;
 
   const handleDelete = () => {
     const auxEdges = { ...edges };
@@ -46,7 +44,7 @@ const EdgeModalComponent = (): JSX.Element | null => {
 
   const handleSave = () => {
     const auxEdges = { ...edges };
-    auxEdges[edgeId].label = amount;
+    auxEdges[edgeId] = parseInt(amount, 10);
     setEdges(auxEdges);
     close();
   };

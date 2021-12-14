@@ -14,7 +14,9 @@ const LayersCalculationComponent = (): JSX.Element | null => {
 
   const renderCalculation = useMemo(() => {
     const layerToCalculate = parseInt(currentLayer, 10);
-    if (Number.isNaN(layerToCalculate)) return <p>{t("noLayerSelected")}</p>;
+    if (Number.isNaN(layerToCalculate)) {
+      return <p style={{ textAlign: "end" }}>{t("noLayerSelected")}</p>;
+    }
     const calculatedNodes = calculateNodesLayers(layerToCalculate);
     return calculatedNodes.map((n) => (
       <p key={n.id}>

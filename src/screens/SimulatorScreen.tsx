@@ -64,7 +64,7 @@ const SimulatorScreen = (): JSX.Element => {
       </ScreensHeaderComponent>
       <div className="simulator__content">
         <div className="simulator__items">{renderContent()}</div>
-        <ConversionListComponent />
+        {/* <ConversionListComponent /> */}
       </div>
     </>
   );

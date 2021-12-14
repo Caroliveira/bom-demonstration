@@ -24,7 +24,10 @@ export const useDiagram = () => {
   );
 
   useEffect(() => {
-    const elsEdges = Object.entries(edges).map(([id, el]) => ({ ...el, id }));
+    const elsEdges = Object.entries(edges).map(([id, label]) => {
+      const [source, target] = id.split("-");
+      return { id, source, target, label };
+    });
     const elsNodes = Object.entries(nodes).map(([id, { label, ...rest }]) => {
       return { ...rest, id, data: { label } };
     });

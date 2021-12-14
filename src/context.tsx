@@ -9,13 +9,7 @@ export type Node = {
 
 export type Nodes = { [id: string]: Node };
 
-export type Edge = {
-  label: string;
-  source: string;
-  target: string;
-};
-
-export type Edges = { [id: string]: Edge };
+export type Edges = { [id: string]: number };
 
 export type ConversionEdge = {
   label: string;

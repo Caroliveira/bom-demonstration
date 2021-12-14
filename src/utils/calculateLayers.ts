@@ -1,11 +1,14 @@
-import { Edge, Edges, Node, Nodes } from "../context";
+import { Edges, Node, Nodes } from "../context";
 
 type NodesArr = ({ id: string } & Node)[];
-type EdgesArr = ({ id: string } & Edge)[];
+type EdgesArr = { source: string; target: string; label: number }[];
 
 const defineEdgesAndNodesAsArray = (nodes: Nodes, edges: Edges) => {
   const nodesArr = Object.entries(nodes).map(([id, node]) => ({ ...node, id }));
-  const edgesArr = Object.entries(edges).map(([id, edge]) => ({ ...edge, id }));
+  const edgesArr = Object.entries(edges).map(([id, label]) => {
+    const [source, target] = id.split("-");
+    return { source, target, label };
+  });
   return { nodesArr, edgesArr };
 };
 

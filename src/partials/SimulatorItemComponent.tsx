@@ -21,11 +21,10 @@ const SimulatorItemComponent = ({
 
   const available = useMemo(() => {
     let isAvailable = true;
-    Object.entries(edges).forEach(([edgeId, { label }]) => {
+    Object.entries(edges).forEach(([edgeId, label]) => {
       const [source, target] = edgeId.split("-");
       const { amount } = nodes[source];
-      const intLabel = parseInt(label as string, 10);
-      if (target === nodeId && amount < intLabel) isAvailable = false;
+      if (target === nodeId && amount < label) isAvailable = false;
     });
     return isAvailable;
   }, [nodes]);

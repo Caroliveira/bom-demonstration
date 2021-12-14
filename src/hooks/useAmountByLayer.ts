@@ -12,9 +12,9 @@ export const useAmountByLayer = () => {
   const { nodeId, nodes, edges } = useContext(ProjectContext);
 
   const edgesArr = useMemo(() => {
-    return Object.entries(edges).map(([edgeId, edge]) => {
+    return Object.entries(edges).map(([edgeId, label]) => {
       const [source, target] = edgeId.split("-");
-      return { source, target, label: edge.label };
+      return { source, target, label };
     });
   }, [edges]);
 
@@ -33,7 +33,7 @@ export const useAmountByLayer = () => {
           id: source,
           label: nodes[source].label,
           layer: nodes[source].layer,
-          amount: parseInt(label as string, 10) * amount,
+          amount: label * amount,
         });
       });
     });
