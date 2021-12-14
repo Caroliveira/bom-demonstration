@@ -17,7 +17,7 @@ const HeaderComponent = (): JSX.Element => {
   const handleClick = async (evt: React.MouseEvent) => {
     evt.preventDefault();
     if (history.location.pathname === "/") {
-      const id = uuid();
+      const [id] = uuid().split("-");
       localStorage.setItem("bom_demonstration_id", id);
       await createProject({ id });
     }
