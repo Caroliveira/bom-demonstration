@@ -29,6 +29,7 @@ const DiagramToolbarComponent = (): JSX.Element => {
     <div className="toolbar">
       <div className="toolbar--centered">
         <IconButtonComponent
+          disabled={!elements.length}
           Icon={showMiniMap ? FaMap : FaRegMap}
           translationKey={showMiniMap ? "hideMap" : "showMap"}
           onClick={() => setShowMiniMap(!showMiniMap)}
