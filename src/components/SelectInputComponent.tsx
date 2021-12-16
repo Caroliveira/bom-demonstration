@@ -5,24 +5,22 @@ import { FiAlertTriangle } from "react-icons/fi";
 type SelectInputProps = {
   error?: string;
   hideLabel?: boolean;
-  translationKey: string;
+  translationKey?: string;
   children: React.ReactNode;
-  divStyle?: React.CSSProperties;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 const SelectInputComponent = ({
   error,
   hideLabel,
   children,
-  translationKey,
-  divStyle,
+  translationKey = "",
   className,
   ...props
 }: SelectInputProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className="input" style={divStyle}>
+    <div className="input">
       {!hideLabel && (
         <label htmlFor={translationKey} className="input__label">
           {t(translationKey)}

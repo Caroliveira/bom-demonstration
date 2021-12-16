@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 
+export type CEDependency = { id: string; amount: number };
+
+export type ConversionEdge = {
+  label?: string;
+  sources: CEDependency[];
+  targets: CEDependency[];
+};
+
 export type Node = {
   label: string;
   amount: number;
@@ -11,16 +19,12 @@ export type Nodes = { [id: string]: Node };
 
 export type Edges = { [id: string]: number };
 
-export type ConversionEdge = {
-  label: string;
-  source: string[];
-  target: string[];
-};
+export type ConversionEdges = { [id: string]: ConversionEdge };
 
 export type Project = {
   nodes: Nodes;
   edges: Edges;
-  conversionEdges: ConversionEdge[];
+  conversionEdges: ConversionEdges;
 };
 
 type ProjectContextType = {
@@ -30,8 +34,8 @@ type ProjectContextType = {
   setNodes: (nodes: Nodes) => void;
   edges: Edges;
   setEdges: (edges: Edges) => void;
-  conversionEdges: ConversionEdge[];
-  setConversionEdges: (conversionEdges: ConversionEdge[]) => void;
+  conversionEdges: ConversionEdges;
+  setConversionEdges: (conversionEdges: ConversionEdges) => void;
   showImportModal: boolean;
   setShowImportModal: (showImportModal: boolean) => void;
   showExportModal: boolean;
@@ -57,7 +61,7 @@ export const ProjectContextProvider = ({
   const [nodeId, setNodeId] = useState("");
   const [nodes, setNodes] = useState<Nodes>({});
   const [edges, setEdges] = useState<Edges>({});
-  const [conversionEdges, setConversionEdges] = useState<ConversionEdge[]>([]);
+  const [conversionEdges, setConversionEdges] = useState<ConversionEdges>({});
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showFullHeader, setShowFullHeader] = useState(false);

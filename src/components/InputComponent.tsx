@@ -1,25 +1,25 @@
-import React from "react";
+import React, { LabelHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 import { FiAlertTriangle } from "react-icons/fi";
 
 type InputProps = {
   error?: string;
-  translationKey: string;
-  divStyle?: React.CSSProperties;
+  translationKey?: string;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputComponent = ({
   error,
-  translationKey,
-  divStyle,
+  translationKey = "",
   className,
+  labelProps,
   ...props
 }: InputProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className="input" style={divStyle}>
-      <label htmlFor={translationKey} className="input__label">
+    <div className="input">
+      <label htmlFor={translationKey} className="input__label" {...labelProps}>
         {t(translationKey)}
       </label>
       <input

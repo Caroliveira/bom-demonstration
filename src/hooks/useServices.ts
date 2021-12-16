@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import { ConversionEdge, Edges, Nodes, ProjectContext } from "../context";
+import { ConversionEdges, Edges, Nodes, ProjectContext } from "../context";
 
 export type ProjectType = {
   id: string;
   nodes: Nodes;
   edges: Edges;
-  conversionEdges?: ConversionEdge[];
+  conversionEdges?: ConversionEdges;
 };
 
 axios.defaults.headers.common = { Accept: "application/json" };

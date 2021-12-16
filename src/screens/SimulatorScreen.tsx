@@ -4,7 +4,7 @@ import { FiShield, FiShieldOff } from "react-icons/fi";
 
 import { Nodes, ProjectContext } from "../context";
 import { calculateLayers } from "../utils";
-import { ConversionListComponent, SimulatorItemComponent } from "../partials";
+import { SimulatorItemComponent } from "../partials";
 import { IconButtonComponent, ScreensHeaderComponent } from "../components";
 
 const SimulatorScreen = (): JSX.Element => {

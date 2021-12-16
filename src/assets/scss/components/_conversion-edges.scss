@@ -1,4 +1,11 @@
 .ce {
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    &__button {
+        margin: 0 8px 8px;
+    }
     &-item {
         display: flex;
         align-items: center;
@@ -15,5 +22,11 @@
         &__icon {
             margin: 0px 16px;
         }
+    }
+    &__input { 
+        display: grid;
+        grid-template-columns: min-content auto 45px 50px;
+        align-items: flex-end;
+        margin-top: 8px;
     }
 }
