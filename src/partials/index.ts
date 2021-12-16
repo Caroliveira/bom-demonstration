@@ -1,5 +1,4 @@
 import ConversionEdgesComponent from "./ConversionEdgesComponent";
-import ConversionListComponent from "./ConversionListComponent";
 import DiagramComponent from "./DiagramComponent";
 import DiagramToolbarComponent from "./DiagramToolbarComponent";
 import EdgeModalComponent from "./EdgeModalComponent";
@@ -9,7 +8,6 @@ import SimulatorItemComponent from "./SimulatorItemComponent";
 
 export {
   ConversionEdgesComponent,
-  ConversionListComponent,
   DiagramComponent,
   DiagramToolbarComponent,
   EdgeModalComponent,

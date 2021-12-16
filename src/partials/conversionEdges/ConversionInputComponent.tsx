@@ -8,10 +8,14 @@ import {
   InputComponent,
   SelectInputComponent,
 } from "../../components";
-import { CEDependency, ProjectContext } from "../../context";
+import { ProjectContext } from "../../context";
 
 type ConversionInputProps = {
-  addDependency: (type: "source" | "target", dep: CEDependency) => void;
+  addDependency: (
+    id: string,
+    amount: number,
+    type: "sources" | "targets"
+  ) => void;
 };
 
 const ConversionInputComponent = ({
@@ -31,9 +35,8 @@ const ConversionInputComponent = ({
   };
 
   const handleAddDependency = () => {
-    if (type === "source" || type === "target") {
-      const dep = { id: nodeId, amount: parseInt(amount, 10) };
-      addDependency(type, dep);
+    if (type === "sources" || type === "targets") {
+      addDependency(nodeId, parseInt(amount, 10), type);
     }
     setAmount("1");
     setNodeId("");
@@ -49,8 +52,8 @@ const ConversionInputComponent = ({
           onChange={(evt) => setType(evt.target.value)}
         >
           <option value="">{t("choose")}</option>
-          <option value="source">{t("source")}</option>
-          <option value="target">{t("target")}</option>
+          <option value="sources">{t("source")}</option>
+          <option value="targets">{t("target")}</option>
         </SelectInputComponent>
         <SelectInputComponent
           value={nodeId}

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
-export type CEDependency = { id: string; amount: number };
-
 export type ConversionEdge = {
   label?: string;
-  sources: CEDependency[];
-  targets: CEDependency[];
+  sources: { [id: string]: number };
+  targets: { [id: string]: number };
 };
 
 export type Node = {

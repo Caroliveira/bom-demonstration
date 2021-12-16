@@ -8,11 +8,11 @@ const ConversionListComponent = (): JSX.Element => {
     <div className="cl">
       <p className="cl__header">{t("conversions")}</p>
       <div className="cl__content">
+        {/* <ConversionItemComponent />
         <ConversionItemComponent />
         <ConversionItemComponent />
         <ConversionItemComponent />
-        <ConversionItemComponent />
-        <ConversionItemComponent />
+        <ConversionItemComponent /> */}
       </div>
     </div>
   );
