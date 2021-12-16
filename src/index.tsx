@@ -4,6 +4,7 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import {
+  ConversionsScreen,
   DiagramScreen,
   HomeScreen,
   NodeScreen,
@@ -28,6 +29,7 @@ ReactDOM.render(
               <Route exact path="/diagram" component={DiagramScreen} />
               <Route exact path="/node/:id" component={NodeScreen} />
               <Route exact path="/simulator" component={SimulatorScreen} />
+              <Route exact path="/conversions" component={ConversionsScreen} />
               <Route exact path="/not-found" component={NotFoundScreen} />
               <Redirect from="*" to="/not-found" />
             </Switch>

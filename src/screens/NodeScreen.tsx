@@ -11,7 +11,7 @@ import {
   ScreensHeaderComponent,
 } from "../components";
 import {
-  ConversionEdgesComponent,
+  NodeConversionsComponent,
   LayersCalculationComponent,
   NodeDependenciesComponent,
 } from "../partials";
@@ -83,8 +83,8 @@ const NodeScreen = ({
           <LayersCalculationComponent />
         </AccordionComponent>
       )}
-      <AccordionComponent translationKey="conversionAndEvents">
-        <ConversionEdgesComponent />
+      <AccordionComponent translationKey="conversionsAndEvents">
+        <NodeConversionsComponent />
       </AccordionComponent>
     </>
   );

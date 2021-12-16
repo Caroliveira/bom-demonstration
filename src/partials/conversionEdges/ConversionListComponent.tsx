@@ -13,8 +13,9 @@ const ConversionListComponent = (): JSX.Element => {
         {Object.entries(conversionEdges).map(([id, ce]) => (
           <ConversionItemComponent
             key={id}
+            context="list"
             conversionEdge={ce}
-            onClick={() => null}
+            // onClick={() => null}
           />
         ))}
       </div>

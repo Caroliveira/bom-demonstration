@@ -23,9 +23,6 @@ const ConversionModalComponent = ({
   const [label, setLabel] = useState<string>();
   const [conversionEdge, setConversionEdge] =
     useState<ConversionEdge>(ceDefault);
-  const showItemComponent =
-    Object.keys(conversionEdge.sources).length ||
-    Object.keys(conversionEdge.targets).length;
 
   useEffect(() => {
     if (id) {
@@ -90,13 +87,11 @@ const ConversionModalComponent = ({
         translationKey="optionalEventName"
       />
       <ConversionInputComponent addDependency={addDependency} />
-      {!!showItemComponent && (
-        <ConversionItemComponent
-          context="modal"
-          conversionEdge={conversionEdge}
-          updateConversionEdge={setConversionEdge}
-        />
-      )}
+      <ConversionItemComponent
+        context="modal"
+        conversionEdge={conversionEdge}
+        updateConversionEdge={setConversionEdge}
+      />
     </ModalComponent>
   );
 };

@@ -6,11 +6,16 @@ import { ConversionEdge, ProjectContext } from "../../context";
 import { colors } from "../../utils";
 
 type ConversionItemPartial =
-  | { context?: "list"; updateConversionEdge?: never; onClick: () => void }
+  | { context?: "list"; updateConversionEdge?: never; onClick?: never }
   | {
       context: "modal";
       updateConversionEdge: (ce: ConversionEdge) => void;
       onClick?: never;
+    }
+  | {
+      context: "page";
+      updateConversionEdge?: never;
+      onClick?: () => void;
     };
 
 type ConversionItemProps = {

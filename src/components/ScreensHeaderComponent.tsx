@@ -8,11 +8,13 @@ import { IconButtonComponent } from "../components";
 type ScreensHeaderProps = {
   title: string;
   children?: React.ReactNode;
+  path?: string;
 };
 
 const ScreensHeaderComponent = ({
   title,
   children,
+  path,
 }: ScreensHeaderProps): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
@@ -23,7 +25,7 @@ const ScreensHeaderComponent = ({
         <IconButtonComponent
           Icon={FiArrowLeft}
           translationKey="back"
-          onClick={() => history.push("/diagram")}
+          onClick={() => history.push(`/${path || "diagram"}`)}
         />
         <h1 className="screen-header__title">{t(title)}</h1>
       </div>
