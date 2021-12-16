@@ -14,12 +14,19 @@ const ConversionEdgesComponent = (): JSX.Element => {
     setShowModal(false);
   };
 
+  const openModal = (ceId: string) => {
+    setId(ceId);
+    setShowModal(true);
+  };
+
   const ceList = useMemo(() => {
-    return Object.values(conversionEdges).filter(({ sources, targets }) => {
-      const inSources = sources[nodeId];
-      const inTargets = targets[nodeId];
-      return !!inSources || !!inTargets;
-    });
+    return Object.entries(conversionEdges).filter(
+      ([_, { sources, targets }]) => {
+        const inSources = sources[nodeId];
+        const inTargets = targets[nodeId];
+        return !!inSources || !!inTargets;
+      }
+    );
   }, [nodeId, conversionEdges]);
 
   return (
@@ -31,8 +38,12 @@ const ConversionEdgesComponent = (): JSX.Element => {
         onClick={() => setShowModal(true)}
       />
       <div className="ce__list">
-        {ceList.map((ce) => (
-          <ConversionItemComponent key={ce.label} conversionEdge={ce} />
+        {ceList.map(([ceId, ce]) => (
+          <ConversionItemComponent
+            key={ce.label}
+            conversionEdge={ce}
+            onClick={() => openModal(ceId)}
+          />
         ))}
       </div>
       <ConversionModalComponent
