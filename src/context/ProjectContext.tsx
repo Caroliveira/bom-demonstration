@@ -69,9 +69,10 @@ export const ProjectContextProvider = ({
 
   const setProject = (project?: Project) => {
     if (project) {
-      const { nodes: n, edges: e } = project;
+      const { nodes: n, edges: e, conversionEdges: ce } = project;
       setNodes(n);
       setEdges(e);
+      setConversionEdges(ce);
     }
   };
 
