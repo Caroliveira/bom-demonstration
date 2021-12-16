@@ -8,13 +8,22 @@
     }
     &-item {
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         background-color: $NEUTRAL_COLOR;
         border-radius: 4px;
         padding: 8px;
         margin: 8px;
+        &__title {
+            margin: 4px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba($PRIMARY_COLOR, 0.3);
+            font-weight: bold;
+            text-align: center;
+        }
+        &__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
         &__text {
             display: block;
             padding: 2px;

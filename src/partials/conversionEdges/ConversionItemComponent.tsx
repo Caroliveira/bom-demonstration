@@ -25,6 +25,7 @@ const ConversionItemComponent = ({
 }: ConversionItemProps): JSX.Element => {
   const { nodes } = useContext(ProjectContext);
   const [showDiff, setShowDiff] = useState(false);
+  const showTitle = conversionEdge.label && context === "list";
 
   const handleClick = () => {
     if (onClick) onClick();
@@ -70,9 +71,12 @@ const ConversionItemComponent = ({
       role="button"
       tabIndex={0}
     >
-      {renderDepList("sources")}
-      <FaPlay color={colors.primary} className="ce-item__icon" />
-      {renderDepList("targets")}
+      {showTitle && <p className="ce-item__title">{conversionEdge.label}</p>}
+      <div className="ce-item__content">
+        {renderDepList("sources")}
+        <FaPlay color={colors.primary} className="ce-item__icon" />
+        {renderDepList("targets")}
+      </div>
     </div>
   );
 };
