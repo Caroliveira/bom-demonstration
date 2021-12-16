@@ -53,7 +53,7 @@ const ExportModalComponent = (): JSX.Element | null => {
   // };
 
   const exportJSONFile = () => {
-    const data = JSON.stringify({ id, nodes, edges });
+    const data = JSON.stringify({ id, nodes, edges, conversionEdges });
     generateFile(data, "json");
   };
 

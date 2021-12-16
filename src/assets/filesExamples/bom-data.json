@@ -1,0 +1,71 @@
+{
+    "id": "24acff9c-b4be-4835-a2fd-1fb3521a6272",
+    "nodes": {
+        "1": {
+            "timer": 0,
+            "amount": 0,
+            "label": "wood",
+            "layer": 0
+        },
+        "2": {
+            "timer": 0,
+            "amount": 0,
+            "label": "stone",
+            "layer": 0
+        },
+        "3": {
+            "timer": 0,
+            "amount": 0,
+            "label": "plank",
+            "layer": 1
+        },
+        "4": {
+            "timer": 0,
+            "amount": 0,
+            "label": "hammer",
+            "layer": 1
+        },
+        "5": {
+            "timer": 0,
+            "amount": 0,
+            "label": "fireplace",
+            "layer": 1
+        },
+        "6": {
+            "timer": 0,
+            "amount": 0,
+            "label": "house",
+            "layer": 2
+        },
+        "7": {
+            "timer": 0,
+            "amount": 0,
+            "label": "comfy house",
+            "layer": 3
+        }
+    },
+    "edges": {
+        "6-7": 1,
+        "1-3": 3,
+        "1-4": 1,
+        "1-5": 2,
+        "2-4": 1,
+        "2-5": 5,
+        "3-6": 2,
+        "4-6": 1,
+        "5-7": 1
+    },
+    "conversionEdges": {
+        "7ac29e8b-c7c8-4a88-9b00-6e1597014a23": {
+            "sources": {
+                "4": 1,
+                "7": 1
+            },
+            "targets": {
+                "3": 3,
+                "5": 1
+            },
+            "label": "Destroy comfy house"
+        }
+    }
+}
