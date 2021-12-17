@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FiSave, FiUpload } from "react-icons/fi";
+import { FiLogOut, FiSave, FiUpload } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
@@ -11,8 +11,13 @@ import { useServices } from "../hooks";
 const HeaderComponent = (): JSX.Element => {
   const history = useHistory();
   const { createProject } = useServices();
-  const { showFullHeader, setShowImportModal, setShowExportModal, loadingSet } =
-    useContext(ProjectContext);
+  const {
+    loadingSet,
+    showFullHeader,
+    setShowImportModal,
+    setShowExportModal,
+    closeProject,
+  } = useContext(ProjectContext);
 
   const handleClick = async (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -22,6 +27,11 @@ const HeaderComponent = (): JSX.Element => {
       await createProject({ id });
     }
     history.push("/diagram");
+  };
+
+  const handleClose = () => {
+    closeProject();
+    history.push("/");
   };
 
   const renderFullHeader = () => (
@@ -51,6 +61,13 @@ const HeaderComponent = (): JSX.Element => {
       </div>
       {showFullHeader && renderFullHeader()}
       <SwitchLanguageComponent />
+      {showFullHeader && (
+        <IconButtonComponent
+          Icon={FiLogOut}
+          translationKey="closeProject"
+          onClick={handleClose}
+        />
+      )}
     </header>
   );
 };

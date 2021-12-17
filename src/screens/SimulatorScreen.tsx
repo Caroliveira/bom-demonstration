@@ -60,12 +60,14 @@ const SimulatorScreen = (): JSX.Element => {
   return (
     <>
       <ScreensHeaderComponent title="simulator">
-        <ButtonComponent
-          outlined
-          translationKey="conversions"
-          className="toolbar__button"
-          onClick={() => history.push("/conversions")}
-        />
+        {!!Object.keys(nodes).length && (
+          <ButtonComponent
+            outlined
+            translationKey="conversions"
+            className="toolbar__button"
+            onClick={() => history.push("/conversions")}
+          />
+        )}
         <IconButtonComponent
           Icon={allowForcedOperations ? FiShieldOff : FiShield}
           label={t("allowForcedOperations", {

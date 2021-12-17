@@ -14,7 +14,7 @@ const SwitchLanguageComponent = (): JSX.Element => {
     <button
       type="button"
       title={t(i18n.language)}
-      className="icon-button icon-button__text"
+      className="icon-button icon-button__text mr-2"
       onClick={handleClick}
     >
       {i18n.language}

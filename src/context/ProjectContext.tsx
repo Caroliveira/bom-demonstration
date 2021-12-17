@@ -48,6 +48,7 @@ type ProjectContextType = {
   loadingSet: boolean;
   setLoadingSet: (show: boolean) => void;
   setProject: (project?: Project) => void;
+  closeProject: () => void;
 };
 
 type ProjectContextProviderType = { children: React.ReactChild };
@@ -67,6 +68,14 @@ export const ProjectContextProvider = ({
   const [showNodeModal, setShowNodeModal] = useState(false);
   const [loadingGet, setLoadingGet] = useState(false);
   const [loadingSet, setLoadingSet] = useState(false);
+
+  const closeProject = () => {
+    localStorage.removeItem("bom_demonstration_id");
+    setShowFullHeader(false);
+    setNodes({});
+    setEdges({});
+    setConversionEdges({});
+  };
 
   const setProject = (project?: Project) => {
     if (project) {
@@ -101,6 +110,7 @@ export const ProjectContextProvider = ({
         loadingSet,
         setLoadingSet,
         setProject,
+        closeProject,
       }}
     >
       {children}
