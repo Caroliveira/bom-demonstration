@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { FaFileAlt } from "react-icons/fa";
 
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { fileHandler } from "../utils";
 import { useServices } from "../hooks";
 import { ProjectContext } from "../context";
@@ -69,7 +70,15 @@ const ImportModalComponent = (): JSX.Element | null => {
 
   if (!type) {
     return (
-      <ModalComponent show={showImportModal} title="importTypeTitle">
+      <ModalComponent
+        show={showImportModal}
+        title="importTypeTitle"
+        deleteButton={{
+          Icon: AiOutlineCloseCircle,
+          onClick: closeModal,
+          style: { marginLeft: 20 },
+        }}
+      >
         <SelectInputComponent
           hideLabel
           value={type}

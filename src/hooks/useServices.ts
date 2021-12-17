@@ -16,6 +16,7 @@ axios.defaults.headers.common = { Accept: "application/json" };
 export const useServices = (customSetLoading?: (loading: boolean) => void) => {
   const history = useHistory();
   const { setProject } = useContext(ProjectContext);
+  // const base = "http://localhost:3001"; // local
   const base = "https://bom-demonstration-api.herokuapp.com";
   const [loading, setLoading] = useState(false);
 
