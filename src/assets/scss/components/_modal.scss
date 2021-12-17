@@ -40,18 +40,31 @@
       display: inline;
     }
   }
-  &__file-icon {
-    margin-right: 8px;
-    color: $PRIMARY_COLOR;
-  }
-  &__file-name {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 16px;
-    border-radius: 8px;
-    color: $PRIMARY_COLOR;
-    background-color: rgba(#3c417a, 0.2);
-    border: 2px solid rgba($PRIMARY_COLOR, 0.5);
+  &__file {
+    &-name {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: $PRIMARY_COLOR;
+      background-color: rgba(#347, 0.2);
+      border: 2px solid rgba($PRIMARY_COLOR, 0.5);
+    }
+    &-icon {
+      color: $PRIMARY_COLOR;
+      width: 16px;
+      height: 16px;
+      &--background {
+        padding: 0;
+        margin-right: 8px;
+        background: none;
+        border: none;
+        height: 20px;
+        width: 20px;
+      }
+    }
   }
   &__buttons {
     margin-top: 24px;

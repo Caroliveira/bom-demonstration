@@ -1,14 +1,19 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { FaKey } from "react-icons/fa";
+import { FaCheck, FaCopy } from "react-icons/fa";
 
 import { ProjectContext } from "../context";
-import { ButtonComponent, ModalComponent } from "../components";
+import {
+  ButtonComponent,
+  IconButtonComponent,
+  ModalComponent,
+} from "../components";
 import { useServices } from "../hooks";
 
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { nodes, edges } = useContext(ProjectContext);
   const id = localStorage.getItem("bom_demonstration_id") || "";
@@ -60,6 +65,12 @@ const ExportModalComponent = (): JSX.Element | null => {
   const closeModal = () => {
     setShowModal(false);
     setShowExportModal(false);
+    setCopied(false);
+  };
+
+  const copyId = () => {
+    navigator.clipboard.writeText(id);
+    setCopied(true);
   };
 
   return (
@@ -70,7 +81,14 @@ const ExportModalComponent = (): JSX.Element | null => {
     >
       {id && (
         <p className="modal__file-name">
-          <FaKey className="modal__file-icon" /> {id}
+          <IconButtonComponent
+            Icon={copied ? FaCheck : FaCopy}
+            translationKey="editConversion"
+            onClick={copyId}
+            className="modal__file-icon--background"
+            iconProps={{ className: "modal__file-icon" }}
+          />
+          {id}
         </p>
       )}
       <iframe title="export" id="iframe" style={{ display: "none" }} />

@@ -55,7 +55,7 @@ export const useServices = (customSetLoading?: (loading: boolean) => void) => {
       return res.data;
     } catch (error: any) {
       stopLoading();
-      return error.response.status;
+      return error?.response?.status || 500;
     }
   };
 
@@ -67,7 +67,7 @@ export const useServices = (customSetLoading?: (loading: boolean) => void) => {
       return res.data;
     } catch (error: any) {
       stopLoading();
-      return error;
+      return error?.response?.status || 500;
     }
   };
 
