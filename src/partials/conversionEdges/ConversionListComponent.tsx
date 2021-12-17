@@ -1,16 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectContext } from "../../context";
+import { ConversionEdge, ProjectContext } from "../../context";
 import ConversionItemComponent from "./ConversionItemComponent";
 
 const ConversionListComponent = (): JSX.Element => {
   const { t } = useTranslation();
   const { conversionEdges, nodes, setNodes } = useContext(ProjectContext);
-  const [ces, setCes] = useState(() =>
-    Object.entries(conversionEdges).map(([id, ce]) => {
-      return { id, ...ce };
-    })
-  );
+  const [ces, setCes] = useState<({ id: string } & ConversionEdge)[]>([]);
+
+  useEffect(() => {
+    const auxCes = Object.entries(conversionEdges)
+      .map(([id, ce]) => ({ id, ...ce }))
+      .sort((a, b) => +b.available - +a.available);
+    setCes(auxCes);
+  }, [conversionEdges]);
 
   const handleClick = (ceId: string) => {
     const { sources, targets, available } = conversionEdges[ceId];
