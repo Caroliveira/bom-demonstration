@@ -8,7 +8,7 @@ import { IconButtonProps } from "./IconButtonComponent";
 
 type ModalProps = {
   show: boolean;
-  title: string;
+  title?: string;
   deleteButton?: IconButtonProps;
   secondaryButton?: ButtonProps;
   submitButton?: ButtonProps;
@@ -38,7 +38,7 @@ const ModalComponent = ({
     <div className="modal__background">
       <form className="modal" role="dialog" onSubmit={handleSubmit}>
         <div className="modal__header">
-          <h2 className="modal__title">{t(title)}</h2>
+          {title && <h2 className="modal__title">{t(title)}</h2>}
           {deleteButton && (
             <IconButtonComponent
               className="modal__icon"

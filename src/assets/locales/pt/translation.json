@@ -25,6 +25,7 @@
   "export": "Exportar {{file}}",
   "exportTitle": "Salve seu projeto",
   "file": "Arquivo",
+  "forbiddenCicle": "Ciclo não é suportado",
   "generateId": "Gerar ID",
   "hideMap": "Esconder mini mapa",
   "id": "Número de identificação",
