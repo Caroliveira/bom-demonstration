@@ -4,6 +4,7 @@ export type ConversionEdge = {
   label?: string;
   sources: { [id: string]: number };
   targets: { [id: string]: number };
+  available: boolean;
 };
 
 export type Node = {

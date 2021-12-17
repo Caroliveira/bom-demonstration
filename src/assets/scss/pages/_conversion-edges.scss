@@ -16,11 +16,17 @@
         max-width: 400px;
         min-width: fit-content;
         cursor: pointer;
+        &--disabled {
+            cursor: auto;
+        }
         &__container {
             background-color: $NEUTRAL_COLOR;
             border-radius: 4px;
             margin: 8px;
             padding: 8px;
+            &--disabled {
+                opacity: 0.6;
+            }
             
         }
         &__title {

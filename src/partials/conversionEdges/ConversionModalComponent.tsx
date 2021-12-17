@@ -20,7 +20,12 @@ type ConversionModalProps = {
   closeModal: () => void;
 };
 
-const ceDefault: ConversionEdge = { label: "", sources: {}, targets: {} };
+const ceDefault: ConversionEdge = {
+  label: "",
+  sources: {},
+  targets: {},
+  available: true,
+};
 
 const ConversionModalComponent = ({
   id,
@@ -28,7 +33,8 @@ const ConversionModalComponent = ({
   closeModal,
 }: ConversionModalProps): JSX.Element => {
   const { t } = useTranslation();
-  const { conversionEdges, setConversionEdges } = useContext(ProjectContext);
+  const { conversionEdges, setConversionEdges, nodes } =
+    useContext(ProjectContext);
   const [conversionEdge, setConversionEdge] = useState(ceDefault);
   const [label, setLabel] = useState<string>();
   const [error, setError] = useState("");
@@ -77,6 +83,9 @@ const ConversionModalComponent = ({
     if (!hasErrors()) {
       const auxEdges = { ...conversionEdges };
       const ce = { ...conversionEdge, label };
+      Object.entries(ce.sources).forEach(([nodeId, value]) => {
+        if (nodes[nodeId].amount < value) ce.available = false;
+      });
       auxEdges[id || uuid()] = ce;
       setConversionEdges(auxEdges);
       close();
@@ -137,6 +146,7 @@ const ConversionModalComponent = ({
       <ConversionInputComponent addDependency={addDependency} />
       <ConversionItemComponent
         context="modal"
+        conversionEdgeId={id}
         conversionEdge={conversionEdge}
         renderIcon={deleteDependency}
       />

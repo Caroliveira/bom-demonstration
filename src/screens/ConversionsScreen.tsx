@@ -30,11 +30,11 @@ const ConversionsScreen = (): JSX.Element => {
         />
       </ScreensHeaderComponent>
       <div className="ce__list">
-        {Object.entries(conversionEdges).map(([ceId, ce]) => (
+        {Object.keys(conversionEdges).map((ceId) => (
           <ConversionItemComponent
             key={ceId}
             context="page"
-            conversionEdge={ce}
+            conversionEdgeId={ceId}
             onClick={() => openModal(ceId)}
           />
         ))}
