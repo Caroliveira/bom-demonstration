@@ -12,17 +12,20 @@
         flex-direction: column;
         justify-content: center;
 
-        margin: 8px;
-        padding: 8px;
         min-height: 40px;
         max-width: 400px;
         min-width: fit-content;
-        background-color: $NEUTRAL_COLOR;
-        border-radius: 4px;
         cursor: pointer;
+        &__container {
+            background-color: $NEUTRAL_COLOR;
+            border-radius: 4px;
+            margin: 8px;
+            padding: 8px;
+            
+        }
         &__title {
             margin: 4px 0 8px;
-            padding-bottom: 4px;
+            padding-top: 4px;
             border-bottom: 1px solid rgba($PRIMARY_COLOR, 0.3);
             font-weight: bold;
             text-align: center;
@@ -39,6 +42,19 @@
         }
         &__icon {
             margin: 0px 16px;
+        }
+        &__info {
+            display: flex;
+            align-items: center;
+            margin: 8px 0 4px;
+            padding-top: 8px;
+            border-top: 1px solid rgba($PRIMARY_COLOR, 0.3);
+        }
+        &__diff {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-right: 8px;
         }
     }
     &__input { 

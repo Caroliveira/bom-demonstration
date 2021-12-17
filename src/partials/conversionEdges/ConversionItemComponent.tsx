@@ -1,31 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaPlay } from "react-icons/fa";
-import { FiDelete } from "react-icons/fi";
+import { FaEdit, FaPlay } from "react-icons/fa";
 import { IconButtonComponent } from "../../components";
 import { ConversionEdge, ProjectContext } from "../../context";
 import { colors } from "../../utils";
 
 type ConversionItemPartial =
-  | { context?: "list"; updateConversionEdge?: never; onClick?: never }
   | {
       context: "modal";
-      updateConversionEdge: (ce: ConversionEdge) => void;
       onClick?: never;
     }
   | {
-      context: "page";
-      updateConversionEdge?: never;
+      context?: "page" | "list";
       onClick?: () => void;
     };
 
 type ConversionItemProps = {
   conversionEdge: ConversionEdge;
+  renderIcon?: (type: "sources" | "targets", id: string) => void;
 } & ConversionItemPartial;
 
 const ConversionItemComponent = ({
   context = "list",
   conversionEdge,
-  updateConversionEdge,
+  renderIcon,
   onClick,
 }: ConversionItemProps): JSX.Element | null => {
   const { nodes } = useContext(ProjectContext);
@@ -38,29 +35,8 @@ const ConversionItemComponent = ({
   if (!ce) return null;
 
   const handleClick = () => {
-    if (onClick) onClick();
-    else setShowDiff(true);
-  };
-
-  const deleteDep = (type: "sources" | "targets", id: string) => {
-    const auxCe = { ...ce };
-    delete auxCe[type][id];
-    updateConversionEdge?.(auxCe);
-  };
-
-  const renderDepButton = (type: "sources" | "targets", id: string) => {
-    if (context !== "modal") return "";
-    return (
-      <IconButtonComponent
-        Icon={FiDelete}
-        translationKey="deleteItem"
-        onClick={() => deleteDep(type, id)}
-        style={{ background: "none", border: "none", height: 16 }}
-        iconProps={{
-          style: { color: colors.error, width: 16, height: 16 },
-        }}
-      />
-    );
+    if (onClick && context === "list") onClick();
+    else setShowDiff(!showDiff);
   };
 
   const renderDepList = (type: "sources" | "targets") => {
@@ -71,27 +47,58 @@ const ConversionItemComponent = ({
         {depArr.map(([id, amount]) => (
           <span key={id} className="ce-item__text">
             {amount} - {nodes[id].label}
-            {renderDepButton(type, id)}
+            {renderIcon?.(type, id)}
           </span>
         ))}
       </div>
     );
   };
 
-  return (
-    <div
-      className="ce-item"
-      onClick={handleClick}
-      onKeyPress={handleClick}
-      role="button"
-      tabIndex={0}
-    >
-      {showTitle && <p className="ce-item__title">{conversionEdge.label}</p>}
-      <div className="ce-item__content">
-        {renderDepList("sources")}
-        <FaPlay color={colors.primary} className="ce-item__icon" />
-        {renderDepList("targets")}
+  const renderDiff = () => {
+    const diffResult = { ...ce.targets };
+    Object.entries(ce.sources).forEach(([id, amount]) => {
+      if (diffResult[id]) diffResult[id] -= amount;
+      else diffResult[id] = -amount;
+    });
+    return (
+      <div className="ce-item__info">
+        <div className="ce-item__diff">
+          {Object.entries(diffResult).map(([id, amount]) => (
+            <span key={id}>
+              {nodes[id].label}: {amount}
+            </span>
+          ))}
+        </div>
+        {context === "page" && (
+          <IconButtonComponent
+            Icon={FaEdit}
+            translationKey="editConversion"
+            onClick={onClick}
+            style={{ height: 32, width: 32, paddingTop: 4 }}
+            iconProps={{ style: { width: 20, height: 20 } }}
+          />
+        )}
       </div>
+    );
+  };
+
+  return (
+    <div className="ce-item__container">
+      <div
+        className="ce-item"
+        onClick={handleClick}
+        onKeyPress={handleClick}
+        role="button"
+        tabIndex={0}
+      >
+        {showTitle && <p className="ce-item__title">{conversionEdge.label}</p>}
+        <div className="ce-item__content">
+          {renderDepList("sources")}
+          <FaPlay color={colors.primary} className="ce-item__icon" />
+          {renderDepList("targets")}
+        </div>
+      </div>
+      {showDiff && renderDiff()}
     </div>
   );
 };

@@ -1,13 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
-import { FiAlertTriangle } from "react-icons/fi";
+import { FiAlertTriangle, FiDelete } from "react-icons/fi";
 import { v4 as uuid } from "uuid";
 import __ from "lodash";
 
 import { ConversionInputComponent, ConversionItemComponent } from ".";
-import { InputComponent, ModalComponent } from "../../components";
+import {
+  IconButtonComponent,
+  InputComponent,
+  ModalComponent,
+} from "../../components";
 import { ConversionEdge, ProjectContext } from "../../context";
+import { colors } from "../../utils";
 
 type ConversionModalProps = {
   id: string;
@@ -88,6 +93,26 @@ const ConversionModalComponent = ({
     setConversionEdge(ce);
   };
 
+  const deleteDependency = (type: "sources" | "targets", nodeId: string) => {
+    const deleteDep = () => {
+      const auxCe = { ...conversionEdge };
+      delete auxCe[type][id];
+      setConversionEdge(auxCe);
+    };
+
+    return (
+      <IconButtonComponent
+        Icon={FiDelete}
+        translationKey="deleteItem"
+        onClick={deleteDep}
+        style={{ background: "none", border: "none", height: 16 }}
+        iconProps={{
+          style: { color: colors.error, width: 16, height: 16 },
+        }}
+      />
+    );
+  };
+
   const deleteButton = {
     Icon: CgTrash,
     translationKey: "deleteConversion",
@@ -113,7 +138,7 @@ const ConversionModalComponent = ({
       <ConversionItemComponent
         context="modal"
         conversionEdge={conversionEdge}
-        updateConversionEdge={setConversionEdge}
+        renderIcon={deleteDependency}
       />
       {!!error && (
         <span className="input__error">

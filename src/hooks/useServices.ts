@@ -31,11 +31,11 @@ export const useServices = (customSetLoading?: (loading: boolean) => void) => {
 
   const getProject = async (id: string) => {
     startLoading();
+    if (history.location.pathname !== "/diagram") history.push("/diagram");
     try {
       const { data } = await axios.get(`${base}/projects/${id}`);
       if (data) {
         setProject(data);
-        if (history.location.pathname !== "/diagram") history.push("/diagram");
         stopLoading();
         return 200;
       }
