@@ -1,16 +1,10 @@
-import React, { useContext, useMemo, useState } from "react";
-import {
-  ConversionItemComponent,
-  ConversionModalComponent,
-} from "./conversionEdges";
-import { ButtonComponent } from "../components";
+import React, { useContext, useMemo } from "react";
+import { ConversionItemComponent } from "./conversionEdges";
 import { ProjectContext } from "../context";
 import { colors } from "../utils";
 
 const NodeConversionsComponent = (): JSX.Element => {
   const { nodeId, conversionEdges } = useContext(ProjectContext);
-  const [showModal, setShowModal] = useState(false);
-  const [id, setId] = useState("");
 
   const ceList = useMemo(() => {
     return Object.entries(conversionEdges).filter(
@@ -26,7 +20,7 @@ const NodeConversionsComponent = (): JSX.Element => {
     <div style={{ color: colors.primary }}>
       <div className="ce__list">
         {ceList.map(([ceId, ce]) => (
-          <ConversionItemComponent key={ce.label} conversionEdge={ce} />
+          <ConversionItemComponent key={ceId} conversionEdge={ce} />
         ))}
       </div>
     </div>

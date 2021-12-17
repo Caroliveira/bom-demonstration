@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { CgTrash } from "react-icons/cg";
+import { FiAlertTriangle } from "react-icons/fi";
 import { v4 as uuid } from "uuid";
+import __ from "lodash";
 
 import { ConversionInputComponent, ConversionItemComponent } from ".";
 import { InputComponent, ModalComponent } from "../../components";
@@ -12,29 +15,29 @@ type ConversionModalProps = {
   closeModal: () => void;
 };
 
-const ceDefault = { label: "", sources: {}, targets: {} };
+const ceDefault: ConversionEdge = { label: "", sources: {}, targets: {} };
 
 const ConversionModalComponent = ({
   id,
   show,
   closeModal,
-}: ConversionModalProps): JSX.Element | null => {
+}: ConversionModalProps): JSX.Element => {
+  const { t } = useTranslation();
   const { conversionEdges, setConversionEdges } = useContext(ProjectContext);
+  const [conversionEdge, setConversionEdge] = useState(ceDefault);
   const [label, setLabel] = useState<string>();
-  const [conversionEdge, setConversionEdge] =
-    useState<ConversionEdge>(ceDefault);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (id) {
-      const ce = conversionEdges[id];
-      setConversionEdge(ce);
-      setLabel(ce.label);
-    }
+    const ce = JSON.parse(JSON.stringify(conversionEdges[id] || ceDefault));
+    setConversionEdge(ce);
+    setLabel(ce.label);
   }, [id]);
 
   const close = () => {
     setLabel("");
-    setConversionEdge(ceDefault);
+    setError("");
+    setConversionEdge(JSON.parse(JSON.stringify(ceDefault)));
     closeModal();
   };
 
@@ -47,12 +50,32 @@ const ConversionModalComponent = ({
     }
   };
 
+  const hasErrors = () => {
+    const { sources, targets } = conversionEdge;
+    const sourcesLength = Object.keys(sources).length;
+    const targetsLength = Object.keys(targets).length;
+    let hasError = "";
+    if (!sourcesLength || !targetsLength) hasError = "emptyDependencies";
+    else if (targetsLength <= 1) hasError = "regularConnection";
+    else {
+      const isDuplicated = Object.values(conversionEdges).find(
+        ({ label: _, ...deps }) => __.isEqual(deps, { sources, targets })
+      );
+      if (isDuplicated) hasError = "alreadyExists";
+    }
+    if (!hasError) return false;
+    setError(hasError);
+    return true;
+  };
+
   const handleSave = () => {
-    const auxEdges = { ...conversionEdges };
-    const ce = { ...conversionEdge, label };
-    auxEdges[id || uuid()] = ce;
-    setConversionEdges(auxEdges);
-    close();
+    if (!hasErrors()) {
+      const auxEdges = { ...conversionEdges };
+      const ce = { ...conversionEdge, label };
+      auxEdges[id || uuid()] = ce;
+      setConversionEdges(auxEdges);
+      close();
+    }
   };
 
   const addDependency = (
@@ -92,6 +115,12 @@ const ConversionModalComponent = ({
         conversionEdge={conversionEdge}
         updateConversionEdge={setConversionEdge}
       />
+      {!!error && (
+        <span className="input__error">
+          <FiAlertTriangle style={{ marginRight: 8 }} />
+          {t(error)}
+        </span>
+      )}
     </ModalComponent>
   );
 };

@@ -1,8 +1,6 @@
-import React, { useContext, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useContext, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
-import { useHistory } from "react-router-dom";
 import { ProjectContext } from "../context";
 import { IconButtonComponent, ScreensHeaderComponent } from "../components";
 import { ConversionItemComponent, ConversionModalComponent } from "../partials";
@@ -34,7 +32,7 @@ const ConversionsScreen = (): JSX.Element => {
       <div className="ce__list">
         {Object.entries(conversionEdges).map(([ceId, ce]) => (
           <ConversionItemComponent
-            key={ce.label}
+            key={ceId}
             context="page"
             conversionEdge={ce}
             onClick={() => openModal(ceId)}

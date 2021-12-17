@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { FiDelete } from "react-icons/fi";
 import { IconButtonComponent } from "../../components";
@@ -27,10 +27,15 @@ const ConversionItemComponent = ({
   conversionEdge,
   updateConversionEdge,
   onClick,
-}: ConversionItemProps): JSX.Element => {
+}: ConversionItemProps): JSX.Element | null => {
   const { nodes } = useContext(ProjectContext);
+  const [ce, setCe] = useState<ConversionEdge>();
   const [showDiff, setShowDiff] = useState(false);
-  const showTitle = conversionEdge.label && context === "list";
+  const showTitle = conversionEdge.label && context !== "modal";
+
+  useEffect(() => setCe(conversionEdge), [conversionEdge]);
+
+  if (!ce) return null;
 
   const handleClick = () => {
     if (onClick) onClick();
@@ -38,30 +43,35 @@ const ConversionItemComponent = ({
   };
 
   const deleteDep = (type: "sources" | "targets", id: string) => {
-    const ce = { ...conversionEdge };
-    delete ce[type][id];
-    updateConversionEdge?.(ce);
+    const auxCe = { ...ce };
+    delete auxCe[type][id];
+    updateConversionEdge?.(auxCe);
+  };
+
+  const renderDepButton = (type: "sources" | "targets", id: string) => {
+    if (context !== "modal") return "";
+    return (
+      <IconButtonComponent
+        Icon={FiDelete}
+        translationKey="deleteItem"
+        onClick={() => deleteDep(type, id)}
+        style={{ background: "none", border: "none", height: 16 }}
+        iconProps={{
+          style: { color: colors.error, width: 16, height: 16 },
+        }}
+      />
+    );
   };
 
   const renderDepList = (type: "sources" | "targets") => {
-    const depArr = Object.entries(conversionEdge[type]);
+    const depArr = Object.entries(ce[type]);
     if (!depArr.length) return <span>-</span>;
     return (
       <div>
         {depArr.map(([id, amount]) => (
           <span key={id} className="ce-item__text">
             {amount} - {nodes[id].label}
-            {context === "modal" && (
-              <IconButtonComponent
-                Icon={FiDelete}
-                translationKey="deleteItem"
-                onClick={() => deleteDep(type, id)}
-                style={{ background: "none", border: "none", height: 16 }}
-                iconProps={{
-                  style: { color: colors.error, width: 16, height: 16 },
-                }}
-              />
-            )}
+            {renderDepButton(type, id)}
           </span>
         ))}
       </div>
