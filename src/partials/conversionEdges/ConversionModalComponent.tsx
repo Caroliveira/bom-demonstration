@@ -67,7 +67,6 @@ const ConversionModalComponent = ({
     const targetsLength = Object.keys(targets).length;
     let hasError = "";
     if (!sourcesLength || !targetsLength) hasError = "emptyDependencies";
-    else if (targetsLength <= 1) hasError = "regularConnection";
     else {
       const isDuplicated = Object.values(conversionEdges).find(
         ({ label: _, ...deps }) => __.isEqual(deps, { sources, targets })

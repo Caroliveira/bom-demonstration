@@ -1,10 +1,16 @@
 .ce {
+    &__button {
+        margin: 0 8px 8px;
+    }
+    &__input { 
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-top: 8px;
+    }
     &__list {
         display: flex;
         flex-wrap: wrap;
-    }
-    &__button {
-        margin: 0 8px 8px;
     }
     &-item {
         flex: 1;
@@ -24,27 +30,23 @@
             border-radius: 4px;
             margin: 8px;
             padding: 8px;
+            display: flex;
+            flex-direction: column;
             &--disabled {
                 opacity: 0.6;
             }
             
-        }
-        &__title {
-            margin: 4px 0 8px;
-            padding-top: 4px;
-            border-bottom: 1px solid rgba($PRIMARY_COLOR, 0.3);
-            font-weight: bold;
-            text-align: center;
         }
         &__content {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        &__text {
-            display: block;
-            padding: 2px;
-            color: black;
+        &__diff {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-right: 8px;
         }
         &__icon {
             margin: 0px 16px;
@@ -56,17 +58,17 @@
             padding-top: 8px;
             border-top: 1px solid rgba($PRIMARY_COLOR, 0.3);
         }
-        &__diff {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding-right: 8px;
+        &__text {
+            display: block;
+            padding: 2px;
+            color: black;
         }
-    }
-    &__input { 
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-top: 8px;
+        &__title {
+            margin: 4px 0 8px;
+            padding-top: 4px;
+            border-bottom: 1px solid rgba($PRIMARY_COLOR, 0.3);
+            font-weight: bold;
+            text-align: center;
+        }
     }
 }
