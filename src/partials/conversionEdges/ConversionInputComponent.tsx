@@ -11,6 +11,7 @@ import {
 import { ProjectContext } from "../../context";
 
 type ConversionInputProps = {
+  type: "sources" | "targets";
   addDependency: (
     id: string,
     amount: number,
@@ -19,13 +20,13 @@ type ConversionInputProps = {
 };
 
 const ConversionInputComponent = ({
+  type,
   addDependency,
 }: ConversionInputProps): JSX.Element => {
   const { t } = useTranslation();
   const { nodes } = useContext(ProjectContext);
 
   const [nodeId, setNodeId] = useState("");
-  const [type, setType] = useState("");
   const [amount, setAmount] = useState("1");
   const [error, setError] = useState("");
 
@@ -40,25 +41,16 @@ const ConversionInputComponent = ({
     }
     setAmount("1");
     setNodeId("");
-    setType("");
   };
 
   return (
     <div>
       <div className="ce__input">
         <SelectInputComponent
-          translationKey="dependency"
-          value={type}
-          onChange={(evt) => setType(evt.target.value)}
-        >
-          <option value="">{t("choose")}</option>
-          <option value="sources">{t("source")}</option>
-          <option value="targets">{t("target")}</option>
-        </SelectInputComponent>
-        <SelectInputComponent
           value={nodeId}
+          translationKey={type.slice(0, type.length - 1)}
           onChange={(evt) => setNodeId(evt.target.value)}
-          style={{ margin: "0 8px" }}
+          style={{ width: "200px" }}
         >
           <option value="">{t("choose")}</option>
           {Object.entries(nodes).map(([id, node]) => {
@@ -74,7 +66,7 @@ const ConversionInputComponent = ({
           min={1}
           value={amount}
           onChange={handleAmountChange}
-          style={{ width: "45px" }}
+          style={{ width: "60px" }}
         />
         <IconButtonComponent
           Icon={FaPlus}

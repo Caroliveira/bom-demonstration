@@ -143,7 +143,8 @@ const ConversionModalComponent = ({
         onChange={(evt) => setLabel(evt.target.value)}
         translationKey="optionalEventName"
       />
-      <ConversionInputComponent addDependency={addDependency} />
+      <ConversionInputComponent type="sources" addDependency={addDependency} />
+      <ConversionInputComponent type="targets" addDependency={addDependency} />
       <ConversionItemComponent
         context="modal"
         conversionEdgeId={id}

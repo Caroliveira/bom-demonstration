@@ -64,9 +64,9 @@
         }
     }
     &__input { 
-        display: grid;
-        grid-template-columns: min-content auto 45px 50px;
+        display: flex;
         align-items: flex-end;
+        justify-content: space-between;
         margin-top: 8px;
     }
 }
