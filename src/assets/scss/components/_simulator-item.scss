@@ -18,6 +18,14 @@
       padding: 0;
     }
   }
+  &__input {
+    width: 32px;
+    height: 18px;
+    border: none;
+    border-bottom: 1px solid $PRIMARY_COLOR;
+    background-color: $NEUTRAL_COLOR;
+    text-align: center;
+  }
   &__options {
     width: 100%;
     margin-top: 10px;

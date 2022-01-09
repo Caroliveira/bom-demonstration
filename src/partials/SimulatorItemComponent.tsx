@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from "react";
-import { FiClock, FiMinus, FiPlus } from "react-icons/fi";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
-import { IconButtonComponent } from "../components";
+import { IconButtonComponent, InputComponent } from "../components";
 import { Node, ProjectContext } from "../context";
 
 type SimulatorItemProps = {
@@ -38,6 +38,13 @@ const SimulatorItemComponent = ({
     setNodes(auxNodes);
   };
 
+  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const auxNodes = { ...nodes };
+    const { value } = evt.target;
+    if (value.match("[0-9]+")) auxNodes[nodeId].amount = parseInt(value, 10);
+    setNodes(auxNodes);
+  };
+
   const renderItemInfo = () => (
     <div className="simulator-item__options">
       <IconButtonComponent
@@ -47,6 +54,11 @@ const SimulatorItemComponent = ({
         className="simulator-item__button--icon"
         onClick={() => handleNodeAmountChange("subtract")}
       />
+      <input
+        value={node.amount}
+        onChange={handleInputChange}
+        className="simulator-item__input"
+      />
       <IconButtonComponent
         disabled={allowForcedOperations ? false : !available}
         Icon={FiPlus}
@@ -54,12 +66,6 @@ const SimulatorItemComponent = ({
         className="simulator-item__button--icon"
         onClick={() => handleNodeAmountChange("add")}
       />
-      <IconButtonComponent
-        Icon={FiClock}
-        translationKey="timer"
-        className="simulator-item__button--icon"
-      />
-      <span>{node.timer}</span>
     </div>
   );
 
