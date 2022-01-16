@@ -29,7 +29,9 @@ const SimulatorItemComponent = ({
     return isAvailable;
   }, [nodes]);
 
-  const handleClick = () => setShowInfo(!showInfo);
+  const handleClick = () => {
+    if (available || allowForcedOperations) setShowInfo(!showInfo);
+  };
 
   const handleNodeAmountChange = (type: "add" | "subtract") => {
     const auxNodes = { ...nodes };
