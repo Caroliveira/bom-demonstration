@@ -49,6 +49,7 @@ type ProjectContextType = {
   setLoadingSet: (show: boolean) => void;
   setProject: (project?: Project) => void;
   closeProject: () => void;
+  resetNodesAmount: () => void;
 };
 
 type ProjectContextProviderType = { children: React.ReactChild };
@@ -86,6 +87,14 @@ export const ProjectContextProvider = ({
     }
   };
 
+  const resetNodesAmount = () => {
+    const auxNodes = { ...nodes };
+    Object.keys(nodes).forEach((id) => {
+      auxNodes[id].amount = 0;
+    });
+    setNodes(auxNodes);
+  };
+
   return (
     <ProjectContext.Provider
       value={{
@@ -111,6 +120,7 @@ export const ProjectContextProvider = ({
         setLoadingSet,
         setProject,
         closeProject,
+        resetNodesAmount,
       }}
     >
       {children}

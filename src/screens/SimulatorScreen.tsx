@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FiShield, FiShieldOff } from "react-icons/fi";
 
 import { useHistory } from "react-router-dom";
+import { FaUndo } from "react-icons/fa";
 import { Nodes, ProjectContext } from "../context";
 import { calculateLayers } from "../utils";
 import { ConversionListComponent, SimulatorItemComponent } from "../partials";
@@ -15,7 +16,8 @@ import {
 const SimulatorScreen = (): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { nodes, edges, setNodes } = useContext(ProjectContext);
+  const { nodes, edges, setNodes, resetNodesAmount } =
+    useContext(ProjectContext);
   const [allowForcedOperations, setAllowForcedOperations] = useState(false);
 
   useEffect(() => setNodes(calculateLayers(nodes, edges)), []);
@@ -74,6 +76,12 @@ const SimulatorScreen = (): JSX.Element => {
             state: allowForcedOperations ? t("on") : t("off"),
           })}
           onClick={() => setAllowForcedOperations(!allowForcedOperations)}
+        />
+        <IconButtonComponent
+          Icon={FaUndo}
+          style={{ padding: 10 }}
+          translationKey="restart"
+          onClick={resetNodesAmount}
         />
       </ScreensHeaderComponent>
       <div className="simulator__content">
