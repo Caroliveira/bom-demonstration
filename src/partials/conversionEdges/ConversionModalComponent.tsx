@@ -104,7 +104,7 @@ const ConversionModalComponent = ({
   const deleteDependency = (type: "sources" | "targets", nodeId: string) => {
     const deleteDep = () => {
       const auxCe = { ...conversionEdge };
-      delete auxCe[type][id];
+      delete auxCe[type][nodeId];
       setConversionEdge(auxCe);
     };
 
