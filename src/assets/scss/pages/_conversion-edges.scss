@@ -25,6 +25,10 @@
           border-radius: 8px;
           background-color: $NEUTRAL_TRANSPARENT;
         }
+        &--node {
+            @extend .ce__list;
+            max-height: 400px;
+        }
     }
     &-item {
         flex: 1;

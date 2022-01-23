@@ -18,7 +18,7 @@ const NodeConversionsComponent = (): JSX.Element => {
 
   return (
     <div style={{ color: colors.primary }}>
-      <div className="ce__list">
+      <div className="ce__list--node">
         {ceList.map(([ceId]) => (
           <ConversionItemComponent key={ceId} conversionEdgeId={ceId} />
         ))}
