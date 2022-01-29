@@ -47,7 +47,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   const handleCreate = () => {
     const [newId] = uuid().split("-");
     const auxNodes = { ...nodes };
-    auxNodes[newId] = { label: name.trim(), amount: 0, layer: 0, timer: 0 };
+    auxNodes[newId] = { label: name.trim(), amount: 0, layer: 0 };
     setNodes(auxNodes);
   };
 

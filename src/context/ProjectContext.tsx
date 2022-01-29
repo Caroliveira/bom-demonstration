@@ -11,7 +11,6 @@ export type Node = {
   label: string;
   amount: number;
   layer: number;
-  timer: number;
 };
 
 export type Nodes = { [id: string]: Node };
