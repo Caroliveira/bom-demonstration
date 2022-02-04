@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 
-import { IconButtonComponent, InputComponent } from "../components";
+import { IconButtonComponent } from "../components";
 import { Node, ProjectContext } from "../context";
 
 type SimulatorItemProps = {
@@ -30,7 +30,9 @@ const SimulatorItemComponent = ({
   }, [nodes]);
 
   const handleClick = () => {
-    if (available || allowForcedOperations) setShowInfo(!showInfo);
+    if ((available || allowForcedOperations) && !node.blocked) {
+      setShowInfo(!showInfo);
+    }
   };
 
   const handleNodeAmountChange = (type: "add" | "subtract") => {
@@ -73,7 +75,9 @@ const SimulatorItemComponent = ({
 
   return (
     <li
-      className={`simulator-item ${!available && "simulator-item--disabled"}`}
+      className={`simulator-item ${
+        (!available || node.blocked) && "simulator-item--disabled"
+      }`}
     >
       <div
         className="simulator-item__button"

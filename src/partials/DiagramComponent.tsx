@@ -17,22 +17,33 @@ const DiagramComponent = (): JSX.Element => {
   const history = useHistory();
   const { t } = useTranslation();
   const [error, setError] = useState("");
-  const { edges, setEdges } = useContext(ProjectContext);
+  const { nodes, edges, setEdges } = useContext(ProjectContext);
   const { elements, setEdgeId, showMiniMap } = useContext(DiagramContext);
 
+  const isBlocked = (id: string | null) => {
+    if (id && nodes[id].blocked) {
+      setError(`${t("blockedItem")}: ${nodes[id].label}`);
+      return true;
+    }
+    return false;
+  };
+
   const onConnect = (params: Edge | Connection) => {
+    const { source, target } = params;
+    if (isBlocked(source) || isBlocked(target)) return;
     if (hasCicle(params, edges)) setError("forbiddenCicle");
     else {
       const updatedEdges = { ...edges };
-      updatedEdges[`${params.source}-${params.target}`] = 1;
+      updatedEdges[`${source}-${target}`] = 1;
       setEdges(updatedEdges);
     }
   };
 
   const onEdgeUpdate = ({ id, label }: Edge, newEdge: Connection) => {
+    const { source, target } = newEdge;
+    if (isBlocked(source) || isBlocked(target)) return;
     if (hasCicle(newEdge, edges)) setError("forbiddenCicle");
     else {
-      const { source, target } = newEdge;
       const updatedEdges = { ...edges };
       delete updatedEdges[id];
       updatedEdges[`${source}-${target}`] = parseInt(label as string, 10);
