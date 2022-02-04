@@ -9,7 +9,7 @@ const ConversionsScreen = (): JSX.Element => {
   const { conversionEdges } = useContext(ProjectContext);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState("");
-
+  console.log("test")
   const closeModal = () => {
     setId("");
     setShowModal(false);
