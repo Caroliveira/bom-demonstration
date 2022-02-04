@@ -1,0 +1,829 @@
+{
+    "id": "",
+    "nodes": {
+        "9d97ff10": {
+            "label": "Twigs",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "8e0404e7": {
+            "label": "Flint",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "22ea458a": {
+            "label": "Cut Grass",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "dc05a5fd": {
+            "label": "Log",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "e830f4be": {
+            "label": "Rocks",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "01a6ebc2": {
+            "label": "Petals",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "3dd4cb55": {
+            "label": "Gold Nugget",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "1b643a1d": {
+            "label": "Jet Feather",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "977507b3": {
+            "label": "Charcoal",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "1750a26c": {
+            "label": "Silk",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "2b847f35": {
+            "label": "Cut Reeds",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "44e45c91": {
+            "label": "Ashes",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "5d936247": {
+            "label": "Spider Gland",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "bb71d451": {
+            "label": "Pig Skin",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "2f0ba4ad": {
+            "label": "Manure",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "08260f63": {
+            "label": "Honeycomb",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "bcf2dc47": {
+            "label": "Bee",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "044e9b84": {
+            "label": "Azure Feather",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "11e049cf": {
+            "label": "Hound's Tooth",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "e56be860": {
+            "label": "Crimson Feather",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "62797dcf": {
+            "label": "Stinger",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "af9d6e00": {
+            "label": "Bone Shards",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "c125eed4": {
+            "label": "Beefalo Wool",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "1098e35c": {
+            "label": "Steel Wool",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "9e3ab01f": {
+            "label": "Rabbit",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "f5196435": {
+            "label": "Living Logs",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "73d626c9": {
+            "label": "Butterfly Wings",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "22b5f8cf": {
+            "label": "Walrus Tusk",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "0b196d48": {
+            "label": "Nitre",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "ea14fd79": {
+            "label": "Fireflies",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "8771a925": {
+            "label": "Pumpkin",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "fd9496cb": {
+            "label": "Light Bulbs",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "a926cda5": {
+            "label": "Honey",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "bf07c8a0": {
+            "label": "Bunny Puff",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "db6a13ef": {
+            "label": "Gear",
+            "amount": 0,
+            "layer": 0,
+            "timer": 0
+        },
+        "fd8b320c": {
+            "label": "Axe",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "aa6e5f8f": {
+            "label": "Pickaxe",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "eeaf611f": {
+            "label": "Torch",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "e37260f2": {
+            "label": "Trap",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "0cb0a77a": {
+            "label": "Pretty Parasol",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "e71d8e0f": {
+            "label": "Grass Suit",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "a9f8be30": {
+            "label": "Shovel",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "4395bfbf": {
+            "label": "Pitchfork",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "5645b8f9": {
+            "label": "Razor",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "f02e55ef": {
+            "label": "Feather Pencil",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "00e289e7": {
+            "label": "Bird Trap",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "e7061822": {
+            "label": "Backpack",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "95635aac": {
+            "label": "Umbrella",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "8b278988": {
+            "label": "Fishing Rod",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "f6598deb": {
+            "label": "Hay Wall",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "5675cda7": {
+            "label": "Luxury Axe",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "b30c6fd7": {
+            "label": "Regal Shovel",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "2d150512": {
+            "label": "Opulent Pickaxe",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "9bbfff68": {
+            "label": "Saddlehorn",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "cf8afa56": {
+            "label": "Rope",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "98ac9ca5": {
+            "label": "Campfire",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "4fb83351": {
+            "label": "Farm",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "d8c7c071": {
+            "label": "Straw Hat",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "a2643ff1": {
+            "label": "Improved Farm",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "6a373d07": {
+            "label": "Fire Pit",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "3af5baf1": {
+            "label": "Science Machine",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "6c21b5cd": {
+            "label": "Boards",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "cc860ca6": {
+            "label": "War Saddle",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "8ec011f3": {
+            "label": "Healing Salve",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "d1157c5b": {
+            "label": "Cut Stone",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "33bcd11a": {
+            "label": "Saddle",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "9e2480b7": {
+            "label": "Brush",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "54e74c0e": {
+            "label": "Sleep Dart",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "dc829411": {
+            "label": "Fire Dart",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "480a2924": {
+            "label": "Glossamer Saddle",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "c62e1777": {
+            "label": "Papyrus",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "614de8c7": {
+            "label": "Blow Dart",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "d482f748": {
+            "label": "Beeswax",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "a613d2df": {
+            "label": "Pumpkin Lantern",
+            "amount": 0,
+            "layer": 1,
+            "timer": 0
+        },
+        "7121de01": {
+            "label": "Thermal Stone",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "bc38737a": {
+            "label": "Hammer",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "1b2899cc": {
+            "label": "Straw Roll",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "fbf592cd": {
+            "label": "Bug Net",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "d94365cd": {
+            "label": "Drying Rack",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "a3345b36": {
+            "label": "Rainometer",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "a436db92": {
+            "label": "Spear",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "adfced23": {
+            "label": "Log Suit",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "a5d57c0c": {
+            "label": "Wood Fence",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "ff79a332": {
+            "label": "Wood Wall",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "231bc1e2": {
+            "label": "Lantern",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "b576922d": {
+            "label": "Piggyback",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "be8b79d2": {
+            "label": "Tent",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "3df3d79b": {
+            "label": "Miner Hat",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "bfc72cae": {
+            "label": "Bee Box",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "cdfb8509": {
+            "label": "Alchemy Engine",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "89d1a51f": {
+            "label": "Thermal Measurer",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "26340d3b": {
+            "label": "Bee Mine",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "61b128ed": {
+            "label": "Chest",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "a478b144": {
+            "label": "Sign",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "392b64b6": {
+            "label": "Mini Sign",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "b081b1c7": {
+            "label": "Salt Lick",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "1116deb2": {
+            "label": "Ice Box",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "7a145a20": {
+            "label": "Crock Pot",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "8a327d53": {
+            "label": "Lightning Rod",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "ecbae92e": {
+            "label": "Compass",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "81d6ae19": {
+            "label": "Wax Paper",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "ee05d9ac": {
+            "label": "Honey Poultice",
+            "amount": 0,
+            "layer": 2,
+            "timer": 0
+        },
+        "37f1a1cb": {
+            "label": "Fur Roll",
+            "amount": 0,
+            "layer": 3,
+            "timer": 0
+        },
+        "76473aff": {
+            "label": "Bundling Wrap",
+            "amount": 0,
+            "layer": 3,
+            "timer": 0
+        }
+    },
+    "edges": {
+        "9d97ff10-fd8b320c": 1,
+        "8e0404e7-fd8b320c": 1,
+        "9d97ff10-aa6e5f8f": 2,
+        "8e0404e7-aa6e5f8f": 2,
+        "9d97ff10-bc38737a": 3,
+        "8e0404e7-bc38737a": 3,
+        "22ea458a-cf8afa56": 2,
+        "cf8afa56-bc38737a": 2,
+        "dc05a5fd-98ac9ca5": 2,
+        "22ea458a-98ac9ca5": 3,
+        "dc05a5fd-6a373d07": 2,
+        "e830f4be-6a373d07": 12,
+        "22ea458a-eeaf611f": 2,
+        "9d97ff10-eeaf611f": 2,
+        "22ea458a-e37260f2": 6,
+        "9d97ff10-e37260f2": 2,
+        "01a6ebc2-0cb0a77a": 6,
+        "9d97ff10-0cb0a77a": 4,
+        "22ea458a-0cb0a77a": 3,
+        "3dd4cb55-3af5baf1": 1,
+        "e830f4be-3af5baf1": 4,
+        "dc05a5fd-3af5baf1": 4,
+        "9d97ff10-e71d8e0f": 2,
+        "9d97ff10-a9f8be30": 2,
+        "8e0404e7-a9f8be30": 2,
+        "8e0404e7-4395bfbf": 2,
+        "9d97ff10-4395bfbf": 2,
+        "9d97ff10-5645b8f9": 2,
+        "8e0404e7-5645b8f9": 2,
+        "977507b3-f02e55ef": 1,
+        "1b643a1d-f02e55ef": 1,
+        "9d97ff10-f02e55ef": 1,
+        "1750a26c-00e289e7": 4,
+        "9d97ff10-00e289e7": 3,
+        "2b847f35-c62e1777": 4,
+        "c62e1777-ecbae92e": 1,
+        "3dd4cb55-ecbae92e": 1,
+        "22ea458a-e71d8e0f": 10,
+        "22ea458a-e7061822": 4,
+        "9d97ff10-e7061822": 4,
+        "44e45c91-8ec011f3": 2,
+        "5d936247-8ec011f3": 1,
+        "e830f4be-8ec011f3": 1,
+        "22ea458a-1b2899cc": 6,
+        "cf8afa56-1b2899cc": 1,
+        "bb71d451-95635aac": 1,
+        "1750a26c-95635aac": 2,
+        "9d97ff10-95635aac": 6,
+        "1750a26c-fbf592cd": 2,
+        "cf8afa56-fbf592cd": 1,
+        "9d97ff10-fbf592cd": 4,
+        "1750a26c-8b278988": 2,
+        "9d97ff10-8b278988": 2,
+        "2f0ba4ad-4fb83351": 4,
+        "dc05a5fd-4fb83351": 4,
+        "22ea458a-4fb83351": 8,
+        "bcf2dc47-bfc72cae": 4,
+        "08260f63-bfc72cae": 1,
+        "dc05a5fd-6c21b5cd": 4,
+        "6c21b5cd-bfc72cae": 2,
+        "cf8afa56-d94365cd": 3,
+        "9d97ff10-d94365cd": 3,
+        "977507b3-d94365cd": 2,
+        "e830f4be-d1157c5b": 3,
+        "d1157c5b-7a145a20": 3,
+        "977507b3-7a145a20": 6,
+        "9d97ff10-7a145a20": 6,
+        "d1157c5b-cdfb8509": 2,
+        "6c21b5cd-cdfb8509": 4,
+        "3dd4cb55-cdfb8509": 6,
+        "3dd4cb55-89d1a51f": 2,
+        "6c21b5cd-89d1a51f": 2,
+        "3dd4cb55-a3345b36": 2,
+        "6c21b5cd-a3345b36": 2,
+        "cf8afa56-a3345b36": 2,
+        "d1157c5b-8a327d53": 1,
+        "3dd4cb55-8a327d53": 4,
+        "cf8afa56-a436db92": 1,
+        "9d97ff10-a436db92": 2,
+        "8e0404e7-a436db92": 1,
+        "dc05a5fd-adfced23": 8,
+        "cf8afa56-adfced23": 2,
+        "bcf2dc47-26340d3b": 4,
+        "6c21b5cd-26340d3b": 1,
+        "8e0404e7-26340d3b": 1,
+        "044e9b84-614de8c7": 1,
+        "11e049cf-614de8c7": 1,
+        "2b847f35-614de8c7": 2,
+        "e56be860-dc829411": 1,
+        "2b847f35-dc829411": 2,
+        "977507b3-dc829411": 1,
+        "62797dcf-54e74c0e": 1,
+        "2b847f35-54e74c0e": 2,
+        "1b643a1d-54e74c0e": 1,
+        "6c21b5cd-61b128ed": 3,
+        "6c21b5cd-a478b144": 1,
+        "6c21b5cd-392b64b6": 1,
+        "cf8afa56-a5d57c0c": 1,
+        "9d97ff10-a5d57c0c": 3,
+        "22ea458a-f6598deb": 4,
+        "9d97ff10-f6598deb": 2,
+        "cf8afa56-ff79a332": 1,
+        "6c21b5cd-ff79a332": 2,
+        "08260f63-d482f748": 1,
+        "d482f748-81d6ae19": 1,
+        "c62e1777-81d6ae19": 1,
+        "3dd4cb55-5675cda7": 2,
+        "9d97ff10-5675cda7": 4,
+        "3dd4cb55-b30c6fd7": 2,
+        "9d97ff10-b30c6fd7": 4,
+        "9d97ff10-2d150512": 4,
+        "3dd4cb55-2d150512": 2,
+        "9d97ff10-9bbfff68": 2,
+        "af9d6e00-9bbfff68": 2,
+        "1b643a1d-9bbfff68": 1,
+        "c125eed4-33bcd11a": 4,
+        "bb71d451-33bcd11a": 4,
+        "3dd4cb55-33bcd11a": 4,
+        "1098e35c-cc860ca6": 4,
+        "9e3ab01f-cc860ca6": 4,
+        "dc05a5fd-cc860ca6": 10,
+        "f5196435-480a2924": 2,
+        "73d626c9-480a2924": 68,
+        "1750a26c-480a2924": 4,
+        "22b5f8cf-9e2480b7": 1,
+        "1098e35c-9e2480b7": 1,
+        "3dd4cb55-9e2480b7": 2,
+        "0b196d48-b081b1c7": 4,
+        "6c21b5cd-b081b1c7": 2,
+        "d8c7c071-3df3d79b": 1,
+        "ea14fd79-3df3d79b": 1,
+        "3dd4cb55-3df3d79b": 1,
+        "22ea458a-d8c7c071": 12,
+        "8771a925-a613d2df": 1,
+        "ea14fd79-a613d2df": 1,
+        "fd9496cb-231bc1e2": 2,
+        "cf8afa56-231bc1e2": 2,
+        "9d97ff10-231bc1e2": 3,
+        "bb71d451-b576922d": 4,
+        "cf8afa56-b576922d": 2,
+        "1750a26c-b576922d": 6,
+        "a926cda5-ee05d9ac": 2,
+        "c62e1777-ee05d9ac": 1,
+        "bf07c8a0-37f1a1cb": 2,
+        "1b2899cc-37f1a1cb": 1,
+        "1750a26c-be8b79d2": 6,
+        "cf8afa56-be8b79d2": 3,
+        "9d97ff10-be8b79d2": 4,
+        "aa6e5f8f-7121de01": 1,
+        "8e0404e7-7121de01": 3,
+        "e830f4be-7121de01": 10,
+        "cf8afa56-76473aff": 1,
+        "81d6ae19-76473aff": 1,
+        "e830f4be-a2643ff1": 4,
+        "22ea458a-a2643ff1": 10,
+        "2f0ba4ad-a2643ff1": 6,
+        "db6a13ef-1116deb2": 1,
+        "6c21b5cd-1116deb2": 1,
+        "3dd4cb55-1116deb2": 2
+    },
+    "conversionEdges": {
+        "ec5a55b1-6263-41da-ae02-7a1f551e8b9b": {
+            "label": "Mine",
+            "sources": {
+                "aa6e5f8f": 1
+            },
+            "targets": {
+                "e830f4be": 4,
+                "aa6e5f8f": 1
+            },
+            "available": false
+        },
+        "79d96bd5-de94-4639-8f5b-9e1a62f8d175": {
+            "label": " Lumberjack",
+            "sources": {
+                "fd8b320c": 1
+            },
+            "targets": {
+                "fd8b320c": 1,
+                "dc05a5fd": 3,
+                "9d97ff10": 1
+            },
+            "available": false
+        },
+        "8d6b3053-b726-45d6-95c9-f2fc253a4ea3": {
+            "label": "Destroy tent",
+            "sources": {
+                "bc38737a": 1,
+                "be8b79d2": 1
+            },
+            "targets": {
+                "bc38737a": 1,
+                "cf8afa56": 1,
+                "1750a26c": 1,
+                "9d97ff10": 1
+            },
+            "available": false
+        }
+    }
+}

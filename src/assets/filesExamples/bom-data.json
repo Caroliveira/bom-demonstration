@@ -2,12 +2,12 @@
     "id": "24acff9c-b4be-4835-a2fd-1fb3521a6272",
     "nodes": {
         "1": {
-            "amount": 0,
+            "amount": 500,
             "label": "wood",
             "layer": 0
         },
         "2": {
-            "amount": 0,
+            "amount": 552,
             "label": "stone",
             "layer": 0
         },
@@ -17,7 +17,7 @@
             "layer": 1
         },
         "4": {
-            "amount": 0,
+            "amount": 2,
             "label": "hammer",
             "layer": 1
         },
@@ -50,6 +50,8 @@
     },
     "conversionEdges": {
         "a": {
+            "available": false,
+            "label": "Destroy comfy house",
             "sources": {
                 "4": 1,
                 "7": 1
@@ -57,8 +59,18 @@
             "targets": {
                 "3": 3,
                 "5": 1
+            }
+        },
+        "b": {
+            "label": "Destroy fireplace",
+            "sources": {
+                "4": 1,
+                "5": 1
             },
-            "label": "Destroy comfy house"
+            "targets": {
+                "2": 2
+            },
+            "available": false
         }
     }
 }

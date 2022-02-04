@@ -62,7 +62,7 @@ const ConversionItemComponent = ({
       <div>
         {depArr.map(([id, amount]) => (
           <span key={id} className="ce-item__text">
-            {amount} - {nodes[id].label}
+            {amount} - {nodes[id]?.label}
             {renderIcon?.(type, id)}
           </span>
         ))}
