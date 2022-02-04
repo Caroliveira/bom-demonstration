@@ -19,6 +19,7 @@ const NodeModalComponent = (): JSX.Element | null => {
   } = useContext(ProjectContext);
 
   const [name, setName] = useState("");
+  const [blocked, setBlocked] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => setName(nodes[nodeId]?.label || ""), [nodeId, showNodeModal]);
@@ -47,13 +48,14 @@ const NodeModalComponent = (): JSX.Element | null => {
   const handleCreate = () => {
     const [newId] = uuid().split("-");
     const auxNodes = { ...nodes };
-    auxNodes[newId] = { label: name.trim(), amount: 0, layer: 0 };
+    auxNodes[newId] = { label: name.trim(), blocked, amount: 0, layer: 0 };
     setNodes(auxNodes);
   };
 
   const handleUpdate = () => {
     const auxNodes = { ...nodes };
     auxNodes[nodeId].label = name.trim();
+    auxNodes[nodeId].blocked = blocked;
     setNodes(auxNodes);
   };
 
@@ -98,6 +100,13 @@ const NodeModalComponent = (): JSX.Element | null => {
         error={error}
         value={name}
         onChange={handleNameChange}
+      />
+      <InputComponent
+        autoFocus
+        type="checkbox"
+        translationKey="blockedItem"
+        checked={blocked}
+        onChange={(evt) => setBlocked(evt.target.checked)}
       />
     </ModalComponent>
   );

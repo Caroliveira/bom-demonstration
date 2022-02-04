@@ -1,1 +1,324 @@
-{"id":"","nodes":{"70226e3b":{"label":"Pebbles","amount":0,"layer":0},"4e93b96f":{"label":"Timber","amount":0,"layer":0},"7970de0f":{"label":"Palm Leaf","amount":0,"layer":0},"881d85e7":{"label":"Long Grass","amount":0,"layer":0},"1318d08f":{"label":"Charcoal","amount":0,"layer":0},"83962dcd":{"label":"Hand Axe","amount":0,"layer":1},"c5424d0a":{"label":"Stone Chunk","amount":0,"layer":1},"1d90a0b2":{"label":"Tool Handle","amount":0,"layer":1},"21b65ced":{"label":"Makeshift Bed Sheet","amount":0,"layer":1},"493d2e8e":{"label":"Makeshift Bowl","amount":0,"layer":1},"49337c72":{"label":"Straw Bundle","amount":0,"layer":1},"81f7766c":{"label":"Rope","amount":0,"layer":1},"0bbff91d":{"label":"Crafting Bench","amount":0,"layer":2},"e4c0112c":{"label":"Torch","amount":0,"layer":2},"30a3c9a7":{"label":"Comfy Padding","amount":0,"layer":2},"42d9ebbc":{"label":"Flimsy Multitool","amount":0,"layer":2},"adf265bf":{"label":"Wooden Club","amount":0,"layer":2},"ea6736fe":{"label":"Wooden Rod","amount":0,"layer":2},"2a7fcee5":{"label":"Flimsy Bed","amount":0,"layer":3}},"edges":{"70226e3b-83962dcd":2,"4e93b96f-42d9ebbc":2,"81f7766c-42d9ebbc":1,"4e93b96f-adf265bf":4,"81f7766c-adf265bf":1,"7970de0f-adf265bf":1,"881d85e7-49337c72":3,"4e93b96f-ea6736fe":3,"81f7766c-ea6736fe":1,"81f7766c-30a3c9a7":1,"7970de0f-30a3c9a7":2,"49337c72-30a3c9a7":1,"7970de0f-21b65ced":3,"881d85e7-81f7766c":3,"70226e3b-c5424d0a":4,"70226e3b-1d90a0b2":1,"4e93b96f-1d90a0b2":2,"81f7766c-e4c0112c":2,"1d90a0b2-e4c0112c":1,"1318d08f-e4c0112c":4,"7970de0f-493d2e8e":2,"30a3c9a7-2a7fcee5":1,"c5424d0a-0bbff91d":4,"4e93b96f-0bbff91d":4,"81f7766c-0bbff91d":1},"conversionEdges":{"c5c7494b-7285-48ab-ba4e-094071f6402c":{"label":"Crafting through bench: Hand Axe","sources":{"70226e3b":2,"42d9ebbc":1,"0bbff91d":1},"targets":{"83962dcd":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"06dbe493-10c5-4fdd-a76f-13807a4e83cc":{"label":"Crafting through bench: Flimsy Multitool","sources":{"4e93b96f":2,"81f7766c":1,"42d9ebbc":1,"0bbff91d":1},"targets":{"42d9ebbc":2,"0bbff91d":1},"available":false},"2716e118-2a0e-49a0-8b1d-31a7f5090bf8":{"label":"Crafting through bench: Wooden Club","sources":{"4e93b96f":4,"7970de0f":1,"81f7766c":1,"42d9ebbc":1,"0bbff91d":1},"targets":{"adf265bf":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"567f55a3-00b3-41e0-a0ac-b9489e24ba72":{"label":"Crafting through bench: Straw Bundle","sources":{"881d85e7":3,"42d9ebbc":1,"0bbff91d":1},"targets":{"49337c72":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"817d4562-488c-4c3f-8fb2-6b80a3205d61":{"label":"Crafting through bench: Wooden Rod","sources":{"4e93b96f":3,"81f7766c":1,"42d9ebbc":1,"0bbff91d":1},"targets":{"ea6736fe":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"01802fee-20c5-4cd6-8c31-c42b9f8e5c52":{"label":"Crafting through bench: Comfy Padding","sources":{"7970de0f":2,"49337c72":1,"81f7766c":1,"42d9ebbc":1,"0bbff91d":1},"targets":{"30a3c9a7":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"ba261fbf-671a-4a7e-818b-bdcc0e6ffd6a":{"label":"Crafting through bench: Makeshift Bed Sheet","sources":{"7970de0f":3,"42d9ebbc":1,"0bbff91d":1},"targets":{"21b65ced":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"ed9c4f04-db28-4457-8e50-b414f5e61fe5":{"label":"Crafting through bench: Rope","sources":{"881d85e7":3,"42d9ebbc":1,"0bbff91d":1},"targets":{"81f7766c":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"932dc145-e0c3-422d-80c7-98996c8e0635":{"label":"Crafting through bench: Stone Chunk","sources":{"70226e3b":4,"42d9ebbc":1,"0bbff91d":1},"targets":{"c5424d0a":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"30bc3dc9-57b0-4c56-9470-c6fa59beca3d":{"label":"Crafting through bench: Tool Handle","sources":{"4e93b96f":2,"70226e3b":1,"42d9ebbc":1,"0bbff91d":1},"targets":{"1d90a0b2":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"0cb9eaf8-1a1b-4d4e-a088-e46f4832ee82":{"label":"Crafting through bench: Torch","sources":{"1d90a0b2":1,"1318d08f":4,"81f7766c":2,"42d9ebbc":1,"0bbff91d":1},"targets":{"e4c0112c":1,"42d9ebbc":1,"0bbff91d":1},"available":false},"8b2756dd-37ee-4e2b-97a2-1b7a713d486f":{"label":"Crafting through bench: Makeshift Bowl","sources":{"7970de0f":2,"42d9ebbc":1,"0bbff91d":1},"targets":{"493d2e8e":1,"42d9ebbc":1,"0bbff91d":1},"available":false}}}
+{
+    "id": "",
+    "nodes": {
+        "70226e3b": {
+            "label": "Pebbles",
+            "amount": 0,
+            "layer": 0,
+            "blocked": false
+        },
+        "4e93b96f": {
+            "label": "Timber",
+            "amount": 0,
+            "layer": 0,
+            "blocked": false
+        },
+        "7970de0f": {
+            "label": "Palm Leaf",
+            "amount": 0,
+            "layer": 0,
+            "blocked": false
+        },
+        "881d85e7": {
+            "label": "Long Grass",
+            "amount": 0,
+            "layer": 0,
+            "blocked": false
+        },
+        "1318d08f": {
+            "label": "Charcoal",
+            "amount": 0,
+            "layer": 0,
+            "blocked": false
+        },
+        "83962dcd": {
+            "label": "Hand Axe",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "c5424d0a": {
+            "label": "Stone Chunk",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "1d90a0b2": {
+            "label": "Tool Handle",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "21b65ced": {
+            "label": "Makeshift Bed Sheet",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "493d2e8e": {
+            "label": "Makeshift Bowl",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "49337c72": {
+            "label": "Straw Bundle",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "81f7766c": {
+            "label": "Rope",
+            "amount": 0,
+            "layer": 1,
+            "blocked": false
+        },
+        "0bbff91d": {
+            "label": "Crafting Bench",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "e4c0112c": {
+            "label": "Torch",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "30a3c9a7": {
+            "label": "Comfy Padding",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "42d9ebbc": {
+            "label": "Flimsy Multitool",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "adf265bf": {
+            "label": "Wooden Club",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "ea6736fe": {
+            "label": "Wooden Rod",
+            "amount": 0,
+            "layer": 2,
+            "blocked": false
+        },
+        "2a7fcee5": {
+            "label": "Flimsy Bed",
+            "amount": 0,
+            "layer": 3,
+            "blocked": false
+        }
+    },
+    "edges": {
+        "70226e3b-83962dcd": 2,
+        "4e93b96f-42d9ebbc": 2,
+        "81f7766c-42d9ebbc": 1,
+        "4e93b96f-adf265bf": 4,
+        "81f7766c-adf265bf": 1,
+        "7970de0f-adf265bf": 1,
+        "881d85e7-49337c72": 3,
+        "4e93b96f-ea6736fe": 3,
+        "81f7766c-ea6736fe": 1,
+        "81f7766c-30a3c9a7": 1,
+        "7970de0f-30a3c9a7": 2,
+        "49337c72-30a3c9a7": 1,
+        "7970de0f-21b65ced": 3,
+        "881d85e7-81f7766c": 3,
+        "70226e3b-c5424d0a": 4,
+        "70226e3b-1d90a0b2": 1,
+        "4e93b96f-1d90a0b2": 2,
+        "81f7766c-e4c0112c": 2,
+        "1d90a0b2-e4c0112c": 1,
+        "1318d08f-e4c0112c": 4,
+        "7970de0f-493d2e8e": 2,
+        "30a3c9a7-2a7fcee5": 1,
+        "c5424d0a-0bbff91d": 4,
+        "4e93b96f-0bbff91d": 4,
+        "81f7766c-0bbff91d": 1
+    },
+    "conversionEdges": {
+        "c5c7494b-7285-48ab-ba4e-094071f6402c": {
+            "label": "Crafting through bench: Hand Axe",
+            "sources": {
+                "70226e3b": 2,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "83962dcd": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "06dbe493-10c5-4fdd-a76f-13807a4e83cc": {
+            "label": "Crafting through bench: Flimsy Multitool",
+            "sources": {
+                "4e93b96f": 2,
+                "81f7766c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "42d9ebbc": 2,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "2716e118-2a0e-49a0-8b1d-31a7f5090bf8": {
+            "label": "Crafting through bench: Wooden Club",
+            "sources": {
+                "4e93b96f": 4,
+                "7970de0f": 1,
+                "81f7766c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "adf265bf": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "567f55a3-00b3-41e0-a0ac-b9489e24ba72": {
+            "label": "Crafting through bench: Straw Bundle",
+            "sources": {
+                "881d85e7": 3,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "49337c72": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "817d4562-488c-4c3f-8fb2-6b80a3205d61": {
+            "label": "Crafting through bench: Wooden Rod",
+            "sources": {
+                "4e93b96f": 3,
+                "81f7766c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "ea6736fe": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "01802fee-20c5-4cd6-8c31-c42b9f8e5c52": {
+            "label": "Crafting through bench: Comfy Padding",
+            "sources": {
+                "7970de0f": 2,
+                "49337c72": 1,
+                "81f7766c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "30a3c9a7": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "ba261fbf-671a-4a7e-818b-bdcc0e6ffd6a": {
+            "label": "Crafting through bench: Makeshift Bed Sheet",
+            "sources": {
+                "7970de0f": 3,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "21b65ced": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "ed9c4f04-db28-4457-8e50-b414f5e61fe5": {
+            "label": "Crafting through bench: Rope",
+            "sources": {
+                "881d85e7": 3,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "81f7766c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "932dc145-e0c3-422d-80c7-98996c8e0635": {
+            "label": "Crafting through bench: Stone Chunk",
+            "sources": {
+                "70226e3b": 4,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "c5424d0a": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "30bc3dc9-57b0-4c56-9470-c6fa59beca3d": {
+            "label": "Crafting through bench: Tool Handle",
+            "sources": {
+                "4e93b96f": 2,
+                "70226e3b": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "1d90a0b2": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "0cb9eaf8-1a1b-4d4e-a088-e46f4832ee82": {
+            "label": "Crafting through bench: Torch",
+            "sources": {
+                "1d90a0b2": 1,
+                "1318d08f": 4,
+                "81f7766c": 2,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "e4c0112c": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "8b2756dd-37ee-4e2b-97a2-1b7a713d486f": {
+            "label": "Crafting through bench: Makeshift Bowl",
+            "sources": {
+                "7970de0f": 2,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "targets": {
+                "493d2e8e": 1,
+                "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        }
+    }
+}

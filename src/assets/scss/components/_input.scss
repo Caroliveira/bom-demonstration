@@ -1,6 +1,11 @@
 .input {
   display: flex;
   flex-direction: column;
+  &--row {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+  }
   &__label {
     font-size: 20px;
     margin-bottom: 4px;

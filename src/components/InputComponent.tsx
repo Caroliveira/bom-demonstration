@@ -13,20 +13,28 @@ const InputComponent = ({
   translationKey = "",
   className,
   labelProps,
+  type,
   ...props
 }: InputProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <div className="input">
-      <label htmlFor={translationKey} className="input__label" {...labelProps}>
-        {t(translationKey)}
-      </label>
-      <input
-        aria-labelledby={translationKey}
-        className={`input__box ${className}`}
-        {...props}
-      />
+      <div className={`input ${type === "checkbox" ? "input--row" : ""}`}>
+        <label
+          htmlFor={translationKey}
+          className="input__label"
+          {...labelProps}
+        >
+          {t(translationKey)}
+        </label>
+        <input
+          type={type}
+          aria-labelledby={translationKey}
+          className={`input__box ${className}`}
+          {...props}
+        />
+      </div>
       {!!error && (
         <span className="input__error">
           <FiAlertTriangle style={{ marginRight: 8 }} />

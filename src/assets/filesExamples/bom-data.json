@@ -4,37 +4,44 @@
         "1": {
             "amount": 500,
             "label": "wood",
-            "layer": 0
+            "layer": 0,
+            "blocked": false
         },
         "2": {
             "amount": 552,
             "label": "stone",
-            "layer": 0
+            "layer": 0,
+            "blocked": false
         },
         "3": {
             "amount": 0,
             "label": "plank",
-            "layer": 1
+            "layer": 1,
+            "blocked": false
         },
         "4": {
             "amount": 2,
             "label": "hammer",
-            "layer": 1
+            "layer": 1,
+            "blocked": false
         },
         "5": {
             "amount": 0,
             "label": "fireplace",
-            "layer": 1
+            "layer": 1,
+            "blocked": false
         },
         "6": {
             "amount": 0,
             "label": "house",
-            "layer": 2
+            "layer": 2,
+            "blocked": false
         },
         "7": {
             "amount": 0,
             "label": "comfy house",
-            "layer": 3
+            "layer": 3,
+            "blocked": false
         }
     },
     "edges": {

@@ -5,625 +5,625 @@
             "label": "Twigs",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "8e0404e7": {
             "label": "Flint",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "22ea458a": {
             "label": "Cut Grass",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "dc05a5fd": {
             "label": "Log",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "e830f4be": {
             "label": "Rocks",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "01a6ebc2": {
             "label": "Petals",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "3dd4cb55": {
             "label": "Gold Nugget",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "1b643a1d": {
             "label": "Jet Feather",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "977507b3": {
             "label": "Charcoal",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "1750a26c": {
             "label": "Silk",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "2b847f35": {
             "label": "Cut Reeds",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "44e45c91": {
             "label": "Ashes",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "5d936247": {
             "label": "Spider Gland",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "bb71d451": {
             "label": "Pig Skin",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "2f0ba4ad": {
             "label": "Manure",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "08260f63": {
             "label": "Honeycomb",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "bcf2dc47": {
             "label": "Bee",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "044e9b84": {
             "label": "Azure Feather",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "11e049cf": {
             "label": "Hound's Tooth",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "e56be860": {
             "label": "Crimson Feather",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "62797dcf": {
             "label": "Stinger",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "af9d6e00": {
             "label": "Bone Shards",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "c125eed4": {
             "label": "Beefalo Wool",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "1098e35c": {
             "label": "Steel Wool",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "9e3ab01f": {
             "label": "Rabbit",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "f5196435": {
             "label": "Living Logs",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "73d626c9": {
             "label": "Butterfly Wings",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "22b5f8cf": {
             "label": "Walrus Tusk",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "0b196d48": {
             "label": "Nitre",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "ea14fd79": {
             "label": "Fireflies",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "8771a925": {
             "label": "Pumpkin",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "fd9496cb": {
             "label": "Light Bulbs",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "a926cda5": {
             "label": "Honey",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "bf07c8a0": {
             "label": "Bunny Puff",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "db6a13ef": {
             "label": "Gear",
             "amount": 0,
             "layer": 0,
-            "timer": 0
+            "blocked": false
         },
         "fd8b320c": {
             "label": "Axe",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "aa6e5f8f": {
             "label": "Pickaxe",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "eeaf611f": {
             "label": "Torch",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "e37260f2": {
             "label": "Trap",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "0cb0a77a": {
             "label": "Pretty Parasol",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "e71d8e0f": {
             "label": "Grass Suit",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "a9f8be30": {
             "label": "Shovel",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "4395bfbf": {
             "label": "Pitchfork",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "5645b8f9": {
             "label": "Razor",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "f02e55ef": {
             "label": "Feather Pencil",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "00e289e7": {
             "label": "Bird Trap",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "e7061822": {
             "label": "Backpack",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "95635aac": {
             "label": "Umbrella",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "8b278988": {
             "label": "Fishing Rod",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "f6598deb": {
             "label": "Hay Wall",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "5675cda7": {
             "label": "Luxury Axe",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "b30c6fd7": {
             "label": "Regal Shovel",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "2d150512": {
             "label": "Opulent Pickaxe",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "9bbfff68": {
             "label": "Saddlehorn",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "cf8afa56": {
             "label": "Rope",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "98ac9ca5": {
             "label": "Campfire",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "4fb83351": {
             "label": "Farm",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "d8c7c071": {
             "label": "Straw Hat",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "a2643ff1": {
             "label": "Improved Farm",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "6a373d07": {
             "label": "Fire Pit",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "3af5baf1": {
             "label": "Science Machine",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "6c21b5cd": {
             "label": "Boards",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "cc860ca6": {
             "label": "War Saddle",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "8ec011f3": {
             "label": "Healing Salve",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "d1157c5b": {
             "label": "Cut Stone",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "33bcd11a": {
             "label": "Saddle",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "9e2480b7": {
             "label": "Brush",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "54e74c0e": {
             "label": "Sleep Dart",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "dc829411": {
             "label": "Fire Dart",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "480a2924": {
             "label": "Glossamer Saddle",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "c62e1777": {
             "label": "Papyrus",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "614de8c7": {
             "label": "Blow Dart",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "d482f748": {
             "label": "Beeswax",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "a613d2df": {
             "label": "Pumpkin Lantern",
             "amount": 0,
             "layer": 1,
-            "timer": 0
+            "blocked": false
         },
         "7121de01": {
             "label": "Thermal Stone",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "bc38737a": {
             "label": "Hammer",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "1b2899cc": {
             "label": "Straw Roll",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "fbf592cd": {
             "label": "Bug Net",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "d94365cd": {
             "label": "Drying Rack",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "a3345b36": {
             "label": "Rainometer",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "a436db92": {
             "label": "Spear",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "adfced23": {
             "label": "Log Suit",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "a5d57c0c": {
             "label": "Wood Fence",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "ff79a332": {
             "label": "Wood Wall",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "231bc1e2": {
             "label": "Lantern",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "b576922d": {
             "label": "Piggyback",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "be8b79d2": {
             "label": "Tent",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "3df3d79b": {
             "label": "Miner Hat",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "bfc72cae": {
             "label": "Bee Box",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "cdfb8509": {
             "label": "Alchemy Engine",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "89d1a51f": {
             "label": "Thermal Measurer",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "26340d3b": {
             "label": "Bee Mine",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "61b128ed": {
             "label": "Chest",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "a478b144": {
             "label": "Sign",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "392b64b6": {
             "label": "Mini Sign",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "b081b1c7": {
             "label": "Salt Lick",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "1116deb2": {
             "label": "Ice Box",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "7a145a20": {
             "label": "Crock Pot",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "8a327d53": {
             "label": "Lightning Rod",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "ecbae92e": {
             "label": "Compass",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "81d6ae19": {
             "label": "Wax Paper",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "ee05d9ac": {
             "label": "Honey Poultice",
             "amount": 0,
             "layer": 2,
-            "timer": 0
+            "blocked": false
         },
         "37f1a1cb": {
             "label": "Fur Roll",
             "amount": 0,
             "layer": 3,
-            "timer": 0
+            "blocked": false
         },
         "76473aff": {
             "label": "Bundling Wrap",
             "amount": 0,
             "layer": 3,
-            "timer": 0
+            "blocked": false
         }
     },
     "edges": {
