@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaCheck, FaCopy } from "react-icons/fa";
+import { v4 as uuid } from "uuid";
 
 import { ProjectContext } from "../context";
 import {
@@ -14,9 +15,11 @@ import { useServices } from "../hooks";
 const ExportModalComponent = (): JSX.Element | null => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
+  const [id, setId] = useState(
+    localStorage.getItem("bom_demonstration_id") || uuid()
+  );
   const [showModal, setShowModal] = useState(false);
   const { nodes, edges } = useContext(ProjectContext);
-  const id = localStorage.getItem("bom_demonstration_id") || "";
 
   const {
     showExportModal,
@@ -28,8 +31,12 @@ const ExportModalComponent = (): JSX.Element | null => {
 
   const update = async () => {
     const project = { id, nodes, edges, conversionEdges };
-    if (!id) await createProject(project);
-    else await updateProject(project);
+    try {
+      if (!id) await createProject(project);
+      else await updateProject(project);
+    } catch {
+      setId("");
+    }
     setShowModal(true);
   };
 
