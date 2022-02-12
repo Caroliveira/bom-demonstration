@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo } from "react";
+import React, { useState, useContext, useMemo, useEffect } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 
 import { IconButtonComponent } from "../components";
@@ -28,6 +28,10 @@ const SimulatorItemComponent = ({
     });
     return isAvailable;
   }, [nodes]);
+
+  useEffect(() => {
+    if (!available) setShowInfo(false);
+  }, [available]);
 
   const handleClick = () => {
     if ((available || allowForcedOperations) && !node.blocked) {

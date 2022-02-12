@@ -64,28 +64,29 @@ const NodeScreen = ({
           style={{ padding: 8 }}
         />
       </ScreensHeaderComponent>
+      <div className="node__content">
+        <div className="node__dependencies">
+          <NodeDependenciesComponent dependencies={sources} type="source" />
+          <GiBottomRight3DArrow className="node__arrow" />
+          <h2 className="node__label">
+            {nodes[nodeId].label}
+            <span className="node__layer">
+              {t("layer")} {nodes[nodeId].layer + 1}
+            </span>
+          </h2>
+          <GiBottomRight3DArrow className="node__arrow" />
+          <NodeDependenciesComponent dependencies={targets} type="target" />
+        </div>
 
-      <div className="node__dependencies">
-        <NodeDependenciesComponent dependencies={sources} type="source" />
-        <GiBottomRight3DArrow className="node__arrow" />
-        <h2 className="node__label">
-          {nodes[nodeId].label}
-          <span className="node__layer">
-            {t("layer")} {nodes[nodeId].layer + 1}
-          </span>
-        </h2>
-        <GiBottomRight3DArrow className="node__arrow" />
-        <NodeDependenciesComponent dependencies={targets} type="target" />
-      </div>
-
-      {nodes[nodeId].layer !== 0 && (
-        <AccordionComponent translationKey="layersCalculation">
-          <LayersCalculationComponent />
+        {nodes[nodeId].layer !== 0 && (
+          <AccordionComponent translationKey="layersCalculation">
+            <LayersCalculationComponent />
+          </AccordionComponent>
+        )}
+        <AccordionComponent translationKey="conversionsAndEvents">
+          <NodeConversionsComponent />
         </AccordionComponent>
-      )}
-      <AccordionComponent translationKey="conversionsAndEvents">
-        <NodeConversionsComponent />
-      </AccordionComponent>
+      </div>
     </>
   );
 };
