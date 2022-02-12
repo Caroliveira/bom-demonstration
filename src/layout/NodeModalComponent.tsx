@@ -16,6 +16,8 @@ const NodeModalComponent = (): JSX.Element | null => {
     setEdges,
     showNodeModal,
     setShowNodeModal,
+    conversionEdges,
+    setConversionEdges,
   } = useContext(ProjectContext);
 
   const [name, setName] = useState("");
@@ -34,13 +36,20 @@ const NodeModalComponent = (): JSX.Element | null => {
     if (!nodeId) return;
     const auxNodes = { ...nodes };
     const auxEdges = { ...edges };
+    const auxConversionEdges = { ...conversionEdges };
     Object.keys(edges).forEach((edgeId) => {
       const [source, target] = edgeId.split("-");
       if (nodeId === source || nodeId === target) delete auxEdges[edgeId];
     });
+    Object.entries(auxConversionEdges).forEach(([ceId, ce]) => {
+      const isSource = Object.keys(ce.sources).find((src) => src === nodeId);
+      const isTarget = Object.keys(ce.targets).find((targ) => targ === nodeId);
+      if (isSource || isTarget) delete auxConversionEdges[ceId];
+    });
     delete auxNodes[nodeId];
     setNodes(auxNodes);
     setEdges(auxEdges);
+    setConversionEdges(auxConversionEdges);
     history.push("/diagram");
     close();
   };
