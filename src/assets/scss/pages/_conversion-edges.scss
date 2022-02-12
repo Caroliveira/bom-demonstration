@@ -44,6 +44,7 @@
             cursor: auto;
         }
         &__container {
+            height: fit-content;
             background-color: $NEUTRAL_COLOR;
             border-radius: 4px;
             margin: 8px;

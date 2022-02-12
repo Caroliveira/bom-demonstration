@@ -3,25 +3,25 @@
     "nodes": {
         "70226e3b": {
             "label": "Pebbles",
-            "amount": 0,
+            "amount": 4,
             "layer": 0,
             "blocked": false
         },
         "4e93b96f": {
             "label": "Timber",
-            "amount": 0,
+            "amount": 3,
             "layer": 0,
             "blocked": false
         },
         "7970de0f": {
             "label": "Palm Leaf",
-            "amount": 0,
+            "amount": 2,
             "layer": 0,
             "blocked": false
         },
         "881d85e7": {
             "label": "Long Grass",
-            "amount": 0,
+            "amount": 3,
             "layer": 0,
             "blocked": false
         },
@@ -30,6 +30,24 @@
             "amount": 0,
             "layer": 0,
             "blocked": false
+        },
+        "0bbff91d": {
+            "label": "Crafting Bench",
+            "amount": 1,
+            "layer": 2,
+            "blocked": true
+        },
+        "c183a3f1": {
+            "label": "Campfire",
+            "blocked": true,
+            "amount": 1,
+            "layer": 0
+        },
+        "c75d117a": {
+            "label": "Small Chest",
+            "blocked": true,
+            "amount": 1,
+            "layer": 0
         },
         "83962dcd": {
             "label": "Hand Axe",
@@ -45,7 +63,7 @@
         },
         "1d90a0b2": {
             "label": "Tool Handle",
-            "amount": 0,
+            "amount": 2,
             "layer": 1,
             "blocked": false
         },
@@ -63,7 +81,7 @@
         },
         "49337c72": {
             "label": "Straw Bundle",
-            "amount": 0,
+            "amount": 4,
             "layer": 1,
             "blocked": false
         },
@@ -71,12 +89,6 @@
             "label": "Rope",
             "amount": 0,
             "layer": 1,
-            "blocked": false
-        },
-        "0bbff91d": {
-            "label": "Crafting Bench",
-            "amount": 0,
-            "layer": 2,
             "blocked": false
         },
         "e4c0112c": {
@@ -87,7 +99,7 @@
         },
         "30a3c9a7": {
             "label": "Comfy Padding",
-            "amount": 0,
+            "amount": 1,
             "layer": 2,
             "blocked": false
         },
@@ -111,7 +123,7 @@
         },
         "2a7fcee5": {
             "label": "Flimsy Bed",
-            "amount": 0,
+            "amount": 1,
             "layer": 3,
             "blocked": false
         }
@@ -138,10 +150,7 @@
         "1d90a0b2-e4c0112c": 1,
         "1318d08f-e4c0112c": 4,
         "7970de0f-493d2e8e": 2,
-        "30a3c9a7-2a7fcee5": 1,
-        "c5424d0a-0bbff91d": 4,
-        "4e93b96f-0bbff91d": 4,
-        "81f7766c-0bbff91d": 1
+        "30a3c9a7-2a7fcee5": 1
     },
     "conversionEdges": {
         "c5c7494b-7285-48ab-ba4e-094071f6402c": {
@@ -316,6 +325,45 @@
             "targets": {
                 "493d2e8e": 1,
                 "42d9ebbc": 1,
+                "0bbff91d": 1
+            },
+            "available": false
+        },
+        "776680fa-e0f2-477c-889b-aacb9fcf979b": {
+            "label": "Craft building: Campfire",
+            "sources": {
+                "2a7fcee5": 1,
+                "70226e3b": 6
+            },
+            "targets": {
+                "2a7fcee5": 1,
+                "c183a3f1": 1
+            },
+            "available": false
+        },
+        "59d9cd9e-e8fe-42fa-9f47-7190cc663375": {
+            "label": "Craft building: Small Chest",
+            "sources": {
+                "c183a3f1": 1,
+                "4e93b96f": 4,
+                "81f7766c": 2
+            },
+            "targets": {
+                "c183a3f1": 1,
+                "c75d117a": 1
+            },
+            "available": false
+        },
+        "f27796ad-839e-4e4b-ace1-267cdec206c7": {
+            "label": "Craft building: Crafting Bench",
+            "sources": {
+                "c75d117a": 1,
+                "c5424d0a": 4,
+                "4e93b96f": 4,
+                "81f7766c": 4
+            },
+            "targets": {
+                "c75d117a": 1,
                 "0bbff91d": 1
             },
             "available": false

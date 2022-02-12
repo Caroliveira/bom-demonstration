@@ -37,8 +37,18 @@ const SimulatorItemComponent = ({
 
   const handleNodeAmountChange = (type: "add" | "subtract") => {
     const auxNodes = { ...nodes };
-    if (type === "add") auxNodes[nodeId].amount += 1;
-    else auxNodes[nodeId].amount -= 1;
+    if (type === "add") {
+      auxNodes[nodeId].amount += 1;
+      Object.entries(edges)
+        .filter(([edgeId]) => {
+          const [_, target] = edgeId.split("-");
+          return target === nodeId;
+        })
+        .forEach(([edgeId, amount]) => {
+          const [source] = edgeId.split("-");
+          auxNodes[source].amount -= amount;
+        });
+    } else auxNodes[nodeId].amount -= 1;
     setNodes(auxNodes);
   };
 
